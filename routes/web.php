@@ -19,4 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/account', 'UserController@index')->name('account');
+Route::get('/user-create', 'UserController@create')->name('userCreate');
+Route::post('/user-store', 'UserController@store')->name('userStore');
+Route::resource('customers', 'CustomerController');
+
 
