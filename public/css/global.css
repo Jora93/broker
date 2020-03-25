@@ -1,0 +1,77 @@
+.carrierPanel {
+  background: #ebcccc;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.tab-content .show {
+  opacity: 1;
+}
+
+.carriers-show .nav-tabs #carrier-tab,
+.customers-show .nav-tabs #carrier-tab {
+  background: #ebcccc;
+}
+
+.carriers-show .nav-tabs #customer-tab,
+.customers-show .nav-tabs #customer-tab {
+  background: #d0e9c6;
+}
+
+.carriers-show .nav-tabs #documents-tab,
+.customers-show .nav-tabs #documents-tab {
+  background: #8a6d3b;
+}
+
+.carriers-show .nav-tabs #notes-tab,
+.customers-show .nav-tabs #notes-tab {
+  background: #767e83;
+}
+
+.carriers-show .nav-tabs a,
+.customers-show .nav-tabs a {
+  font-weight: bold;
+  color: white;
+  cursor: pointer !important;
+}
+
+.carriers-show .tab-pane,
+.customers-show .tab-pane {
+  margin-top: 10px;
+}
+
+.carriers-show .tab-pane .card-header,
+.customers-show .tab-pane .card-header {
+  background: #ebcccc;
+}
+
+.carriers-show .tab-pane .tab-item,
+.customers-show .tab-pane .tab-item {
+  margin-top: 5px;
+}
+
+.carriers-show .tab-pane .insurance-policy .card,
+.customers-show .tab-pane .insurance-policy .card {
+  padding: 2px;
+}
+
+.customers-show .card-header {
+  background: #d0e9c6 !important;
+}
+
+.customer-create .customerPanel {
+  background: #d0e9c6;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.panelTitleLinkContainer {
+  text-align: right;
+  font-size: 12px;
+  padding-top: 5px;
+}
+
+.panelTitleLinkContainer .panelTitleLinkContainer a {
+  margin-left: 10px;
+}
+

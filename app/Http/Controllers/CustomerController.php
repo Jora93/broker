@@ -72,7 +72,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->view('customer.show', [], 200);
     }
 
     /**

@@ -18,74 +18,84 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
-    <script src="{{ asset('js/index.js') }}"></script>
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/inputmask/bindings/inputmask.binding.min.js"></script>--}}
+    {{--    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>--}}
+    {{--    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>--}}
+
+    {{--    <script src="{{ asset('js/index.js') }}"></script>--}}
 </head>
 <body>
-    <div id="app">
-        <ul class="nav nav-tabs">
-            @guest
+{{--    <select class="selectpicker" data-live-search="true">--}}
+{{--        <option disabled selected value> -- select an option -- </option>--}}
+{{--        <option>Hot Dog, Fries and a Soda</option>--}}
+{{--        <option>Burger, Shake and a Smile</option>--}}
+{{--        <option>Sugar, Spice and all things nice</option>--}}
+{{--    </select>--}}
+<div id="app">
+    <ul class="nav nav-tabs">
+        @guest
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
-            @else
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/home')}}">{{ config('app.name', 'Laravel') }}</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Loads</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Loads List</a>
-                        <a class="dropdown-item" href="#">New Load</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{route('customers.index')}}">Customers List</a>
-                        <a class="dropdown-item" href="{{route('customers.create')}}">New Customer</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Carriers</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Carriers List</a>
-                        <a class="dropdown-item" href="#">New Carrier</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown pull-right">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
+            @endif
+        @else
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url('/home')}}">{{ config('app.name', 'Laravel') }}</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Loads</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Loads List</a>
+                    <a class="dropdown-item" href="#">New Load</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Customers</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('customers.index')}}">Customers List</a>
+                    <a class="dropdown-item" href="{{route('customers.create')}}">New Customer</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Carriers</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('carriers.index')}}">Carriers List</a>
+                    <a class="dropdown-item" href="{{route('carriers.create')}}">New Carrier</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown pull-right">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <a class="dropdown-item" href="{{ route('account') }}">My Account</a>
-                        @if(Auth::user()->role === \App\Constanats\UserRoleConstants::Admin)
-                            <a class="dropdown-item" href="{{ route('userCreate') }}">Create User</a>
-                        @endif
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
-        </ul>
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+                        {{ __('Logout') }}
+                    </a>
+                    <a class="dropdown-item" href="{{ route('account') }}">My Account</a>
+                    @if(Auth::user()->role === \App\Constanats\UserRoleConstants::Admin)
+                        <a class="dropdown-item" href="{{ route('userCreate') }}">Create User</a>
+                    @endif
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
+    </ul>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 </body>
 </html>

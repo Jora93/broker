@@ -1,0 +1,78 @@
+.carrierPanel {
+    background: #ebcccc;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.tab-content{
+    .show {
+        opacity: 1;
+    }
+}
+
+.carriers-show, .customers-show {
+    .nav-tabs {
+        #carrier-tab {
+            background: #ebcccc;
+        }
+        #customer-tab {
+            background: #d0e9c6;
+        }
+        #documents-tab {
+            background: #8a6d3b;
+        }
+        #notes-tab {
+            background: #767e83;
+        }
+
+        a {
+            font-weight: bold;
+            color: white;
+            cursor: pointer !important;
+        }
+    }
+
+    .tab-pane {
+        margin-top: 10px;
+
+        .card-header{
+            background: #ebcccc;
+        }
+
+        .tab-item {
+            margin-top: 5px;
+        }
+
+        .insurance-policy {
+            .card {
+                padding: 2px;
+            }
+        }
+    }
+}
+
+.customers-show {
+    .card-header{
+        background: #d0e9c6 !important;
+    }
+}
+
+.customer-create {
+    .customerPanel {
+        background: #d0e9c6;
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+}
+
+.panelTitleLinkContainer {
+    text-align: right;
+    font-size: 12px;
+    padding-top: 5px;
+
+    .panelTitleLinkContainer a {
+        margin-left: 10px;
+    }
+}
+

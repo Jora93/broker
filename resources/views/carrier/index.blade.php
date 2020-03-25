@@ -15,8 +15,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <span>Customers</span>
-                        <a style="float: right;" href="{{route('customers.create')}}" title="create new">
+                        <span>Carriers</span>
+                        <a style="float: right;" href="{{route('carriers.create')}}" title="create new">
                             <button type="button" class="btn btn-primary" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
@@ -29,41 +29,36 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <table class="table table-striped table-bordered data-table" style="width:100%">
+                        <table class="table table-striped table-bordered data-table" colspan="0" rospwan="0" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
-                                    <th>CreditLimit</th>
-                                    <th>Product</th>
                                     <th>Status</th>
+                                    <th>Phone</th>
+                                    <th>Payee Company</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($customers as $customer)
-                                    @php
-                                        if ($customer->currency == 'USD'){
-                                            $currency = '$';
-                                        }
-                                    @endphp
+                                @foreach($carriers as $carrier)
                                     <tr>
-                                        <td>{{$customer->id}}</td>
-                                        <td>{{$customer->company}}</td>
-                                        <td>{{$currency}}@php echo number_format( $customer->creditLimit, 2 )@endphp</td>
-                                        <td>{{$customer->product}}</td>
-                                        <td>{{$customer->status}}</td>
-                                        <td>
-                                            <a title="edit" href="{{route('customers.edit', $customer->id)}}">
+                                        <td>{{$carrier->id}}</td>
+                                        <td>{{$carrier->company}}</td>
+                                        <td>{{$carrier->status}}</td>
+                                        <td>{{$carrier->phone}}</td>
+                                        <td>{{$carrier->payeeCompany}}</td>
+                                        <td style="display: inline-flex;">
+                                            <a title="edit" href="{{route('carriers.edit', $carrier->id)}}">
                                                 <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>
                                             </a>
-                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="post">
+                                            <form  style="margin-left: 5px;" action="{{ route('carriers.destroy', $carrier->id) }}" method="post">
                                                 <input type="hidden" name="_method" value="delete">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{ $customer->id }}">
-                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this customer?')" class="btn btn-danger" name="destroy_device">
+                                                <input type="hidden" name="id" value="{{ $carrier->id }}">
+                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this carrier?')" class="btn btn-danger" name="destroy_device">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </form>
@@ -75,9 +70,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
-                                    <th>CreditLimit</th>
-                                    <th>Product</th>
                                     <th>Status</th>
+                                    <th>Phone</th>
+                                    <th>Payee Company</th>
                                     <th></th>
                                 </tr>
                             </tfoot>

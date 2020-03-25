@@ -1,5 +1,6 @@
 <?php
-
+use App\Imports\CarriersImport;
+use App\Imports\CustomersImport;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +13,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('home'));
 });
 
 Auth::routes();
@@ -22,5 +23,10 @@ Route::get('/account', 'UserController@index')->name('account');
 Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::resource('customers', 'CustomerController');
-
-
+Route::resource('carriers', 'CarrierController');
+Route::get('/import-carrier', function(){
+    $aaa = \Excel::import(new CarriersImport, public_path('/assets/carriers.xls'));
+});
+Route::get('/import-customer', function(){
+    $aaa = \Excel::import(new CustomersImport, public_path('/assets/customer.xlsx'));
+});

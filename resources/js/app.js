@@ -4,7 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+window.$ = window.jQuery = require( 'jquery' );
 require('./bootstrap');
+require('./index');
+require( 'datatables' );
+require( 'bootstrap-select' );
+require( 'jquery-mask-plugin' );
 
 window.Vue = require('vue');
 
