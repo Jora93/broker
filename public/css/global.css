@@ -8,55 +8,90 @@
   opacity: 1;
 }
 
+body {
+  background: red;
+}
+
+.carriers-show .nav-tabs #load-tab,
+.customers-show .nav-tabs #load-tab,
+.loads-show .nav-tabs #load-tab {
+  background: #c4e3f3;
+}
+
 .carriers-show .nav-tabs #carrier-tab,
-.customers-show .nav-tabs #carrier-tab {
+.customers-show .nav-tabs #carrier-tab,
+.loads-show .nav-tabs #carrier-tab {
   background: #ebcccc;
 }
 
 .carriers-show .nav-tabs #customer-tab,
-.customers-show .nav-tabs #customer-tab {
+.customers-show .nav-tabs #customer-tab,
+.loads-show .nav-tabs #customer-tab {
   background: #d0e9c6;
 }
 
 .carriers-show .nav-tabs #documents-tab,
-.customers-show .nav-tabs #documents-tab {
+.customers-show .nav-tabs #documents-tab,
+.loads-show .nav-tabs #documents-tab {
   background: #8a6d3b;
 }
 
 .carriers-show .nav-tabs #notes-tab,
-.customers-show .nav-tabs #notes-tab {
+.customers-show .nav-tabs #notes-tab,
+.loads-show .nav-tabs #notes-tab {
   background: #767e83;
 }
 
 .carriers-show .nav-tabs a,
-.customers-show .nav-tabs a {
+.customers-show .nav-tabs a,
+.loads-show .nav-tabs a {
   font-weight: bold;
   color: white;
   cursor: pointer !important;
 }
 
 .carriers-show .tab-pane,
-.customers-show .tab-pane {
+.customers-show .tab-pane,
+.loads-show .tab-pane {
   margin-top: 10px;
 }
 
 .carriers-show .tab-pane .card-header,
-.customers-show .tab-pane .card-header {
+.customers-show .tab-pane .card-header,
+.loads-show .tab-pane .card-header {
   background: #ebcccc;
 }
 
 .carriers-show .tab-pane .tab-item,
-.customers-show .tab-pane .tab-item {
+.customers-show .tab-pane .tab-item,
+.loads-show .tab-pane .tab-item {
   margin-top: 5px;
 }
 
 .carriers-show .tab-pane .insurance-policy .card,
-.customers-show .tab-pane .insurance-policy .card {
+.customers-show .tab-pane .insurance-policy .card,
+.loads-show .tab-pane .insurance-policy .card {
   padding: 2px;
+}
+
+.loads-show .shipper-cards .card-header {
+  background: #c4e3f3 !important;
+}
+
+.loads-show .shipper-cards .card-body {
+  background: #bee9ff !important;
+}
+
+.loads-show .carrier-cards .shipper-info .card-body {
+  background: #ebcccc;
 }
 
 .customers-show .card-header {
   background: #d0e9c6 !important;
+}
+
+.customers-show .card col-md-4 {
+  padding-bottom: 5px;
 }
 
 .customer-create .customerPanel {
@@ -73,5 +108,9 @@
 
 .panelTitleLinkContainer .panelTitleLinkContainer a {
   margin-left: 10px;
+}
+
+#createLoadModal .modal-dialog {
+  position: initial;
 }
 

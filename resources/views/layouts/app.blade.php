@@ -57,7 +57,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Loads</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Loads List</a>
-                    <a class="dropdown-item" href="#">New Load</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createLoadModal">New Load</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -96,6 +96,49 @@
     <main class="py-4">
         @yield('content')
     </main>
+</div>
+@php
+  $customers = App\Customer::select('company', 'id')->get();
+@endphp
+<!-- The Modal -->
+<div class="modal" id="createLoadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form method="GET" action="{{route('loads.create')}}">
+                <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label class="control-laCbel">*Customer</label><br>
+                            <select name="customerId" class="selectpicker col-sm-12" required="true" data-live-search="true">
+                                <option disabled selected value>Select Customer</option>
+                                @foreach ($customers as $customer)
+                                    <option value="{{ $customer->id }}">{{ $customer->company }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-load-value" class="col-form-label">*Load Value</label>
+                            <input type="number" max="5000" class="form-control" id="customer-load-valuet" required="true"></input>
+                        </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Load</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 </body>
 </html>

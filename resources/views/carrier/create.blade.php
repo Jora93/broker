@@ -147,41 +147,8 @@
                             <div class="entityPanelHeading">
                                 <div class="entityPanelTitle">*Company Information</div>
                             </div>
+                            <br>
                             <div class="entityPanelBody tabIndexContainer">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input name="carrier[carrier_flag]" type="hidden" value="0" tabindex="1"><input class="checkbox-group" check_box_name="carrier" onclick="setCarrier();" type="checkbox" value="1" checked="checked" name="carrier[carrier_flag]" id="carrier_carrier_flag" tabindex="2">
-                                                Carrier
-                                                <span class="formInfo glyphicon glyphicon-info-sign" title="Selecting carrier will require insurance policy"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="van">
-                                                <label class="form-check-label" for="inlineCheckbox1">Van</label>
-                                            </div>
-                                            <br>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="reefer">
-                                                <label class="form-check-label" for="inlineCheckbox2">Reefer</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input name="carrier[vendor_flag]" type="hidden" value="0" tabindex="17"><input class="checkbox-group" check_box_name="vendor" onclick="setVendor();" type="checkbox" value="1" name="carrier[vendor_flag]" id="carrier_vendor_flag" tabindex="18"> Vendor
-                                                <span class="formInfo glyphicon glyphicon-info-sign" title="Selecting vendor will not require insurance policy"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -277,13 +244,6 @@
                                             <input class="form-control requiredInputCarrier" placeholder="Enter city" required="required" type="text" name="carrier[city]" id="carrier_city" tabindex="8">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="carrier_website">Website</label>
-                                            <input class="form-control" placeholder="Enter website" type="text" name="carrier[website]" id="carrier_website" tabindex="24">
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -363,31 +323,7 @@
                                             <input class="form-control requiredInputCarrier" placeholder="Enter zip code" required="required" type="text" name="carrier[zip_code]" id="carrier_zip_code" tabindex="11">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="carrier_currency">Currency</label>
-                                            <span class="formInfo glyphicon glyphicon-info-sign" title="Select the default currency type to be used when calculating invoices and payments."></span>
-                                            <select class="form-control" name="carrier[currency]" id="carrier_currency" tabindex="26"><option value="">Select Currency</option>
-                                                <option value="CAD">CAD</option>
-                                                <option value="MXN">MXN</option>
-                                                <option selected="selected" value="USD">USD</option></select>
-                                        </div>
-                                    </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="addPaymentTermTerm" class="control-label">Payment Term</label>
-                                            <select class="form-control" name="carrier[payment_term_id]" id="carrier_payment_term_id" tabindex="12"><option value="">Select Payment Term</option></select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -450,167 +386,6 @@
                                       </div>
                                     </div>
                                   </div> -->
-                            </div>
-                        </div>
-
-                        <!-- Primary Contact -->
-                        <div class="entityPanel entityFillPanel carrierPanel">
-                            <div class="entityPanelHeading">
-                                <div class="entityPanelTitle">Primary Contact</div>
-                            </div>
-                            <div class="entityPanelBody tabIndexContainer">
-                                <div class="row"><div class="col-md-12"><p>More contacts can be added once this carrier is created.</p></div></div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div id="primaryContactNameGroup" class="form-group">
-                                            <label for="primaryContactName" class="control-label">Name</label>
-                                            <input type="text" class="form-control focusOnShow" id="primaryContactName" name="primary_contact_name" placeholder="Enter contact name" value="" tabindex="27">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactName" class="control-label">Title</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactTitle" name="primary_contact_title" placeholder="Enter contact title" value="" tabindex="34">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactAddress1" class="control-label">Address 1</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactAddress1" name="primary_contact_address1" placeholder="Enter contact address" value="" tabindex="28">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactDepartment" class="control-label">Department</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactDepartment" name="primary_contact_department" placeholder="Enter contact department" value="" tabindex="35">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactAddress2" class="control-label">Address 2</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactAddress2" name="primary_contact_address2" placeholder="Enter contact address" value="" tabindex="29">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="primaryContactPhone" class="control-label">Phone</label>
-                                            <input type="text" class="form-control contactOptional phoneMask" id="primaryContactPhone" name="primary_contact_phone" placeholder="Enter contact phone" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="primaryContactPhoneExtension" class="control-label">Ext</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactPhoneExtension" name="primary_contact_phone_extension" placeholder="Enter extension" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactCity" class="control-label">City</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactCity" name="primary_contact_city" placeholder="Enter contact city" value="" tabindex="30">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactCellPhone" class="control-label">Cell Phone</label>
-                                            <input type="text" class="form-control contactOptional phoneMask" id="primaryContactCellPhone" name="primary_contact_cell_phone" placeholder="Enter contact cell phone" value="" tabindex="36">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactState" class="control-label">State/Province</label>
-                                            <select id="primaryContactState" name="carrier[state]" class="selectpicker" required="true" data-live-search="true">
-                                                <option disabled selected value>Select State/Province</option>
-                                                <option value="AL">AL (Alabama)</option>
-                                                <option value="AK">AK (Alaska)</option>
-                                                <option value="AZ">AZ (Arizona)</option>
-                                                <option value="AR">AR (Arkansas)</option>
-                                                <option value="CA">CA (California)</option>
-                                                <option value="CO">CO (Colorado)</option>
-                                                <option value="CT">CT (Connecticut)</option>
-                                                <option value="DE">DE (Delaware)</option>
-                                                <option value="DC">DC (District of Columbia)</option>
-                                                <option value="FL">FL (Florida)</option>
-                                                <option value="GA">GA (Georgia)</option>
-                                                <option value="HI">HI (Hawaii)</option>
-                                                <option value="ID">ID (Idaho)</option>
-                                                <option value="IL">IL (Illinois)</option>
-                                                <option value="IN">IN (Indiana)</option>
-                                                <option value="IA">IA (Iowa)</option>
-                                                <option value="KS">KS (Kansas)</option>
-                                                <option value="KY">KY (Kentucky)</option>
-                                                <option value="LA">LA (Louisiana)</option>
-                                                <option value="ME">ME (Maine)</option>
-                                                <option value="MD">MD (Maryland)</option>
-                                                <option value="MA">MA (Massachusetts)</option>
-                                                <option value="MI">MI (Michigan)</option>
-                                                <option value="MN">MN (Minnesota)</option>
-                                                <option value="MS">MS (Mississippi)</option>
-                                                <option value="MO">MO (Missouri)</option>
-                                                <option value="MT">MT (Montana)</option>
-                                                <option value="NE">NE (Nebraska)</option>
-                                                <option value="NV">NV (Nevada)</option>
-                                                <option value="NH">NH (New Hampshire)</option>
-                                                <option value="NJ">NJ (New Jersey)</option>
-                                                <option value="NM">NM (New Mexico)</option>
-                                                <option value="NY">NY (New York)</option>
-                                                <option value="NC">NC (North Carolina)</option>
-                                                <option value="ND">ND (North Dakota)</option>
-                                                <option value="OH">OH (Ohio)</option>
-                                                <option value="OK">OK (Oklahoma)</option>
-                                                <option value="OR">OR (Oregon)</option>
-                                                <option value="PA">PA (Pennsylvania)</option>
-                                                <option value="PR">PR (Puerto Rico)</option>
-                                                <option value="RI">RI (Rhode Island)</option>
-                                                <option value="SC">SC (South Carolina)</option>
-                                                <option value="SD">SD (South Dakota)</option>
-                                                <option value="TN">TN (Tennessee)</option>
-                                                <option value="TX">TX (Texas)</option>
-                                                <option value="UT">UT (Utah)</option>
-                                                <option value="VT">VT (Vermont)</option>
-                                                <option value="VA">VA (Virginia)</option>
-                                                <option value="WA">WA (Washington)</option>
-                                                <option value="WV">WV (West Virginia)</option>
-                                                <option value="WI">WI (Wisconsin)</option>
-                                                <option value="WY">WY (Wyoming)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactFax" class="control-label">Fax</label>
-                                            <input type="text" class="form-control contactOptional phoneMask" id="primaryContactFax" name="primary_contact_fax" placeholder="Enter contact fax number" value="" tabindex="37">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactCity" class="control-label">Zip</label>
-                                            <input type="text" class="form-control contactOptional" id="primaryContactZip" name="primary_contact_zip_code" placeholder="Enter contact zip" value="" tabindex="33">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="primaryContactEmail" class="control-label">Email</label>
-                                            <input type="email" class="form-control contactOptional" id="primaryContactEmail" name="primary_contact_email" placeholder="Enter contact email" value="" tabindex="38">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -771,13 +546,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="carrier_default_pay_day">Pay in Days</label>
-                                            <input class="form-control" min="0" placeholder="Enter no of days" type="number" name="carrier[default_pay_day]" id="carrier_default_pay_day" tabindex="52">
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -787,15 +555,6 @@
                                             <input class="form-control" placeholder="Enter zip code" type="text" name="carrier[payee_zip_code]" id="carrier_payee_zip_code" tabindex="46">
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="checkbox" style="margin-top: 30px">
-                                            <label>
-                                                <input name="carrier[use_payee_dba_name]" type="hidden" value="0" tabindex="53"><input type="checkbox" value="1" name="carrier[use_payee_dba_name]" id="carrier_use_payee_dba_name" tabindex="54"> Use Payee DBA name
-                                            </label>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -806,12 +565,9 @@
                             <div class="col-md-12">
                                 <div class="entityPanel entityFillPanel carrierPanel">
                                     <div class="entityPanelHeading">
-                                        <div class="entityPanelTitle">Factoring Company
-                                            <label style="cursor:pointer;float:right;font-weight:normal;color:#333">
-                                                <input name="carrier[remit_payment_to]" type="hidden" value="0"><input class="editMainField" type="checkbox" value="1" name="carrier[remit_payment_to]" id="carrier_remit_payment_to"> Remit Payment to Factoring Company by default.
-                                            </label>
-                                        </div>
+                                        <div class="entityPanelTitle">Factoring Company</div>
                                     </div>
+                                    <br>
                                     <div class="entityPanelBody tabIndexContainer">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -960,23 +716,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="carrier_hazmat_number">HAZMAT #</label>
-                                            <input class="form-control" placeholder="Enter Hazmat Number" type="text" name="carrier[hazmat_number]" id="carrier_hazmat_number" tabindex="65">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="carrier_scac_number">SCAC #</label>
-                                            <input class="form-control" placeholder="Enter SCAC Number" type="text" name="carrier[scac_number]" id="carrier_scac_number" tabindex="67">
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 

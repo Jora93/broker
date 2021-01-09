@@ -15,17 +15,32 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('company');
+
             $table->string('status');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('product');
+            $table->string('company')->unique();
+            $table->string('phone')->unique();
+            $table->string('address1')->unique();
+            $table->string('address2')->unique()->nullable();
+            $table->string('phone_extension')->unique()->nullable();
+            $table->string('fax')->unique()->nullable();
+            $table->string('city');
+            $table->string('email')->unique();
+            $table->string('state');
+            $table->string('zip_code');
+            $table->integer('credit_limit');
             $table->string('currency');
-            $table->integer('creditLimit');
-            $table->boolean('smartWayCarriersPreferred');
-            $table->string('billingCompany');
-            $table->string('billingPhone');
-            $table->string('billingAddress');
+            $table->string('note');
+
+            $table->string('billing_company')->unique();
+            $table->string('billing_phone')->unique();
+            $table->string('billing_address1')->unique();
+            $table->string('billing_address2')->unique()->nullable();
+            $table->string('billing_phone_extension')->unique()->nullable();
+            $table->string('billing_fax')->unique()->nullable();
+            $table->string('billing_city');
+            $table->string('billing_state');
+            $table->string('billing_zip_code');
+
             $table->timestamps();
         });
     }

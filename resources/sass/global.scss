@@ -10,8 +10,11 @@
     }
 }
 
-.carriers-show, .customers-show {
+.carriers-show, .customers-show, .loads-show {
     .nav-tabs {
+        #load-tab {
+            background: #c4e3f3;
+        }
         #carrier-tab {
             background: #ebcccc;
         }
@@ -51,9 +54,33 @@
     }
 }
 
+.loads-show {
+    .shipper-cards {
+        .card-header{
+            background: #c4e3f3 !important;
+        }
+        .card-body{
+            background: #bee9ff !important;
+        }
+    }
+    .carrier-cards {
+        .shipper-info {
+            .card-body{
+                background: #ebcccc;
+            }
+        }
+    }
+}
+
 .customers-show {
     .card-header{
         background: #d0e9c6 !important;
+    }
+
+    .card {
+        col-md-4{
+            padding-bottom: 5px ;
+        }
     }
 }
 
@@ -76,3 +103,8 @@
     }
 }
 
+#createLoadModal {
+    .modal-dialog {
+        position: initial;
+    }
+}

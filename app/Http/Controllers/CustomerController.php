@@ -24,7 +24,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::get();
-        return response()->view('customer.index', ['customers' => json_decode($customers)], 200);
+        return response()->view('customer.index', ['customers' => $customers], 200);
     }
 
     /**
@@ -46,21 +46,35 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'company'        => ['required', 'string', 'max:255'],
-            'status'         => ['required', 'string', Rule::in(['Active', 'Inactive'])],
-            'phone'          => ['required', 'string', 'max:255'],
-            'address'        => ['required', 'string', 'max:255'],
-            'product'        => ['required', 'string', 'max:255'],
-            'currency'       => ['required', 'string', 'max:255'],
-            'creditLimit'    => ['required', 'integer'],
-            'billingCompany' => ['required', 'string', 'max:255'],
-            'billingPhone'   => ['required', 'string', 'max:255'],
-            'billingAddress' => ['required', 'string', 'max:255']
+            'status'          => ['required', 'string', Rule::in(['Active', 'Inactive'])],
+            'company'         => ['required', 'string', 'max:255', 'unique:customers,company'],
+            'phone'           => ['required', 'string', 'max:255', 'unique:customers,phone'],
+            'address1'        => ['required', 'string', 'max:255', 'unique:customers,address1'],
+            'address2'        => ['string', 'max:255', 'unique:customers,address2'],
+            'phone_extension' => ['string', 'max:255'],
+            'fax'             => ['string', 'max:255', 'unique:customers,fax'],
+            'city'            => ['required', 'string', 'max:255'],
+            'email'           => ['required', 'email', 'unique:customers,email'],
+            'state'           => ['required', 'string'],
+            'zip_code'        => ['required', 'string'],
+            'credit_limit'    => ['required', 'integer'],
+            'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
+            'note'            => ['string', 'max:1000'],
+
+            'billing_company'         => ['required', 'string', 'max:255', 'unique:customers,company'],
+            'billing_phone'           => ['required', 'string', 'max:255', 'unique:customers,phone'],
+            'billing_address1'        => ['required', 'string', 'max:255', 'unique:customers,address1'],
+            'billing_address2'        => ['string', 'max:255', 'unique:customers,address2'],
+            'billing_phone_extension' => ['string', 'max:255'],
+            'billing_fax'             => ['string', 'max:255', 'unique:customers,fax'],
+            'billing_city'            => ['required', 'string', 'max:255'],
+            'billing_state'           => ['required', 'string'],
+            'billing_zip_code'        => ['required', 'string'],
         ]);
         $data = $request->all();
-        $data['smartWayCarriersPreferred'] = array_key_exists('smartWayCarriersPreferred', $data) ? true : false;
-        $customer = Customer::create($data);
 
+        $customer = Customer::create($data);
+        return redirect('customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
     }
 
     /**
@@ -70,9 +84,9 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        return response()->view('customer.show', [], 200);
+        return response()->view('customer.show', ['customer' => $customer], 200);
     }
 
     /**
@@ -84,7 +98,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return response()->view('customer.edit', ['customer' =>$customer], 200);
+        return response()->view('customer.edit', ['customer' => $customer], 200);
     }
 
     /**
@@ -98,21 +112,36 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'company'        => ['required', 'string', 'max:255'],
-            'status'         => ['required', 'string', Rule::in(['Active', 'Inactive'])],
-            'phone'          => ['required', 'string', 'max:255'],
-            'address'        => ['required', 'string', 'max:255'],
-            'product'        => ['required', 'string', 'max:255'],
-            'currency'       => ['required', 'string', 'max:255'],
-            'creditLimit'    => ['required', 'integer'],
-            'billingCompany' => ['required', 'string', 'max:255'],
-            'billingPhone'   => ['required', 'string', 'max:255'],
-            'billingAddress' => ['required', 'string', 'max:255']
+            'status'          => ['required', 'string', Rule::in(['Active', 'Inactive'])],
+            'company'         => ['required', 'string', 'max:255', 'unique:customers,company,'.$customer->id],
+            'phone'           => ['required', 'string', 'max:255', 'unique:customers,phone,'.$customer->id],
+            'address1'        => ['required', 'string', 'max:255', 'unique:customers,address1,'.$customer->id],
+            'address2'        => ['string', 'max:255', 'unique:customers,address2,'.$customer->id],
+            'phone_extension' => ['string', 'max:255'],
+            'fax'             => ['string', 'max:255', 'unique:customers,fax,'.$customer->id],
+            'city'            => ['required', 'string', 'max:255'],
+            'email'           => ['required', 'email', 'unique:customers,email,'.$customer->id],
+            'state'           => ['required', 'string'],
+            'zip_code'        => ['required', 'string'],
+            'credit_limit'    => ['required', 'integer'],
+            'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
+            'note'            => ['string', 'max:1000'],
+
+            'billing_company'         => ['required', 'string', 'max:255', 'unique:customers,company,'.$customer->id],
+            'billing_phone'           => ['required', 'string', 'max:255', 'unique:customers,phone,'.$customer->id],
+            'billing_address1'        => ['required', 'string', 'max:255', 'unique:customers,address1,'.$customer->id],
+            'billing_address2'        => ['string', 'max:255', 'unique:customers,address2,'.$customer->id],
+            'billing_phone_extension' => ['string', 'max:255'],
+            'billing_fax'             => ['string', 'max:255', 'unique:customers,fax,'.$customer->id],
+            'billing_city'            => ['required', 'string', 'max:255'],
+            'billing_state'           => ['required', 'string'],
+            'billing_zip_code'        => ['required', 'string'],
         ]);
+
         $data = $request->all();
-        $data['smartWayCarriersPreferred'] = array_key_exists('smartWayCarriersPreferred', $data) ? true : false;
         $customer->update($data);
-        return back()->with(['customer' => $customer]);
+
+        return redirect('customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
     }
 
     /**
@@ -125,7 +154,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer->delete();
-        return back();
+//        $customer->delete();
+//
+//        return back();
     }
 }

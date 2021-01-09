@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+use App\Load;
 
 class LoadController extends Controller
 {
@@ -19,11 +21,13 @@ class LoadController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $custumer = Customer::find($request->customerId);
+        return response()->view('load.crate', ['customers' => $custumer], 200);
     }
 
     /**

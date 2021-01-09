@@ -35,7 +35,7 @@
                                     <th>ID</th>
                                     <th>Company</th>
                                     <th>CreditLimit</th>
-                                    <th>Product</th>
+                                    <th>Phone</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -48,25 +48,29 @@
                                         }
                                     @endphp
                                     <tr>
-                                        <td>{{$customer->id}}</td>
+                                        <td>
+                                            <a title="show" href="{{url('customers/'.$customer->id)}}">
+                                                {{$customer->id}}
+                                            </a>
+                                        </td>
                                         <td>{{$customer->company}}</td>
-                                        <td>{{$currency}}@php echo number_format( $customer->creditLimit, 2 )@endphp</td>
-                                        <td>{{$customer->product}}</td>
+                                        <td>{{$currency}}@php echo number_format( $customer->credit_limit, 2 )@endphp</td>
+                                        <td>{{$customer->phone}}</td>
                                         <td>{{$customer->status}}</td>
                                         <td>
                                             <a title="edit" href="{{route('customers.edit', $customer->id)}}">
                                                 <button type="button" class="btn btn-primary" aria-label="Left Align">
-                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>
                                             </a>
-                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="post">
-                                                <input type="hidden" name="_method" value="delete">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $customer->id }}">
-                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this customer?')" class="btn btn-danger" name="destroy_device">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
-                                            </form>
+{{--                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="post">--}}
+{{--                                                <input type="hidden" name="_method" value="delete">--}}
+{{--                                                @csrf--}}
+{{--                                                <input type="hidden" name="id" value="{{ $customer->id }}">--}}
+{{--                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this customer?')" class="btn btn-danger" name="destroy_device">--}}
+{{--                                                    <span class="glyphicon glyphicon-trash"></span>--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach
