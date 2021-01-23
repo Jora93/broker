@@ -19,129 +19,8 @@
             @endif
             <div class="col-md-12">
                 <div class="card-header">Create Carrier</div>
-                <form method="POST" action="{{route('carriers.store')}}">
+                <form method="post" action="{{url('/carriers')}}">
                     @csrf
-                    <div class="card col-md-6">
-{{--                        <div class="card-header">*Companie information</div>--}}
-{{--                        <div class="card-body">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Company</label>--}}
-{{--                                <input name="company" type="text" class="form-control" placeholder="Company name" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="exampleFormControlSelect1">Status</label>--}}
-{{--                                <select class="form-control" name="status">--}}
-{{--                                    <option>Active</option>--}}
-{{--                                    <option>Inactive</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Phone</label>--}}
-{{--                                <input name="phone" type="text" class="form-control" placeholder="Phone Number" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Fax</label>--}}
-{{--                                <input name="fax" type="text" class="form-control" placeholder="Fax Number">--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Address</label>--}}
-{{--                                <input name="address" type="text" class="form-control" placeholder="Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Currency</label>--}}
-{{--                                <input name="currency" type="text" class="form-control" placeholder="Currency" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Company</label>--}}
-{{--                                <input name="payeeCompany" type="text" class="form-control" placeholder="Payee Company" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Phone</label>--}}
-{{--                                <input name="payeePhone" type="text" class="form-control" placeholder="Payee Phone">--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Address</label>--}}
-{{--                                <input name="payeeAddress" type="text" class="form-control" placeholder="Payee Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>MC Number</label>--}}
-{{--                                <input name="mcNumber" type="text" class="form-control" placeholder="Payee Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Dot Number</label>--}}
-{{--                                <input name="dotNumber" type="number" class="form-control" placeholder="MC Number" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-check" style="padding: 0 0 21px 0;">--}}
-{{--                                <input name="preferredCarrierStatus" type="checkbox" class="form-check-input" id="exampleCheck1">--}}
-{{--                                <label class="form-check-label" for="exampleCheck1" style="padding-left: 20px;">Preferred Carrier Status</label>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-check" style="padding: 0 0 21px 0;">--}}
-{{--                                <input name="smartwayCertified" type="checkbox" class="form-check-input" id="exampleCheck2">--}}
-{{--                                <label class="form-check-label" for="exampleCheck2" style="padding-left: 20px;">Smartway Certified</label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                    </div>
-                    <div class="card col-md-6">
-{{--                        <div class="card-header">Payee information</div>--}}
-{{--                        <div class="card-body">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Company</label>--}}
-{{--                                <input name="company" type="text" class="form-control" placeholder="Company name" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="exampleFormControlSelect1">Status</label>--}}
-{{--                                <select class="form-control" name="status">--}}
-{{--                                    <option>Active</option>--}}
-{{--                                    <option>Inactive</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Phone</label>--}}
-{{--                                <input name="phone" type="text" class="form-control" placeholder="Phone Number" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Fax</label>--}}
-{{--                                <input name="fax" type="text" class="form-control" placeholder="Fax Number">--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Address</label>--}}
-{{--                                <input name="address" type="text" class="form-control" placeholder="Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Currency</label>--}}
-{{--                                <input name="currency" type="text" class="form-control" placeholder="Currency" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Company</label>--}}
-{{--                                <input name="payeeCompany" type="text" class="form-control" placeholder="Payee Company" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Phone</label>--}}
-{{--                                <input name="payeePhone" type="text" class="form-control" placeholder="Payee Phone">--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Payee Address</label>--}}
-{{--                                <input name="payeeAddress" type="text" class="form-control" placeholder="Payee Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>MC Number</label>--}}
-{{--                                <input name="mcNumber" type="text" class="form-control" placeholder="Payee Address" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Dot Number</label>--}}
-{{--                                <input name="dotNumber" type="number" class="form-control" placeholder="MC Number" required>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-check" style="padding: 0 0 21px 0;">--}}
-{{--                                <input name="preferredCarrierStatus" type="checkbox" class="form-check-input" id="exampleCheck1">--}}
-{{--                                <label class="form-check-label" for="exampleCheck1" style="padding-left: 20px;">Preferred Carrier Status</label>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-check" style="padding: 0 0 21px 0;">--}}
-{{--                                <input name="smartwayCertified" type="checkbox" class="form-check-input" id="exampleCheck2">--}}
-{{--                                <label class="form-check-label" for="exampleCheck2" style="padding-left: 20px;">Smartway Certified</label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                    </div>
-{{--//////////////////////////////////////////////////////////--}}
                     <div class="col-md-6">
                         <div class="entityPanel entityFillPanel carrierPanel" >
                             <div class="entityPanelHeading">
@@ -154,7 +33,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Contracted</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input id="carrier_contracted_on" name="carrier[contracted_on]" type="date" class="form-control focusOnLoad" value="" tabindex="3" min={{date('Y-m-d')}}>
+                                                <input id="carrier_contracted_on" name="contracted_on" value="{{old('contracted_on')}}" type="date" class="form-control focusOnLoad"  tabindex="3" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -162,10 +41,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_status">*Status</label>
-                                            <select class="form-control" name="carrier[status]" id="carrier_status" tabindex="19"><option value="Active">Active</option>
-                                                <option value="Do Not Use">Do Not Use</option>
+                                            <select class="form-control" name="status" id="carrier_status" tabindex="19">
+                                                <option value="Active">Active</option>
                                                 <option value="Inactive">Inactive</option>
-                                                <option value="Prospect">Prospect</option></select>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -174,14 +53,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_company">*Company</label>
-                                            <input class="form-control requiredInputCarrier" placeholder="Enter company" required="required" type="text" name="carrier[company]" id="carrier_company" tabindex="4">
+                                            <input class="form-control requiredInputCarrier" placeholder="Enter company" required="required" type="text" name="company" value="{{old('company')}}" id="carrier_company" tabindex="4">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_phone">*Phone</label>
-                                            <input class="form-control requiredInputCarrier phoneMask" placeholder="Enter phone" required="required" type="text" name="carrier[phone]" id="carrier_phone" tabindex="20">
+                                            <input class="form-control requiredInputCarrier phoneMask" placeholder="Enter phone" required="required" type="text" name="phone" value="{{old('phone')}}" id="carrier_phone" tabindex="20">
                                         </div>
                                     </div>
                                 </div>
@@ -190,14 +69,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_dba_name">DBA name</label>
-                                            <input class="form-control" placeholder="Enter DBA name" type="text" name="carrier[dba_name]" id="carrier_dba_name" tabindex="5">
+                                            <input class="form-control" placeholder="Enter DBA name" type="text" name="dba_name" value="{{old('dba_name')}}" id="carrier_dba_name" tabindex="5">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_phone_extension">Phone Extension</label>
-                                            <input class="form-control" placeholder="Enter phone extension" type="text" name="carrier[phone_extension]" id="carrier_phone_extension" tabindex="21">
+                                            <input class="form-control" placeholder="Enter phone extension" type="text" name="phone_extension" value="{{old('phone_extension')}}" id="carrier_phone_extension" tabindex="21">
                                         </div>
                                     </div>
                                 </div>
@@ -206,14 +85,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_address1">*Address 1</label>
-                                            <input class="form-control requiredInputCarrier" placeholder="Enter address" required="required" type="text" name="carrier[address1]" id="carrier_address1" tabindex="6">
+                                            <input class="form-control requiredInputCarrier" placeholder="Enter address" required="required" type="text" name="address1" value="{{old('address1')}}" id="carrier_address1" tabindex="6">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_cell_phone">Cellphone</label>
-                                            <input class="form-control phoneMask" placeholder="Enter cellphone" type="text" name="carrier[cell_phone]" id="carrier_cell_phone" tabindex="22">
+                                            <input class="form-control phoneMask" placeholder="Enter cellphone" type="text" name="cell_phone" value="{{old('cell_phone')}}" id="carrier_cell_phone" tabindex="22">
                                         </div>
                                     </div>
 
@@ -224,14 +103,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_address2">Address 2</label>
-                                            <input class="form-control" placeholder="Enter address 2" type="text" name="carrier[address2]" id="carrier_address2" tabindex="7">
+                                            <input class="form-control" placeholder="Enter address 2" type="text" name="address2" value="{{old('address2')}}" id="carrier_address2" tabindex="7">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_fax">Fax</label>
-                                            <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="carrier[fax]" id="carrier_fax" tabindex="23">
+                                            <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="fax" value="{{old('fax')}}" id="carrier_fax" tabindex="23">
                                         </div>
                                     </div>
 
@@ -241,7 +120,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_city">*City</label>
-                                            <input class="form-control requiredInputCarrier" placeholder="Enter city" required="required" type="text" name="carrier[city]" id="carrier_city" tabindex="8">
+                                            <input class="form-control requiredInputCarrier" placeholder="Enter city" required="required" type="text" name="city" value="{{old('city')}}" id="carrier_city" tabindex="8">
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +129,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">*State/Province</label>
-                                            <select name="carrier[state]" class="selectpicker" required="true" data-live-search="true">
+                                            <select name="state" class="selectpicker" required="true" data-live-search="true">
                                                 <option disabled selected value>Select State/Province</option>
                                                 <option value="AL">AL (Alabama)</option>
                                                 <option value="AK">AK (Alaska)</option>
@@ -310,8 +189,8 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="carrier_email">Email</label>
-                                            <input class="form-control" placeholder="Enter email" type="email" name="carrier[email]" id="carrier_email" tabindex="25">
+                                            <label class="control-label" for="carrier_email">*Email</label>
+                                            <input class="form-control" required="required" placeholder="Enter email" type="email" name="email" value="{{old('email')}}" id="carrier_email" tabindex="25">
                                         </div>
                                     </div>
                                 </div>
@@ -320,7 +199,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_zip_code">*Zip Code</label>
-                                            <input class="form-control requiredInputCarrier" placeholder="Enter zip code" required="required" type="text" name="carrier[zip_code]" id="carrier_zip_code" tabindex="11">
+                                            <input class="form-control requiredInputCarrier" placeholder="Enter zip code" required="required" type="text" name="zip_code" value="{{old('zip_code')}}" id="carrier_zip_code" tabindex="11">
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +208,7 @@
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_carrier_fee">Carrier Fee</label>
                                             <div class="input-group">
-                                                <input class="form-control editMainField" type="number" step=".01" placeholder="Enter Carrier Fee" value="0.0" name="carrier[carrier_fee]" id="carrier_carrier_fee" tabindex="13">
+                                                <input class="form-control editMainField" type="number" step=".01" placeholder="Enter Carrier Fee" value="0.0" name="carrier_fee" value="{{old('carrier_fee')}}" id="carrier_carrier_fee" tabindex="13">
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </div>
@@ -338,30 +217,30 @@
                                     <div class="col-md-12">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="carrier[preferred_carrier_status]" type="hidden" value="0"><input type="checkbox" value="1" name="carrier[preferred_carrier_status]" id="carrier_preferred_carrier_status"> Preferred Carrier Status
+                                                <input name="preferred_carrier_status" type="hidden" value="0"><input type="checkbox" value="1" name="preferred_carrier_status" value="{{old('preferred_carrier_status')}}" id="carrier_preferred_carrier_status"> Preferred Carrier Status
                                             </label>
                                         </div>
 
                                         <div class="checkbox">
                                             <label>
-                                                <input name="carrier[smart_way_certified]" type="hidden" value="0"><input type="checkbox" value="1" name="carrier[smart_way_certified]" id="carrier_smart_way_certified"> SmartWay Certified
+                                                <input name="smart_way_certified" type="hidden" value="0"><input type="checkbox" value="1" name="smart_way_certified" value="{{old('smart_way_certified')}}" id="carrier_smart_way_certified"> SmartWay Certified
                                             </label>
                                         </div>
 
                                         <div class="checkbox">
                                             <label>
-                                                <input name="carrier[carb_compliant]" type="hidden" value="0"><input type="checkbox" value="1" name="carrier[carb_compliant]" id="carrier_carb_compliant"> Clean Air Compliant(CARB)
+                                                <input name="carb_compliant" type="hidden" value="0"><input type="checkbox" value="1" name="carb_compliant" value="{{old('carb_compliant')}}" id="carrier_carb_compliant"> Clean Air Compliant(CARB)
                                             </label>
                                         </div>
 
                                         <div class="checkbox">
                                             <label>
-                                                <input name="carrier[use_dba_name]" type="hidden" value="0"><input type="checkbox" value="1" name="carrier[use_dba_name]" id="carrier_use_dba_name"> Use DBA name
+                                                <input name="use_dba_name" type="hidden" value="0"><input type="checkbox" value="1" name="use_dba_name" value="{{old('use_dba_name')}}" id="carrier_use_dba_name"> Use DBA name
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input name="carrier[require_carrier_agreement]" type="hidden" value="0"><input type="checkbox" value="1" name="carrier[require_carrier_agreement]" id="carrier_require_carrier_agreement"> Require Carrier Agreement to Assign to Load
+                                                <input name="require_carrier_agreement" type="hidden" value="0"><input type="checkbox" value="1" name="require_carrier_agreement" value="{{old('require_carrier_agreement')}}" id="carrier_require_carrier_agreement"> Require Carrier Agreement to Assign to Load
                                             </label>
                                         </div>
                                     </div>
@@ -371,21 +250,23 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_flag">Flag</label>
-                                            <span class="formInfo glyphicon glyphicon-info-sign" data-toggle="tooltip" title="A flag will be displayed to users when adding this carrier to a load."></span>
-                                            <span><input name="carrier[flagged]" type="hidden" value="0" tabindex="14"><input class="pull-left" style="margin-right:5px;" type="checkbox" value="1" name="carrier[flagged]" id="carrier_flagged" tabindex="15"></span>
-                                            <textarea class="form-control" placeholder="Enter flag" name="carrier[flag]" id="carrier_flag" tabindex="16"></textarea>
+                                            <span>
+                                                <input name="flagged" type="hidden" value="0" tabindex="14">
+                                                <input class="pull-left" style="margin-right:5px;" type="checkbox" value="1" name="flagged" id="carrier_flagged" tabindex="15">
+                                            </span>
+                                            <textarea class="form-control" placeholder="Enter flag" name="flag"  value="{{old('flag')}}" id="carrier_flag" tabindex="16"></textarea>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!--  <div class="row">
+                                <div class="row">
                                     <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label for="carrierNote" class="control-label">Note</label>
-                                        <textarea class="form-control" id="carrierNote" name="carrier_note" placeholder="Enter a note about this carrier" rows="2"><#%= @carrier_note.message %></textarea>
-                                      </div>
+                                        <div class="form-group">
+                                            <label for="customerNote" class="control-label">Note</label>
+                                            <textarea class="form-control" id="customerNote" name="note" placeholder="Enter a note about this customer" rows="4" tabindex="15">{{old('note')}}</textarea>
+                                        </div>
                                     </div>
-                                  </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -409,14 +290,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_company">Company</label>
-                                            <input class="form-control" placeholder="Enter company" type="text" name="carrier[payee_company]" id="carrier_payee_company" tabindex="39">
+                                            <input class="form-control" placeholder="Enter company" type="text" name="payee_company" value="{{old('payee_company')}}" id="carrier_payee_company" tabindex="39">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_phone">Phone</label>
-                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="carrier[payee_phone]" id="carrier_payee_phone" tabindex="47">
+                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="payee_phone" value="{{old('payee_phone')}}" id="carrier_payee_phone" tabindex="47">
                                         </div>
                                     </div>
                                 </div>
@@ -425,14 +306,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_dba_name">Payee DBA name</label>
-                                            <input class="form-control" placeholder="Enter Payee DBA name" type="text" name="carrier[payee_dba_name]" id="carrier_payee_dba_name" tabindex="40">
+                                            <input class="form-control" placeholder="Enter Payee DBA name" type="text" name="payee_dba_name" value="{{old('payee_dba_name')}}" id="carrier_payee_dba_name" tabindex="40">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_phone_extension">Phone Extension</label>
-                                            <input class="form-control" placeholder="Enter phone extension" type="text" name="carrier[payee_phone_extension]" id="carrier_payee_phone_extension" tabindex="48">
+                                            <input class="form-control" placeholder="Enter phone extension" type="text" name="payee_phone_extension" value="{{old('payee_phone_extension')}}" id="carrier_payee_phone_extension" tabindex="48">
                                         </div>
                                     </div>
                                 </div>
@@ -441,14 +322,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_address1">Address 1</label>
-                                            <input class="form-control" placeholder="Enter address" type="text" name="carrier[payee_address1]" id="carrier_payee_address1" tabindex="41">
+                                            <input class="form-control" placeholder="Enter address" type="text" name="payee_address1" value="{{old('payee_address1')}}" id="carrier_payee_address1" tabindex="41">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_cell_phone">Cellphone</label>
-                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="carrier[payee_cell_phone]" id="carrier_payee_cell_phone" tabindex="49">
+                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="payee_cell_phone" value="{{old('payee_cell_phone')}}" id="carrier_payee_cell_phone" tabindex="49">
                                         </div>
                                     </div>
                                 </div>
@@ -457,14 +338,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_address2">Address 2</label>
-                                            <input class="form-control" placeholder="Enter address 2" type="text" name="carrier[payee_address2]" id="carrier_payee_address2" tabindex="42">
+                                            <input class="form-control" placeholder="Enter address 2" type="text" name="payee_address2" value="{{old('payee_address2')}}" id="carrier_payee_address2" tabindex="42">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_fax">Fax</label>
-                                            <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="carrier[payee_fax]" id="carrier_payee_fax" tabindex="50">
+                                            <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="payee_fax" value="{{old('payee_fax')}}" id="carrier_payee_fax" tabindex="50">
                                         </div>
                                     </div>
                                 </div>
@@ -473,14 +354,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_city">City</label>
-                                            <input class="form-control" placeholder="Enter city" type="text" name="carrier[payee_city]" id="carrier_payee_city" tabindex="43">
+                                            <input class="form-control" placeholder="Enter city" type="text" name="payee_city" value="{{old('payee_city')}}" id="carrier_payee_city" tabindex="43">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_fed_id">Federal ID</label>
-                                            <input class="form-control" placeholder="Enter federal ID" type="text" name="carrier[payee_fed_id]" id="carrier_payee_fed_id" tabindex="51">
+                                            <input class="form-control" placeholder="Enter federal ID" type="text" name="payee_fed_id" value="{{old('payee_fed_id')}}" id="carrier_payee_fed_id" tabindex="51">
                                         </div>
                                     </div>
                                 </div>
@@ -489,7 +370,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_state">State/Province</label>
-                                            <select id="carrier_payee_state" name="carrier[state]" class="selectpicker" required="true" data-live-search="true">
+                                            <select id="carrier_payee_state" name="payee_state" class="selectpicker" required="true" data-live-search="true">
                                                 <option disabled selected value>Select State/Province</option>
                                                 <option value="AL">AL (Alabama)</option>
                                                 <option value="AK">AK (Alaska)</option>
@@ -552,7 +433,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_zip_code">Zip Code</label>
-                                            <input class="form-control" placeholder="Enter zip code" type="text" name="carrier[payee_zip_code]" id="carrier_payee_zip_code" tabindex="46">
+                                            <input class="form-control" placeholder="Enter zip code" type="text" name="payee_zip_code" value="{{old('payee_zip_code')}}" id="carrier_payee_zip_code" tabindex="46">
                                         </div>
                                     </div>
                                 </div>
@@ -573,13 +454,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_company_name">Company</label>
-                                                    <input class="form-control editMainField" placeholder="Enter factoring company name" maxlength="41" size="41" type="text" name="carrier[factoring_remit_attributes][factoring_company_name]" id="carrier_factoring_remit_attributes_factoring_company_name" tabindex="55">
+                                                    <input class="form-control editMainField" placeholder="Enter factoring company name" maxlength="41" size="41" type="text" name="factoring_company_name" value="{{old('factoring_company_name')}}" id="carrier_factoring_remit_attributes_factoring_company_name" tabindex="55">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_phone">Phone</label>
-                                                    <input class="form-control editMainField phoneMask" placeholder="Enter phone" type="text" name="carrier[factoring_remit_attributes][factoring_phone]" id="carrier_factoring_remit_attributes_factoring_phone" tabindex="62">
+                                                    <input class="form-control editMainField phoneMask" placeholder="Enter phone" type="text" name="factoring_phone" value="{{old('factoring_phone')}}" id="carrier_factoring_remit_attributes_factoring_phone" tabindex="62">
                                                 </div>
                                             </div>
 
@@ -589,13 +470,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_address">Address 1</label>
-                                                    <input class="form-control editMainField" placeholder="Enter address" maxlength="41" size="41" type="text" name="carrier[factoring_remit_attributes][factoring_remit_address]" id="carrier_factoring_remit_attributes_factoring_remit_address" tabindex="56">
+                                                    <input class="form-control editMainField" placeholder="Enter address" maxlength="41" size="41" type="text" name="factoring_remit_address" value="{{old('factoring_remit_address')}}" id="carrier_factoring_remit_attributes_factoring_remit_address" tabindex="56">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_email">Email</label>
-                                                    <input class="form-control editMainField" placeholder="Enter email" maxlength="41" size="41" type="text" name="carrier[factoring_remit_attributes][factoring_remit_email]" id="carrier_factoring_remit_attributes_factoring_remit_email" tabindex="63">
+                                                    <input class="form-control editMainField" placeholder="Enter email" maxlength="41" size="41" type="text" name="factoring_remit_email" value="{{old('factoring_remit_email')}}" id="carrier_factoring_remit_attributes_factoring_remit_email" tabindex="63">
                                                 </div>
                                             </div>
 
@@ -605,7 +486,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_address2">Address 2</label>
-                                                    <input class="form-control editMainField" placeholder="Enter address 2" type="text" name="carrier[factoring_remit_attributes][factoring_remit_address2]" id="carrier_factoring_remit_attributes_factoring_remit_address2" tabindex="57">
+                                                    <input class="form-control editMainField" placeholder="Enter address 2" type="text" name="factoring_remit_address2" value="{{old('factoring_remit_address2')}}" id="carrier_factoring_remit_attributes_factoring_remit_address2" tabindex="57">
                                                 </div>
                                             </div>
                                         </div>
@@ -614,7 +495,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_city">City</label>
-                                                    <input class="form-control editMainField" placeholder="Enter city" maxlength="41" size="41" type="text" name="carrier[factoring_remit_attributes][factoring_remit_city]" id="carrier_factoring_remit_attributes_factoring_remit_city" tabindex="58">
+                                                    <input class="form-control editMainField" placeholder="Enter city" maxlength="41" size="41" type="text" name="factoring_remit_city" value="{{old('factoring_remit_city')}}" id="carrier_factoring_remit_attributes_factoring_remit_city" tabindex="58">
                                                 </div>
                                             </div>
                                         </div>
@@ -623,7 +504,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_state_province">State/Province</label>
-                                                    <select id="carrier_factoring_remit_attributes_factoring_remit_state_province" name="carrier[state]" class="selectpicker" required="true" data-live-search="true">
+                                                    <select id="carrier_factoring_remit_attributes_factoring_remit_state_province" name="factoring_state" class="selectpicker" required="true" data-live-search="true">
                                                         <option disabled selected value>Select State/Province</option>
                                                         <option value="AL">AL (Alabama)</option>
                                                         <option value="AK">AK (Alaska)</option>
@@ -686,7 +567,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_zipcode">Zip code</label>
-                                                    <input class="form-control editMainField" placeholder="Enter zip code" type="text" name="carrier[factoring_remit_attributes][factoring_remit_zipcode]" id="carrier_factoring_remit_attributes_factoring_remit_zipcode" tabindex="61">
+                                                    <input class="form-control editMainField" placeholder="Enter zip code" type="text" name="factoring_remit_zipcode" value="{{old('factoring_remit_zipcode')}}" id="carrier_factoring_remit_attributes_factoring_remit_zipcode" tabindex="61">
                                                 </div>
                                             </div>
                                         </div>
@@ -705,14 +586,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_mc_number">MC #</label>
-                                            <input class="form-control" placeholder="Enter MC Number" type="text" name="carrier[mc_number]" id="carrier_mc_number" tabindex="64">
+                                            <input class="form-control" placeholder="Enter MC Number" type="text" name="mc_number" value="{{old('mc_number')}}" id="carrier_mc_number" tabindex="64">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_dot_number">DOT #</label>
-                                            <input class="form-control" placeholder="Enter DOT Number" type="text" name="carrier[dot_number]" id="carrier_dot_number" tabindex="66">
+                                            <input class="form-control" placeholder="Enter DOT Number" type="text" name="dot_number" value="{{old('dot_number')}}" id="carrier_dot_number" tabindex="66">
                                         </div>
                                     </div>
                                 </div>
@@ -728,7 +609,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceType" class="control-label">*Type</label>
-                                            <select class="form-control" required="required" name="carrier[carrier_insurance_policies_attributes][0][insurance_type]" id="carrier_carrier_insurance_policies_attributes_0_insurance_type" tabindex="68"><option value=""></option>
+                                            <select class="form-control" required="required" name="insurance1_type" id="carrier_carrier_insurance_policies_attributes_0_insurance_type" tabindex="68"><option ></option>
                                                 <option value="Auto Liability">Auto Liability</option>
                                                 <option value="Cargo">Cargo</option>
                                                 <option value="Excess Liability">Excess Liability</option>
@@ -741,7 +622,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceInsurer" class="control-label">Insurer</label>
-                                            <input class="form-control" placeholder="Enter insurer name" type="text" name="carrier[carrier_insurance_policies_attributes][0][insurer]" id="carrier_carrier_insurance_policies_attributes_0_insurer" tabindex="72">
+                                            <input class="form-control" placeholder="Enter insurer name" type="text" name="insurance1_insurer" value="{{old('insurance1_insurer')}}" id="carrier_carrier_insurance_policies_attributes_0_insurer" tabindex="72">
                                         </div>
                                     </div>
                                 </div>
@@ -750,13 +631,13 @@
                                     <div class="col-md-6">
                                         <div id="insuranceAmountGroup" class="form-group">
                                             <label for="insuranceAmount" class="control-label">*Amount</label>
-                                            <input class="form-control" placeholder="Enter amount" min="0.01" step="0.01" required="required" type="number" name="carrier[carrier_insurance_policies_attributes][0][amount]" id="carrier_carrier_insurance_policies_attributes_0_amount" tabindex="69">
+                                            <input class="form-control" placeholder="Enter amount" min="0.01" step="0.01" required="required" type="number" name="insurance1_amount" value="{{old('insurance1_amount')}}" id="carrier_carrier_insurance_policies_attributes_0_amount" tabindex="69">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insurancePolicyNumber" class="control-label">Policy #</label>
-                                            <input class="form-control" placeholder="Enter insurance policy number" type="text" name="carrier[carrier_insurance_policies_attributes][0][policy_number]" id="carrier_carrier_insurance_policies_attributes_0_policy_number" tabindex="73">
+                                            <input class="form-control" placeholder="Enter insurance policy number" type="text" name="insurance1_policy_number" value="{{old('insurance1_policy_number')}}" id="carrier_carrier_insurance_policies_attributes_0_policy_number" tabindex="73">
                                         </div>
                                     </div>
                                 </div>
@@ -766,7 +647,7 @@
                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                             <label class="control-label">Effective Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter effective on date" value="" type="date" name="carrier[carrier_insurance_policies_attributes][0][effective_on]" id="carrier_carrier_insurance_policies_attributes_0_effective_on" tabindex="70" min={{date('Y-m-d')}}>
+                                                <input class="form-control" placeholder="Enter effective on date"  type="date" name="insurance1_effective_on" value="{{old('insurance1_effective_on')}}" id="carrier_carrier_insurance_policies_attributes_0_effective_on" tabindex="70" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -774,7 +655,7 @@
                                         <div class="form-group">
                                             <label class="control-label">*Expiration Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter expires on date" required="required" value="" type="date" name="carrier[carrier_insurance_policies_attributes][0][expires_on]" id="carrier_carrier_insurance_policies_attributes_0_expires_on" tabindex="74" min={{date('Y-m-d')}}>
+                                                <input class="form-control" placeholder="Enter expires on date" required="required" type="date" name="insurance1_expires_on" value="{{old('insurance1_expires_on')}}" id="carrier_carrier_insurance_policies_attributes_0_expires_on" tabindex="74" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -784,14 +665,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insurancePhone" class="control-label">Phone</label>
-                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="carrier[carrier_insurance_policies_attributes][0][phone]" id="carrier_carrier_insurance_policies_attributes_0_phone" tabindex="71">
+                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="insurance1_phone" value="{{old('insurance1_phone')}}" id="carrier_carrier_insurance_policies_attributes_0_phone" tabindex="71">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceEmail" class="control-label">Email</label>
-                                            <input class="form-control" placeholder="Enter email" type="email" name="carrier[carrier_insurance_policies_attributes][0][email]" id="carrier_carrier_insurance_policies_attributes_0_email" tabindex="75">
+                                            <input class="form-control" placeholder="Enter email" type="email" name="insurance1_email" value="{{old('insurance1_email')}}" id="carrier_carrier_insurance_policies_attributes_0_email" tabindex="75">
                                         </div>
                                     </div>
                                 </div>
@@ -807,7 +688,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceType" class="control-label">*Type</label>
-                                            <select class="form-control" required="required" name="carrier[carrier_insurance_policies_attributes][1][insurance_type]" id="carrier_carrier_insurance_policies_attributes_1_insurance_type" tabindex="76"><option value=""></option>
+                                            <select class="form-control" required="required" name="insurance2_type" id="carrier_carrier_insurance_policies_attributes_1_insurance_type" tabindex="76"><option ></option>
                                                 <option value="Auto Liability">Auto Liability</option>
                                                 <option selected="selected" value="Cargo">Cargo</option>
                                                 <option value="Excess Liability">Excess Liability</option>
@@ -820,7 +701,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceInsurer" class="control-label">Insurer</label>
-                                            <input class="form-control" placeholder="Enter insurer name" type="text" name="carrier[carrier_insurance_policies_attributes][1][insurer]" id="carrier_carrier_insurance_policies_attributes_1_insurer" tabindex="80">
+                                            <input class="form-control" placeholder="Enter insurer name" type="text" name="insurance2_insurer" value="{{old('insurance2_insurer')}}" id="carrier_carrier_insurance_policies_attributes_1_insurer" tabindex="80">
                                         </div>
                                     </div>
                                 </div>
@@ -829,13 +710,13 @@
                                     <div class="col-md-6">
                                         <div id="insuranceAmountGroup" class="form-group">
                                             <label for="insuranceAmount" class="control-label">*Amount</label>
-                                            <input class="form-control" placeholder="Enter amount" min="0.01" step="0.01" required="required" type="number" name="carrier[carrier_insurance_policies_attributes][1][amount]" id="carrier_carrier_insurance_policies_attributes_1_amount" tabindex="77">
+                                            <input class="form-control" placeholder="Enter amount" min="0.01" step="0.01" required="required" type="number" name="insurance2_amount" value="{{old('insurance2_amount')}}" id="carrier_carrier_insurance_policies_attributes_1_amount" tabindex="77">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insurancePolicyNumber" class="control-label">Policy #</label>
-                                            <input class="form-control" placeholder="Enter insurance policy number" type="text" name="carrier[carrier_insurance_policies_attributes][1][policy_number]" id="carrier_carrier_insurance_policies_attributes_1_policy_number" tabindex="81">
+                                            <input class="form-control" placeholder="Enter insurance policy number" type="text" name="insurance2_policy_number" value="{{old('insurance2_policy_number')}}" id="carrier_carrier_insurance_policies_attributes_1_policy_number" tabindex="81">
                                         </div>
                                     </div>
                                 </div>
@@ -845,7 +726,7 @@
                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                             <label class="control-label">Effective Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter effective on date" value="" type="date" name="carrier[carrier_insurance_policies_attributes][1][effective_on]" id="carrier_carrier_insurance_policies_attributes_1_effective_on" tabindex="78" min={{date('Y-m-d')}}>
+                                                <input class="form-control" placeholder="Enter effective on date"  type="date" name="insurance2_effective_on" value="{{old('insurance2_effective_on')}}" id="carrier_carrier_insurance_policies_attributes_1_effective_on" tabindex="78" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -853,7 +734,7 @@
                                         <div class="form-group">
                                             <label class="control-label">*Expiration Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter expires on date" required="required" value="" type="date" name="carrier[carrier_insurance_policies_attributes][1][expires_on]" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
+                                                <input class="form-control" placeholder="Enter expires on date" required="required"  type="date" name="insurance2_expires_on" value="{{old('insurance2_expires_on')}}" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -863,21 +744,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insurancePhone" class="control-label">Phone</label>
-                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="carrier[carrier_insurance_policies_attributes][1][phone]" id="carrier_carrier_insurance_policies_attributes_1_phone" tabindex="79">
+                                            <input class="form-control phoneMask" placeholder="Enter phone" type="text" name="insurance2_phone" value="{{old('insurance2_phone')}}" id="carrier_carrier_insurance_policies_attributes_1_phone" tabindex="79">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="insuranceEmail" class="control-label">Email</label>
-                                            <input class="form-control" placeholder="Enter email" type="email" name="carrier[carrier_insurance_policies_attributes][1][email]" id="carrier_carrier_insurance_policies_attributes_1_email" tabindex="83">
+                                            <input class="form-control" placeholder="Enter email" type="email" name="insurance2_email" value="{{old('insurance2_email')}}" id="carrier_carrier_insurance_policies_attributes_1_email" tabindex="83">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-{{--//////////////////////////////////////////////////////////--}}
 
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

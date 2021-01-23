@@ -26,7 +26,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label" for="customer_status">*Status</label>
-                                <select class="form-control" name="status" id="customer_status" tabindex="1"><option value="Active">Active</option>
+                                <select class="form-control" name="status" id="customer_status" tabindex="1">
+                                    <option value="Active">Active</option>
                                     <option value="Inactive">Inactive</option>
                                 </select>
                             </div>

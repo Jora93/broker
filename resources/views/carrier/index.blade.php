@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <div class="container">
+    <div class="">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -34,9 +34,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
+                                    <th>MC#</th>
+                                    <th>DOT#</th>
                                     <th>Status</th>
                                     <th>Phone</th>
-                                    <th>Payee Company</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -44,24 +47,27 @@
                                 @foreach($carriers as $carrier)
                                     <tr>
                                         <td>{{$carrier->id}}</td>
-                                        <td>{{$carrier->company}}</td>
+                                        <td><a href="carriers/{{$carrier->id}}">{{$carrier->company}}</a></td>
+                                        <td>{{$carrier->mc_number}}</td>
+                                        <td>{{$carrier->dot_number}}</td>
                                         <td>{{$carrier->status}}</td>
-                                        <td>{{$carrier->phone}}</td>
-                                        <td>{{$carrier->payeeCompany}}</td>
+                                        <td><a href="tel:{{$carrier->phone}}">{{$carrier->phone}}</a></td>
+                                        <td><a href="https://maps.google.com/?q={{$carrier->address1}}" target="_blank">{{$carrier->address1}}</a></td>
+                                        <td>{{$carrier->email}}</td>
                                         <td style="display: inline-flex;">
                                             <a title="edit" href="{{route('carriers.edit', $carrier->id)}}">
                                                 <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>
                                             </a>
-                                            <form  style="margin-left: 5px;" action="{{ route('carriers.destroy', $carrier->id) }}" method="post">
-                                                <input type="hidden" name="_method" value="delete">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $carrier->id }}">
-                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this carrier?')" class="btn btn-danger" name="destroy_device">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
-                                            </form>
+{{--                                            <form  style="margin-left: 5px;" action="{{ route('carriers.destroy', $carrier->id) }}" method="post">--}}
+{{--                                                <input type="hidden" name="_method" value="delete">--}}
+{{--                                                @csrf--}}
+{{--                                                <input type="hidden" name="id" value="{{ $carrier->id }}">--}}
+{{--                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this carrier?')" class="btn btn-danger" name="destroy_device">--}}
+{{--                                                    <span class="glyphicon glyphicon-trash"></span>--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -70,9 +76,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
+                                    <th>MC#</th>
+                                    <th>DOT#</th>
                                     <th>Status</th>
                                     <th>Phone</th>
-                                    <th>Payee Company</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
                                     <th></th>
                                 </tr>
                             </tfoot>

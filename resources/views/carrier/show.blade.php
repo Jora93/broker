@@ -9,9 +9,9 @@
             <li class="nav-item col-sm-2 documents-tab">
                 <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
             </li>
-            <li class="nav-item col-sm-2 notes-tab">
-                <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>
-            </li>
+{{--            <li class="nav-item col-sm-2 notes-tab">--}}
+{{--                <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>--}}
+{{--            </li>--}}
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="carrier" role="tabpanel" aria-labelledby="carrier-tab">
@@ -30,52 +30,44 @@
                                                 <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Company</div>
-                                                        <div class="entityValue">10-4 Logistics LLC</div>
+                                                        <div class="entityValue">{{$carrier->company}}</div>
                                                     </div>
                                                 </div>
+                                                <br><br><br>
                                                 <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Status</div>
-                                                        <div class="entityValue">Active</div>
+                                                        <div class="entityValue">{{$carrier->status}}</div>
                                                     </div>
                                                 </div>
+                                                <br><br><br>
                                                 <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Phone</div>
                                                         <div class="entityValue">
-                                                            <a href="tel:(704) 222-9028">(704) 222-9028</a></div>
+                                                            <a href="tel:{{$carrier->phone}}">{{$carrier->phone}}</a>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <br><br><br>
                                                 <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Address</div>
                                                         <div class="entityValue">
-                                                            <a href="https://maps.google.com/?q=8712 Mill Grove Rd Indian Trial , NC 28079" target="_blank">8712 Mill Grove Rd<br>Indian Trial , NC 28079</a>
+                                                            <div class="entityValue">
+                                                                <a href="https://maps.google.com/?q={{$carrier->address1}}" target="_blank">{{$carrier->address1}}</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <br><br><br>
+                                                <div class="col-md-12">
                                                     <div class="entityLabelValue">
-                                                        <div class="entityLabel">Currency</div>
-                                                        <div class="entityValue">USD</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Preferred Carrier Status</div>
-                                                        <div class="entityValue">No</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">SmartWay Certificate</div>
-                                                        <div class="entityValue">No</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Clean Air Compliant(CARB)</div>
-                                                        <div class="entityValue">No</div>
+                                                        <div class="entityLabel">Note</div>
+                                                        <br>
+                                                        <div class="entityValue">
+                                                            {{$carrier->note}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,19 +100,19 @@
                                                         <td>
                                                             <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(0)"></span>
                                                         </td>
-                                                        <td>General Liability</td>
-                                                        <td>$1,000,000.00</td>
-                                                        <td></td>
-                                                        <td>12/05/2019</td>
+                                                        <td>{{$carrier->insurance1_type}}</td>
+                                                        <td>${{$carrier->insurance1_amount}}</td>
+                                                        <td>{{$carrier->insurance1_effective_on}}</td>
+                                                        <td>{{$carrier->insurance1_expires_on}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(1)"></span>
                                                         </td>
-                                                        <td>Cargo</td>
-                                                        <td>$100,000.00</td>
-                                                        <td></td>
-                                                        <td>12/05/2019</td>
+                                                        <td>{{$carrier->insurance2_type}}</td>
+                                                        <td>${{$carrier->insurance2_amount}}</td>
+                                                        <td>{{$carrier->insurance2_effective_on}}</td>
+                                                        <td>{{$carrier->insurance2_expires_on}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -147,14 +139,14 @@
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Phone</div>
                                                         <div class="entityValue">
-                                                            <a href="tel:(704) 222-9028">(704) 222-9028</a></div>
+                                                            <a href="tel:{{$carrier->payee_phone}}">{{$carrier->payee_phone}}</a></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Address</div>
                                                         <div class="entityValue">
-                                                            <a href="https://maps.google.com/?q=8712 Mill Grove Rd Indian Trial , NC 28079" target="_blank">8712 Mill Grove Rd<br>Indian Trial , NC 28079</a>
+                                                            <a href="https://maps.google.com/?q={{$carrier->payee_address1}}" target="_blank">{{$carrier->payee_address1}}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,13 +168,13 @@
                                                 <div class="col-md-6">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">MC #</div>
-                                                        <div class="entityValue">966310</div>
+                                                        <div class="entityValue">{{$carrier->mc_number}}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">DOT #</div>
-                                                        <div class="entityValue">2879288</div>
+                                                        <div class="entityValue">{{$carrier->dot_number}}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,19 +194,8 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="entityLabelValue">
-                                                                <a href="/loads/search/advanced/results?carriers%5B%5D=93348-10-4+Logistics+LLC">Load History</a>
+                                                                <a href="#">Load History</a>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="entityLabelValue">
-                                                                <a href="/accounting/carriers/performance?carrier=93348-10-4+Logistics+LLC">Performance</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="entityLabelValue">
-                                                                <a href="/accounting/carriers/payment_history?carrier=93348-10-4+Logistics+LLC">
-                                                                    <nobr>Payment History</nobr>
-                                                                </a></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -248,7 +229,7 @@
                                                     <a class="actionLink" style="padding-right: 5px" href="/documents/191644/print" target="_blank">
                                                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                                                     </a>
-                                                    <a href="/documents/191644">SGSH Setup (1) (2).pdf</a>
+                                                    <a href="/documents/191644">Setup (1) (2).pdf</a>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <a class="actionLink" style="padding-right: 5px" href="/documents/191644/download">
@@ -257,7 +238,7 @@
                                                     <a class="actionLink" style="padding-right: 5px" href="/documents/191644/print" target="_blank">
                                                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                                                     </a>
-                                                    <a href="/documents/191644">SGSH Setup (1) (2).pdf</a>
+                                                    <a href="/documents/191644">Setup (1) (2).pdf</a>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <a class="actionLink" style="padding-right: 5px" href="/documents/191644/download">
@@ -266,7 +247,7 @@
                                                     <a class="actionLink" style="padding-right: 5px" href="/documents/191644/print" target="_blank">
                                                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                                                     </a>
-                                                    <a href="/documents/191644">SGSH Setup (1) (2).pdf</a>
+                                                    <a href="/documents/191644">Setup (1) (2).pdf</a>
                                                 </div>
                                             </div>
                                         </div>
