@@ -1,7 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="col-sm-12 loads-show">
+        <form method="post" action="{{ url('/loads') }}" class="col-sm-12">
+        @csrf
+            <input type="hidden" name="customer_id" value="{{$customer->id}}">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item col-sm-2 load-tab">
                 <a class="nav-link active" id="load-tab" data-toggle="tab" href="#load" role="tab" aria-controls="load" aria-selected="true">Load</a>
@@ -21,26 +33,22 @@
                                         <div class="card-header">Shipper Information</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-sm-6 col-xs-6">
-                                                    <div id="ship_location_companyGroup" class="form-group">
-                                                        <label class="control-label">Company</label>
-                                                        <div>
-                                                            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" style="width: 100%; position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);" value="" class="form-control editMainField tt-hint" tabindex="-1" readonly="" autocomplete="off" spellcheck="false"><input type="text" id="ship_location_company" name="load_customer[ship_location_company]" style="width: 100%; position: relative; vertical-align: top; background-color: transparent;" value="" class="form-control editMainField tt-input" placeholder="Enter company" tabindex="211" autocomplete="off" spellcheck="false" dir="auto"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-10"></div></span></span>
-                                                            <input type="hidden" id="ship_location_id" name="load_customer[ship_location_id]" value="" tabindex="212">
-                                                        </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">*Company</label>
+                                                        <input class="form-control" placeholder="Enter company" required="required" type="text" name="shipper_company" value="{{old('shipper_company')}}">
                                                     </div>
                                                 </div>
-
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
                                                         <label class="control-label">Phone</label>
-                                                        <input type="text" id="ship_location_phone" name="load_customer[ship_location_phone]" value="" class="form-control editMainField phoneMask" placeholder="Enter phone number" tabindex="12">
+                                                        <input type="text" name="shipper_phone" value="{{old('shipper_phone')}}" class="form-control phoneMask" placeholder="Enter phone number">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2 col-xs-2">
+                                                <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
                                                         <label class="control-label">Extension</label>
-                                                        <input type="text" id="ship_location_phone_extension" name="load_customer[ship_location_phone_extension]" value="" class="form-control editMainField" placeholder="Enter extension" tabindex="13">
+                                                        <input type="text" name="shipper_phone_extension" value="{{old('shipper_phone_extension')}}" class="form-control" placeholder="Enter extension">
                                                     </div>
                                                 </div>
                                             </div>
@@ -49,76 +57,73 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Location PoC</label>
-                                                        <input type="text" id="ship_location_contact" name="load_customer[ship_location_contact_name]" value="" class="form-control editMainField" placeholder="Enter point of contact" tabindex="213">
+                                                        <input type="text" name="shipper_location_POS" value="{{old('shipper_location_POS')}}" class="form-control" placeholder="Enter point of contact">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Customer PoC</label>
-                                                        <select id="customerContactSelect" name="load_customer[customer_contact_id]" class="form-control editMainField" tabindex="223">
-                                                            <option value="">-- No Contact Selected --</option>
-                                                        </select>
+                                                        <input type="text" name="shipper_customer_POS" value="{{old('shipper_customer_POS')}}" class="form-control" placeholder="Enter point of customer">
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div id="ship_location_address1Group" class="form-group">
                                                         <label class="control-label">Address 1</label>
-                                                        <input type="text" id="ship_location_address1" name="load_customer[ship_location_address1]" value="" class="form-control editMainField" placeholder="Enter address" tabindex="214">
+                                                        <input type="text" name="shipper_address1" value="{{old('shipper_address1')}}" class="form-control" placeholder="Enter address">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Fax</label>
-                                                        <input type="text" id="ship_location_fax" name="load_customer[ship_location_fax]" value="" class="form-control editMainField phoneMask" placeholder="Enter fax number" tabindex="224">
+                                                        <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="shipper_fax" value="{{old('shipper_fax')}}">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="ship_location_address2Group" class="form-group">
+                                                    <div class="form-group">
                                                         <label class="control-label">Address 2</label>
-                                                        <input type="text" id="ship_location_address2" name="load_customer[ship_location_address2]" value="" class="form-control editMainField" placeholder="Enter address" tabindex="215">
+                                                        <input type="text" name="shipper_address2" value="{{old('shipper_address2')}}" class="form-control" placeholder="Enter address">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-6 col-xs-6">
-                                                    <div class="col-sm-6 col-xs-6 ship-location-quantity">
+                                                    <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Quantity</label>
-                                                            <input type="text" name="load_customer[ship_location_quantity]" value="" class="form-control editMainField" placeholder="Enter quantity" tabindex="225">
+                                                            <input type="text" name="shipper_quantity" value="{{old('shipper_quantity')}}" class="form-control editMainField" placeholder="Enter quantity">
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6 ship-location-type">
+                                                    <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Type</label>
-                                                            <select name="load_customer[ship_location_type]" id="load_customer_ship_location_type" class="form-control" tabindex="226"><option value="">Select Type</option><option value="Blueberries">Blueberries</option>
-                                                                <option value="Boxes">Boxes</option>
-                                                                <option value="Carrier Fee">Carrier Fee</option>
-                                                                <option value="Cartons">Cartons</option>
-                                                                <option value="CWT">CWT</option>
-                                                                <option value="Flat Rate">Flat Rate</option>
-                                                                <option value="Miles">Miles</option>
-                                                                <option value="Pallets">Pallets</option>
-                                                                <option value="Pounds">Pounds</option>
-                                                                <option value="Strawberries">Strawberries</option>
-                                                                <option value="Tons">Tons</option>
-                                                                <option value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
+                                                            <select name="shipper_type" value="{{old('shipper_type')}}" class="form-control">
+                                                                <option>Select Type</option>
+                                                                <option @if(old('shipper_type') === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
+                                                                <option @if(old('shipper_type') === 'Boxes') selected @endif value="Boxes">Boxes</option>
+                                                                <option @if(old('shipper_type') === 'Carrier Fee') selected @endif value="Carrier Fee">Carrier Fee</option>
+                                                                <option @if(old('shipper_type') === 'Cartons') selected @endif value="Cartons">Cartons</option>
+                                                                <option @if(old('shipper_type') === 'CWT') selected @endif value="CWT">CWT</option>
+                                                                <option @if(old('shipper_type') === 'Flat Rate') selected @endif value="Flat Rate">Flat Rate</option>
+                                                                <option @if(old('shipper_type') === 'Miles') selected @endif value="Miles">Miles</option>
+                                                                <option @if(old('shipper_type') === 'Pallets') selected @endif value="Pallets">Pallets</option>
+                                                                <option @if(old('shipper_type') === 'Pounds') selected @endif value="Pounds">Pounds</option>
+                                                                <option @if(old('shipper_type') === 'Strawberries') selected @endif value="Strawberries">Strawberries</option>
+                                                                <option @if(old('shipper_type') === 'Tons') selected @endif value="Tons">Tons</option>
+                                                                <option @if(old('shipper_type') === 'Truck Ordered/Not Used') selected @endif value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="ship_location_cityGroup" class="form-group shipLocationCityMsg-1613">
+                                                    <div class="form-group">
                                                         <label class="control-label">City</label>
-                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="ship_location_city" name="load_customer[ship_location_city]" value="" class="form-control editMainField tt-input" placeholder="Enter city" tabindex="217" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-11"></div></span></span>
+                                                        <input class="form-control" placeholder="Enter billing city" type="text" name="shipper_city" value="{{old('shipper_city')}}">
                                                     </div>
                                                 </div>
 
@@ -126,16 +131,70 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="text" name="load_customer[ship_location_weight]" value="" class="form-control editMainField" placeholder="Enter weight" tabindex="227">
+                                                        <input type="text" name="shipper_weight" value="{{old('shipper_weight')}}" class="form-control" placeholder="Enter weight">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="ship_location_stateGroup" class="form-group shipLocationStateMsg-1613">
-                                                        <label class="control-label">State/Province</label>
-                                                        <select name="load_customer[ship_location_state]" class="editMainField form-control chosen chosen-select" id="ship_location_state" tabindex="218" style="display: none;"><option value="">Select State/Province</option><optgroup label="United States"><option value="AL">AL (Alabama)</option><option value="AK">AK (Alaska)</option><option value="AZ">AZ (Arizona)</option><option value="AR">AR (Arkansas)</option><option value="CA">CA (California)</option><option value="CO">CO (Colorado)</option><option value="CT">CT (Connecticut)</option><option value="DE">DE (Delaware)</option><option value="DC">DC (District of Columbia)</option><option value="FL">FL (Florida)</option><option value="GA">GA (Georgia)</option><option value="HI">HI (Hawaii)</option><option value="ID">ID (Idaho)</option><option value="IL">IL (Illinois)</option><option value="IN">IN (Indiana)</option><option value="IA">IA (Iowa)</option><option value="KS">KS (Kansas)</option><option value="KY">KY (Kentucky)</option><option value="LA">LA (Louisiana)</option><option value="ME">ME (Maine)</option><option value="MD">MD (Maryland)</option><option value="MA">MA (Massachusetts)</option><option value="MI">MI (Michigan)</option><option value="MN">MN (Minnesota)</option><option value="MS">MS (Mississippi)</option><option value="MO">MO (Missouri)</option><option value="MT">MT (Montana)</option><option value="NE">NE (Nebraska)</option><option value="NV">NV (Nevada)</option><option value="NH">NH (New Hampshire)</option><option value="NJ">NJ (New Jersey)</option><option value="NM">NM (New Mexico)</option><option value="NY">NY (New York)</option><option value="NC">NC (North Carolina)</option><option value="ND">ND (North Dakota)</option><option value="OH">OH (Ohio)</option><option value="OK">OK (Oklahoma)</option><option value="OR">OR (Oregon)</option><option value="PA">PA (Pennsylvania)</option><option value="PR">PR (Puerto Rico)</option><option value="RI">RI (Rhode Island)</option><option value="SC">SC (South Carolina)</option><option value="SD">SD (South Dakota)</option><option value="TN">TN (Tennessee)</option><option value="TX">TX (Texas)</option><option value="UT">UT (Utah)</option><option value="VT">VT (Vermont)</option><option value="VA">VA (Virginia)</option><option value="WA">WA (Washington)</option><option value="WV">WV (West Virginia)</option><option value="WI">WI (Wisconsin)</option><option value="WY">WY (Wyoming)</option></optgroup><optgroup label="Canada"><option value="AB">AB (Alberta)</option><option value="BC">BC (British Columbia)</option><option value="MB">MB (Manitoba)</option><option value="NB">NB (New Brunswick)</option><option value="NF">NF (Newfoundland)</option><option value="NT">NT (Northwest Territory)</option><option value="NS">NS (Nova Scotia)</option><option value="NU">NU (Nunavut)</option><option value="ON">ON (Ontario)</option><option value="PE">PE (Prince Edward Island)</option><option value="QC">QC (Quebec)</option><option value="SK">SK (Saskatchewan)</option><option value="YT">YT (Yukon Territory)</option></optgroup><optgroup label="Mexican"><option value="AG">AG (Aguascalientes)</option><option value="BJ">BJ (Baja California)</option><option value="BS">BS (Baja California Sur)</option><option value="CP">CP (Campeche)</option><option value="CH">CH (Chiapas)</option><option value="CI">CI (Chihuahua)</option><option value="CU">CU (Coahuila)</option><option value="CL">CL (Colima)</option><option value="DF">DF (Distrito Federal)</option><option value="DG">DG (Durango)</option><option value="GJ">GJ (Guanajuato)</option><option value="GR">GR (Guerrero)</option><option value="HG">HG (Hidalgo)</option><option value="JA">JA (Jalisco)</option><option value="EM">EM (Mexico)</option><option value="MH">MH (Michoacan)</option><option value="MR">MR (Morelos)</option><option value="NA">NA (Nayarit)</option><option value="NL">NL (Nuevo León)</option><option value="OA">OA (Oaxaca)</option><option value="PU">PU (Puebla)</option><option value="QA">QA (Queretaro)</option><option value="QR">QR (Quintana Roo)</option><option value="SL">SL (San Luis Potosi)</option><option value="SI">SI (Sinaloa)</option><option value="SO">SO (Sonora)</option><option value="TA">TA (Tabasco)</option><option value="TM">TM (Tamaulipas)</option><option value="TL">TL (Tlaxcala)</option><option value="VZ">VZ (Veracruz)</option><option value="YC">YC (Yucatan)</option><option value="ZT">ZT (Zacatecas)</option></optgroup></select><div class="chosen-container chosen-container-single" style="width: 100%;" title="" id="ship_location_state_chosen"><a class="chosen-single" tabindex="-1"><span>Select State/Province</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" tabindex="219"></div><ul class="chosen-results"></ul></div></div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">State/Province</label><br>
+                                                        <select name="shipper_state" value="{{old('shipper_state')}}" class="selectpicker" required="true" data-live-search="true">
+                                                            <option disabled selected value>Select State/Province</option>
+                                                            <option @if(old('shipper_state') === 'AL') selected @endif value="AL">AL (Alabama)</option>
+                                                            <option @if(old('shipper_state') === 'AK') selected @endif value="AK">AK (Alaska)</option>
+                                                            <option @if(old('shipper_state') === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
+                                                            <option @if(old('shipper_state') === 'AR') selected @endif value="AR">AR (Arkansas)</option>
+                                                            <option @if(old('shipper_state') === 'CA') selected @endif value="CA">CA (California)</option>
+                                                            <option @if(old('shipper_state') === 'CO') selected @endif value="CO">CO (Colorado)</option>
+                                                            <option @if(old('shipper_state') === 'CT') selected @endif value="CT">CT (Connecticut)</option>
+                                                            <option @if(old('shipper_state') === 'DE') selected @endif value="DE">DE (Delaware)</option>
+                                                            <option @if(old('shipper_state') === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
+                                                            <option @if(old('shipper_state') === 'FL') selected @endif value="FL">FL (Florida)</option>
+                                                            <option @if(old('shipper_state') === 'GA') selected @endif value="GA">GA (Georgia)</option>
+                                                            <option @if(old('shipper_state') === 'HI') selected @endif value="HI">HI (Hawaii)</option>
+                                                            <option @if(old('shipper_state') === 'ID') selected @endif value="ID">ID (Idaho)</option>
+                                                            <option @if(old('shipper_state') === 'IL') selected @endif value="IL">IL (Illinois)</option>
+                                                            <option @if(old('shipper_state') === 'IN') selected @endif value="IN">IN (Indiana)</option>
+                                                            <option @if(old('shipper_state') === 'IA') selected @endif value="IA">IA (Iowa)</option>
+                                                            <option @if(old('shipper_state') === 'KS') selected @endif value="KS">KS (Kansas)</option>
+                                                            <option @if(old('shipper_state') === 'KY') selected @endif value="KY">KY (Kentucky)</option>
+                                                            <option @if(old('shipper_state') === 'LA') selected @endif value="LA">LA (Louisiana)</option>
+                                                            <option @if(old('shipper_state') === 'ME') selected @endif value="ME">ME (Maine)</option>
+                                                            <option @if(old('shipper_state') === 'MD') selected @endif value="MD">MD (Maryland)</option>
+                                                            <option @if(old('shipper_state') === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
+                                                            <option @if(old('shipper_state') === 'MI') selected @endif value="MI">MI (Michigan)</option>
+                                                            <option @if(old('shipper_state') === 'MN') selected @endif value="MN">MN (Minnesota)</option>
+                                                            <option @if(old('shipper_state') === 'MS') selected @endif value="MS">MS (Mississippi)</option>
+                                                            <option @if(old('shipper_state') === 'MO') selected @endif value="MO">MO (Missouri)</option>
+                                                            <option @if(old('shipper_state') === 'MT') selected @endif value="MT">MT (Montana)</option>
+                                                            <option @if(old('shipper_state') === 'NE') selected @endif value="NE">NE (Nebraska)</option>
+                                                            <option @if(old('shipper_state') === 'NV') selected @endif value="NV">NV (Nevada)</option>
+                                                            <option @if(old('shipper_state') === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
+                                                            <option @if(old('shipper_state') === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
+                                                            <option @if(old('shipper_state') === 'NM') selected @endif value="NM">NM (New Mexico)</option>
+                                                            <option @if(old('shipper_state') === 'NY') selected @endif value="NY">NY (New York)</option>
+                                                            <option @if(old('shipper_state') === 'NC') selected @endif value="NC">NC (North Carolina)</option>
+                                                            <option @if(old('shipper_state') === 'ND') selected @endif value="ND">ND (North Dakota)</option>
+                                                            <option @if(old('shipper_state') === 'OH') selected @endif value="OH">OH (Ohio)</option>
+                                                            <option @if(old('shipper_state') === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
+                                                            <option @if(old('shipper_state') === 'OR') selected @endif value="OR">OR (Oregon)</option>
+                                                            <option @if(old('shipper_state') === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
+                                                            <option @if(old('shipper_state') === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
+                                                            <option @if(old('shipper_state') === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
+                                                            <option @if(old('shipper_state') === 'SC') selected @endif value="SC">SC (South Carolina)</option>
+                                                            <option @if(old('shipper_state') === 'SD') selected @endif value="SD">SD (South Dakota)</option>
+                                                            <option @if(old('shipper_state') === 'TN') selected @endif value="TN">TN (Tennessee)</option>
+                                                            <option @if(old('shipper_state') === 'TX') selected @endif value="TX">TX (Texas)</option>
+                                                            <option @if(old('shipper_state') === 'UT') selected @endif value="UT">UT (Utah)</option>
+                                                            <option @if(old('shipper_state') === 'VT') selected @endif value="VT">VT (Vermont)</option>
+                                                            <option @if(old('shipper_state') === 'VA') selected @endif value="VA">VA (Virginia)</option>
+                                                            <option @if(old('shipper_state') === 'WA') selected @endif value="WA">WA (Washington)</option>
+                                                            <option @if(old('shipper_state') === 'WV') selected @endif value="WV">WV (West Virginia)</option>
+                                                            <option @if(old('shipper_state') === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
+                                                            <option @if(old('shipper_state') === 'WY') selected @endif value="WY">WY (Wyoming)</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -143,9 +202,9 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Value</label>
 
-                                                        <div class="input-group input-group-sm">
+                                                        <div class="input-group">
                                                             <span class="input-group-addon">$</span>
-                                                            <input type="text" id="load_customer_ship_location_value" name="load_customer[ship_location_value]" value="2,000.00" class="form-control editMainField" placeholder="Enter value" tabindex="228">
+                                                            <input type="number" name="shipper_value" value="{{old('shipper_value', $shipper_value)}}" class="form-control" placeholder="Enter value">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,20 +212,17 @@
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="ship_location_zip_codeGroup" class="form-group">
-                                                        <label class="control-label">Zip Code</label>
-                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="ship_location_zip_code" name="load_customer[ship_location_zip_code]" value="" class="form-control editMainField tt-input" placeholder="Enter zip code" tabindex="220" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-12"></div></span></span>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="shipper_zip_code">Zip Code</label>
+                                                        <input class="form-control requiredInputCustomer" placeholder="Enter zip code" type="text" name="shipper_zip_code" value="{{old('shipper_zip_code')}}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div class="form-group shipLocationPickupAtMsg-1613">
+                                                    <div id="insuranceEffectiveDateGroup" class="form-group">
                                                         <label class="control-label">Pickup Date</label>
-                                                        <div class="input-group date dateTimeMainPicker" id="pickupAtDateTimePicker" onmouseover="$(this).datetimepicker({pickTime: false});" onkeydown="$(this).datetimepicker({pickTime: false});">
-                                                            <input name="load_customer[ship_location_pickup_at]" type="text" class="form-control" value="" tabindex="229">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-calendar"></i></button>
-                                                            </div>
+                                                        <div class="input-group date datePicker defaultDatePicker">
+                                                            <input class="form-control" placeholder="Enter pichup date"  type="date" name="shipper_pickup_date" value="{{old('shipper_pickup_date')}}" min={{date('Y-m-d')}}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,21 +232,14 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Pickup #</label>
-                                                        <input type="text" name="load_customer[ship_location_pickup_number]" value="" class="form-control editMainField" placeholder="Enter pickup number" tabindex="221">
+                                                        <input type="text" name="shipper_pickup_number" value="{{old('shipper_pickup_number')}}" class="form-control editMainField" placeholder="Enter pickup number">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Pickup Time</label>
-                                                        <input style="float:right;margin:3px;" type="checkbox" id="load_customer_ship_location_appointment" name="load_customer[ship_location_appointment]" tabindex="230">
-                                                        <label style="font-weight:normal;float:right;" for="load_customer_ship_location_appointment">Appointment</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="load_customer[ship_location_pickup_time]" class="form-control input-small time-picker-input" value="" tabindex="231">
-                                                            <div class="input-group-btn">
-                                                                <button type="button" class="btn btn-default btn-sm time" onmouseover="$(this).datetimepicker({pickDate: false});"><i class="glyphicon glyphicon-time"></i></button>
-                                                            </div>
-                                                        </div>
+                                                        <input type="time" name="shipper_pickup_time" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time')}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,7 +248,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Pickup Note</label>
-                                                        <textarea class="form-control editMainField" id="ship_location_notes" name="load_customer[ship_location_notes]" placeholder="Enter pickup notes" tabindex="222"></textarea>
+                                                        <textarea class="form-control editMainField" name="shipper_notes" placeholder="Enter pickup notes">{{old('shipper_notes')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +260,7 @@
                                 <div class="tab-item">
                                     <div class="card">
                                         <div class="card-header">
-                                            <span>Stops</span>
+                                            <span>Stops //todo add functionality later</span>
                                             <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span>
                                         </div>
                                         <div class="card-body">
@@ -228,24 +277,25 @@
                                         <div class="card-header">Consignee Information</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <div id="delivery_location_companyGroup" class="col-sm-6 col-xs-6">
+                                                <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label">Company</label>
-                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="delivery_location_company" name="load_customer[delivery_location_company]" value="" class="form-control editMainField tt-input" placeholder="Enter company" tabindex="232" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-13"></div></span></span>
-                                                        <input type="hidden" id="delivery_location_id" name="load_customer[delivery_location_id]" value="" tabindex="233">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Company</label>
+                                                            <input class="form-control" placeholder="Enter company" required="required" type="text" name="consignee_company" value="{{old('consignee_company')}}">
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
-                                                        <label class="control-label">Phone</label>
-                                                        <input type="text" id="delivery_location_phone" name="load_customer[delivery_location_phone]" value="" class="form-control editMainField phoneMask" placeholder="Enter phone number" tabindex="35">
+                                                        <label class="control-label" for="customer_phone">Phone</label>
+                                                        <input class="form-control requiredInputCustomer phoneMask" placeholder="Enter phone" required="required" type="text" name="consignee_phone" value="{{old('consignee_phone')}}">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2 col-xs-2">
+                                                <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
                                                         <label class="control-label">Extension</label>
-                                                        <input type="text" id="delivery_location_phone_extension" name="load_customer[delivery_location_phone_extension]" value="" class="form-control editMainField" placeholder="Enter extension" tabindex="36">
+                                                        <input class="form-control" placeholder="Enter extension" type="text" name="consignee_phone_extension" value="{{old('consignee_phone_extension')}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,28 +304,28 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Contact</label>
-                                                        <input type="text" id="delivery_location_contact" name="load_customer[delivery_location_contact_name]" value="" class="form-control editMainField" placeholder="Enter point of contact" tabindex="234">
+                                                        <input type="text" name="consignee_contact_name" value="{{old('consignee_contact_name')}}" class="form-control" placeholder="Enter point of contact" tabindex="234">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Fax</label>
-                                                        <input type="text" id="delivery_location_fax" name="load_customer[delivery_location_fax]" value="" class="form-control editMainField phoneMask" placeholder="Enter fax number" tabindex="254">
+                                                        <input type="text" name="consignee_fax" value="{{old('consignee_fax')}}" class="form-control editMainField phoneMask" placeholder="Enter fax number">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="delivery_location_address1Group" class="form-group">
+                                                    <div class="form-group">
                                                         <label class="control-label">Address 1</label>
-                                                        <input type="text" id="delivery_location_address1" name="load_customer[delivery_location_address1]" value="" class="form-control editMainField" placeholder="Enter address" tabindex="235">
+                                                        <input type="text" name="consignee_address1" value="{{old('consignee_address1')}}" class="form-control" placeholder="Enter address">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery #</label>
-                                                        <input type="text" name="load_customer[delivery_location_delivered_number]" value="" class="form-control editMainField" placeholder="Enter delivery number" tabindex="255">
+                                                        <input type="text" name="consignee_delivered_number" value="{{old('consignee_delivered_number')}}" class="form-control editMainField" placeholder="Enter delivery number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,17 +334,15 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Address 2</label>
-                                                        <input type="text" id="delivery_location_address2" name="load_customer[delivery_location_address2]" value="" class="form-control editMainField" placeholder="Enter address" tabindex="236">
+                                                        <input type="text" name="consignee_address2" value="{{old('consignee_address2')}}" class="form-control" placeholder="Enter address">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group deliveryLocationPickupAtMsg-1613">
                                                         <label class="control-label">Delivery Date</label>
-                                                        <div class="input-group date dateTimeMainPicker" id="deliveredAtDateTimePicker" onmouseover="$(this).datetimepicker({pickTime: false});" onkeydown="$(this).datetimepicker({pickTime: false});">
-                                                            <input name="load_customer[delivery_location_delivered_at]" type="text" class="form-control editMainField" value="" tabindex="256">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-calendar"></i></button>
-                                                            </div>
+                                                        <div class="input-group date datePicker defaultDatePicker">
+                                                            <input class="form-control" placeholder="Enter delivery date"  type="date" name="consignee_delivery_date" value="{{old('consignee_delivery_date')}}" min={{date('Y-m-d')}}>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,42 +352,87 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
                                                         <label class="control-label">City</label>
-                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="delivery_location_city" name="load_customer[delivery_location_city]" value="" class="form-control editMainField tt-input" placeholder="Enter city" tabindex="237" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-14"></div></span></span>
+                                                        <input class="form-control" placeholder="Enter city" required="required" type="text" name="consignee_city" value="{{old('consignee_city')}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery Time</label>
-                                                        <input style="float:right;margin:3px;" type="checkbox" id="load_customer_delivery_location_appointment" name="load_customer[delivery_location_appointment]" tabindex="257">
-                                                        <label style="font-weight:normal;float:right;" for="load_customer_delivery_location_appointment">Appointment</label>
-                                                        <div class="input-group">
-                                                            <input type="text" name="load_customer[delivery_location_delivered_time]" class="form-control input-small time-picker-input" value="" tabindex="258">
-                                                            <div class="input-group-btn">
-                                                                <button type="button" class="btn btn-default btn-sm time" onmouseover="$(this).datetimepicker({pickDate: false});"><i class="glyphicon glyphicon-time"></i></button>
-                                                            </div>
-                                                        </div>
+                                                        <input type="time" name="consignee_delivery_time" class="form-control input-small time-picker-input" value="{{old('consignee_delivery_time')}}">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div id="delivery_location_stateGroup" class="form-group deliveryLocationStateMsg-1613">
-                                                        <label class="control-label">State/Province</label>
-                                                        <select name="load_customer[delivery_location_state]" class="editMainField form-control chosen chosen-select" id="delivery_location_state" tabindex="238" style="display: none;"><option value="">Select State/Province</option><optgroup label="United States"><option value="AL">AL (Alabama)</option><option value="AK">AK (Alaska)</option><option value="AZ">AZ (Arizona)</option><option value="AR">AR (Arkansas)</option><option value="CA">CA (California)</option><option value="CO">CO (Colorado)</option><option value="CT">CT (Connecticut)</option><option value="DE">DE (Delaware)</option><option value="DC">DC (District of Columbia)</option><option value="FL">FL (Florida)</option><option value="GA">GA (Georgia)</option><option value="HI">HI (Hawaii)</option><option value="ID">ID (Idaho)</option><option value="IL">IL (Illinois)</option><option value="IN">IN (Indiana)</option><option value="IA">IA (Iowa)</option><option value="KS">KS (Kansas)</option><option value="KY">KY (Kentucky)</option><option value="LA">LA (Louisiana)</option><option value="ME">ME (Maine)</option><option value="MD">MD (Maryland)</option><option value="MA">MA (Massachusetts)</option><option value="MI">MI (Michigan)</option><option value="MN">MN (Minnesota)</option><option value="MS">MS (Mississippi)</option><option value="MO">MO (Missouri)</option><option value="MT">MT (Montana)</option><option value="NE">NE (Nebraska)</option><option value="NV">NV (Nevada)</option><option value="NH">NH (New Hampshire)</option><option value="NJ">NJ (New Jersey)</option><option value="NM">NM (New Mexico)</option><option value="NY">NY (New York)</option><option value="NC">NC (North Carolina)</option><option value="ND">ND (North Dakota)</option><option value="OH">OH (Ohio)</option><option value="OK">OK (Oklahoma)</option><option value="OR">OR (Oregon)</option><option value="PA">PA (Pennsylvania)</option><option value="PR">PR (Puerto Rico)</option><option value="RI">RI (Rhode Island)</option><option value="SC">SC (South Carolina)</option><option value="SD">SD (South Dakota)</option><option value="TN">TN (Tennessee)</option><option value="TX">TX (Texas)</option><option value="UT">UT (Utah)</option><option value="VT">VT (Vermont)</option><option value="VA">VA (Virginia)</option><option value="WA">WA (Washington)</option><option value="WV">WV (West Virginia)</option><option value="WI">WI (Wisconsin)</option><option value="WY">WY (Wyoming)</option></optgroup><optgroup label="Canada"><option value="AB">AB (Alberta)</option><option value="BC">BC (British Columbia)</option><option value="MB">MB (Manitoba)</option><option value="NB">NB (New Brunswick)</option><option value="NF">NF (Newfoundland)</option><option value="NT">NT (Northwest Territory)</option><option value="NS">NS (Nova Scotia)</option><option value="NU">NU (Nunavut)</option><option value="ON">ON (Ontario)</option><option value="PE">PE (Prince Edward Island)</option><option value="QC">QC (Quebec)</option><option value="SK">SK (Saskatchewan)</option><option value="YT">YT (Yukon Territory)</option></optgroup><optgroup label="Mexican"><option value="AG">AG (Aguascalientes)</option><option value="BJ">BJ (Baja California)</option><option value="BS">BS (Baja California Sur)</option><option value="CP">CP (Campeche)</option><option value="CH">CH (Chiapas)</option><option value="CI">CI (Chihuahua)</option><option value="CU">CU (Coahuila)</option><option value="CL">CL (Colima)</option><option value="DF">DF (Distrito Federal)</option><option value="DG">DG (Durango)</option><option value="GJ">GJ (Guanajuato)</option><option value="GR">GR (Guerrero)</option><option value="HG">HG (Hidalgo)</option><option value="JA">JA (Jalisco)</option><option value="EM">EM (Mexico)</option><option value="MH">MH (Michoacan)</option><option value="MR">MR (Morelos)</option><option value="NA">NA (Nayarit)</option><option value="NL">NL (Nuevo León)</option><option value="OA">OA (Oaxaca)</option><option value="PU">PU (Puebla)</option><option value="QA">QA (Queretaro)</option><option value="QR">QR (Quintana Roo)</option><option value="SL">SL (San Luis Potosi)</option><option value="SI">SI (Sinaloa)</option><option value="SO">SO (Sonora)</option><option value="TA">TA (Tabasco)</option><option value="TM">TM (Tamaulipas)</option><option value="TL">TL (Tlaxcala)</option><option value="VZ">VZ (Veracruz)</option><option value="YC">YC (Yucatan)</option><option value="ZT">ZT (Zacatecas)</option></optgroup></select><div class="chosen-container chosen-container-single" style="width: 100%;" title="" id="delivery_location_state_chosen"><a class="chosen-single" tabindex="-1"><span>Select State/Province</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" tabindex="239"></div><ul class="chosen-results"></ul></div></div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">State/Province</label><br>
+                                                        <select name="consignee_delivery_state" value="{{old('consignee_delivery_state')}}" class="selectpicker" required="true" data-live-search="true">
+                                                            <option disabled selected value>Select State/Province</option>
+                                                            <option @if(old('shipper_state') === 'AL') selected @endif value="AL">AL (Alabama)</option>
+                                                            <option @if(old('shipper_state') === 'AK') selected @endif value="AK">AK (Alaska)</option>
+                                                            <option @if(old('shipper_state') === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
+                                                            <option @if(old('shipper_state') === 'AR') selected @endif value="AR">AR (Arkansas)</option>
+                                                            <option @if(old('shipper_state') === 'CA') selected @endif value="CA">CA (California)</option>
+                                                            <option @if(old('shipper_state') === 'CO') selected @endif value="CO">CO (Colorado)</option>
+                                                            <option @if(old('shipper_state') === 'CT') selected @endif value="CT">CT (Connecticut)</option>
+                                                            <option @if(old('shipper_state') === 'DE') selected @endif value="DE">DE (Delaware)</option>
+                                                            <option @if(old('shipper_state') === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
+                                                            <option @if(old('shipper_state') === 'FL') selected @endif value="FL">FL (Florida)</option>
+                                                            <option @if(old('shipper_state') === 'GA') selected @endif value="GA">GA (Georgia)</option>
+                                                            <option @if(old('shipper_state') === 'HI') selected @endif value="HI">HI (Hawaii)</option>
+                                                            <option @if(old('shipper_state') === 'ID') selected @endif value="ID">ID (Idaho)</option>
+                                                            <option @if(old('shipper_state') === 'IL') selected @endif value="IL">IL (Illinois)</option>
+                                                            <option @if(old('shipper_state') === 'IN') selected @endif value="IN">IN (Indiana)</option>
+                                                            <option @if(old('shipper_state') === 'IA') selected @endif value="IA">IA (Iowa)</option>
+                                                            <option @if(old('shipper_state') === 'KS') selected @endif value="KS">KS (Kansas)</option>
+                                                            <option @if(old('shipper_state') === 'KY') selected @endif value="KY">KY (Kentucky)</option>
+                                                            <option @if(old('shipper_state') === 'LA') selected @endif value="LA">LA (Louisiana)</option>
+                                                            <option @if(old('shipper_state') === 'ME') selected @endif value="ME">ME (Maine)</option>
+                                                            <option @if(old('shipper_state') === 'MD') selected @endif value="MD">MD (Maryland)</option>
+                                                            <option @if(old('shipper_state') === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
+                                                            <option @if(old('shipper_state') === 'MI') selected @endif value="MI">MI (Michigan)</option>
+                                                            <option @if(old('shipper_state') === 'MN') selected @endif value="MN">MN (Minnesota)</option>
+                                                            <option @if(old('shipper_state') === 'MS') selected @endif value="MS">MS (Mississippi)</option>
+                                                            <option @if(old('shipper_state') === 'MO') selected @endif value="MO">MO (Missouri)</option>
+                                                            <option @if(old('shipper_state') === 'MT') selected @endif value="MT">MT (Montana)</option>
+                                                            <option @if(old('shipper_state') === 'NE') selected @endif value="NE">NE (Nebraska)</option>
+                                                            <option @if(old('shipper_state') === 'NV') selected @endif value="NV">NV (Nevada)</option>
+                                                            <option @if(old('shipper_state') === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
+                                                            <option @if(old('shipper_state') === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
+                                                            <option @if(old('shipper_state') === 'NM') selected @endif value="NM">NM (New Mexico)</option>
+                                                            <option @if(old('shipper_state') === 'NY') selected @endif value="NY">NY (New York)</option>
+                                                            <option @if(old('shipper_state') === 'NC') selected @endif value="NC">NC (North Carolina)</option>
+                                                            <option @if(old('shipper_state') === 'ND') selected @endif value="ND">ND (North Dakota)</option>
+                                                            <option @if(old('shipper_state') === 'OH') selected @endif value="OH">OH (Ohio)</option>
+                                                            <option @if(old('shipper_state') === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
+                                                            <option @if(old('shipper_state') === 'OR') selected @endif value="OR">OR (Oregon)</option>
+                                                            <option @if(old('shipper_state') === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
+                                                            <option @if(old('shipper_state') === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
+                                                            <option @if(old('shipper_state') === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
+                                                            <option @if(old('shipper_state') === 'SC') selected @endif value="SC">SC (South Carolina)</option>
+                                                            <option @if(old('shipper_state') === 'SD') selected @endif value="SD">SD (South Dakota)</option>
+                                                            <option @if(old('shipper_state') === 'TN') selected @endif value="TN">TN (Tennessee)</option>
+                                                            <option @if(old('shipper_state') === 'TX') selected @endif value="TX">TX (Texas)</option>
+                                                            <option @if(old('shipper_state') === 'UT') selected @endif value="UT">UT (Utah)</option>
+                                                            <option @if(old('shipper_state') === 'VT') selected @endif value="VT">VT (Vermont)</option>
+                                                            <option @if(old('shipper_state') === 'VA') selected @endif value="VA">VA (Virginia)</option>
+                                                            <option @if(old('shipper_state') === 'WA') selected @endif value="WA">WA (Washington)</option>
+                                                            <option @if(old('shipper_state') === 'WV') selected @endif value="WV">WV (West Virginia)</option>
+                                                            <option @if(old('shipper_state') === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
+                                                            <option @if(old('shipper_state') === 'WY') selected @endif value="WY">WY (Wyoming)</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <label class="control-label">BOL Payment Term</label>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6 col-xs-6" style="padding-left:0px;">
-                                                            <select name="load_customer[third_party_billing]" id="load_customer_third_party_billing" class="form-control" tabindex="259"><option selected="selected" value="0">Prepaid</option>
-                                                                <option value="1">Collect</option>
-                                                                <option value="2">Third Party</option></select>
-                                                        </div>
-                                                        <div class="col-sm-6 col-xs-6">
-                                                            <a id="third-party-billing-action" class="action-link" href="javascript:" title="Add 3rd Party Billing"><i class="fa fa-plus"></i> 3rd Party Billing</a>
-                                                        </div>
+                                                        <select name="consignee_BOL_payment_term" value="{{old('consignee_BOL_payment_term')}}" class="form-control">
+                                                            <option disabled selected value>--Select BOL Payment Term--</option>
+                                                            <option  @if(old('consignee_BOL_payment_term') === 'Prepaid') selected @endif value="Prepaid">Prepaid</option>
+                                                            <option  @if(old('consignee_BOL_payment_term') === 'Collect') selected @endif value="Collect">Collect</option>
+                                                            <option  @if(old('consignee_BOL_payment_term') === 'Third Party') selected @endif value="Third Party">Third Party</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -347,27 +440,18 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label">Zip Code</label>
-                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="delivery_location_zip_code" name="load_customer[delivery_location_zip_code]" value="" class="form-control editMainField tt-input" placeholder="Enter zip code" tabindex="241" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-15"></div></span></span>
+                                                        <label class="control-label">Zip Code</label><br>
+                                                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                                                            <input type="text" name="consignee_delivery_location_zip_code" value="{{old('consignee_delivery_location_zip_code')}}" class="form-control editMainField tt-input" placeholder="Enter zip code">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">BOL #</label>
-                                                        <input type="text" name="load_customer[delivery_location_bol_number]" value="" class="form-control editMainField" placeholder="Enter BOL #" tabindex="260">
+                                                        <input type="text" name="consignee_delivery_location_bol_number" value="{{old('consignee_delivery_location_bol_number')}}" class="form-control editMainField" placeholder="Enter BOL #" >
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="" style="text-align: right">
-                                                        <a href="javascript:" class="add-class-dimensions" onclick="addNewClassDimensionsRow()"><i class="glyphicon glyphicon-plus"></i>
-                                                            Class/Dimensions</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="row class-dimensions-row">
                                                 <div class="col-sm-12">
                                                     <table class="table table-class-dimensions">
@@ -380,48 +464,52 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="freight-class-td-width">
-                                                                <select name="freight_class" id="freight-classes" class="form-control" tabindex="242"><option value="">Select Freight Class</option><option value="FAK">FAK</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="55">55</option>
-                                                                    <option value="60">60</option>
-                                                                    <option value="65">65</option>
-                                                                    <option value="70">70</option>
-                                                                    <option value="77.5">77.5</option>
-                                                                    <option value="85">85</option>
-                                                                    <option value="92.5">92.5</option>
-                                                                    <option value="100">100</option>
-                                                                    <option value="110">110</option>
-                                                                    <option value="125">125</option>
-                                                                    <option value="150">150</option>
-                                                                    <option value="175">175</option>
-                                                                    <option value="200">200</option>
-                                                                    <option value="250">250</option>
-                                                                    <option value="300">300</option>
-                                                                    <option value="400">400</option>
-                                                                    <option value="500">500</option></select>
+                                                                <select name="consignee_freight_class" id="freight-classes" class="form-control" tabindex="242">
+                                                                    <option value="">Select Freight Class</option>
+                                                                    <option @if(old('consignee_freight_class') === 'FAK') selected @endif value="FAK">FAK</option>
+                                                                    <option @if(old('consignee_freight_class') === '50') selected @endif value="50">50</option>
+                                                                    <option @if(old('consignee_freight_class') === '55') selected @endif value="55">55</option>
+                                                                    <option @if(old('consignee_freight_class') === '60') selected @endif value="60">60</option>
+                                                                    <option @if(old('consignee_freight_class') === '65') selected @endif value="65">65</option>
+                                                                    <option @if(old('consignee_freight_class') === '70' ) selected @endif value="70">70</option>
+                                                                    <option @if(old('consignee_freight_class') === '77.5') selected @endif value="77.5">77.5</option>
+                                                                    <option @if(old('consignee_freight_class') === '85') selected @endif value="85">85</option>
+                                                                    <option @if(old('consignee_freight_class') === '92.5') selected @endif value="92.5">92.5</option>
+                                                                    <option @if(old('consignee_freight_class') === '100') selected @endif value="100">100</option>
+                                                                    <option @if(old('consignee_freight_class') === '110') selected @endif value="110">110</option>
+                                                                    <option @if(old('consignee_freight_class') === '125') selected @endif value="125">125</option>
+                                                                    <option @if(old('consignee_freight_class') === '150') selected @endif value="150">150</option>
+                                                                    <option @if(old('consignee_freight_class') === '175') selected @endif value="175">175</option>
+                                                                    <option @if(old('consignee_freight_class') === '200') selected @endif value="200">200</option>
+                                                                    <option @if(old('consignee_freight_class') === '250') selected @endif value="250">250</option>
+                                                                    <option @if(old('consignee_freight_class') === '300') selected @endif value="300">300</option>
+                                                                    <option @if(old('consignee_freight_class') === '400') selected @endif value="400">400</option>
+                                                                    <option @if(old('consignee_freight_class') === '500') selected @endif value="500">500</option></select>
                                                             </td>
                                                             <td class="nmfc-td-width">
-                                                                <input type="text" name="load_customer[national_motor_freight_class]" value="" class="form-control" tabindex="243">
+                                                                <input type="text" name="consignee_national_motor_freight_class" value="{{old('consignee_national_motor_freight_class')}}" class="form-control">
                                                             </td>
                                                             <td class="prod-td-width">
-                                                                <input type="text" name="load_customer[bol_product]" value="general goods" class="form-control" tabindex="244">
+                                                                <input type="text" name="consignee_bol_product" value="{{old('consignee_bol_product')}}" class="form-control">
                                                             </td>
                                                             <td class="qty-td-width">
-                                                                <input type="text" name="load_customer[delivery_location_quantity]" value="" class="form-control" tabindex="245">
+                                                                <input type="text" name="consignee_delivery_location_quantity" value="{{old('consignee_delivery_location_quantity')}}" class="form-control">
                                                             </td>
                                                             <td class="type-td-width">
-                                                                <select name="load_customer[delivery_location_type]" id="item-types" class="form-control" tabindex="246"><option value="">Select Type</option><option value="Blueberries">Blueberries</option>
-                                                                    <option value="Boxes">Boxes</option>
-                                                                    <option value="Carrier Fee">Carrier Fee</option>
-                                                                    <option value="Cartons">Cartons</option>
-                                                                    <option value="CWT">CWT</option>
-                                                                    <option value="Flat Rate">Flat Rate</option>
-                                                                    <option value="Miles">Miles</option>
-                                                                    <option value="Pallets">Pallets</option>
-                                                                    <option value="Pounds">Pounds</option>
-                                                                    <option value="Strawberries">Strawberries</option>
-                                                                    <option value="Tons">Tons</option>
-                                                                    <option value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
+                                                                <select name="consignee_item_type" value="{{old('consignee_item_type')}}" class="form-control">
+                                                                    <option value="">Select Type</option>
+                                                                    <option @if(old('consignee_item_type') === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
+                                                                    <option @if(old('consignee_item_type') === 'Boxes') selected @endif  value="Boxes">Boxes</option>
+                                                                    <option @if(old('consignee_item_type') === 'Carrier Fee') selected @endif  value="Carrier Fee">Carrier Fee</option>
+                                                                    <option @if(old('consignee_item_type') === 'Cartons') selected @endif  value="Cartons">Cartons</option>
+                                                                    <option @if(old('consignee_item_type') === 'CWT') selected @endif  value="CWT">CWT</option>
+                                                                    <option @if(old('consignee_item_type') === 'Flat Rate') selected @endif  value="Flat Rate">Flat Rate</option>
+                                                                    <option @if(old('consignee_item_type') === 'Miles') selected @endif  value="Miles">Miles</option>
+                                                                    <option @if(old('consignee_item_type') === 'Pallets') selected @endif  value="Pallets">Pallets</option>
+                                                                    <option @if(old('consignee_item_type') === 'Pounds') selected @endif  value="Pounds">Pounds</option>
+                                                                    <option @if(old('consignee_item_type') === 'Strawberries') selected @endif  value="Strawberries">Strawberries</option>
+                                                                    <option @if(old('consignee_item_type') === 'Tons') selected @endif  value="Tons">Tons</option>
+                                                                    <option @if(old('consignee_item_type') === 'ruck Ordered/Not Used') selected @endif  value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -433,49 +521,46 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="length-td-width">
-                                                                <input type="text" name="load_customer[length]" value="" class="form-control" tabindex="247">
+                                                                <input type="text" name="consignee_length" value="{{old('consignee_length')}}" class="form-control" tabindex="247">
                                                             </td>
                                                             <td class="width-td-width">
-                                                                <input type="text" name="load_customer[width]" value="" class="form-control" tabindex="248">
+                                                                <input type="text" name="consignee_width" value="{{old('consignee_width')}}" class="form-control" tabindex="248">
                                                             </td>
                                                             <td class="height-td-width">
-                                                                <input type="text" name="load_customer[height]" value="" class="form-control" tabindex="249">
+                                                                <input type="text" name="consignee_height" value="{{old('consignee_height')}}" class="form-control" tabindex="249">
                                                             </td>
                                                             <td class="weight-td-width">
-                                                                <input type="text" name="load_customer[delivery_location_weight]" value="" class="form-control" tabindex="250">
+                                                                <input type="text" name="consignee_delivery_location_weight" value="{{old('consignee_delivery_location_weight')}}" class="form-control" tabindex="250">
                                                             </td>
                                                             <td class="haz-mat-td-width">
-                                                                <input style="height:25px;width:25px" type="checkbox" name="load_customer[haz_mat]" class="form-control" tabindex="251">
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input name="consignee_haz_mat" type="hidden" value="0">
+                                                                        <input type="checkbox" value="1" name="consignee_haz_mat" value="{{old('consignee_haz_mat')}}" id="carrier_use_dba_name">
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         </tbody></table>
                                                 </div>
-
-                                                <div class="row bol-report-row">
-                                                    <div class="col-sm-12" style="margin-top:10px;padding:0px;">
-                                                        <div class="form-group">
-                                                            <div style="float:left;width:80%">
-                                                                <label class="control-label label-wrapper">
-                                                                    <span>BOL Note</span>
-                                                                </label>
-                                                            </div>
-                                                            <div style="text-align:right;float:right;width:20%">
-                                                                <a href="javascript:" class="bol-report-action" onclick="showBolReportEmailDialog();" title="Email BOL Report"><i class="fa fa-envelope-o"></i></a>
-                                                                <a href="/loads/11113/1613/create_bol_report" target="_blank" class="bol-report-action"><i class="fa fa-file-pdf-o"></i> Bill of Lading</a>
-                                                            </div>
-                                                            <textarea class="form-control editMainField" name="load_customer[delivery_location_bol_notes]" placeholder="Enter BOL note" tabindex="252"></textarea>
-                                                        </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">BOL Note</label>
+                                                        <textarea class="form-control editMainField" name="consignee_bol_notes" placeholder="Enter delivery notes" tabindex="253">
+                                                            {{old('consignee_bol_notes')}}
+                                                        </textarea>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery Note</label>
-                                                        <textarea class="form-control editMainField" id="delivery_location_notes" name="load_customer[delivery_location_notes]" placeholder="Enter delivery notes" tabindex="253"></textarea>
+                                                        <textarea class="form-control editMainField" name="consignee_delivery_location_notes" placeholder="Enter delivery notes" tabindex="253">
+                                                            {{old('consignee_delivery_location_notes')}}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -493,31 +578,23 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group carrierMsg">
-                                                        <label class="control-label" style="width:100%;">Carrier</label>
-                                                        <div style="padding:0;" class="col-sm-11">
-                                                            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input type="text" id="loadCarrierSelect" name="" value="" class="form-control editMainField tt-input" placeholder="Click to see Suggested Carriers or Search by Name / MC" tabindex="261" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: fixed; z-index: 100; display: none;"><div class="tt-dataset-9"></div></span></span>
-                                                            <input type="hidden" name="carrier_id" id="carrier-id" tabindex="262">
-                                                            <input type="hidden" name="hidden_carrier_id" id="hidden-carrier-id" tabindex="263">
-                                                            <div class="hidden new-carrier-link">https://login.brokerpro.com/carriers/new</div>
-                                                        </div>
-                                                        <div style="padding:0;" class="col-sm-1" id="loadCarrierRemove">
-                                                            <button title="Remove the selected carrier from this load." type="button" class="btn btn-default btn-sm" style="margin: 0px;" onclick="$('#loadCarrierSelect').val('');$('#hidden-carrier-id').val('');$('#carrier-id').val('');">
-                                                                <i class="fa fa-times" style="font-size: 16px;"></i>
-                                                            </button>
-                                                        </div>
+                                                        <label class="control-label">Carrier</label>
+                                                        {{-- todo poxel ajax searchov--}}
+                                                        <select id="dispatcherUserSelect" name="carrier_id" class="form-control editMainField" tabindex="66">
+                                                            <option value="">-- No Carrier Selected --</option>
+                                                            @foreach($carriers as $carrier)
+                                                                <option @if(old('carrier_id') == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
-{{--                                                <script type="text/javascript">--}}
-{{--                                                    function carrierChanged(flag, flagged) {--}}
-{{--                                                        onCarrierSelectionChanged(16931, 244839, '247579', '', true, '', flag, flagged);--}}
-{{--                                                    }--}}
-{{--                                                </script>--}}
-
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Dispatcher</label>
-                                                        <select id="dispatcherUserSelect" name="dispatcher_user_id" class="form-control editMainField" tabindex="66">
+                                                        {{-- todo avelacnel dispatcherner --}}
+                                                        <select id="dispatcherUserSelect" name="dispatcher_user_id" value="{{old('dispatcher_user_id', 1)}}" class="form-control editMainField" tabindex="66">
                                                             <option value="">-- No Dispatcher Selected --</option>
+                                                            <option value="1">Fake dispatcher</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -526,14 +603,14 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Truck #</label>
-                                                        <input type="text" name="truck_number" value="" class="form-control editMainField" placeholder="Enter carrier truck number" tabindex="264">
+                                                        <input type="text" name="truck_number" value="{{old('truck_number')}}" class="form-control editMainField" placeholder="Enter carrier truck number" tabindex="264">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Trailer #</label>
-                                                        <input type="text" name="trailer_number" value="" class="form-control editMainField" placeholder="Enter carrier trailer number" tabindex="267">
+                                                        <input type="text" name="trailer_number" value="{{old('trailer_number')}}" class="form-control editMainField" placeholder="Enter carrier trailer number" tabindex="267">
                                                     </div>
                                                 </div>
                                             </div>
@@ -542,31 +619,29 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Driver</label>
-                                                        <input type="text" name="driver" value="" class="form-control editMainField" placeholder="Enter carrier driver name" tabindex="265">
+                                                        <input type="text" name="driver" value="{{old('driver')}}" class="form-control editMainField" placeholder="Enter carrier driver name" tabindex="265">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Driver Cell #</label>
-                                                        <input type="text" name="driver_number" value="" class="form-control editMainField phoneMask" placeholder="Enter carrier driver number" tabindex="268">
+                                                        <input type="text" name="driver_number" value="{{old('driver_number')}}" class="form-control editMainField phoneMask" placeholder="Enter carrier driver number" tabindex="268">
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <div class="row">
-
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Pro #</label>
-                                                        <input type="text" name="pro_number" value="" class="form-control editMainField" placeholder="Enter carrier pro number" tabindex="266">
+                                                        <input type="text" name="pro_number" value="{{old('pro_number')}}" class="form-control editMainField" placeholder="Enter carrier pro number" tabindex="266">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Driver Email</label>
-                                                        <input type="email" name="driver_email" value="" class="form-control editMainField" placeholder="Enter the driver's email address" tabindex="269">
+                                                        <input type="email" name="driver_email" value="{{old('driver_email')}}" class="form-control editMainField" placeholder="Enter the driver's email address" tabindex="269">
                                                     </div>
                                                 </div>
                                             </div>
@@ -595,7 +670,7 @@
                                                 <tbody>
                                                 <tr class="carrierCostRow">
                                                     <td class="unitColumn">
-                                                        <select name="load_carrier_costs[0][units_id]" class=" form-control editMainField input-sm carrierCostUnitsInput" onchange="onCarrierCostUnitsChanged()" tabindex="73">
+                                                        <select name="carrier_costs_units_id" class=" form-control editMainField input-sm" tabindex="73">
                                                             <option value="10613">Blueberries</option>
                                                             <option value="10612">Boxes</option>
                                                             <option value="10907">Carrier Fee</option>
@@ -609,13 +684,14 @@
                                                             <option value="10610">Tons</option>
                                                             <option value="10615">Truck Ordered/Not Used</option>
                                                         </select>
-                                                        <input id="load_carrier_cost_0_id" type="hidden" name="load_carrier_costs[0][id]" value="2234957" tabindex="74">
                                                     </td>
-                                                    <td class="qtyColumn"><input name="load_carrier_costs[0][quantity]" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" onkeyup="updateCarrierCosts()" onchange="updateCarrierCosts()" disabled="" tabindex="75"></td>
+                                                    <td class="qtyColumn">
+                                                        <input name="carrier_costs_quantity" type="text" value="{{old('carrier_costs_quantity', '1.0')}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
+                                                    </td>
                                                     <td class="amtColumn">
-                                                        <div class="input-group input-group-sm carrierCostInput">
+                                                        <div class="input-group carrierCostInput">
                                                             <span class="input-group-addon">$</span>
-                                                            <input name="load_carrier_costs[0][rate_per_unit]" type="text" class=" form-control editMainField input-sm carrierCostPerUnitInput" value="0.00" onkeyup="updateCarrierCosts()" tabindex="76">
+                                                            <input name="carrier_costs_rate_per_unit" value="{{old('carrier_costs_quantity', '0.00')}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
                                                         </div>
                                                     </td>
                                                     <td class="suggestColumn">
@@ -623,10 +699,6 @@
                                                     <td class="text-right">
                                                         <span class="grossColumn carrierCostGrossColumn">$0.00</span>
                                                     </td>
-                                                    <td class="delColumn">
-                                                        <span class="tableAction glyphicon glyphicon-remove carrierRemoveCost" title="Remove this cost" onclick="removeCarrierCostRow(this)" style="display: none;"></span>
-                                                    </td>
-
                                                 </tr>
 
                                                 <tr class="carrierStopsHeader">
@@ -639,11 +711,13 @@
                                                 </tr>
                                                 <tr class="carrierStopsRow">
                                                     <td></td>
-                                                    <td><input id="load_customer_carrier_stop" name="stops" type="number" min="0" value="0" class=" form-control editMainField input-sm carrierCostInput carrierCostStopsInput" onkeyup="updateCarrierCosts()" onchange="updateCarrierCosts()" tabindex="77"></td>
                                                     <td>
-                                                        <div class="input-group input-group-sm carrierCostInput">
+                                                        <input name="stops" type="number" min="0" value="{{old('stops', 0)}}" class=" form-control editMainField input-sm" tabindex="77">
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
                                                             <span class="input-group-addon">$</span>
-                                                            <input name="cost_per_stop" type="text" class=" form-control editMainField input-sm carrierCostPerStopInput" value="" onkeyup="updateCarrierCosts()" tabindex="78">
+                                                            <input name="cost_per_stop" type="text" class=" form-control input-sm" value="{{old('cost_per_stop')}}"  tabindex="78">
                                                         </div>
                                                     </td>
                                                     <td></td>
@@ -661,24 +735,31 @@
                                                     <th></th>
                                                 </tr>
                                                 <tr>
-                                                    <td><input id="carrierMilesInput" name="miles" type="number" min="0" value="" class=" form-control editMainField input-sm carrierCostInput carrierCostNumberMilesInput" onkeyup="updateCarrierCosts()" onchange="updateCarrierCosts()" tabindex="79"></td>
                                                     <td>
-                                                        <select id="carrierFuelSurchargeSelect" name="fuel_surcharge_type" class=" form-control editMainField input-sm" onchange="onCarrierFuelSurchargeChanged()" tabindex="80">
-                                                            <option selected="">None</option>  <option>Flat Rate</option>  <option>Per Mile</option>  <option>Percentage</option>
+                                                        <input name="miles" type="number" min="0" value="{{old('miles', 0)}}" class="form-control input-sm">
+                                                    </td>
+                                                    <td>
+                                                        <select name="fuel_surcharge_type" class="form-control input-sm">
+                                                            <option selected="">None</option>
+                                                            <option value="Flat Rate">Flat Rate</option>
+                                                            <option value="Per Mile">Per Mile</option>
+                                                            <option value="Percentage">Percentage</option>
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <div id="carrierFuelSurchargeDollarContainer" class="input-group input-group-sm carrierCostInput" style="">
+                                                        <div class="input-group">
                                                             <span class="input-group-addon">$</span>
-                                                            <input id="carrierFuelSurchargeDollarInput" name="fuel_surcharge_rate_dollar" type="text" class=" form-control editMainField input-sm carrierCostFSRateInput" value="" disabled="" onkeyup="updateCarrierCosts()" tabindex="81">
+                                                            <input name="fuel_surcharge_rate_dollar" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_dollar')}}" disabled="">
                                                         </div>
-                                                        <div id="carrierFuelSurchargePercentageContainer" class="input-group input-group-sm carrierCostInput" style="display:none">
-                                                            <input id="carrierFuelSurchargePercentageInput" name="fuel_surcharge_rate_percentage" type="text" class=" form-control editMainField input-sm carrierCostFSPCNTGInput" value="0" disabled="" onkeyup="updateCarrierCosts()" onchange="updateCarrierCosts()" tabindex="82">
+                                                        <div class="input-group" style="display:none">
+                                                            <input name="fuel_surcharge_rate_percentage" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_percentage', 0)}}" disabled="">
                                                             <span class="input-group-addon">%</span>
                                                         </div>
                                                     </td>
-                                                    <td><div id="carrierSuggestedFuelSurchargeRate"></div></td>
-                                                    <td class="text-right">  <span class="grossColumn carrierCostMilesGrossColumn">$0.00</span></td>
+                                                    <td><div></div></td>
+                                                    <td class="text-right">
+                                                        <span class="grossColumn carrierCostMilesGrossColumn">$0.00</span>
+                                                    </td>
                                                     <td class="delColumn"></td>
                                                 </tr>
                                                 <tr>
@@ -703,9 +784,9 @@
                                                     </td>
 
                                                     <td class="grossColumn">
-                                                        <div class="input-group input-group-sm carrierCostInput" style="float: right">
+                                                        <div class="input-group" style="float: right">
                                                             <span class="input-group-addon">$</span>
-                                                            <input name="driver_advance_gross" type="text" style="color: red" class="form-control editMainField input-sm carrierCostDriverAdvanceInput" value="" onkeyup="updateCarrierCosts()" tabindex="83">
+                                                            <input name="driver_advance_gross" type="number" style="color: red" class="form-control input-sm" value="{{old('driver_advance_gross')}}">
                                                         </div>
                                                     </td>
                                                     <td></td>
@@ -713,18 +794,23 @@
 
                                                 <tr class="costBalanceDueRow">
                                                     <td colspan="4" style="text-align: right">Balance Due</td>
-                                                    <td class="text-right">  <span class="grossColumn carrierCostBalanceDueColumn">$0.00</span></td>
+                                                    <td class="text-right">
+                                                        <span class="grossColumn carrierCostBalanceDueColumn">$0.00</span>
+                                                    </td>
                                                     <td class="delColumn"></td>
                                                 </tr>
 
                                                 </tbody>
                                             </table>
 
-                                            <a href="javascript:" onclick="showSendCarrierConfirmationOneDialog()" title="Email carrier confirmation one" class=""><i class="fa fa-envelope-o"></i></a>
-                                            <a href="/loads/11113/1613/carrier_confirmation_one.pdf" class="actionLink " target="_blank"><i class="fa fa-file-pdf-o"></i> Carrier Confirmation One</a>
-                                            <a href="javascript:" onclick="showSendCarrierConfirmationTwoDialog()" title="Email carrier confirmation two" class=""><i class="fa fa-envelope-o"></i></a>
-                                            <a href="/loads/11113/1613/carrier_confirmation_two.pdf" class="actionLink " target="_blank"><i class="fa fa-file-pdf-o"></i> Carrier Confirmation Two</a>
-
+                                            <a href="" class="actionLink " target="_blank">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                                Carrier Confirmation One
+                                            </a>
+                                            <a href="" class="actionLink " target="_blank">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                                Carrier Confirmation Two
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -732,7 +818,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12"><br>
+                    <button type="submit" class="btn btn-primary">Create Load</button>
+                </div>
             </div>
+
             <div class="tab-pane fade" id="customers" role="tabpanel" aria-labelledby="customer-tab">
                 <div id="customer" class="tabcontent" style="display: block;">
                     <div class="row">
@@ -740,147 +830,97 @@
                             <div class="col-sm-12">
                                 <div class="tab-item">
                                     <div class="card">
+
                                         <div class="card-header">Company Information</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-sm-4">
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Company</div>
-                                                        <div class="entityValue">AG SOURCE, INC.</div>
+                                                        <div class="entityValue">{{$customer->company}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <br><br><br>
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Status</div>
-                                                        <div class="entityValue">Active</div>
+                                                        <div class="entityValue">{{$customer->status}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <br><br><br>
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Phone</div>
-                                                        <div class="entityValue"><a href="tel:(785) 841-1315">(785) 841-1315</a></div>
+                                                        <div class="entityValue"><a href="tel:{{$customer->phone}}">{{$customer->phone}}</a></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <br><br><br>
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Address</div>
-                                                        <div class="entityValue"><a href="https://maps.google.com/?q=4910 CORPORATE CENTRE DR., STE 110 LAWRENCE, KS 66047" target="_blank">4910 CORPORATE CENTRE DR., STE 110<br>LAWRENCE, KS 66047</a></div>
+                                                        <div class="entityValue"><a href="https://maps.google.com/?q={{$customer->address1}}" target="_blank">{{$customer->address1}}</a></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Shipper</div>
-                                                        <div class="entityValue">No</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Consignee</div>
-                                                        <div class="entityValue">No</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
+                                                <br><br><br>
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Credit Limit</div>
-                                                        <div class="entityValue">$10000</div>
+                                                        <div class="entityValue">${{$customer->credit_limit}}</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <br><br><br>
+                                                <div class="col-md-4">
                                                     <div class="entityLabelValue">
                                                         <div class="entityLabel">Currency</div>
                                                         <div class="entityValue">USD</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Product</div>
-                                                        <div class="entityValue">general goods</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="entityLabelValue">
-                                                        <div class="entityLabel">Smart Way Carriers Preferred</div>
-                                                        <div class="entityValue">No</div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Notes -->
                                 <div class="tab-item">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <span>Preferred Carriers</span>
-                                                <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <p class="noEntitiesDefined">No Preferred Carriers.</p>
-                                                </div>
-                                            </div>
+                                    <div class="card">
+                                        <div class="card-header">Notes</div>
+                                        <div class="card-body">
+                                            {{$customer->note}}
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Company Information -->
-                        <div class="col-sm-4">
-                            <div class="col-sm-12">
+                        <div class="col-md-4">
+                            <!-- Billing Information -->
+                            <div class="tab-item">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <div class="entityPanelTitle">Billing Information</div>
-                                    </div>
+                                    <div class="card-header">Billing Information</div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-md-6">
                                                 <div class="entityLabelValue">
                                                     <div class="entityLabel">Company</div>
-                                                    <div class="entityValue">AG SOURCE, INC.</div>
+                                                    <div class="entityValue">{{$customer->billing_company}}</div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="entityLabelValue">
-                                                    <div class="entityLabel">Phone</div>
-                                                    <div class="entityValue"><a href="tel:(785) 841-1315">(785) 841-1315</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-md-6">
                                                 <div class="entityLabelValue">
                                                     <div class="entityLabel">Address</div>
-                                                    <div class="entityValue"><a href="https://maps.google.com/?q=4910 CORPORATE CENTRE DR., STE 110 LAWRENCE, KS 66047" target="_blank">4910 CORPORATE CENTRE DR., STE 110<br>LAWRENCE, KS 66047</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="entityLabelValue">
-                                                    <div class="entityLabel">Require PO # to Invoice</div>
-                                                    <div class="entityValue">No</div>
+                                                    <div class="entityValue"><a href="https://maps.google.com/?q={{$customer->billing_address1}}" target="_blank">{{$customer->billing_address1}}</a></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                        <div class="card-header">
-                                            <div class="entityPanelTitle">Reports</div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/accounting/customers/aging?customer=16931-AG SOURCE, INC.">Aging Detail</a></div></div>
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/loads/search/advanced/results?customers[]=16931-AG SOURCE, INC.">Load History</a></div></div>
-                                                <!--<div class="col-sm-4"><div class="entityLabelValue"><a href="?customer=-"><nobr>Aging Summary</nobr></a></div></div>-->
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/accounting/customers/invoice_summary?customer=16931-AG SOURCE, INC.">Invoice Status</a></div></div>
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/accounting/show_commissions_report?customers[]=16931&amp;single_customer=true&amp;status=Invoiced">Commissions Report</a></div></div>
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="javascript:" onclick="showCustomerAgingSummary(16931, null, false, function(){});" id="aging-summary"><nobr>Aging Summary</nobr></a></div></div>
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/accounting/customers/sales_summary?customer=16931-AG SOURCE, INC."><nobr>Sales Summary</nobr></a></div></div>
-                                                <div class="col-sm-4"><div class="entityLabelValue"><a href="/accounting/customers/performance?customer=16931-AG SOURCE, INC.">Performance</a></div></div>
-                                            </div>
-                                        </div>
-                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        </form>
     </div>
 @endsection

@@ -25,6 +25,7 @@ Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::resource('customers', 'CustomerController');
 Route::resource('carriers', 'CarrierController');
 Route::resource('loads', 'LoadController');
+Route::get('loads-search', 'LoadController@search');
 Route::get('/import-carrier', function(){
     $aaa = \Excel::import(new CarriersImport, public_path('/assets/carriers.xls'));
 });

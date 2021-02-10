@@ -56,7 +56,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Loads</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Loads List</a>
+                    <a class="dropdown-item" href="{{url('/loads')}}">Loads List</a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#createLoadModal">New Load</a>
                 </div>
             </li>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group">
                             <label for="customer-load-value" class="col-form-label">*Load Value</label>
-                            <input type="number" max="5000" class="form-control" id="customer-load-valuet" required="true"></input>
+                            <input type="number" name="shipper_value" max="7000" class="form-control" id="customer-load-valuet" required="true">
                         </div>
                 </div>
 

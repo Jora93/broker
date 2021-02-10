@@ -235,7 +235,8 @@
 
                                         <div class="checkbox">
                                             <label>
-                                                <input name="use_dba_name" type="hidden" value="0"><input type="checkbox" value="1" name="use_dba_name" value="{{old('use_dba_name')}}" id="carrier_use_dba_name"> Use DBA name
+                                                <input name="use_dba_name" type="hidden" value="0">
+                                                <input type="checkbox" value="1" name="use_dba_name" value="{{old('use_dba_name')}}" id="carrier_use_dba_name"> Use DBA name
                                             </label>
                                         </div>
                                         <div class="checkbox">

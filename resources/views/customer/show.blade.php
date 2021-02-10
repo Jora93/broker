@@ -89,7 +89,8 @@
                                 <div class="card">
                                     <div class="card-header">Billing Information</div>
                                     <div class="card-body">
-                                        <div class="row"><div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="entityLabelValue">
                                                     <div class="entityLabel">Company</div>
                                                     <div class="entityValue">{{$customer->billing_company}}</div>
