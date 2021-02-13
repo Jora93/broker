@@ -18,7 +18,7 @@
         <!-- Company Information -->
         <div class="col-md-6">
             <div class="entityPanel entityFillPanel customerPanel">
-                <div class="entityPanelHeading">
+                <div class="entityPanelHeading"a>
                     <div class="entityPanelTitle">Company Information</div>
                 </div>
                 <div class="entityPanelBody tabIndexContainer">

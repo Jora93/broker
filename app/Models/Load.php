@@ -20,6 +20,7 @@ class Load extends Model
         'id',
         'carrier_id',
         'customer_id',
+        'dispatcher_id',
         'shipper_company',
         'shipper_phone',
         'shipper_phone_extension',
@@ -66,7 +67,6 @@ class Load extends Model
         'consignee_haz_mat',
         'consignee_bol_notes',
         'consignee_delivery_location_notes',
-        'dispatcher_user_id', //todo make new table
         'truck_number',
         'trailer_number',
         'driver',
@@ -96,5 +96,13 @@ class Load extends Model
     public function carrier()
     {
         return $this->belongsTo('App\Carrier');
+    }
+
+    /**
+     * Get the dispatcher for the load.
+     */
+    public function dispatcher()
+    {
+        return $this->belongsTo('App\Dispatcher');
     }
 }

@@ -592,9 +592,9 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Dispatcher</label>
                                                             {{-- todo avelacnel dispatcherner --}}
-                                                            <select id="dispatcherUserSelect" name="dispatcher_user_id" value="{{old('dispatcher_user_id', 1)}}" class="form-control editMainField" tabindex="66">
+                                                            <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">
                                                                 <option value="">-- No Dispatcher Selected --</option>
-                                                                <option @if(old('dispatcher_user_id', $load->dispatcher_user_id) == 1) selected @endif value="1">Fake dispatcher</option>
+                                                                <option @if(old('dispatcher_id', $load->dispatcher_id) == 1) selected @endif value="1">Fake dispatcher</option>
                                                             </select>
                                                         </div>
                                                     </div>

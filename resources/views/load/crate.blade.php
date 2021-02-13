@@ -592,9 +592,13 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Dispatcher</label>
                                                         {{-- todo avelacnel dispatcherner --}}
-                                                        <select id="dispatcherUserSelect" name="dispatcher_user_id" value="{{old('dispatcher_user_id', 1)}}" class="form-control editMainField" tabindex="66">
+                                                        <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id')}}" class="form-control editMainField" tabindex="66">
                                                             <option value="">-- No Dispatcher Selected --</option>
-                                                            <option value="1">Fake dispatcher</option>
+                                                            @if(!$dispatchers->isEmpty())
+                                                                @foreach($dispatchers as $dispatcher)
+                                                                    <option @if(old('dispatcher_id') == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>

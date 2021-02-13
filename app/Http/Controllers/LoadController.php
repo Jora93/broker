@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dispatcher;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Carrier;
@@ -38,10 +39,12 @@ class LoadController extends Controller
 
         $custumer = Customer::find($request->customerId);
         $carriers = Carrier::get();
+        $dispatchers = Dispatcher::select('id', 'full_name')->get();
 
         return response()->view('load.crate', [
             'customer' => $custumer,
             'carriers' => $carriers,
+            'dispatchers' => $dispatchers,
             'shipper_value' => $request->shipper_value
             ], 200);
     }
@@ -58,6 +61,7 @@ class LoadController extends Controller
         $request->validate([
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
+            "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
             "shipper_company"                        => ['required', 'string'],
             "shipper_phone"                          => ['required', 'string'],
             "shipper_phone_extension"                => ['required', 'string'],
@@ -104,7 +108,6 @@ class LoadController extends Controller
             "consignee_haz_mat"                      => ['required', 'string'],
             "consignee_bol_notes"                    => ['required', 'string'],
             "consignee_delivery_location_notes"      => ['required', 'string'],
-            "dispatcher_user_id"                     => ['required', 'string'], //todo dispatcher
             "truck_number"                           => ['required', 'string'],
             "trailer_number"                         => ['required', 'string'],
             "driver"                                 => ['required', 'string'],
@@ -168,6 +171,7 @@ class LoadController extends Controller
         $request->validate([
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
+            "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
             "shipper_company"                        => ['required', 'string'],
             "shipper_phone"                          => ['required', 'string'],
             "shipper_phone_extension"                => ['required', 'string'],
@@ -214,7 +218,6 @@ class LoadController extends Controller
             "consignee_haz_mat"                      => ['string', 'nullable'],
             "consignee_bol_notes"                    => ['required', 'string'],
             "consignee_delivery_location_notes"      => ['required', 'string'],
-            "dispatcher_user_id"                     => ['required', 'string'], //todo dispatcher
             "truck_number"                           => ['required', 'string'],
             "trailer_number"                         => ['required', 'string'],
             "driver"                                 => ['required', 'string'],

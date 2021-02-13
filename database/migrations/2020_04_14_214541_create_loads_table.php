@@ -17,6 +17,7 @@ class CreateLoadsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('carrier_id');
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('dispatcher_id');
             $table->string('shipper_company');
             $table->string('shipper_phone');
             $table->string('shipper_phone_extension');
@@ -63,7 +64,6 @@ class CreateLoadsTable extends Migration
             $table->string('consignee_haz_mat');
             $table->string('consignee_bol_notes');
             $table->string('consignee_delivery_location_notes');
-            $table->string('dispatcher_user_id'); //todo make new table
             $table->string('truck_number');
             $table->string('trailer_number');
             $table->string('driver');
@@ -80,6 +80,7 @@ class CreateLoadsTable extends Migration
 
             $table->foreign('carrier_id')->references('id')->on('carriers')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('dispatcher_id')->references('id')->on('dispatchers')->onDelete('cascade');
 
             $table->timestamps();
         });

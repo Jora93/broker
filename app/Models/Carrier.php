@@ -85,4 +85,12 @@ class Carrier extends Model
         "insurance2_phone",
         "insurance2_email"
     ];
+
+    /**
+     * Get the loads for the carrier.
+     */
+    public function loads()
+    {
+        return $this->hasMany('App\Load');
+    }
 }

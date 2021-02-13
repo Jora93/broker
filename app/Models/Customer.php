@@ -42,4 +42,12 @@ class Customer extends Model
         'billing_state',
         'billing_zip_code',
     ];
+
+    /**
+     * Get the loads for the customer.
+     */
+    public function loads()
+    {
+        return $this->hasMany('App\Load');
+    }
 }

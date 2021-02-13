@@ -21,4 +21,13 @@ class Dispatcher extends Model
         'full_name',
         'email'
     ];
+
+
+    /**
+     * Get the loads for the dispatcher.
+     */
+    public function loads()
+    {
+        return $this->hasMany('App\Load');
+    }
 }
