@@ -10892,10 +10892,6 @@ a.text-dark:focus {
   opacity: 1;
 }
 
-body {
-  background: red;
-}
-
 .carriers-show .nav-tabs #load-tab,
 .customers-show .nav-tabs #load-tab,
 .loads-show .nav-tabs #load-tab {

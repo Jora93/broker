@@ -68726,10 +68726,17 @@ $(document).ready(function () {
 
   window.copyBillingInfoToDefaultLocation = function () {
     $("#defaultLocationCompany").val($("#customer_billing_company").val()), $("#defaultLocationPhone").val($("#customer_billing_phone").val()), $("#defaultLocationPhoneExtension").val($("#customer_billing_phone_extension").val()), $("#defaultLocationFax").val($("#customer_billing_fax").val()), $("#defaultLocationAddress1").val($("#customer_billing_address1").val()), $("#defaultLocationAddress2").val($("#customer_billing_address2").val()), $("#defaultLocationCity").val($("#customer_billing_city").val()), $("#defaultLocationState").val($("#customer_billing_state").val()).trigger("chosen:updated"), $("#defaultLocationZip").val($("#customer_billing_zip_code").val());
-  }; // $(".phoneMask").keyup(function() {
+  };
+
+  window.addStop = function () {
+    var item = document.getElementById("consigneeItem");
+    var clone = item.cloneNode(true);
+    document.getElementById("consigneeContainer").appendChild(clone);
+  };
+
+  console.log(111111); // $(".phoneMask").keyup(function() {
   //     $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "($1)$2-$3"));
   // });
-
 
   $(".phoneMask").mask('(000) 000-00000000000000');
 });

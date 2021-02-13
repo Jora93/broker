@@ -17,8 +17,9 @@ class LoadController extends Controller
     public function index()
     {
         $loads = Load::with(['customer', 'carrier'])->orderBy('created_at', 'desc')->paginate(25);
+        $dispatchers = Dispatcher::select('id', 'full_name')->get();
 
-        return View('load.index')->with(['loads' => $loads]);
+        return View('load.index')->with(['loads' => $loads, 'dispatchers' => $dispatchers]);
     }
 
     /**
@@ -255,6 +256,7 @@ class LoadController extends Controller
     public function search(Request $request)
     {
         $data = $request->all();
+        $dispatchers = Dispatcher::get();
 
         $loads = Load::whereHas('customer', function ($query) use ($data) {
             if (isset($data['customer']) && !is_null($data['customer'])) {
@@ -265,12 +267,16 @@ class LoadController extends Controller
             }
         });
 
+        if (isset($data['dispatcher_id']) && !is_null($data['dispatcher_id'])) {
+            $loads->where('dispatcher_id', $data['dispatcher_id']);
+        }
+
         if (isset($data['id']) && !is_null($data['id'])) {
             $loads->where('id', $data['id']);
         }
 
         $loads = $loads->with(['customer','carrier'])->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
-        return view('load.index', compact('loads', 'data'));
+        return view('load.index', compact('loads', 'data', 'dispatchers'));
     }
 }

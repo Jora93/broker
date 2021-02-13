@@ -25,6 +25,19 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
+                                    <label class="control-label">Dispatcher:</label>
+                                    <select class="form-control" name="dispatcher_id" tabindex="1">
+                                        <option value="">Select Dispatcher</option>
+                                        @if(!$dispatchers->isEmpty())
+                                            @foreach($dispatchers as $dispatcher)
+                                                <option @if( isset($data['dispatcher_id']) && $data['dispatcher_id'] == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
                                     <label class="control-label">Per Page:</label>
                                     <select class="form-control" name="paginate" tabindex="1">
                                         <option value="25" selected>25</option>

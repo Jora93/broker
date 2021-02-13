@@ -49,6 +49,13 @@ $(document).ready(function () {
             $("#defaultLocationZip").val($("#customer_billing_zip_code").val())
     };
 
+    window.addStop = function () {
+        var item = document.getElementById("consigneeItem");
+        var clone = item.cloneNode(true);
+        document.getElementById("consigneeContainer").appendChild(clone);
+    };
+
+    console.log(111111);
     // $(".phoneMask").keyup(function() {
     //     $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "($1)$2-$3"));
     // });

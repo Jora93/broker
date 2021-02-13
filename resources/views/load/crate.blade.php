@@ -261,7 +261,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <span>Stops //todo add functionality later</span>
-                                            <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-plus pull-right" onclick="addStop()" aria-hidden="true"></span>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -271,8 +271,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="tab-item">
+                            <div class="col-sm-12" id="consigneeContainer">
+                                <div class="tab-item" id="consigneeItem">
                                     <div class="card">
                                         <div class="card-header">Consignee Information</div>
                                         <div class="card-body">
