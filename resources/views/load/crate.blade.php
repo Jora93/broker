@@ -10,8 +10,9 @@
             </ul>
         </div>
     @endif
+    <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
-        <form method="post" action="{{ url('/loads') }}" class="col-sm-12">
+        <form method="post" id="loadCreateForm" action="{{ url('/loads') }}" class="col-sm-12">
         @csrf
             <input type="hidden" name="customer_id" value="{{$customer->id}}">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -140,7 +141,7 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">State/Province</label><br>
-                                                        <select name="shipper_state" value="{{old('shipper_state')}}" class="selectpicker" required="true" data-live-search="true">
+                                                        <select name="shipper_state" value="{{old('shipper_state')}}" class="selectpickeraa" required="true" data-live-search="true">
                                                             <option disabled selected value>Select State/Province</option>
                                                             <option @if(old('shipper_state') === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                             <option @if(old('shipper_state') === 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -261,7 +262,9 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <span>Stops //todo add functionality later</span>
-                                            <span class="glyphicon glyphicon-plus pull-right" onclick="addStop()" aria-hidden="true"></span>
+                                            <button style="float: right" type="button" class="btn btn-primary" aria-label="Left Align">
+                                                <span style="cursor:pointer" class="glyphicon glyphicon-plus pull-right" onclick="addStop()" aria-hidden="true"></span>
+                                            </button>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -281,7 +284,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label class="control-label">Company</label>
-                                                            <input class="form-control" placeholder="Enter company" required="required" type="text" name="consignee_company" value="{{old('consignee_company')}}">
+                                                            <input class="form-control consignee_company" placeholder="Enter company" required="required" type="text" name="consignee[0][company]" value="{{old('consignee_company')}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -289,13 +292,13 @@
                                                 <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
                                                         <label class="control-label" for="customer_phone">Phone</label>
-                                                        <input class="form-control requiredInputCustomer phoneMask" placeholder="Enter phone" required="required" type="text" name="consignee_phone" value="{{old('consignee_phone')}}">
+                                                        <input class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone" required="required" type="text" name="consignee[0][phone]" value="{{old('consignee_phone')}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3 col-xs-3">
                                                     <div class="form-group">
                                                         <label class="control-label">Extension</label>
-                                                        <input class="form-control" placeholder="Enter extension" type="text" name="consignee_phone_extension" value="{{old('consignee_phone_extension')}}">
+                                                        <input class="form-control consignee_phone_extension" placeholder="Enter extension" type="text" name="consignee[0][phone_extension]" value="{{old('consignee_phone_extension')}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -304,13 +307,13 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Contact</label>
-                                                        <input type="text" name="consignee_contact_name" value="{{old('consignee_contact_name')}}" class="form-control" placeholder="Enter point of contact" tabindex="234">
+                                                        <input type="text" name="consignee[0][contact_name]" value="{{old('consignee_contact_name')}}" class="form-control consignee_contact_name" placeholder="Enter point of contact" tabindex="234">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Fax</label>
-                                                        <input type="text" name="consignee_fax" value="{{old('consignee_fax')}}" class="form-control editMainField phoneMask" placeholder="Enter fax number">
+                                                        <input type="text" name="consignee[0][fax]" value="{{old('consignee_fax')}}" class="form-control editMainField phoneMask consignee_fax" placeholder="Enter fax number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,13 +322,13 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Address 1</label>
-                                                        <input type="text" name="consignee_address1" value="{{old('consignee_address1')}}" class="form-control" placeholder="Enter address">
+                                                        <input type="text" name="consignee[0][address1]" value="{{old('consignee_address1')}}" class="form-control consignee_address1" placeholder="Enter address">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery #</label>
-                                                        <input type="text" name="consignee_delivered_number" value="{{old('consignee_delivered_number')}}" class="form-control editMainField" placeholder="Enter delivery number">
+                                                        <input type="text" name="consignee[0][delivered_number]" value="{{old('consignee_delivered_number')}}" class="consignee_delivered_number form-control editMainField" placeholder="Enter delivery number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,15 +337,14 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Address 2</label>
-                                                        <input type="text" name="consignee_address2" value="{{old('consignee_address2')}}" class="form-control" placeholder="Enter address">
+                                                        <input type="text" name="consignee[0][address2]" value="{{old('consignee_address2')}}" class="consignee_address2 form-control" placeholder="Enter address">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group deliveryLocationPickupAtMsg-1613">
                                                         <label class="control-label">Delivery Date</label>
                                                         <div class="input-group date datePicker defaultDatePicker">
-                                                            <input class="form-control" placeholder="Enter delivery date"  type="date" name="consignee_delivery_date" value="{{old('consignee_delivery_date')}}" min={{date('Y-m-d')}}>
-
+                                                            <input class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="date" name="consignee[0][delivery_date]" value="{{old('consignee_delivery_date')}}" min={{date('Y-m-d')}}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -352,13 +354,13 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
                                                         <label class="control-label">City</label>
-                                                        <input class="form-control" placeholder="Enter city" required="required" type="text" name="consignee_city" value="{{old('consignee_city')}}">
+                                                        <input class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[0][city]" value="{{old('consignee_city')}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery Time</label>
-                                                        <input type="time" name="consignee_delivery_time" class="form-control input-small time-picker-input" value="{{old('consignee_delivery_time')}}">
+                                                        <input type="time" name="consignee[0][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{old('consignee_delivery_time')}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,7 +369,7 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">State/Province</label><br>
-                                                        <select name="consignee_delivery_state" value="{{old('consignee_delivery_state')}}" class="selectpicker" required="true" data-live-search="true">
+                                                        <select name="consignee[0][delivery_state]" value="{{old('consignee_delivery_state')}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
                                                             <option disabled selected value>Select State/Province</option>
                                                             <option @if(old('shipper_state') === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                             <option @if(old('shipper_state') === 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -427,7 +429,7 @@
                                                 <div class="col-sm-6 col-xs-6">
                                                     <label class="control-label">BOL Payment Term</label>
                                                     <div class="form-group">
-                                                        <select name="consignee_BOL_payment_term" value="{{old('consignee_BOL_payment_term')}}" class="form-control">
+                                                        <select name="consignee[0][BOL_payment_term]" value="{{old('consignee_BOL_payment_term')}}" class="consignee_BOL_payment_term form-control">
                                                             <option disabled selected value>--Select BOL Payment Term--</option>
                                                             <option  @if(old('consignee_BOL_payment_term') === 'Prepaid') selected @endif value="Prepaid">Prepaid</option>
                                                             <option  @if(old('consignee_BOL_payment_term') === 'Collect') selected @endif value="Collect">Collect</option>
@@ -442,13 +444,13 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Zip Code</label><br>
                                                         <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                                                            <input type="text" name="consignee_delivery_location_zip_code" value="{{old('consignee_delivery_location_zip_code')}}" class="form-control editMainField tt-input" placeholder="Enter zip code">
+                                                            <input type="text" name="consignee[0][delivery_location_zip_code]" value="{{old('consignee_delivery_location_zip_code')}}" class="consignee_delivery_location_zip_code form-control editMainField tt-input" placeholder="Enter zip code">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
                                                         <label class="control-label">BOL #</label>
-                                                        <input type="text" name="consignee_delivery_location_bol_number" value="{{old('consignee_delivery_location_bol_number')}}" class="form-control editMainField" placeholder="Enter BOL #" >
+                                                        <input type="text" name="consignee[0][delivery_location_bol_number]" value="{{old('consignee_delivery_location_bol_number')}}" class="consignee_delivery_location_bol_number form-control editMainField" placeholder="Enter BOL #" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -464,7 +466,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="freight-class-td-width">
-                                                                <select name="consignee_freight_class" id="freight-classes" class="form-control" tabindex="242">
+                                                                <select name="consignee[0][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">
                                                                     <option value="">Select Freight Class</option>
                                                                     <option @if(old('consignee_freight_class') === 'FAK') selected @endif value="FAK">FAK</option>
                                                                     <option @if(old('consignee_freight_class') === '50') selected @endif value="50">50</option>
@@ -487,16 +489,16 @@
                                                                     <option @if(old('consignee_freight_class') === '500') selected @endif value="500">500</option></select>
                                                             </td>
                                                             <td class="nmfc-td-width">
-                                                                <input type="text" name="consignee_national_motor_freight_class" value="{{old('consignee_national_motor_freight_class')}}" class="form-control">
+                                                                <input type="text" name="consignee[0][national_motor_freight_class]" value="{{old('consignee_national_motor_freight_class')}}" class="consignee_national_motor_freight_class form-control">
                                                             </td>
                                                             <td class="prod-td-width">
-                                                                <input type="text" name="consignee_bol_product" value="{{old('consignee_bol_product')}}" class="form-control">
+                                                                <input type="text" name="consignee[0][bol_product]" value="{{old('consignee_bol_product')}}" class="consignee_bol_product form-control">
                                                             </td>
                                                             <td class="qty-td-width">
-                                                                <input type="text" name="consignee_delivery_location_quantity" value="{{old('consignee_delivery_location_quantity')}}" class="form-control">
+                                                                <input type="text" name="consignee[0][delivery_location_quantity]" value="{{old('consignee_delivery_location_quantity')}}" class="consignee_delivery_location_quantity form-control">
                                                             </td>
                                                             <td class="type-td-width">
-                                                                <select name="consignee_item_type" value="{{old('consignee_item_type')}}" class="form-control">
+                                                                <select name="consignee[0][item_type]" value="{{old('consignee_item_type')}}" class="consignee_item_type form-control">
                                                                     <option value="">Select Type</option>
                                                                     <option @if(old('consignee_item_type') === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
                                                                     <option @if(old('consignee_item_type') === 'Boxes') selected @endif  value="Boxes">Boxes</option>
@@ -521,22 +523,22 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="length-td-width">
-                                                                <input type="text" name="consignee_length" value="{{old('consignee_length')}}" class="form-control" tabindex="247">
+                                                                <input type="text" name="consignee[0][length]" value="{{old('consignee_length')}}" class="consignee_length form-control" tabindex="247">
                                                             </td>
                                                             <td class="width-td-width">
-                                                                <input type="text" name="consignee_width" value="{{old('consignee_width')}}" class="form-control" tabindex="248">
+                                                                <input type="text" name="consignee[0][width]" value="{{old('consignee_width')}}" class="consignee_width form-control" tabindex="248">
                                                             </td>
                                                             <td class="height-td-width">
-                                                                <input type="text" name="consignee_height" value="{{old('consignee_height')}}" class="form-control" tabindex="249">
+                                                                <input type="text" name="consignee[0][height]" value="{{old('consignee_height')}}" class="consignee_height form-control" tabindex="249">
                                                             </td>
                                                             <td class="weight-td-width">
-                                                                <input type="text" name="consignee_delivery_location_weight" value="{{old('consignee_delivery_location_weight')}}" class="form-control" tabindex="250">
+                                                                <input type="text" name="consignee[0][delivery_location_weight]" value="{{old('consignee_delivery_location_weight')}}" class="consignee_delivery_location_weight form-control" tabindex="250">
                                                             </td>
                                                             <td class="haz-mat-td-width">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input name="consignee_haz_mat" type="hidden" value="0">
-                                                                        <input type="checkbox" value="1" name="consignee_haz_mat" value="{{old('consignee_haz_mat')}}" id="carrier_use_dba_name">
+{{--                                                                        <input name="consignee[0][haz_mat]" type="hidden" value="0">--}}
+                                                                        <input type="checkbox" value="1" name="consignee[0][haz_mat]" class="consignee_haz_mat" value="{{old('consignee_haz_mat')}}" id="carrier_use_dba_name">
                                                                     </label>
                                                                 </div>
                                                             </td>
@@ -548,7 +550,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">BOL Note</label>
-                                                        <textarea class="form-control editMainField" name="consignee_bol_notes" placeholder="Enter delivery notes" tabindex="253">
+                                                        <textarea class="form-control editMainField consignee_bol_notes" name="consignee[0][bol_notes]" placeholder="Enter delivery notes" tabindex="253">
                                                             {{old('consignee_bol_notes')}}
                                                         </textarea>
                                                     </div>
@@ -558,7 +560,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery Note</label>
-                                                        <textarea class="form-control editMainField" name="consignee_delivery_location_notes" placeholder="Enter delivery notes" tabindex="253">
+                                                        <textarea class="form-control editMainField consignee_delivery_location_notes" name="consignee[0][delivery_location_notes]" placeholder="Enter delivery notes" tabindex="253">
                                                             {{old('consignee_delivery_location_notes')}}
                                                         </textarea>
                                                     </div>

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+<script>
+    window.editStopIndex = '{!! count($load->drops) !!}';
+</script>
 
 @section('content')
     @if ($errors->any())
@@ -10,10 +13,12 @@
             </ul>
         </div>
     @endif
+    <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
-        <form method="post" action="{{ url('/loads/'.$load->id) }}" class="col-sm-12">
+        <form method="post" id="loadEditForm" action="{{ url('/loads/'.$load->id) }}" class="col-sm-12">
             @method('PATCH')
             @csrf
+            <input type="hidden" id="load_id" name="Load_id" value="{{$load->id}}">
             <input type="hidden" name="customer_id" value="{{$load->customer->id}}">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item col-sm-2 load-tab">
@@ -262,7 +267,9 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <span>Stops //todo add functionality later</span>
-                                                <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span>
+                                                <button style="float: right" type="button" class="btn btn-primary" aria-label="Left Align">
+                                                    <span style="cursor:pointer" class="glyphicon glyphicon-plus pull-right" onclick="addEditStop()" aria-hidden="true"></span>
+                                                </button>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -272,301 +279,304 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="tab-item">
-                                        <div class="card">
-                                            <div class="card-header">Consignee Information</div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
+                                <div class="col-sm-12" id="consigneeContainer">
+                                    @foreach($load->drops as $key => $drop)
+                                        <div class="tab-item" id="consigneeItem">
+                                            <input type="hidden" name='consignee[{{$key}}][is_new]' class="is_new" value="false">
+                                            <input type="hidden" name='consignee[{{$key}}][id]'  value="{{$drop->id}}">
+                                            <div class="card">
+                                                <div class="card-header">Consignee Information</div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
-                                                                <label class="control-label">Company</label>
-                                                                <input class="form-control" placeholder="Enter company" required="required" type="text" name="consignee_company" value="{{old('consignee_company', $load->consignee_company)}}">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Company</label>
+                                                                    <input class="form-control consignee_company" placeholder="Enter company" required="required" type="text" name="consignee[{{$key}}][company]" value="{{$drop->company}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-xs-3">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="customer_phone">Phone</label>
+                                                                <input class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone" required="required" type="text" name="consignee[{{$key}}][phone]" value="{{$drop->phone}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-xs-3">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Extension</label>
+                                                                <input class="form-control consignee_phone_extension" placeholder="Enter extension" type="text" name="consignee[{{$key}}][phone_extension]" value="{{$drop->phone_extension}}">
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-3 col-xs-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label" for="customer_phone">Phone</label>
-                                                            <input class="form-control requiredInputCustomer phoneMask" placeholder="Enter phone" required="required" type="text" name="consignee_phone" value="{{old('consignee_phone', $load->consignee_phone)}}">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Contact</label>
+                                                                <input type="text" name="consignee[{{$key}}][contact_name]" value="{{$drop->contact_name}}" class="form-control consignee_contact_name" placeholder="Enter point of contact" tabindex="234">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-3 col-xs-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Extension</label>
-                                                            <input class="form-control" placeholder="Enter extension" type="text" name="consignee_phone_extension" value="{{old('consignee_phone_extension', $load->consignee_phone_extension)}}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Contact</label>
-                                                            <input type="text" name="consignee_contact_name" value="{{old('consignee_contact_name', $load->consignee_contact_name)}}" class="form-control" placeholder="Enter point of contact" tabindex="234">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Fax</label>
-                                                            <input type="text" name="consignee_fax" value="{{old('consignee_fax', $load->consignee_fax)}}" class="form-control editMainField phoneMask" placeholder="Enter fax number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Address 1</label>
-                                                            <input type="text" name="consignee_address1" value="{{old('consignee_address1', $load->consignee_address1)}}" class="form-control" placeholder="Enter address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Delivery #</label>
-                                                            <input type="text" name="consignee_delivered_number" value="{{old('consignee_delivered_number', $load->consignee_delivered_number)}}" class="form-control editMainField" placeholder="Enter delivery number">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Address 2</label>
-                                                            <input type="text" name="consignee_address2" value="{{old('consignee_address2', $load->consignee_address2)}}" class="form-control" placeholder="Enter address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group deliveryLocationPickupAtMsg-1613">
-                                                            <label class="control-label">Delivery Date</label>
-                                                            <div class="input-group date datePicker defaultDatePicker">
-                                                                <input class="form-control" placeholder="Enter delivery date"  type="date" name="consignee_delivery_date" value="{{old('consignee_delivery_date', $load->consignee_delivery_date)}}">
-
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Fax</label>
+                                                                <input type="text" name="consignee[{{$key}}][fax]" value="{{$drop->fax}}" class="form-control editMainField phoneMask consignee_fax" placeholder="Enter fax number">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
-                                                            <label class="control-label">City</label>
-                                                            <input class="form-control" placeholder="Enter city" required="required" type="text" name="consignee_city" value="{{old('consignee_city', $load->consignee_city)}}">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Address 1</label>
+                                                                <input type="text" name="consignee[{{$key}}][address1]" value="{{$drop->address1}}" class="form-control consignee_address1" placeholder="Enter address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Delivery #</label>
+                                                                <input type="text" name="consignee[{{$key}}][delivered_number]" value="{{$drop->delivered_number}}" class="consignee_delivered_number form-control editMainField" placeholder="Enter delivery number">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Delivery Time</label>
-                                                            <input type="time" name="consignee_delivery_time" class="form-control input-small time-picker-input" value="{{old('consignee_delivery_time', $load->consignee_delivery_time)}}">
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">State/Province</label><br>
-                                                            <select name="consignee_delivery_state" value="{{old('consignee_delivery_state', $load->consignee_delivery_state)}}" class="selectpicker" required="true" data-live-search="true">
-                                                                <option disabled selected value>Select State/Province</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'CA') selected @endif value="CA">CA (California)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NY') selected @endif value="NY">NY (New York)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                                <option @if(old('consignee_delivery_state', $load->consignee_delivery_state) === 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                                            </select>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Address 2</label>
+                                                                <input type="text" name="consignee[{{$key}}][address2]" value="{{$drop->address2}}" class="consignee_address2 form-control" placeholder="Enter address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group deliveryLocationPickupAtMsg-1613">
+                                                                <label class="control-label">Delivery Date</label>
+                                                                <div class="input-group date datePicker defaultDatePicker">
+                                                                    <input class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="date" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <label class="control-label">BOL Payment Term</label>
-                                                        <div class="form-group">
-                                                            <select name="consignee_BOL_payment_term" value="{{old('consignee_BOL_payment_term', $load->consignee_BOL_payment_term)}}" class="form-control">
-                                                                <option disabled selected value>--Select BOL Payment Term--</option>
-                                                                <option  @if(old('consignee_BOL_payment_term', $load->consignee_BOL_payment_term) === 'Prepaid') selected @endif value="Prepaid">Prepaid</option>
-                                                                <option  @if(old('consignee_BOL_payment_term', $load->consignee_BOL_payment_term) === 'Collect') selected @endif value="Collect">Collect</option>
-                                                                <option  @if(old('consignee_BOL_payment_term', $load->consignee_BOL_payment_term) === 'Third Party') selected @endif value="Third Party">Third Party</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Zip Code</label><br>
-                                                            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                                                            <input type="text" name="consignee_delivery_location_zip_code" value="{{old('consignee_delivery_location_zip_code', $load->consignee_delivery_location_zip_code)}}" class="form-control editMainField tt-input" placeholder="Enter zip code">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
+                                                                <label class="control-label">City</label>
+                                                                <input class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Delivery Time</label>
+                                                                <input type="time" name="consignee[{{$key}}][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{$drop->delivery_time}}">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">BOL #</label>
-                                                            <input type="text" name="consignee_delivery_location_bol_number" value="{{old('consignee_delivery_location_bol_number', $load->consignee_delivery_location_bol_number)}}" class="form-control editMainField" placeholder="Enter BOL #" >
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">State/Province</label><br>
+                                                                <select name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
+                                                                    <option disabled selected value>Select State/Province</option>
+                                                                    <option @if($drop->delivery_state === 'AL') selected @endif value="AL">AL (Alabama)</option>
+                                                                    <option @if($drop->delivery_state === 'AK') selected @endif value="AK">AK (Alaska)</option>
+                                                                    <option @if($drop->delivery_state === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
+                                                                    <option @if($drop->delivery_state === 'AR') selected @endif value="AR">AR (Arkansas)</option>
+                                                                    <option @if($drop->delivery_state === 'CA') selected @endif value="CA">CA (California)</option>
+                                                                    <option @if($drop->delivery_state === 'CO') selected @endif value="CO">CO (Colorado)</option>
+                                                                    <option @if($drop->delivery_state === 'CT') selected @endif value="CT">CT (Connecticut)</option>
+                                                                    <option @if($drop->delivery_state === 'DE') selected @endif value="DE">DE (Delaware)</option>
+                                                                    <option @if($drop->delivery_state === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
+                                                                    <option @if($drop->delivery_state === 'FL') selected @endif value="FL">FL (Florida)</option>
+                                                                    <option @if($drop->delivery_state === 'GA') selected @endif value="GA">GA (Georgia)</option>
+                                                                    <option @if($drop->delivery_state === 'HI') selected @endif value="HI">HI (Hawaii)</option>
+                                                                    <option @if($drop->delivery_state === 'ID') selected @endif value="ID">ID (Idaho)</option>
+                                                                    <option @if($drop->delivery_state === 'IL') selected @endif value="IL">IL (Illinois)</option>
+                                                                    <option @if($drop->delivery_state === 'IN') selected @endif value="IN">IN (Indiana)</option>
+                                                                    <option @if($drop->delivery_state === 'IA') selected @endif value="IA">IA (Iowa)</option>
+                                                                    <option @if($drop->delivery_state === 'KS') selected @endif value="KS">KS (Kansas)</option>
+                                                                    <option @if($drop->delivery_state === 'KY') selected @endif value="KY">KY (Kentucky)</option>
+                                                                    <option @if($drop->delivery_state === 'LA') selected @endif value="LA">LA (Louisiana)</option>
+                                                                    <option @if($drop->delivery_state === 'ME') selected @endif value="ME">ME (Maine)</option>
+                                                                    <option @if($drop->delivery_state === 'MD') selected @endif value="MD">MD (Maryland)</option>
+                                                                    <option @if($drop->delivery_state === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
+                                                                    <option @if($drop->delivery_state === 'MI') selected @endif value="MI">MI (Michigan)</option>
+                                                                    <option @if($drop->delivery_state === 'MN') selected @endif value="MN">MN (Minnesota)</option>
+                                                                    <option @if($drop->delivery_state === 'MS') selected @endif value="MS">MS (Mississippi)</option>
+                                                                    <option @if($drop->delivery_state === 'MO') selected @endif value="MO">MO (Missouri)</option>
+                                                                    <option @if($drop->delivery_state === 'MT') selected @endif value="MT">MT (Montana)</option>
+                                                                    <option @if($drop->delivery_state === 'NE') selected @endif value="NE">NE (Nebraska)</option>
+                                                                    <option @if($drop->delivery_state === 'NV') selected @endif value="NV">NV (Nevada)</option>
+                                                                    <option @if($drop->delivery_state === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
+                                                                    <option @if($drop->delivery_state === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
+                                                                    <option @if($drop->delivery_state === 'NM') selected @endif value="NM">NM (New Mexico)</option>
+                                                                    <option @if($drop->delivery_state === 'NY') selected @endif value="NY">NY (New York)</option>
+                                                                    <option @if($drop->delivery_state === 'NC') selected @endif value="NC">NC (North Carolina)</option>
+                                                                    <option @if($drop->delivery_state === 'ND') selected @endif value="ND">ND (North Dakota)</option>
+                                                                    <option @if($drop->delivery_state === 'OH') selected @endif value="OH">OH (Ohio)</option>
+                                                                    <option @if($drop->delivery_state === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
+                                                                    <option @if($drop->delivery_state === 'OR') selected @endif value="OR">OR (Oregon)</option>
+                                                                    <option @if($drop->delivery_state === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
+                                                                    <option @if($drop->delivery_state === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
+                                                                    <option @if($drop->delivery_state === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
+                                                                    <option @if($drop->delivery_state === 'SC') selected @endif value="SC">SC (South Carolina)</option>
+                                                                    <option @if($drop->delivery_state === 'SD') selected @endif value="SD">SD (South Dakota)</option>
+                                                                    <option @if($drop->delivery_state === 'TN') selected @endif value="TN">TN (Tennessee)</option>
+                                                                    <option @if($drop->delivery_state === 'TX') selected @endif value="TX">TX (Texas)</option>
+                                                                    <option @if($drop->delivery_state === 'UT') selected @endif value="UT">UT (Utah)</option>
+                                                                    <option @if($drop->delivery_state === 'VT') selected @endif value="VT">VT (Vermont)</option>
+                                                                    <option @if($drop->delivery_state === 'VA') selected @endif value="VA">VA (Virginia)</option>
+                                                                    <option @if($drop->delivery_state === 'WA') selected @endif value="WA">WA (Washington)</option>
+                                                                    <option @if($drop->delivery_state === 'WV') selected @endif value="WV">WV (West Virginia)</option>
+                                                                    <option @if($drop->delivery_state === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
+                                                                    <option @if($drop->delivery_state === 'WY') selected @endif value="WY">WY (Wyoming)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <label class="control-label">BOL Payment Term</label>
+                                                            <div class="form-group">
+                                                                <select name="consignee[{{$key}}][BOL_payment_term]" value="{{$drop->BOL_payment_term}}" class="consignee_BOL_payment_term form-control">
+                                                                    <option disabled selected value>--Select BOL Payment Term--</option>
+                                                                    <option  @if($drop->BOL_payment_term === 'Prepaid') selected @endif value="Prepaid">Prepaid</option>
+                                                                    <option  @if($drop->BOL_payment_term === 'Collect') selected @endif value="Collect">Collect</option>
+                                                                    <option  @if($drop->BOL_payment_term === 'Third Party') selected @endif value="Third Party">Third Party</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row class-dimensions-row">
-                                                    <div class="col-sm-12">
-                                                        <table class="table table-class-dimensions">
-                                                            <tbody><tr>
-                                                                <th>Freight Class</th>
-                                                                <th>NMFC</th>
-                                                                <th>Product</th>
-                                                                <th>Qty</th>
-                                                                <th>Type</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="freight-class-td-width">
-                                                                    <select name="consignee_freight_class" id="freight-classes" class="form-control" tabindex="242">
-                                                                        <option value="">Select Freight Class</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === 'FAK') selected @endif value="FAK">FAK</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '50') selected @endif value="50">50</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '55') selected @endif value="55">55</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '60') selected @endif value="60">60</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '65') selected @endif value="65">65</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '70' ) selected @endif value="70">70</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '77.5') selected @endif value="77.5">77.5</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '85') selected @endif value="85">85</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '92.5') selected @endif value="92.5">92.5</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '100') selected @endif value="100">100</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '110') selected @endif value="110">110</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '125') selected @endif value="125">125</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '150') selected @endif value="150">150</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '175') selected @endif value="175">175</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '200') selected @endif value="200">200</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '250') selected @endif value="250">250</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '300') selected @endif value="300">300</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '400') selected @endif value="400">400</option>
-                                                                        <option @if(old('consignee_freight_class', $load->consignee_freight_class) === '500') selected @endif value="500">500</option></select>
-                                                                </td>
-                                                                <td class="nmfc-td-width">
-                                                                    <input type="text" name="consignee_national_motor_freight_class" value="{{old('consignee_national_motor_freight_class', $load->consignee_national_motor_freight_class)}}" class="form-control">
-                                                                </td>
-                                                                <td class="prod-td-width">
-                                                                    <input type="text" name="consignee_bol_product" value="{{old('consignee_bol_product', $load->consignee_bol_product)}}" class="form-control">
-                                                                </td>
-                                                                <td class="qty-td-width">
-                                                                    <input type="text" name="consignee_delivery_location_quantity" value="{{old('consignee_delivery_location_quantity', $load->consignee_delivery_location_quantity)}}" class="form-control">
-                                                                </td>
-                                                                <td class="type-td-width">
-                                                                    <select name="consignee_item_type" value="{{old('consignee_item_type', $load->consignee_item_type)}}" class="form-control">
-                                                                        <option value="">Select Type</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Boxes') selected @endif  value="Boxes">Boxes</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Carrier Fee') selected @endif  value="Carrier Fee">Carrier Fee</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Cartons') selected @endif  value="Cartons">Cartons</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'CWT') selected @endif  value="CWT">CWT</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Flat Rate') selected @endif  value="Flat Rate">Flat Rate</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Miles') selected @endif  value="Miles">Miles</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Pallets') selected @endif  value="Pallets">Pallets</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Pounds') selected @endif  value="Pounds">Pounds</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Strawberries') selected @endif  value="Strawberries">Strawberries</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'Tons') selected @endif  value="Tons">Tons</option>
-                                                                        <option @if(old('consignee_item_type', $load->consignee_item_type) === 'ruck Ordered/Not Used') selected @endif  value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Length</th>
-                                                                <th>Width</th>
-                                                                <th>Height</th>
-                                                                <th>Weight</th>
-                                                                <th>HazMat</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="length-td-width">
-                                                                    <input type="text" name="consignee_length" value="{{old('consignee_length', $load->consignee_length)}}" class="form-control" tabindex="247">
-                                                                </td>
-                                                                <td class="width-td-width">
-                                                                    <input type="text" name="consignee_width" value="{{old('consignee_width', $load->consignee_width)}}" class="form-control" tabindex="248">
-                                                                </td>
-                                                                <td class="height-td-width">
-                                                                    <input type="text" name="consignee_height" value="{{old('consignee_height', $load->consignee_height)}}" class="form-control" tabindex="249">
-                                                                </td>
-                                                                <td class="weight-td-width">
-                                                                    <input type="text" name="consignee_delivery_location_weight" value="{{old('consignee_delivery_location_weight', $load->consignee_delivery_location_weight)}}" class="form-control" tabindex="250">
-                                                                </td>
-                                                                <td class="haz-mat-td-width">
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            <input type="checkbox" @if(old('consignee_haz_mat', $load->consignee_haz_mat)) checked="checked" value="1" @else value="0" @endif name="consignee_haz_mat" id="carrier_use_dba_name">
-                                                                        </label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody></table>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">BOL Note</label>
-                                                            <textarea class="form-control" name="consignee_bol_notes" placeholder="Enter delivery notes">
-                                                                {{old('consignee_bol_notes', $load->consignee_bol_notes)}}
-                                                            </textarea>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Zip Code</label><br>
+                                                                <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                                                            <input type="text" name="consignee[{{$key}}][delivery_location_zip_code]" value="{{$drop->delivery_location_zip_code}}" class="consignee_delivery_location_zip_code form-control editMainField tt-input" placeholder="Enter zip code">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">BOL #</label>
+                                                                <input type="text" name="consignee[{{$key}}][delivery_location_bol_number]" value="{{$drop->delivery_location_bol_number}}" class="consignee_delivery_location_bol_number form-control editMainField" placeholder="Enter BOL #" >
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Delivery Note</label>
-                                                            <textarea class="form-control" name="consignee_delivery_location_notes" placeholder="Enter delivery notes">
-                                                            {{old('consignee_delivery_location_notes', $load->consignee_delivery_location_notes)}}
+                                                    <div class="row class-dimensions-row">
+                                                        <div class="col-sm-12">
+                                                            <table class="table table-class-dimensions">
+                                                                <tbody><tr>
+                                                                    <th>Freight Class</th>
+                                                                    <th>NMFC</th>
+                                                                    <th>Product</th>
+                                                                    <th>Qty</th>
+                                                                    <th>Type</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="freight-class-td-width">
+                                                                        <select name="consignee[{{$key}}][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">
+                                                                            <option value="">Select Freight Class</option>
+                                                                            <option @if($drop->freight_class === 'FAK') selected @endif value="FAK">FAK</option>
+                                                                            <option @if($drop->freight_class === '50') selected @endif value="50">50</option>
+                                                                            <option @if($drop->freight_class === '55') selected @endif value="55">55</option>
+                                                                            <option @if($drop->freight_class === '60') selected @endif value="60">60</option>
+                                                                            <option @if($drop->freight_class === '65') selected @endif value="65">65</option>
+                                                                            <option @if($drop->freight_class === '70' ) selected @endif value="70">70</option>
+                                                                            <option @if($drop->freight_class === '77.5') selected @endif value="77.5">77.5</option>
+                                                                            <option @if($drop->freight_class === '85') selected @endif value="85">85</option>
+                                                                            <option @if($drop->freight_class === '92.5') selected @endif value="92.5">92.5</option>
+                                                                            <option @if($drop->freight_class === '100') selected @endif value="100">100</option>
+                                                                            <option @if($drop->freight_class === '110') selected @endif value="110">110</option>
+                                                                            <option @if($drop->freight_class === '125') selected @endif value="125">125</option>
+                                                                            <option @if($drop->freight_class === '150') selected @endif value="150">150</option>
+                                                                            <option @if($drop->freight_class === '175') selected @endif value="175">175</option>
+                                                                            <option @if($drop->freight_class === '200') selected @endif value="200">200</option>
+                                                                            <option @if($drop->freight_class === '250') selected @endif value="250">250</option>
+                                                                            <option @if($drop->freight_class === '300') selected @endif value="300">300</option>
+                                                                            <option @if($drop->freight_class === '400') selected @endif value="400">400</option>
+                                                                            <option @if($drop->freight_class === '500') selected @endif value="500">500</option></select>
+                                                                    </td>
+                                                                    <td class="nmfc-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][national_motor_freight_class]" value="{{$drop->national_motor_freight_class}}" class="consignee_national_motor_freight_class form-control">
+                                                                    </td>
+                                                                    <td class="prod-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][bol_product]" value="{{$drop->bol_product}}" class="consignee_bol_product form-control">
+                                                                    </td>
+                                                                    <td class="qty-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][delivery_location_quantity]" value="{{$drop->delivery_location_quantity}}" class="consignee_delivery_location_quantity form-control">
+                                                                    </td>
+                                                                    <td class="type-td-width">
+                                                                        <select name="consignee[{{$key}}][item_type]" value="{{$drop->item_type}}" class="consignee_item_type form-control">
+                                                                            <option value="">Select Type</option>
+                                                                            <option @if($drop->item_type === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
+                                                                            <option @if($drop->item_type === 'Boxes') selected @endif  value="Boxes">Boxes</option>
+                                                                            <option @if($drop->item_type === 'Carrier Fee') selected @endif  value="Carrier Fee">Carrier Fee</option>
+                                                                            <option @if($drop->item_type === 'Cartons') selected @endif  value="Cartons">Cartons</option>
+                                                                            <option @if($drop->item_type === 'CWT') selected @endif  value="CWT">CWT</option>
+                                                                            <option @if($drop->item_type === 'Flat Rate') selected @endif  value="Flat Rate">Flat Rate</option>
+                                                                            <option @if($drop->item_type === 'Miles') selected @endif  value="Miles">Miles</option>
+                                                                            <option @if($drop->item_type === 'Pallets') selected @endif  value="Pallets">Pallets</option>
+                                                                            <option @if($drop->item_type === 'Pounds') selected @endif  value="Pounds">Pounds</option>
+                                                                            <option @if($drop->item_type === 'Strawberries') selected @endif  value="Strawberries">Strawberries</option>
+                                                                            <option @if($drop->item_type === 'Tons') selected @endif  value="Tons">Tons</option>
+                                                                            <option @if($drop->item_type === 'ruck Ordered/Not Used') selected @endif  value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Length</th>
+                                                                    <th>Width</th>
+                                                                    <th>Height</th>
+                                                                    <th>Weight</th>
+                                                                    <th>HazMat</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="length-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][length]" value="{{$drop->length}}" class="consignee_length form-control" tabindex="247">
+                                                                    </td>
+                                                                    <td class="width-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][width]" value="{{$drop->width}}" class="consignee_width form-control" tabindex="248">
+                                                                    </td>
+                                                                    <td class="height-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][height]" value="{{$drop->height}}" class="consignee_height form-control" tabindex="249">
+                                                                    </td>
+                                                                    <td class="weight-td-width">
+                                                                        <input type="text" name="consignee[{{$key}}][delivery_location_weight]" value="{{$drop->delivery_location_weight}}" class="consignee_delivery_location_weight form-control" tabindex="250">
+                                                                    </td>
+                                                                    <td class="haz-mat-td-width">
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                <input type="checkbox" value="1" name="consignee[{{$key}}][haz_mat]" class="consignee_haz_mat" value="{{$drop->haz_mat}}" id="carrier_use_dba_name">
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody></table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label">BOL Note</label>
+                                                                <textarea class="form-control editMainField consignee_bol_notes" name="consignee[{{$key}}][bol_notes]" placeholder="Enter delivery notes" tabindex="253">
+                                                            {{$drop->bol_notes}}
                                                         </textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Delivery Note</label>
+                                                                <textarea class="form-control editMainField consignee_delivery_location_notes" name="consignee[{{$key}}][delivery_location_notes]" placeholder="Enter delivery notes" tabindex="253">
+                                                            {{$drop->delivery_location_notes}}
+                                                        </textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-sm-6 carrier-cards">

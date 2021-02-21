@@ -101,7 +101,7 @@
                                             <td><a href="{{ url('/carrier/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
                                             <td>{{$load->shipper_address1}}</td>
                                             <td>{{$load->consignee_address1}}</td>
-                                            <td>{{$load->stops}}</td>
+                                            <td>{{count($load->drops)}}</td>
                                             <td>{{$load->consignee_delivery_date}} {{$load->consignee_delivery_time}}</td>
                                             <td>
                                                 <a title="edit" href="{{url('/loads/'.$load->id.'/edit')}}">

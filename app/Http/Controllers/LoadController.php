@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Customer;
 use App\Carrier;
 use App\Load;
+use App\Drop;
+use Illuminate\Support\Facades\Validator;
 
 class LoadController extends Controller
 {
@@ -16,7 +18,7 @@ class LoadController extends Controller
      */
     public function index()
     {
-        $loads = Load::with(['customer', 'carrier'])->orderBy('created_at', 'desc')->paginate(25);
+        $loads = Load::with(['customer', 'carrier', 'drops'])->orderBy('created_at', 'desc')->paginate(25);
         $dispatchers = Dispatcher::select('id', 'full_name')->get();
 
         return View('load.index')->with(['loads' => $loads, 'dispatchers' => $dispatchers]);
@@ -59,7 +61,7 @@ class LoadController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
             "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
@@ -82,33 +84,33 @@ class LoadController extends Controller
             "shipper_pickup_time"                    => ['required', 'string'],
             "shipper_pickup_number"                  => ['required', 'string'],
             "shipper_notes"                          => ['required', 'string'],
-            "consignee_company"                      => ['required', 'string'],
-            "consignee_phone"                        => ['required', 'string'],
-            "consignee_phone_extension"              => ['required', 'string'],
-            "consignee_contact_name"                 => ['required', 'string'],
-            "consignee_fax"                          => ['required', 'string'],
-            "consignee_address1"                     => ['required', 'string'],
-            "consignee_delivered_number"             => ['required', 'string'],
-            "consignee_address2"                     => ['required', 'string'],
-            "consignee_delivery_date"                => ['required', 'string'],
-            "consignee_delivery_time"                => ['required', 'string'],
-            "consignee_city"                         => ['required', 'string'],
-            "consignee_delivery_state"               => ['required', 'string'],
-            "consignee_BOL_payment_term"             => ['required', 'string'],
-            "consignee_delivery_location_bol_number" => ['required', 'string'],
-            "consignee_delivery_location_zip_code"   => ['required', 'string'],
-            "consignee_freight_class"                => ['required', 'string'],
-            "consignee_national_motor_freight_class" => ['required', 'string'],
-            "consignee_bol_product"                  => ['required', 'string'],
-            "consignee_delivery_location_quantity"   => ['required', 'string'],
-            "consignee_item_type"                    => ['required', 'string'],
-            "consignee_length"                       => ['required', 'string'],
-            "consignee_width"                        => ['required', 'string'],
-            "consignee_height"                       => ['required', 'string'],
-            "consignee_delivery_location_weight"     => ['required', 'string'],
-            "consignee_haz_mat"                      => ['required', 'string'],
-            "consignee_bol_notes"                    => ['required', 'string'],
-            "consignee_delivery_location_notes"      => ['required', 'string'],
+            "consignee.*.company"                      => ['required', 'string'],
+            "consignee.*.phone"                        => ['required', 'string'],
+            "consignee.*.phone_extension"              => ['required', 'string'],
+            "consignee.*.contact_name"                 => ['required', 'string'],
+            "consignee.*.fax"                          => ['required', 'string'],
+            "consignee.*.address1"                     => ['required', 'string'],
+            "consignee.*.delivered_number"             => ['required', 'string'],
+            "consignee.*.address2"                     => ['required', 'string'],
+            "consignee.*.delivery_date"                => ['required', 'string'],
+            "consignee.*.delivery_time"                => ['required', 'string'],
+            "consignee.*.city"                         => ['required', 'string'],
+            "consignee.*.delivery_state"               => ['required', 'string'],
+            "consignee.*.BOL_payment_term"             => ['required', 'string'],
+            "consignee.*.delivery_location_bol_number" => ['required', 'string'],
+            "consignee.*.delivery_location_zip_code"   => ['required', 'string'],
+            "consignee.*.freight_class"                => ['required', 'string'],
+            "consignee.*.national_motor_freight_class" => ['required', 'string'],
+            "consignee.*.bol_product"                  => ['required', 'string'],
+            "consignee.*.delivery_location_quantity"   => ['required', 'string'],
+            "consignee.*.item_type"                    => ['required', 'string'],
+            "consignee.*.length"                       => ['required', 'string'],
+            "consignee.*.width"                        => ['required', 'string'],
+            "consignee.*.height"                       => ['required', 'string'],
+            "consignee.*.delivery_location_weight"     => ['required', 'string'],
+            "consignee.*.haz_mat"                      => ['required', 'string'],
+            "consignee.*.bol_notes"                    => ['required', 'string'],
+            "consignee.*.delivery_location_notes"      => ['required', 'string'],
             "truck_number"                           => ['required', 'string'],
             "trailer_number"                         => ['required', 'string'],
             "driver"                                 => ['required', 'string'],
@@ -124,11 +126,23 @@ class LoadController extends Controller
             "driver_advance_gross"                   => ['required', 'string'],
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
         $data = $request->all();
-        $load = Load::create($data);
+        $dropsData =  $data['consignee'];
+        unset($data['consignee']);
+        $loadData = $data;
 
-        return redirect('loads/'.$load->id)->withInput()->with('success', 'Load Created successfully');
+        $load = Load::create($loadData);
 
+        foreach ($dropsData as $key => $dropData) {
+            $dropsData[$key]['load_id'] = $load->id;
+        }
+        Drop::insert($dropsData);
+
+        return response()->json(['success' => 'Load Created successfully']);
     }
 
     /**
@@ -152,6 +166,7 @@ class LoadController extends Controller
      */
     public function edit(Load $load)
     {
+        $load->drops;
         return response()->view('load.edit', [
             'load' => $load,
             'carriers' => Carrier::get() //TODO make ajax elastic search
@@ -168,8 +183,7 @@ class LoadController extends Controller
      */
     public function update(Request $request, Load $load)
     {
-//        dd($request->consignee_haz_mat);
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
             "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
@@ -192,33 +206,34 @@ class LoadController extends Controller
             "shipper_pickup_time"                    => ['required', 'string'],
             "shipper_pickup_number"                  => ['required', 'string'],
             "shipper_notes"                          => ['required', 'string'],
-            "consignee_company"                      => ['required', 'string'],
-            "consignee_phone"                        => ['required', 'string'],
-            "consignee_phone_extension"              => ['required', 'string'],
-            "consignee_contact_name"                 => ['required', 'string'],
-            "consignee_fax"                          => ['required', 'string'],
-            "consignee_address1"                     => ['required', 'string'],
-            "consignee_delivered_number"             => ['required', 'string'],
-            "consignee_address2"                     => ['required', 'string'],
-            "consignee_delivery_date"                => ['required', 'string'],
-            "consignee_delivery_time"                => ['required', 'string'],
-            "consignee_city"                         => ['required', 'string'],
-            "consignee_delivery_state"               => ['required', 'string'],
-            "consignee_BOL_payment_term"             => ['required', 'string'],
-            "consignee_delivery_location_bol_number" => ['required', 'string'],
-            "consignee_delivery_location_zip_code"   => ['required', 'string'],
-            "consignee_freight_class"                => ['required', 'string'],
-            "consignee_national_motor_freight_class" => ['required', 'string'],
-            "consignee_bol_product"                  => ['required', 'string'],
-            "consignee_delivery_location_quantity"   => ['required', 'string'],
-            "consignee_item_type"                    => ['required', 'string'],
-            "consignee_length"                       => ['required', 'string'],
-            "consignee_width"                        => ['required', 'string'],
-            "consignee_height"                       => ['required', 'string'],
-            "consignee_delivery_location_weight"     => ['required', 'string'],
-            "consignee_haz_mat"                      => ['string', 'nullable'],
-            "consignee_bol_notes"                    => ['required', 'string'],
-            "consignee_delivery_location_notes"      => ['required', 'string'],
+            "consignee.*.is_new"                     => ['required'],
+            "consignee.*.company"                      => ['required', 'string'],
+            "consignee.*.phone"                        => ['required', 'string'],
+            "consignee.*.phone_extension"              => ['required', 'string'],
+            "consignee.*.contact_name"                 => ['required', 'string'],
+            "consignee.*.fax"                          => ['required', 'string'],
+            "consignee.*.address1"                     => ['required', 'string'],
+            "consignee.*.delivered_number"             => ['required', 'string'],
+            "consignee.*.address2"                     => ['required', 'string'],
+            "consignee.*.delivery_date"                => ['required', 'string'],
+            "consignee.*.delivery_time"                => ['required', 'string'],
+            "consignee.*.city"                         => ['required', 'string'],
+            "consignee.*.delivery_state"               => ['required', 'string'],
+            "consignee.*.BOL_payment_term"             => ['required', 'string'],
+            "consignee.*.delivery_location_bol_number" => ['required', 'string'],
+            "consignee.*.delivery_location_zip_code"   => ['required', 'string'],
+            "consignee.*.freight_class"                => ['required', 'string'],
+            "consignee.*.national_motor_freight_class" => ['required', 'string'],
+            "consignee.*.bol_product"                  => ['required', 'string'],
+            "consignee.*.delivery_location_quantity"   => ['required', 'string'],
+            "consignee.*.item_type"                    => ['required', 'string'],
+            "consignee.*.length"                       => ['required', 'string'],
+            "consignee.*.width"                        => ['required', 'string'],
+            "consignee.*.height"                       => ['required', 'string'],
+            "consignee.*.delivery_location_weight"     => ['required', 'string'],
+            "consignee.*.haz_mat"                      => ['required', 'string'],
+            "consignee.*.bol_notes"                    => ['required', 'string'],
+            "consignee.*.delivery_location_notes"      => ['required', 'string'],
             "truck_number"                           => ['required', 'string'],
             "trailer_number"                         => ['required', 'string'],
             "driver"                                 => ['required', 'string'],
@@ -234,11 +249,34 @@ class LoadController extends Controller
             "driver_advance_gross"                   => ['required', 'string'],
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
         $data = $request->all();
-        $data['consignee_haz_mat'] = isset($data['consignee_haz_mat']) ? 1: 0;
+        $dropsData =  $data['consignee'];
+        unset($data['consignee']);
+        $newDrops = [];
+
+        foreach ($dropsData as $key => $dropData) {
+            $dropsData[$key]['haz_mat'] = isset($dropsData[$key]['haz_mat']) ? 1: 0;
+            $dropsData[$key]['load_id'] = $load->id;
+            if ($dropData['is_new'] === 'false') {
+                unset($dropData['is_new']);
+                Drop::find($dropData['id'])->update($dropData);
+            } else {
+                unset($dropData['is_new']);
+                $dropData['load_id'] = $load->id;
+                $newDrops[] = $dropData;
+            }
+        }
+        if (!empty($newDrops)) {
+            Drop::insert($newDrops);
+        }
+
         $load->update($data);
 
-        return redirect('loads/')->withInput()->with('success', 'Load Updated successfully');
+        return response()->json(['success' => 'Load Created successfully']);
     }
 
     /**

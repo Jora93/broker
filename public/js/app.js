@@ -68709,7 +68709,20 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 $(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   $('.data-table').DataTable();
 
   window.copyCompanyInfoToPayeeInfo = function () {
@@ -68728,14 +68741,234 @@ $(document).ready(function () {
     $("#defaultLocationCompany").val($("#customer_billing_company").val()), $("#defaultLocationPhone").val($("#customer_billing_phone").val()), $("#defaultLocationPhoneExtension").val($("#customer_billing_phone_extension").val()), $("#defaultLocationFax").val($("#customer_billing_fax").val()), $("#defaultLocationAddress1").val($("#customer_billing_address1").val()), $("#defaultLocationAddress2").val($("#customer_billing_address2").val()), $("#defaultLocationCity").val($("#customer_billing_city").val()), $("#defaultLocationState").val($("#customer_billing_state").val()).trigger("chosen:updated"), $("#defaultLocationZip").val($("#customer_billing_zip_code").val());
   };
 
+  $('.selectpickeraa').selectpicker(); //Create Load start ---------------------
+
+  window.createStopIndex = 0;
+
   window.addStop = function () {
-    var item = document.getElementById("consigneeItem");
-    var clone = item.cloneNode(true);
-    document.getElementById("consigneeContainer").appendChild(clone);
+    window.createStopIndex++;
+    $('.selectpickeraa').selectpicker('destroy');
+    var newForm = $("#consigneeItem").clone();
+    newForm.find('.consignee_company').attr('name', 'consignee[' + window.createStopIndex + '][company]');
+    newForm.find('.consignee_phone').attr('name', 'consignee[' + window.createStopIndex + '][phone]');
+    newForm.find('.consignee_phone_extension').attr('name', 'consignee[' + window.createStopIndex + '][phone_extension]');
+    newForm.find('.consignee_contact_name').attr('name', 'consignee[' + window.createStopIndex + '][contact_name]');
+    newForm.find('.consignee_fax').attr('name', 'consignee[' + window.createStopIndex + '][fax]');
+    newForm.find('.consignee_address1').attr('name', 'consignee[' + window.createStopIndex + '][address1]');
+    newForm.find('.consignee_delivered_number').attr('name', 'consignee[' + window.createStopIndex + '][delivered_number]');
+    newForm.find('.consignee_address2').attr('name', 'consignee[' + window.createStopIndex + '][address2]');
+    newForm.find('.consignee_delivery_date').attr('name', 'consignee[' + window.createStopIndex + '][delivery_date]');
+    newForm.find('.consignee_city').attr('name', 'consignee[' + window.createStopIndex + '][city]');
+    newForm.find('.consignee_delivery_time').attr('name', 'consignee[' + window.createStopIndex + '][delivery_time]');
+    newForm.find('.consignee_delivery_state').attr('name', 'consignee[' + window.createStopIndex + '][delivery_state]');
+    newForm.find('.consignee_BOL_payment_term').attr('name', 'consignee[' + window.createStopIndex + '][BOL_payment_term]');
+    newForm.find('.consignee_delivery_location_zip_code').attr('name', 'consignee[' + window.createStopIndex + '][delivery_location_zip_code]');
+    newForm.find('.consignee_delivery_location_bol_number').attr('name', 'consignee[' + window.createStopIndex + '][delivery_location_bol_number]');
+    newForm.find('.consignee_freight_class').attr('name', 'consignee[' + window.createStopIndex + '][freight_class]');
+    newForm.find('.consignee_national_motor_freight_class').attr('name', 'consignee[' + window.createStopIndex + '][national_motor_freight_class]');
+    newForm.find('.consignee_bol_product').attr('name', 'consignee[' + window.createStopIndex + '][bol_product]');
+    newForm.find('.consignee_delivery_location_quantity').attr('name', 'consignee[' + window.createStopIndex + '][delivery_location_quantity]');
+    newForm.find('.consignee_item_type').attr('name', 'consignee[' + window.createStopIndex + '][item_type]');
+    newForm.find('.consignee_length').attr('name', 'consignee[' + window.createStopIndex + '][length]');
+    newForm.find('.consignee_width').attr('name', 'consignee[' + window.createStopIndex + '][width]');
+    newForm.find('.consignee_height').attr('name', 'consignee[' + window.createStopIndex + '][height]');
+    newForm.find('.consignee_delivery_location_weight').attr('name', 'consignee[' + window.createStopIndex + '][delivery_location_weight]');
+    newForm.find('.consignee_haz_mat').attr('name', 'consignee[' + window.createStopIndex + '][haz_mat]');
+    newForm.find('.consignee_bol_notes').attr('name', 'consignee[' + window.createStopIndex + '][bol_notes]');
+    newForm.find('.consignee_delivery_location_notes').attr('name', 'consignee[' + window.createStopIndex + '][delivery_location_notes]');
+    newForm.find('.consignee_company').val('');
+    newForm.find('.consignee_phone').val('');
+    newForm.find('.consignee_phone_extension').val('');
+    newForm.find('.consignee_contact_name').val('');
+    newForm.find('.consignee_fax').val('');
+    newForm.find('.consignee_address1').val('');
+    newForm.find('.consignee_delivered_number').val('');
+    newForm.find('.consignee_address2').val('');
+    newForm.find('.consignee_delivery_date').val('');
+    newForm.find('.consignee_city').val('');
+    newForm.find('.consignee_delivery_time').val('');
+    newForm.find('.consignee_delivery_state').val('');
+    newForm.find('.consignee_BOL_payment_term').val('');
+    newForm.find('.consignee_delivery_location_zip_code').val('');
+    newForm.find('.consignee_delivery_location_bol_number').val('');
+    newForm.find('.consignee_freight_class').val('');
+    newForm.find('.consignee_national_motor_freight_class').val('');
+    newForm.find('.consignee_bol_product').val('');
+    newForm.find('.consignee_delivery_location_quantity').val('');
+    newForm.find('.consignee_item_type').val('');
+    newForm.find('.consignee_length').val('');
+    newForm.find('.consignee_width').val('');
+    newForm.find('.consignee_height').val('');
+    newForm.find('.consignee_delivery_location_weight').val('');
+    newForm.find('.consignee_haz_mat').val('');
+    newForm.find('.consignee_bol_notes').val('');
+    newForm.find('.consignee_delivery_location_notes').val('');
+    newForm.appendTo("#consigneeContainer");
+    $('.selectpickeraa').selectpicker('refresh');
   };
 
-  console.log(111111); // $(".phoneMask").keyup(function() {
-  //     $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "($1)$2-$3"));
+  $("#loadCreateForm").submit(function (event) {
+    event.preventDefault();
+    var $inputs = $('#loadCreateForm :input');
+    var values = {};
+    $inputs.each(function () {
+      values[this.name] = $(this).val();
+    });
+    $.ajax({
+      type: "POST",
+      url: "http://broker.me/loads",
+      data: values,
+      success: function success(result) {
+        if (result.success) {
+          location.href = location.origin + 'loads';
+        }
+
+        if (result.error) {
+          $(".alert-danger").remove();
+
+          for (var _i = 0, _Object$entries = Object.entries(result.error); _i < _Object$entries.length; _i++) {
+            var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                key = _Object$entries$_i[0],
+                value = _Object$entries$_i[1];
+
+            console.log("".concat(key, ": ").concat(value));
+          }
+
+          var list = '';
+
+          for (var _i2 = 0, _Object$entries2 = Object.entries(result.error); _i2 < _Object$entries2.length; _i2++) {
+            var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+                _key = _Object$entries2$_i[0],
+                _value = _Object$entries2$_i[1];
+
+            list += "<li>".concat(_value, "</li>");
+          }
+
+          var html = '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+          $("#ajaxErrorContainer").append(html);
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  }); //Create Load end ---------------------
+  //Edit Load start ---------------------
+
+  window.addEditStop = function () {
+    window.editStopIndex++;
+    $('.selectpickeraa').selectpicker('destroy');
+    var newForm = $("#consigneeItem").clone();
+    newForm.find('.is_new').attr('name', 'consignee[' + window.editStopIndex + '][is_new]');
+    newForm.find('.is_new').val('true');
+    newForm.find('.consignee_company').attr('name', 'consignee[' + window.editStopIndex + '][company]');
+    newForm.find('.consignee_phone').attr('name', 'consignee[' + window.editStopIndex + '][phone]');
+    newForm.find('.consignee_phone_extension').attr('name', 'consignee[' + window.editStopIndex + '][phone_extension]');
+    newForm.find('.consignee_contact_name').attr('name', 'consignee[' + window.editStopIndex + '][contact_name]');
+    newForm.find('.consignee_fax').attr('name', 'consignee[' + window.editStopIndex + '][fax]');
+    newForm.find('.consignee_address1').attr('name', 'consignee[' + window.editStopIndex + '][address1]');
+    newForm.find('.consignee_delivered_number').attr('name', 'consignee[' + window.editStopIndex + '][delivered_number]');
+    newForm.find('.consignee_address2').attr('name', 'consignee[' + window.editStopIndex + '][address2]');
+    newForm.find('.consignee_delivery_date').attr('name', 'consignee[' + window.editStopIndex + '][delivery_date]');
+    newForm.find('.consignee_city').attr('name', 'consignee[' + window.editStopIndex + '][city]');
+    newForm.find('.consignee_delivery_time').attr('name', 'consignee[' + window.editStopIndex + '][delivery_time]');
+    newForm.find('.consignee_delivery_state').attr('name', 'consignee[' + window.editStopIndex + '][delivery_state]');
+    newForm.find('.consignee_BOL_payment_term').attr('name', 'consignee[' + window.editStopIndex + '][BOL_payment_term]');
+    newForm.find('.consignee_delivery_location_zip_code').attr('name', 'consignee[' + window.editStopIndex + '][delivery_location_zip_code]');
+    newForm.find('.consignee_delivery_location_bol_number').attr('name', 'consignee[' + window.editStopIndex + '][delivery_location_bol_number]');
+    newForm.find('.consignee_freight_class').attr('name', 'consignee[' + window.editStopIndex + '][freight_class]');
+    newForm.find('.consignee_national_motor_freight_class').attr('name', 'consignee[' + window.editStopIndex + '][national_motor_freight_class]');
+    newForm.find('.consignee_bol_product').attr('name', 'consignee[' + window.editStopIndex + '][bol_product]');
+    newForm.find('.consignee_delivery_location_quantity').attr('name', 'consignee[' + window.editStopIndex + '][delivery_location_quantity]');
+    newForm.find('.consignee_item_type').attr('name', 'consignee[' + window.editStopIndex + '][item_type]');
+    newForm.find('.consignee_length').attr('name', 'consignee[' + window.editStopIndex + '][length]');
+    newForm.find('.consignee_width').attr('name', 'consignee[' + window.editStopIndex + '][width]');
+    newForm.find('.consignee_height').attr('name', 'consignee[' + window.editStopIndex + '][height]');
+    newForm.find('.consignee_delivery_location_weight').attr('name', 'consignee[' + window.editStopIndex + '][delivery_location_weight]');
+    newForm.find('.consignee_haz_mat').attr('name', 'consignee[' + window.editStopIndex + '][haz_mat]');
+    newForm.find('.consignee_bol_notes').attr('name', 'consignee[' + window.editStopIndex + '][bol_notes]');
+    newForm.find('.consignee_delivery_location_notes').attr('name', 'consignee[' + window.editStopIndex + '][delivery_location_notes]');
+    newForm.find('.consignee_company').val('');
+    newForm.find('.consignee_phone').val('');
+    newForm.find('.consignee_phone_extension').val('');
+    newForm.find('.consignee_contact_name').val('');
+    newForm.find('.consignee_fax').val('');
+    newForm.find('.consignee_address1').val('');
+    newForm.find('.consignee_delivered_number').val('');
+    newForm.find('.consignee_address2').val('');
+    newForm.find('.consignee_delivery_date').val('');
+    newForm.find('.consignee_city').val('');
+    newForm.find('.consignee_delivery_time').val('');
+    newForm.find('.consignee_delivery_state').val('');
+    newForm.find('.consignee_BOL_payment_term').val('');
+    newForm.find('.consignee_delivery_location_zip_code').val('');
+    newForm.find('.consignee_delivery_location_bol_number').val('');
+    newForm.find('.consignee_freight_class').val('');
+    newForm.find('.consignee_national_motor_freight_class').val('');
+    newForm.find('.consignee_bol_product').val('');
+    newForm.find('.consignee_delivery_location_quantity').val('');
+    newForm.find('.consignee_item_type').val('');
+    newForm.find('.consignee_length').val('');
+    newForm.find('.consignee_width').val('');
+    newForm.find('.consignee_height').val('');
+    newForm.find('.consignee_delivery_location_weight').val('');
+    newForm.find('.consignee_haz_mat').val('');
+    newForm.find('.consignee_bol_notes').val('');
+    newForm.find('.consignee_delivery_location_notes').val('');
+    newForm.appendTo("#consigneeContainer");
+    $('.selectpickeraa').selectpicker('refresh');
+  };
+
+  $("#loadEditForm").submit(function (event) {
+    event.preventDefault();
+    var inputs = $('#loadEditForm :input');
+    var loadId = $("#load_id").val();
+    var values = {};
+    inputs.each(function () {
+      values[this.name] = $(this).val();
+    });
+    $.ajax({
+      type: "PATCH",
+      url: "http://broker.me/loads/".concat(loadId),
+      data: values,
+      success: function success(result) {
+        if (result.success) {
+          location.href = location.origin + '/loads';
+        }
+
+        if (result.error) {
+          $(".alert-danger").remove();
+
+          for (var _i3 = 0, _Object$entries3 = Object.entries(result.error); _i3 < _Object$entries3.length; _i3++) {
+            var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
+                key = _Object$entries3$_i[0],
+                value = _Object$entries3$_i[1];
+
+            console.log("".concat(key, ": ").concat(value));
+          }
+
+          var list = '';
+
+          for (var _i4 = 0, _Object$entries4 = Object.entries(result.error); _i4 < _Object$entries4.length; _i4++) {
+            var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2),
+                _key2 = _Object$entries4$_i[0],
+                _value2 = _Object$entries4$_i[1];
+
+            list += "<li>".concat(_value2, "</li>");
+          }
+
+          var html = '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+          $("#ajaxErrorContainer").append(html);
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  }); //Edit Load end -----------------------
+  // $.ajax({
+  //     type: "POST",
+  //     url: "http://broker.me/dispatchers",
+  //     data: {category:'client', type:'premium'},
+  //     success: function(result){
+  //         debugger
+  //     }
   // });
 
   $(".phoneMask").mask('(000) 000-00000000000000');

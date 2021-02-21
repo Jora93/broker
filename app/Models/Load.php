@@ -40,33 +40,33 @@ class Load extends Model
         'shipper_pickup_number',
         'shipper_pickup_time',
         'shipper_notes',
-        'consignee_company',
-        'consignee_phone',
-        'consignee_phone_extension',
-        'consignee_contact_name',
-        'consignee_fax',
-        'consignee_address1',
-        'consignee_delivered_number',
-        'consignee_address2',
-        'consignee_delivery_date',
-        'consignee_city',
-        'consignee_delivery_time',
-        'consignee_delivery_state',
-        'consignee_BOL_payment_term',
-        'consignee_delivery_location_bol_number',
-        'consignee_delivery_location_zip_code',
-        'consignee_freight_class',
-        'consignee_national_motor_freight_class',
-        'consignee_bol_product',
-        'consignee_delivery_location_quantity',
-        'consignee_item_type',
-        'consignee_length',
-        'consignee_width',
-        'consignee_height',
-        'consignee_delivery_location_weight',
-        'consignee_haz_mat',
-        'consignee_bol_notes',
-        'consignee_delivery_location_notes',
+//        'consignee_company',
+//        'consignee_phone',
+//        'consignee_phone_extension',
+//        'consignee_contact_name',
+//        'consignee_fax',
+//        'consignee_address1',
+//        'consignee_delivered_number',
+//        'consignee_address2',
+//        'consignee_delivery_date',
+//        'consignee_city',
+//        'consignee_delivery_time',
+//        'consignee_delivery_state',
+//        'consignee_BOL_payment_term',
+//        'consignee_delivery_location_bol_number',
+//        'consignee_delivery_location_zip_code',
+//        'consignee_freight_class',
+//        'consignee_national_motor_freight_class',
+//        'consignee_bol_product',
+//        'consignee_delivery_location_quantity',
+//        'consignee_item_type',
+//        'consignee_length',
+//        'consignee_width',
+//        'consignee_height',
+//        'consignee_delivery_location_weight',
+//        'consignee_haz_mat',
+//        'consignee_bol_notes',
+//        'consignee_delivery_location_notes',
         'truck_number',
         'trailer_number',
         'driver',
@@ -104,5 +104,13 @@ class Load extends Model
     public function dispatcher()
     {
         return $this->belongsTo('App\Dispatcher');
+    }
+
+    /**
+     * Get the drops for the load.
+     */
+    public function drops()
+    {
+        return $this->hasMany('App\Drop');
     }
 }
