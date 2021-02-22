@@ -81,6 +81,24 @@
                     <a class="dropdown-item" href="{{route('dispatchers.create')}}">New Dispatcher</a>
                 </div>
             </li>
+            @php
+                $changedLoads = \App\Load::where('changed', true)->get();
+            @endphp
+            <li class="nav-item dropdown">
+                <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    Changed Loads
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " onclick="addEditStop()" aria-hidden="true">
+                        {{count($changedLoads)}}
+                    </span>
+                </a>
+                @if(!$changedLoads->isEmpty())
+                    <div class="dropdown-menu">
+                        @foreach($changedLoads as $changedLoad)
+                            <a class="dropdown-item" href="{{route('loads.show', $changedLoad->id)}}">#{{$changedLoad->id}} changed</a>
+                        @endforeach
+                    </div>
+                @endif
+            </li>
             <li class="nav-item dropdown pull-right">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <div class="dropdown-menu">

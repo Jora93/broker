@@ -79,7 +79,8 @@ class Load extends Model
         'cost_per_stop',
         'miles',
         'fuel_surcharge_type',
-        'driver_advance_gross'
+        'driver_advance_gross',
+        'changed'
     ];
 
     /**
@@ -112,5 +113,13 @@ class Load extends Model
     public function drops()
     {
         return $this->hasMany('App\Drop');
+    }
+
+    /**
+     * Get the history for the Load.
+     */
+    public function histories()
+    {
+        return $this->hasMany('App\LoadHistory');
     }
 }

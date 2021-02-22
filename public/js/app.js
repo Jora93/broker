@@ -68820,7 +68820,7 @@ $(document).ready(function () {
       data: values,
       success: function success(result) {
         if (result.success) {
-          location.href = location.origin + 'loads';
+          location.href = location.origin + '/loads';
         }
 
         if (result.error) {
@@ -68962,15 +68962,30 @@ $(document).ready(function () {
       }
     });
   }); //Edit Load end -----------------------
-  // $.ajax({
-  //     type: "POST",
-  //     url: "http://broker.me/dispatchers",
-  //     data: {category:'client', type:'premium'},
-  //     success: function(result){
-  //         debugger
-  //     }
-  // });
+  //review change
 
+  $('.load-history-review').click(function () {
+    var id = $(this).data('id');
+    var reviewer_id = $(this).data('reviewer-id');
+    $.ajax({
+      type: "PATCH",
+      url: "http://broker.me/load-history/".concat(id),
+      data: {
+        reviewer_id: reviewer_id,
+        confirmed: 1
+      },
+      success: function success(result) {
+        if (result.success) {
+          $("#history-".concat(result.id)).html('Confirmed');
+          $("#history-".concat(result.id)).addClass('btn-success');
+
+          if (result.changedLoadsExist === false) {
+            $('.header-notifications-item').removeClass('has-notification');
+          }
+        }
+      }
+    });
+  });
   $(".phoneMask").mask('(000) 000-00000000000000');
 });
 

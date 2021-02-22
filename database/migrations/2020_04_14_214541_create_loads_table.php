@@ -77,6 +77,7 @@ class CreateLoadsTable extends Migration
             $table->string('miles');
             $table->string('fuel_surcharge_type');
             $table->string('driver_advance_gross');
+            $table->boolean('changed')->default(false);
 
             $table->foreign('carrier_id')->references('id')->on('carriers')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

@@ -26,6 +26,12 @@
   background: #d0e9c6;
 }
 
+.carriers-show .nav-tabs #history-tab,
+.customers-show .nav-tabs #history-tab,
+.loads-show .nav-tabs #history-tab {
+  background: #dfcceb;
+}
+
 .carriers-show .nav-tabs #documents-tab,
 .customers-show .nav-tabs #documents-tab,
 .loads-show .nav-tabs #documents-tab {
@@ -44,6 +50,12 @@
   font-weight: bold;
   color: white;
   cursor: pointer !important;
+}
+
+.carriers-show .history-card-header,
+.customers-show .history-card-header,
+.loads-show .history-card-header {
+  background: #dfcceb !important;
 }
 
 .carriers-show .tab-pane,
@@ -108,5 +120,9 @@
 
 #createLoadModal .modal-dialog {
   position: initial;
+}
+
+.has-notification {
+  color: red;
 }
 

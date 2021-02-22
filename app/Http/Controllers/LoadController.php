@@ -8,7 +8,9 @@ use App\Customer;
 use App\Carrier;
 use App\Load;
 use App\Drop;
+use App\LoadHistory;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class LoadController extends Controller
 {
@@ -152,9 +154,14 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Load $load)
     {
-        //
+        $load->drops;
+        $load->histories;
+        return response()->view('load.show', [
+            'load' => $load,
+            'carriers' => Carrier::get() //TODO make ajax elastic search
+        ], 200);
     }
 
     /**
@@ -169,6 +176,7 @@ class LoadController extends Controller
         $load->drops;
         return response()->view('load.edit', [
             'load' => $load,
+            'dispatchers' => Dispatcher::select('id', 'full_name')->get(),
             'carriers' => Carrier::get() //TODO make ajax elastic search
         ], 200);
     }
@@ -273,7 +281,10 @@ class LoadController extends Controller
         if (!empty($newDrops)) {
             Drop::insert($newDrops);
         }
-
+        if ($data['shipper_value'] != $load->shipper_value || $data['carrier_id'] != $load->carrier_id || $data['carrier_id'] != $load->customer_id) {
+            $this->createHistory($data, $load);
+            $data['changed'] = 1;
+        }
         $load->update($data);
 
         return response()->json(['success' => 'Load Created successfully']);
@@ -316,5 +327,24 @@ class LoadController extends Controller
         $loads = $loads->with(['customer','carrier'])->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
         return view('load.index', compact('loads', 'data', 'dispatchers'));
+    }
+
+    private function createHistory($data, $load)
+    {
+        $info = Auth::user()->email.' changed ';
+        if ($data['shipper_value'] != $load->shipper_value) {
+            $info = $info.'Value from '.$load->shipper_value.' to '.$data['shipper_value'].', ';
+        }
+        if ($data['carrier_id'] != $load->carrier_id) {
+            $info = $info.'Carrier Id from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
+        }
+        if ($data['carrier_id'] != $load->customer_id) {
+            $info = $info.'Customer ID from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
+        }
+        LoadHistory::create([
+            'load_id' => $load->id,
+            'user_id' => Auth::user()->id,
+            'info' => $info
+        ]);
     }
 }

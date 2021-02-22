@@ -4,22 +4,10 @@
 </script>
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
-        <form method="post" id="loadEditForm" action="{{ url('/loads/'.$load->id) }}" class="col-sm-12">
-            @method('PATCH')
+{{--        <form method="" action="" class="col-sm-12">--}}
             @csrf
-            <input type="hidden" id="load_id" name="Load_id" value="{{$load->id}}">
-            <input type="hidden" name="customer_id" value="{{$load->customer->id}}">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item col-sm-2 load-tab">
                     <a class="nav-link active" id="load-tab" data-toggle="tab" href="#load" role="tab" aria-controls="load" aria-selected="true">Load</a>
@@ -27,6 +15,11 @@
                 <li class="nav-item col-sm-2 customers-tab">
                     <a class="nav-link" id="customer-tab" data-toggle="tab" href="#customers" role="tab" aria-controls="customers" aria-selected="false">Customers</a>
                 </li>
+                @if(count($load->histories))
+                    <li class="nav-item col-sm-2 history-tab">
+                        <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
+                    </li>
+                @endif
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="load" role="tabpanel" aria-labelledby="load-tab">
@@ -42,19 +35,19 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">*Company</label>
-                                                            <input class="form-control" placeholder="Enter company" required="required" type="text" name="shipper_company" value="{{old('shipper_company', $load->shipper_company)}}">
+                                                            <input disabled class="form-control" placeholder="Enter company" required="required" type="text" name="shipper_company" value="{{old('shipper_company', $load->shipper_company)}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Phone</label>
-                                                            <input type="text" name="shipper_phone" value="{{old('shipper_phone', $load->shipper_phone)}}" class="form-control phoneMask" placeholder="Enter phone number">
+                                                            <input disabled type="text" name="shipper_phone" value="{{old('shipper_phone', $load->shipper_phone)}}" class="form-control phoneMask" placeholder="Enter phone number">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Extension</label>
-                                                            <input type="text" name="shipper_phone_extension" value="{{old('shipper_phone_extension', $load->shipper_phone_extension)}}" class="form-control" placeholder="Enter extension">
+                                                            <input disabled type="text" name="shipper_phone_extension" value="{{old('shipper_phone_extension', $load->shipper_phone_extension)}}" class="form-control" placeholder="Enter extension">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -63,13 +56,13 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Location PoC</label>
-                                                            <input type="text" name="shipper_location_POS" value="{{old('shipper_location_POS', $load->shipper_location_POS)}}" class="form-control" placeholder="Enter point of contact">
+                                                            <input disabled type="text" name="shipper_location_POS" value="{{old('shipper_location_POS', $load->shipper_location_POS)}}" class="form-control" placeholder="Enter point of contact">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Customer PoC</label>
-                                                            <input type="text" name="shipper_customer_POS" value="{{old('shipper_customer_POS', $load->shipper_customer_POS)}}" class="form-control" placeholder="Enter point of customer">
+                                                            <input disabled type="text" name="shipper_customer_POS" value="{{old('shipper_customer_POS', $load->shipper_customer_POS)}}" class="form-control" placeholder="Enter point of customer">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -78,14 +71,14 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div id="ship_location_address1Group" class="form-group">
                                                             <label class="control-label">Address 1</label>
-                                                            <input type="text" name="shipper_address1" value="{{old('shipper_address1', $load->shipper_address1)}}" class="form-control" placeholder="Enter address">
+                                                            <input disabled type="text" name="shipper_address1" value="{{old('shipper_address1', $load->shipper_address1)}}" class="form-control" placeholder="Enter address">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Fax</label>
-                                                            <input class="form-control phoneMask" placeholder="Enter fax number" type="text" name="shipper_fax" value="{{old('shipper_fax', $load->shipper_fax)}}">
+                                                            <input disabled class="form-control phoneMask" placeholder="Enter fax number" type="text" name="shipper_fax" value="{{old('shipper_fax', $load->shipper_fax)}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,33 +87,20 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Address 2</label>
-                                                            <input type="text" name="shipper_address2" value="{{old('shipper_address2', $load->shipper_address2)}}" class="form-control" placeholder="Enter address">
+                                                            <input disabled type="text" name="shipper_address2" value="{{old('shipper_address2', $load->shipper_address2)}}" class="form-control" placeholder="Enter address">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Quantity</label>
-                                                            <input type="text" name="shipper_quantity" value="{{old('shipper_quantity', $load->shipper_quantity)}}" class="form-control editMainField" placeholder="Enter quantity">
+                                                            <input disabled type="text" name="shipper_quantity" value="{{old('shipper_quantity', $load->shipper_quantity)}}" class="form-control editMainField" placeholder="Enter quantity">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-xs-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Type</label>
-                                                            <select name="shipper_type" value="{{old('shipper_type', $load->shipper_type)}}" class="form-control">
-                                                                <option>Select Type</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Boxes') selected @endif value="Boxes">Boxes</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Carrier Fee') selected @endif value="Carrier Fee">Carrier Fee</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Cartons') selected @endif value="Cartons">Cartons</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'CWT') selected @endif value="CWT">CWT</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Flat Rate') selected @endif value="Flat Rate">Flat Rate</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Miles') selected @endif value="Miles">Miles</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Pallets') selected @endif value="Pallets">Pallets</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Pounds') selected @endif value="Pounds">Pounds</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Strawberries') selected @endif value="Strawberries">Strawberries</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Tons') selected @endif value="Tons">Tons</option>
-                                                                <option @if(old('shipper_type', $load->shipper_type) === 'Truck Ordered/Not Used') selected @endif value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
+                                                            <input disabled name="shipper_type" value="{{$load->shipper_type}}" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -129,7 +109,7 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">City</label>
-                                                            <input class="form-control" placeholder="Enter billing city" type="text" name="shipper_city" value="{{old('shipper_city', $load->shipper_city)}}">
+                                                            <input disabled class="form-control" placeholder="Enter billing city" type="text" name="shipper_city" value="{{old('shipper_city', $load->shipper_city)}}">
                                                         </div>
                                                     </div>
 
@@ -137,7 +117,7 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Weight</label>
-                                                            <input type="text" name="shipper_weight" value="{{old('shipper_weight', $load->shipper_weight)}}" class="form-control" placeholder="Enter weight">
+                                                            <input disabled type="text" name="shipper_weight" value="{{old('shipper_weight', $load->shipper_weight)}}" class="form-control" placeholder="Enter weight">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,7 +126,7 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">State/Province</label><br>
-                                                            <select name="shipper_state" value="{{old('shipper_state', $load->shipper_state)}}" class="selectpicker" required="true" data-live-search="true">
+                                                            <select disabled name="shipper_state" value="{{old('shipper_state', $load->shipper_state)}}" class="selectpicker" required="true" data-live-search="true">
                                                                 <option disabled selected value>Select State/Province</option>
                                                                 <option @if(old('shipper_state', $load->shipper_state) === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                                 <option @if(old('shipper_state', $load->shipper_state) === 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -210,7 +190,7 @@
 
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input type="number" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
+                                                                <input disabled type="number" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +200,7 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label" for="shipper_zip_code">Zip Code</label>
-                                                            <input class="form-control requiredInputCustomer" placeholder="Enter zip code" type="text" name="shipper_zip_code" value="{{old('shipper_zip_code', $load->shipper_zip_code)}}">
+                                                            <input disabled class="form-control requiredInputCustomer" placeholder="Enter zip code" type="text" name="shipper_zip_code" value="{{old('shipper_zip_code', $load->shipper_zip_code)}}">
                                                         </div>
                                                     </div>
 
@@ -228,7 +208,7 @@
                                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                                             <label class="control-label">Pickup Date</label>
                                                             <div class="input-group date datePicker defaultDatePicker">
-                                                                <input class="form-control" placeholder="Enter pichup date"  type="date" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
+                                                                <input disabled class="form-control" placeholder="Enter pichup date"  type="date" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -238,14 +218,14 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Pickup #</label>
-                                                            <input type="text" name="shipper_pickup_number" value="{{old('shipper_pickup_number', $load->shipper_pickup_number)}}" class="form-control editMainField" placeholder="Enter pickup number">
+                                                            <input disabled type="text" name="shipper_pickup_number" value="{{old('shipper_pickup_number', $load->shipper_pickup_number)}}" class="form-control editMainField" placeholder="Enter pickup number">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Pickup Time</label>
-                                                            <input type="time" name="shipper_pickup_time" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time', $load->shipper_pickup_time)}}">
+                                                            <input disabled type="time" name="shipper_pickup_time" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time', $load->shipper_pickup_time)}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,26 +234,9 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Pickup Note</label>
-                                                            <textarea class="form-control editMainField" name="shipper_notes" placeholder="Enter pickup notes">{{old('shipper_notes', $load->shipper_notes)}}</textarea>
+                                                            <textarea disabled class="form-control editMainField" name="shipper_notes" placeholder="Enter pickup notes">{{old('shipper_notes', $load->shipper_notes)}}</textarea>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="tab-item">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <span>Stops //todo add functionality later</span>
-                                                <button style="float: right" type="button" class="btn btn-primary" aria-label="Left Align">
-                                                    <span style="cursor:pointer" class="glyphicon glyphicon-plus pull-right" onclick="addEditStop()" aria-hidden="true"></span>
-                                                </button>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <p class="noEntitiesDefined">No stops have been added.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,8 +245,8 @@
                                 <div class="col-sm-12" id="consigneeContainer">
                                     @foreach($load->drops as $key => $drop)
                                         <div class="tab-item" id="consigneeItem">
-                                            <input type="hidden" name='consignee[{{$key}}][is_new]' class="is_new" value="false">
-                                            <input type="hidden" name='consignee[{{$key}}][id]'  value="{{$drop->id}}">
+                                            <input disabled type="hidden" name='consignee[{{$key}}][is_new]' class="is_new" value="false">
+                                            <input disabled type="hidden" name='consignee[{{$key}}][id]'  value="{{$drop->id}}">
                                             <div class="card">
                                                 <div class="card-header">Consignee Information</div>
                                                 <div class="card-body">
@@ -292,7 +255,7 @@
                                                             <div class="form-group">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Company</label>
-                                                                    <input class="form-control consignee_company" placeholder="Enter company" required="required" type="text" name="consignee[{{$key}}][company]" value="{{$drop->company}}">
+                                                                    <input disabled class="form-control consignee_company" placeholder="Enter company" required="required" type="text" name="consignee[{{$key}}][company]" value="{{$drop->company}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -300,13 +263,13 @@
                                                         <div class="col-sm-3 col-xs-3">
                                                             <div class="form-group">
                                                                 <label class="control-label" for="customer_phone">Phone</label>
-                                                                <input class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone" required="required" type="text" name="consignee[{{$key}}][phone]" value="{{$drop->phone}}">
+                                                                <input disabled class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone" required="required" type="text" name="consignee[{{$key}}][phone]" value="{{$drop->phone}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 col-xs-3">
                                                             <div class="form-group">
                                                                 <label class="control-label">Extension</label>
-                                                                <input class="form-control consignee_phone_extension" placeholder="Enter extension" type="text" name="consignee[{{$key}}][phone_extension]" value="{{$drop->phone_extension}}">
+                                                                <input disabled class="form-control consignee_phone_extension" placeholder="Enter extension" type="text" name="consignee[{{$key}}][phone_extension]" value="{{$drop->phone_extension}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -315,13 +278,13 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Contact</label>
-                                                                <input type="text" name="consignee[{{$key}}][contact_name]" value="{{$drop->contact_name}}" class="form-control consignee_contact_name" placeholder="Enter point of contact" tabindex="234">
+                                                                <input disabled type="text" name="consignee[{{$key}}][contact_name]" value="{{$drop->contact_name}}" class="form-control consignee_contact_name" placeholder="Enter point of contact" tabindex="234">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Fax</label>
-                                                                <input type="text" name="consignee[{{$key}}][fax]" value="{{$drop->fax}}" class="form-control editMainField phoneMask consignee_fax" placeholder="Enter fax number">
+                                                                <input disabled type="text" name="consignee[{{$key}}][fax]" value="{{$drop->fax}}" class="form-control editMainField phoneMask consignee_fax" placeholder="Enter fax number">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -330,13 +293,13 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Address 1</label>
-                                                                <input type="text" name="consignee[{{$key}}][address1]" value="{{$drop->address1}}" class="form-control consignee_address1" placeholder="Enter address">
+                                                                <input disabled type="text" name="consignee[{{$key}}][address1]" value="{{$drop->address1}}" class="form-control consignee_address1" placeholder="Enter address">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Delivery #</label>
-                                                                <input type="text" name="consignee[{{$key}}][delivered_number]" value="{{$drop->delivered_number}}" class="consignee_delivered_number form-control editMainField" placeholder="Enter delivery number">
+                                                                <input disabled type="text" name="consignee[{{$key}}][delivered_number]" value="{{$drop->delivered_number}}" class="consignee_delivered_number form-control editMainField" placeholder="Enter delivery number">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -345,14 +308,14 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Address 2</label>
-                                                                <input type="text" name="consignee[{{$key}}][address2]" value="{{$drop->address2}}" class="consignee_address2 form-control" placeholder="Enter address">
+                                                                <input disabled type="text" name="consignee[{{$key}}][address2]" value="{{$drop->address2}}" class="consignee_address2 form-control" placeholder="Enter address">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group deliveryLocationPickupAtMsg-1613">
                                                                 <label class="control-label">Delivery Date</label>
                                                                 <div class="input-group date datePicker defaultDatePicker">
-                                                                    <input class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="date" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
+                                                                    <input disabled class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="date" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -362,13 +325,13 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
                                                                 <label class="control-label">City</label>
-                                                                <input class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
+                                                                <input disabled class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Delivery Time</label>
-                                                                <input type="time" name="consignee[{{$key}}][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{$drop->delivery_time}}">
+                                                                <input disabled type="time" name="consignee[{{$key}}][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{$drop->delivery_time}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -377,7 +340,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">State/Province</label><br>
-                                                                <select name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
+                                                                <select disabled name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
                                                                     <option disabled selected value>Select State/Province</option>
                                                                     <option @if($drop->delivery_state === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                                     <option @if($drop->delivery_state === 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -437,7 +400,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <label class="control-label">BOL Payment Term</label>
                                                             <div class="form-group">
-                                                                <select name="consignee[{{$key}}][BOL_payment_term]" value="{{$drop->BOL_payment_term}}" class="consignee_BOL_payment_term form-control">
+                                                                <select disabled name="consignee[{{$key}}][BOL_payment_term]" value="{{$drop->BOL_payment_term}}" class="consignee_BOL_payment_term form-control">
                                                                     <option disabled selected value>--Select BOL Payment Term--</option>
                                                                     <option  @if($drop->BOL_payment_term === 'Prepaid') selected @endif value="Prepaid">Prepaid</option>
                                                                     <option  @if($drop->BOL_payment_term === 'Collect') selected @endif value="Collect">Collect</option>
@@ -452,13 +415,13 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Zip Code</label><br>
                                                                 <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                                                            <input type="text" name="consignee[{{$key}}][delivery_location_zip_code]" value="{{$drop->delivery_location_zip_code}}" class="consignee_delivery_location_zip_code form-control editMainField tt-input" placeholder="Enter zip code">
+                                                            <input disabled type="text" name="consignee[{{$key}}][delivery_location_zip_code]" value="{{$drop->delivery_location_zip_code}}" class="consignee_delivery_location_zip_code form-control editMainField tt-input" placeholder="Enter zip code">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">BOL #</label>
-                                                                <input type="text" name="consignee[{{$key}}][delivery_location_bol_number]" value="{{$drop->delivery_location_bol_number}}" class="consignee_delivery_location_bol_number form-control editMainField" placeholder="Enter BOL #" >
+                                                                <input disabled type="text" name="consignee[{{$key}}][delivery_location_bol_number]" value="{{$drop->delivery_location_bol_number}}" class="consignee_delivery_location_bol_number form-control editMainField" placeholder="Enter BOL #" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -474,7 +437,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="freight-class-td-width">
-                                                                        <select name="consignee[{{$key}}][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">
+                                                                        <select disabled name="consignee[{{$key}}][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">
                                                                             <option value="">Select Freight Class</option>
                                                                             <option @if($drop->freight_class === 'FAK') selected @endif value="FAK">FAK</option>
                                                                             <option @if($drop->freight_class === '50') selected @endif value="50">50</option>
@@ -497,16 +460,16 @@
                                                                             <option @if($drop->freight_class === '500') selected @endif value="500">500</option></select>
                                                                     </td>
                                                                     <td class="nmfc-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][national_motor_freight_class]" value="{{$drop->national_motor_freight_class}}" class="consignee_national_motor_freight_class form-control">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][national_motor_freight_class]" value="{{$drop->national_motor_freight_class}}" class="consignee_national_motor_freight_class form-control">
                                                                     </td>
                                                                     <td class="prod-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][bol_product]" value="{{$drop->bol_product}}" class="consignee_bol_product form-control">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][bol_product]" value="{{$drop->bol_product}}" class="consignee_bol_product form-control">
                                                                     </td>
                                                                     <td class="qty-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][delivery_location_quantity]" value="{{$drop->delivery_location_quantity}}" class="consignee_delivery_location_quantity form-control">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][delivery_location_quantity]" value="{{$drop->delivery_location_quantity}}" class="consignee_delivery_location_quantity form-control">
                                                                     </td>
                                                                     <td class="type-td-width">
-                                                                        <select name="consignee[{{$key}}][item_type]" value="{{$drop->item_type}}" class="consignee_item_type form-control">
+                                                                        <select disabled name="consignee[{{$key}}][item_type]" value="{{$drop->item_type}}" class="consignee_item_type form-control">
                                                                             <option value="">Select Type</option>
                                                                             <option @if($drop->item_type === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
                                                                             <option @if($drop->item_type === 'Boxes') selected @endif  value="Boxes">Boxes</option>
@@ -531,21 +494,21 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="length-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][length]" value="{{$drop->length}}" class="consignee_length form-control" tabindex="247">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][length]" value="{{$drop->length}}" class="consignee_length form-control" tabindex="247">
                                                                     </td>
                                                                     <td class="width-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][width]" value="{{$drop->width}}" class="consignee_width form-control" tabindex="248">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][width]" value="{{$drop->width}}" class="consignee_width form-control" tabindex="248">
                                                                     </td>
                                                                     <td class="height-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][height]" value="{{$drop->height}}" class="consignee_height form-control" tabindex="249">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][height]" value="{{$drop->height}}" class="consignee_height form-control" tabindex="249">
                                                                     </td>
                                                                     <td class="weight-td-width">
-                                                                        <input type="text" name="consignee[{{$key}}][delivery_location_weight]" value="{{$drop->delivery_location_weight}}" class="consignee_delivery_location_weight form-control" tabindex="250">
+                                                                        <input disabled type="text" name="consignee[{{$key}}][delivery_location_weight]" value="{{$drop->delivery_location_weight}}" class="consignee_delivery_location_weight form-control" tabindex="250">
                                                                     </td>
                                                                     <td class="haz-mat-td-width">
                                                                         <div class="checkbox">
                                                                             <label>
-                                                                                <input type="checkbox" value="1" name="consignee[{{$key}}][haz_mat]" class="consignee_haz_mat" value="{{$drop->haz_mat}}" id="carrier_use_dba_name">
+                                                                                <input disabled type="checkbox" value="1" name="consignee[{{$key}}][haz_mat]" class="consignee_haz_mat" value="{{$drop->haz_mat}}" id="carrier_use_dba_name">
                                                                             </label>
                                                                         </div>
                                                                     </td>
@@ -590,7 +553,7 @@
                                                         <div class="form-group carrierMsg">
                                                             <label class="control-label">Carrier</label>
                                                             {{-- todo poxel ajax searchov--}}
-                                                            <select id="dispatcherUserSelect" name="carrier_id" class="form-control editMainField" tabindex="66">
+                                                            <select disabled id="dispatcherUserSelect" name="carrier_id" class="form-control editMainField" tabindex="66">
                                                                 <option value="">-- No Carrier Selected --</option>
                                                                 @foreach($carriers as $carrier)
                                                                     <option @if(old('carrier_id', $load->carrier_id) == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}}</option>
@@ -602,12 +565,9 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Dispatcher</label>
                                                             {{-- todo avelacnel dispatcherner --}}
-                                                            <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">
+                                                            <select disabled id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">
                                                                 <option value="">-- No Dispatcher Selected --</option>
-{{--                                                                <option @if(old('dispatcher_id', $load->dispatcher_id) == 1) selected @endif value="1">Fake dispatcher</option>--}}
-                                                                @foreach($dispatchers as $dispatcher)
-                                                                    <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
-                                                                @endforeach
+                                                                <option selected value="1">{{$load->dispatcher->full_name}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -616,14 +576,14 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Truck #</label>
-                                                            <input type="text" name="truck_number" value="{{old('truck_number', $load->truck_number)}}" class="form-control editMainField" placeholder="Enter carrier truck number" tabindex="264">
+                                                            <input disabled type="text" name="truck_number" value="{{old('truck_number', $load->truck_number)}}" class="form-control editMainField" placeholder="Enter carrier truck number" tabindex="264">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Trailer #</label>
-                                                            <input type="text" name="trailer_number" value="{{old('trailer_number', $load->trailer_number)}}" class="form-control editMainField" placeholder="Enter carrier trailer number" tabindex="267">
+                                                            <input disabled type="text" name="trailer_number" value="{{old('trailer_number', $load->trailer_number)}}" class="form-control editMainField" placeholder="Enter carrier trailer number" tabindex="267">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -632,14 +592,14 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Driver</label>
-                                                            <input type="text" name="driver" value="{{old('driver', $load->driver)}}" class="form-control editMainField" placeholder="Enter carrier driver name" tabindex="265">
+                                                            <input disabled type="text" name="driver" value="{{old('driver', $load->driver)}}" class="form-control editMainField" placeholder="Enter carrier driver name" tabindex="265">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Driver Cell #</label>
-                                                            <input type="text" name="driver_number" value="{{old('driver_number', $load->driver_number)}}" class="form-control editMainField phoneMask" placeholder="Enter carrier driver number" tabindex="268">
+                                                            <input disabled type="text" name="driver_number" value="{{old('driver_number', $load->driver_number)}}" class="form-control editMainField phoneMask" placeholder="Enter carrier driver number" tabindex="268">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -648,13 +608,13 @@
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Pro #</label>
-                                                            <input type="text" name="pro_number" value="{{old('pro_number', $load->pro_number)}}" class="form-control editMainField" placeholder="Enter carrier pro number" tabindex="266">
+                                                            <input disabled type="text" name="pro_number" value="{{old('pro_number', $load->pro_number)}}" class="form-control editMainField" placeholder="Enter carrier pro number" tabindex="266">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Driver Email</label>
-                                                            <input type="email" name="driver_email" value="{{old('driver_email', $load->driver_email)}}" class="form-control editMainField" placeholder="Enter the driver's email address" tabindex="269">
+                                                            <input disabled type="email" name="driver_email" value="{{old('driver_email', $load->driver_email)}}" class="form-control editMainField" placeholder="Enter the driver's email address" tabindex="269">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -681,7 +641,7 @@
                                                     <tbody>
                                                     <tr class="carrierCostRow">
                                                         <td class="unitColumn">
-                                                            <select name="carrier_costs_units_id" class=" form-control editMainField input-sm" tabindex="73">
+                                                            <select disabled name="carrier_costs_units_id" class=" form-control editMainField input-sm" tabindex="73">
                                                                 <option value="10613">Blueberries</option>
                                                                 <option value="10612">Boxes</option>
                                                                 <option value="10907">Carrier Fee</option>
@@ -697,12 +657,12 @@
                                                             </select>
                                                         </td>
                                                         <td class="qtyColumn">
-                                                            <input name="carrier_costs_quantity" type="text" value="{{old('carrier_costs_quantity', $load->carrier_costs_quantity)}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
+                                                            <input disabled name="carrier_costs_quantity" type="text" value="{{old('carrier_costs_quantity', $load->carrier_costs_quantity)}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
                                                         </td>
                                                         <td class="amtColumn">
                                                             <div class="input-group carrierCostInput">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input name="carrier_costs_rate_per_unit" value="{{old('carrier_costs_rate_per_unit', $load->carrier_costs_rate_per_unit)}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
+                                                                <input disabled name="carrier_costs_rate_per_unit" value="{{old('carrier_costs_rate_per_unit', $load->carrier_costs_rate_per_unit)}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
                                                             </div>
                                                         </td>
                                                         <td class="suggestColumn">
@@ -723,12 +683,12 @@
                                                     <tr class="carrierStopsRow">
                                                         <td></td>
                                                         <td>
-                                                            <input name="stops" type="number" min="0" value="{{old('stops', $load->stops)}}" class=" form-control editMainField input-sm" tabindex="77">
+                                                            <input disabled name="stops" type="number" min="0" value="{{old('stops', $load->stops)}}" class=" form-control editMainField input-sm" tabindex="77">
                                                         </td>
                                                         <td>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input name="cost_per_stop" type="text" class=" form-control input-sm" value="{{old('cost_per_stop', $load->cost_per_stop)}}"  tabindex="78">
+                                                                <input disabled name="cost_per_stop" type="text" class=" form-control input-sm" value="{{old('cost_per_stop', $load->cost_per_stop)}}"  tabindex="78">
                                                             </div>
                                                         </td>
                                                         <td></td>
@@ -747,10 +707,10 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input name="miles" type="number" min="0" value="{{old('miles', $load->miles)}}" class="form-control input-sm">
+                                                            <input disabled name="miles" type="number" min="0" value="{{old('miles', $load->miles)}}" class="form-control input-sm">
                                                         </td>
                                                         <td>
-                                                            <select name="fuel_surcharge_type" class="form-control input-sm">
+                                                            <select disabled name="fuel_surcharge_type" class="form-control input-sm">
                                                                 <option selected="">None</option>
                                                                 <option value="Flat Rate">Flat Rate</option>
                                                                 <option value="Per Mile">Per Mile</option>
@@ -760,10 +720,10 @@
                                                         <td>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input name="fuel_surcharge_rate_dollar" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_dollar', $load->fuel_surcharge_rate_dollar)}}" disabled="">
+                                                                <input disabled name="fuel_surcharge_rate_dollar" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_dollar', $load->fuel_surcharge_rate_dollar)}}" disabled="">
                                                             </div>
                                                             <div class="input-group" style="display:none">
-                                                                <input name="fuel_surcharge_rate_percentage" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_percentage', $load->fuel_surcharge_rate_percentage)}}" disabled="">
+                                                                <input disabled name="fuel_surcharge_rate_percentage" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_percentage', $load->fuel_surcharge_rate_percentage)}}" disabled="">
                                                                 <span class="input-group-addon">%</span>
                                                             </div>
                                                         </td>
@@ -797,7 +757,7 @@
                                                         <td class="grossColumn">
                                                             <div class="input-group" style="float: right">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input name="driver_advance_gross" type="number" style="color: red" class="form-control input-sm" value="{{old('driver_advance_gross', $load->driver_advance_gross)}}">
+                                                                <input disabled name="driver_advance_gross" type="number" style="color: red" class="form-control input-sm" value="{{old('driver_advance_gross', $load->driver_advance_gross)}}">
                                                             </div>
                                                         </td>
                                                         <td></td>
@@ -828,9 +788,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12"><br>
-                        <button type="submit" class="btn btn-primary">Create Load</button>
                     </div>
                 </div>
 
@@ -930,7 +887,52 @@
                         </div>
                     </div>
                 </div>
+
+                @if(count($load->histories))
+                <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                    <div id="history" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="card-header history-card-header">History</div>
+                                            <div class="card-body">
+                                                @foreach($load->histories as $history)
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <div class="entityLabelValue">
+                                                                <div class="entityValue">{{$history->created_at}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="entityLabelValue">
+                                                                <div class="entityValue">{{$history->info}}</div>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-md-2">
+                                                                <div class="entityLabelValue">
+                                                                    @if(!$history->confirmed)
+                                                                        <button class="btn btn-primary load-history-review" id="history-{{$history->id}}" data-id="{{$history->id}}" data-reviewer-id="{{Auth::user()->id}}">Confirm</button>
+                                                                    @else
+                                                                        Confirmed by {{$history->reviewer->email}}
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
+                                                    </div>
+                                                    <hr>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
-        </form>
+{{--        </form>--}}
     </div>
 @endsection

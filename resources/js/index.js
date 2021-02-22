@@ -140,7 +140,7 @@ $(document).ready(function () {
             data: values,
             success: function (result) {
                 if(result.success) {
-                    location.href = location.origin + 'loads';
+                    location.href = location.origin + '/loads';
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();
@@ -268,15 +268,29 @@ $(document).ready(function () {
 
     //Edit Load end -----------------------
 
+    //review change
+    $('.load-history-review').click(function() {
+        var id = $(this).data('id');
+        var reviewer_id = $(this).data('reviewer-id');
+        $.ajax({
+            type: "PATCH",
+            url: `http://broker.me/load-history/${id}`,
+            data: {
+                reviewer_id: reviewer_id,
+                confirmed: 1
+            },
+            success: function (result) {
+                if(result.success) {
+                    $(`#history-${result.id}`).html('Confirmed');
+                    $(`#history-${result.id}`).addClass('btn-success');
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: "http://broker.me/dispatchers",
-    //     data: {category:'client', type:'premium'},
-    //     success: function(result){
-    //         debugger
-    //     }
-    // });
+                    if (result.changedLoadsExist === false) {
+                        $('.header-notifications-item').removeClass('has-notification');
+                    }
+                }
+            }
+        });
+    });
 
     $(".phoneMask").mask('(000) 000-00000000000000');
 });

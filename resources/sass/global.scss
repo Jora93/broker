@@ -21,6 +21,9 @@
         #customer-tab {
             background: #d0e9c6;
         }
+        #history-tab {
+            background: #dfcceb;
+        }
         #documents-tab {
             background: #8a6d3b;
         }
@@ -33,6 +36,10 @@
             color: white;
             cursor: pointer !important;
         }
+    }
+
+    .history-card-header {
+        background: #dfcceb !important;
     }
 
     .tab-pane {
@@ -107,4 +114,8 @@
     .modal-dialog {
         position: initial;
     }
+}
+
+.has-notification {
+    color: red;
 }
