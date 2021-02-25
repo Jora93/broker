@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -157,5 +158,12 @@ class CustomerController extends Controller
 //        $customer->delete();
 //
 //        return back();
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        $data = Customer::where('company', 'LIKE', '%'.$keyword.'%')->get();
+        return response()->json(['data' => $data]);
     }
 }

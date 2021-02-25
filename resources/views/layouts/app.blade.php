@@ -116,6 +116,19 @@
                     </form>
                 </div>
             </li>
+            <div class="col-sm-6 col-xs-6" id="searchCustomers">
+                <form class="form-inline" id="customer_search">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label class="sr-only">Find Customer</label>
+                        <input class="form-control" type="text" id="" name="keyword" placeholder="Search for customers.." title="Type in a name">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">
+                        <span style="cursor:pointer" class="glyphicon glyphicon-search" onclick="addEditStop()" aria-hidden="true"></span>
+                    </button>
+                </form>
+                <ul id="myUL" class="col-sm-6 col-xs-6"></ul>
+            </div>
+
         @endguest
     </ul>
     <main class="py-4">

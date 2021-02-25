@@ -68985,6 +68985,30 @@ $(document).ready(function () {
         }
       }
     });
+  }); //find customers
+
+  $("#customer_search").submit(function (event) {
+    event.preventDefault();
+    var $inputs = $('#customer_search :input');
+    var values = {};
+    $inputs.each(function () {
+      values[this.name] = $(this).val();
+    });
+    $.ajax({
+      type: "GET",
+      url: "http://broker.me/customers-search",
+      data: values,
+      success: function success(result) {
+        if (result.data && result.data.length) {
+          var html = '';
+          result.data.forEach(function (item) {
+            var itemHtml = "<li><a href=\"customers/".concat(item.id, "\">").concat(item.company, "</a></li>");
+            html += itemHtml;
+          });
+          $('#myUL').append(html);
+        }
+      }
+    });
   });
   $(".phoneMask").mask('(000) 000-00000000000000');
 });
