@@ -32,6 +32,12 @@
   background: #dfcceb;
 }
 
+.carriers-show .nav-tabs #accounting-tab,
+.customers-show .nav-tabs #accounting-tab,
+.loads-show .nav-tabs #accounting-tab {
+  background: #999999;
+}
+
 .carriers-show .nav-tabs #documents-tab,
 .customers-show .nav-tabs #documents-tab,
 .loads-show .nav-tabs #documents-tab {
@@ -56,6 +62,12 @@
 .customers-show .history-card-header,
 .loads-show .history-card-header {
   background: #dfcceb !important;
+}
+
+.carriers-show .accounting-card-header,
+.customers-show .accounting-card-header,
+.loads-show .accounting-card-header {
+  background: #999999 !important;
 }
 
 .carriers-show .tab-pane,

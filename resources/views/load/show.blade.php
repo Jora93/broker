@@ -7,13 +7,57 @@
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
 {{--        <form method="" action="" class="col-sm-12">--}}
-            @csrf
+            <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
+                <div class="col-md-6" style="padding-right:0px;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Status</div>
+                            <input disabled value="{{$load->status}}" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Product</div>
+                            <input disabled id="product" name="product" title="general goods" value="{{$load->product}}" class="form-control input-sm editMainField">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">PO Number</div>
+                            <input disabled id="po_number" name="purchase_order_number" title="" value="{{$load->purchase_order_number}}" class="form-control input-sm editMainField">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-left:0px;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group carrierEquipmentMsg">
+                            <div class="entityLabel">Carrier Equipment</div>
+                            <input disabled value="{{$load->carrier_equipment_id}}" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Trailer Size</div>
+                            <input disabled value="{{$load->trailer_size}}" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Dispatcher</div>
+                            <input disabled value="{{$load->dispatcher->full_name}}" class="form-control input-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item col-sm-2 load-tab">
                     <a class="nav-link active" id="load-tab" data-toggle="tab" href="#load" role="tab" aria-controls="load" aria-selected="true">Load</a>
                 </li>
                 <li class="nav-item col-sm-2 customers-tab">
                     <a class="nav-link" id="customer-tab" data-toggle="tab" href="#customers" role="tab" aria-controls="customers" aria-selected="false">Customers</a>
+                </li>
+                <li class="nav-item col-sm-2 accounting-tab">
+                    <a class="nav-link" id="accounting-tab" data-toggle="tab" href="#accounting" role="tab" aria-controls="accounting" aria-selected="false">Accounting</a>
                 </li>
                 @if(count($load->histories))
                     <li class="nav-item col-sm-2 history-tab">
@@ -932,6 +976,116 @@
                     </div>
                 </div>
                 @endif
+                <div class="tab-pane fade" id="accounting" role="tabpanel" aria-labelledby="accounting-tab">
+                    <div id="accounting" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Customer Charges</div>
+                                            <div class="card-body">
+                                                <table id="carrierCostsTable" class="table table-striped carrierCostsTable costTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="unitColumn">Units</th>
+                                                        <th class="qtyColumn">Quantity</th>
+                                                        <th class="amtColumn">Cost/Unit</th>
+                                                        <th class="suggestColumn"></th>
+                                                        <th class="grossColumn">Gross</th>
+                                                        <th class="delColumn"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="carrierCostRow">
+                                                        <td class="unitColumn">
+                                                            <input disabled name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="qtyColumn">
+                                                            <input disabled name="customer_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="amtColumn">
+                                                            <div class="input-group carrierCostInput">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input disabled name="customer_costs_rate_per_unit" value="{{$load->customer_costs_rate_per_unit}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
+                                                            </div>
+                                                        </td>
+                                                        <td class="suggestColumn">
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span class="grossColumn carrierCostGrossColumn">$0.00</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation One
+                                                </a>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation Two
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Carrier Accounting Details</div>
+                                            <div class="card-body">
+                                                <table id="carrierCostsTable" class="table table-striped carrierCostsTable costTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="unitColumn">Units</th>
+                                                        <th class="qtyColumn">Quantity</th>
+                                                        <th class="amtColumn">Cost/Unit</th>
+                                                        <th class="suggestColumn"></th>
+                                                        <th class="grossColumn">Gross</th>
+                                                        <th class="delColumn"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="carrierCostRow">
+                                                        <td class="unitColumn">
+                                                            <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="qtyColumn">
+                                                            <input name="carrier_costs_quantity" type="text" value="'1.0'" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
+                                                        </td>
+                                                        <td class="amtColumn">
+                                                            <div class="input-group carrierCostInput">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input disabled name="carrier_costs_rate_per_unit" value="{{$load->carrier_costs_rate_per_unit}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
+                                                            </div>
+                                                        </td>
+                                                        <td class="suggestColumn">
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span class="grossColumn carrierCostGrossColumn">$0.00</span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation One
+                                                </a>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation Two
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 {{--        </form>--}}
     </div>

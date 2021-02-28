@@ -20,12 +20,102 @@
             @csrf
             <input type="hidden" id="load_id" name="Load_id" value="{{$load->id}}">
             <input type="hidden" name="customer_id" value="{{$load->customer->id}}">
+            <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
+                <div class="col-md-6" style="padding-right:0px;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Status</div>
+                            <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" onchange="return onStatusChange();" tabindex="1">
+                                <option @if($load->status == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
+                                <option @if($load->status == "Committed") selected @endif value="Committed">Committed</option>
+                                <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
+                                <option @if($load->status == "Dispatched") selected @endif value="Dispatched">Dispatched</option>
+                                <option @if($load->status == "Picked Up") selected @endif value="Picked Up">Picked Up</option>
+                                <option @if($load->status == "Enroute") selected @endif value="Enroute">Enroute</option>
+                                <option @if($load->status == "Delivered") selected @endif value="Delivered">Delivered</option>
+                                <option @if($load->status == "Ready to Invoice") selected @endif value="Ready to Invoice">Ready to Invoice</option>
+                                <option @if($load->status == "Paid Carrier") selected @endif value="Paid Carrier">Paid Carrier</option>
+                                <option @if($load->status == "Paid Customer") selected @endif value="Paid Customer">Paid Customer</option>
+                                <option @if($load->status == "Completed") selected @endif value="Completed">Completed</option>
+                                <option @if($load->status == "Voided") selected @endif value="Voided">Voided</option>
+                                <option @if($load->status == "Pending") selected @endif value="Pending">Pending</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Product</div>
+                            <input id="product" name="product" title="general goods" value="{{$load->product}}" class="form-control input-sm editMainField">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">PO Number</div>
+                            <input id="po_number" name="purchase_order_number" title="" value="{{$load->purchase_order_number}}" class="form-control input-sm editMainField">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding-left:0px;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group carrierEquipmentMsg">
+                            <div class="entityLabel">Carrier Equipment</div>
+                            <select name="carrier_equipment_id" class="form-control input-sm editMainField checkLaneMaster" tabindex="5">
+                                <option @if($load->carrier_equipment_id == "Straight Box Truck") selected @endif value="Straight Box Truck">Straight Box Truck</option>
+                                <option @if($load->carrier_equipment_id == "Van") selected @endif value="Van">Van</option>
+                                <option @if($load->carrier_equipment_id == "Van or Flatbed") selected @endif value="Van or Flatbed">Van or Flatbed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Trailer Size</div>
+                            <select name="trailer_size" class="form-control editMainField" tabindex="7">
+                                <option @if($load->trailer_size == "20' Std.") selected @endif value="20' Std.">20' Std.</option>
+                                <option @if($load->trailer_size == "20' H.C.") selected @endif value="20' H.C.">20' H.C.</option>
+                                <option @if($load->trailer_size == "22'") selected @endif value="22'">22'</option>
+                                <option @if($load->trailer_size == "24'") selected @endif value="24'">24'</option>
+                                <option @if($load->trailer_size == "26'") selected @endif value="26'" selected="">26'</option>
+                                <option @if($load->trailer_size == "28'") selected @endif value="28'">28'</option>
+                                <option @if($load->trailer_size == "32'") selected @endif value="32'">32'</option>
+                                <option @if($load->trailer_size == "40'") selected @endif value="40'">40'</option>
+                                <option @if($load->trailer_size == "40' Std.") selected @endif value="40' Std.">40' Std.</option>
+                                <option @if($load->trailer_size == "40' H.C.") selected @endif value="40' H.C.">40' H.C.</option>
+                                <option @if($load->trailer_size == "43'") selected @endif value="43'">43'</option>
+                                <option @if($load->trailer_size == "45'") selected @endif value="45'">45'</option>
+                                <option @if($load->trailer_size == "45' H.C.") selected @endif value="45' H.C.">45' H.C.</option>
+                                <option @if($load->trailer_size == "46'") selected @endif value="46'">46'</option>
+                                <option @if($load->trailer_size == "48'") selected @endif value="48'">48'</option>
+                                <option @if($load->trailer_size == "52'") selected @endif value="52'">52'</option>
+                                <option @if($load->trailer_size == "53'") selected @endif value="53'">53'</option>
+                                <option @if($load->trailer_size == "57'") selected @endif value="57'">57'</option>
+                                <option @if($load->trailer_size == "Oversize") selected @endif value="Oversize">Oversize</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Dispatcher</div>
+                            <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id')}}" class="form-control editMainField" tabindex="66">
+                                <option value="">-- No Dispatcher Selected --</option>
+                                @if(!$dispatchers->isEmpty())
+                                    @foreach($dispatchers as $dispatcher)
+                                        <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item col-sm-2 load-tab">
                     <a class="nav-link active" id="load-tab" data-toggle="tab" href="#load" role="tab" aria-controls="load" aria-selected="true">Load</a>
                 </li>
                 <li class="nav-item col-sm-2 customers-tab">
                     <a class="nav-link" id="customer-tab" data-toggle="tab" href="#customers" role="tab" aria-controls="customers" aria-selected="false">Customers</a>
+                </li>
+                <li class="nav-item col-sm-2 accounting-tab">
+                    <a class="nav-link" id="accounting-tab" data-toggle="tab" href="#accounting" role="tab" aria-controls="accounting" aria-selected="false">Accounting</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -922,6 +1012,116 @@
                                                         <div class="entityValue"><a href="https://maps.google.com/?q={{$load->customer->billing_address1}}" target="_blank">{{$load->customer->billing_address1}}</a></div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="accounting" role="tabpanel" aria-labelledby="accounting-tab">
+                    <div id="accounting" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Customer Charges</div>
+                                            <div class="card-body">
+                                                <table id="carrierCostsTable" class="table table-striped carrierCostsTable costTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="unitColumn">Units</th>
+                                                        <th class="qtyColumn">Quantity</th>
+                                                        <th class="amtColumn">Cost/Unit</th>
+                                                        <th class="suggestColumn"></th>
+                                                        <th class="grossColumn">Gross</th>
+                                                        <th class="delColumn"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="carrierCostRow">
+                                                        <td class="unitColumn">
+                                                            <input disabled name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="qtyColumn">
+                                                            <input disabled name="customer_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="amtColumn">
+                                                            <div class="input-group carrierCostInput">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input name="customer_costs_rate_per_unit" value="{{$load->customer_costs_rate_per_unit}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
+                                                            </div>
+                                                        </td>
+                                                        <td class="suggestColumn">
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span class="grossColumn carrierCostGrossColumn">$0.00</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation One
+                                                </a>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation Two
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Carrier Accounting Details</div>
+                                            <div class="card-body">
+                                                <table id="carrierCostsTable" class="table table-striped carrierCostsTable costTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="unitColumn">Units</th>
+                                                        <th class="qtyColumn">Quantity</th>
+                                                        <th class="amtColumn">Cost/Unit</th>
+                                                        <th class="suggestColumn"></th>
+                                                        <th class="grossColumn">Gross</th>
+                                                        <th class="delColumn"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr class="carrierCostRow">
+                                                        <td class="unitColumn">
+                                                            <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        </td>
+                                                        <td class="qtyColumn">
+                                                            <input name="carrier_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
+                                                        </td>
+                                                        <td class="amtColumn">
+                                                            <div class="input-group carrierCostInput">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input name="carrier_costs_rate_per_unit" value="{{$load->carrier_costs_rate_per_unit}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
+                                                            </div>
+                                                        </td>
+                                                        <td class="suggestColumn">
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <span class="grossColumn carrierCostGrossColumn">$0.00</span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation One
+                                                </a>
+                                                <a href="" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Carrier Confirmation Two
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

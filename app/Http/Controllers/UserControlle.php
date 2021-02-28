@@ -52,4 +52,9 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
         User::create($data);
     }
+
+    public function settingsShow(Request $request)
+    {
+        dd(22222222);
+    }
 }

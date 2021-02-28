@@ -19,6 +19,27 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
+                                    <label class="control-label">Status:</label>
+                                    <select class="form-control" name="status" tabindex="1">
+                                        <option value="">Select Status</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Committed") selected @endif value="Committed">Committed</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Assigned") selected @endif value="Assigned">Assigned</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Dispatched") selected @endif value="Dispatched">Dispatched</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Picked Up") selected @endif value="Picked Up">Picked Up</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Enroute") selected @endif value="Enroute">Enroute</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Delivered") selected @endif value="Delivered">Delivered</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Ready to Invoice") selected @endif value="Ready to Invoice">Ready to Invoice</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Paid Carrier") selected @endif value="Paid Carrier">Paid Carrier</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Paid Customer") selected @endif value="Paid Customer">Paid Customer</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Completed") selected @endif value="Completed">Completed</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Voided") selected @endif value="Voided">Voided</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Pending") selected @endif value="Pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
                                     <label for="customer">Customer:</label>
                                     <input placeholder="Customer" type="text" class="form-control" name="customer" value="@if(isset($data['customer'])){{$data['customer']}}@endif"/>
                                 </div>
@@ -95,7 +116,7 @@
                                                 </a>
                                             </th>
                                             <td>{{$load->shipper_type}}</td>
-                                            <td>//TODO</td>
+                                            <td>{{$load->status}}</td>
                                             <td><a href="{{ url('/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
                                             <td>{{$load->shipper_pickup_date}} {{$load->shipper_pickup_time}}</td>
                                             <td><a href="{{ url('/carrier/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>

@@ -67,6 +67,12 @@ class LoadController extends Controller
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
             "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
+            "status"                                 => ['required', 'string'],
+            "product"                                => ['required', 'string'],
+            "purchase_order_number"                  => ['required', 'string'],
+            "trailer_size"                           => ['required', 'string'],
+            "customer_costs_rate_per_unit"           => ['required', 'string'],
+            "carrier_costs_rate_per_unit"            => ['required', 'string'],
             "shipper_company"                        => ['required', 'string'],
             "shipper_phone"                          => ['required', 'string'],
             "shipper_phone_extension"                => ['required', 'string'],
@@ -119,13 +125,6 @@ class LoadController extends Controller
             "driver_number"                          => ['required', 'string'],
             "pro_number"                             => ['required', 'string'],
             "driver_email"                           => ['required', 'email'],
-            "carrier_costs_units_id"                 => ['required', 'string'],
-            "carrier_costs_rate_per_unit"            => ['required', 'string'],
-            "stops"                                  => ['required', 'string'],
-            "cost_per_stop"                          => ['required', 'string'],
-            "miles"                                  => ['required', 'string'],
-            "fuel_surcharge_type"                    => ['required', 'string'],
-            "driver_advance_gross"                   => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -195,6 +194,12 @@ class LoadController extends Controller
             "carrier_id"                             => ['required', 'exists:carriers,id'],
             "customer_id"                            => ['required', 'exists:customers,id'],
             "dispatcher_id"                          => ['required', 'exists:dispatchers,id'],
+            "status"                                 => ['required', 'string'],
+            "product"                                => ['required', 'string'],
+            "purchase_order_number"                  => ['required', 'string'],
+            "trailer_size"                           => ['required', 'string'],
+            "customer_costs_rate_per_unit"           => ['required', 'string'],
+            "carrier_costs_rate_per_unit"            => ['required', 'string'],
             "shipper_company"                        => ['required', 'string'],
             "shipper_phone"                          => ['required', 'string'],
             "shipper_phone_extension"                => ['required', 'string'],
@@ -214,7 +219,6 @@ class LoadController extends Controller
             "shipper_pickup_time"                    => ['required', 'string'],
             "shipper_pickup_number"                  => ['required', 'string'],
             "shipper_notes"                          => ['required', 'string'],
-            "consignee.*.is_new"                     => ['required'],
             "consignee.*.company"                      => ['required', 'string'],
             "consignee.*.phone"                        => ['required', 'string'],
             "consignee.*.phone_extension"              => ['required', 'string'],
@@ -248,13 +252,6 @@ class LoadController extends Controller
             "driver_number"                          => ['required', 'string'],
             "pro_number"                             => ['required', 'string'],
             "driver_email"                           => ['required', 'email'],
-            "carrier_costs_units_id"                 => ['required', 'string'],
-            "carrier_costs_rate_per_unit"            => ['required', 'string'],
-            "stops"                                  => ['required', 'string'],
-            "cost_per_stop"                          => ['required', 'string'],
-            "miles"                                  => ['required', 'string'],
-            "fuel_surcharge_type"                    => ['required', 'string'],
-            "driver_advance_gross"                   => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -324,6 +321,10 @@ class LoadController extends Controller
             $loads->where('id', $data['id']);
         }
 
+        if (isset($data['status']) && !is_null($data['status'])) {
+            $loads->where('status', $data['status']);
+        }
+
         $loads = $loads->with(['customer','carrier'])->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
         return view('load.index', compact('loads', 'data', 'dispatchers'));
@@ -332,15 +333,27 @@ class LoadController extends Controller
     private function createHistory($data, $load)
     {
         $info = Auth::user()->email.' changed ';
-        if ($data['shipper_value'] != $load->shipper_value) {
-            $info = $info.'Value from '.$load->shipper_value.' to '.$data['shipper_value'].', ';
-        }
+
         if ($data['carrier_id'] != $load->carrier_id) {
             $info = $info.'Carrier Id from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
         }
+
         if ($data['carrier_id'] != $load->customer_id) {
             $info = $info.'Customer ID from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
         }
+
+        if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time'] != $load->shipper_pickup_time) {
+            $info = $info.'Pickup Date from '.$load->shipper_pickup_date.' '.$load->shipper_pickup_time.' to '.$data['shipper_pickup_date'].' '.$data['shipper_pickup_time'].', ';
+        }
+
+        if ($data['customer_costs_rate_per_unit'] != $load->customer_costs_rate_per_unit) {
+            $info = $info.'Customer Rate from $'.$load->customer_costs_rate_per_unit.' to $'.$data['customer_costs_rate_per_unit'].', ';
+        }
+
+        if ($data['carrier_costs_rate_per_unit'] != $load->carrier_costs_rate_per_unit) {
+            $info = $info.'Carrier Rate from $'.$load->carrier_costs_rate_per_unit.' to $'.$data['carrier_costs_rate_per_unit'].', ';
+        }
+
         LoadHistory::create([
             'load_id' => $load->id,
             'user_id' => Auth::user()->id,

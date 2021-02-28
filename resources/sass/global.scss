@@ -24,6 +24,9 @@
         #history-tab {
             background: #dfcceb;
         }
+        #accounting-tab {
+            background: #999999;
+        }
         #documents-tab {
             background: #8a6d3b;
         }
@@ -40,6 +43,9 @@
 
     .history-card-header {
         background: #dfcceb !important;
+    }
+    .accounting-card-header {
+        background: #999999 !important;
     }
 
     .tab-pane {

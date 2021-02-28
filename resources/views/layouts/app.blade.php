@@ -100,7 +100,11 @@
                 @endif
             </li>
             <li class="nav-item dropdown pull-right">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-user pull-right " onclick="addEditStop()" aria-hidden="true">
+                    </span>
+                </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
@@ -116,7 +120,15 @@
                     </form>
                 </div>
             </li>
-            <div class="col-sm-6 col-xs-6" id="searchCustomers">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " onclick="addEditStop()" aria-hidden="true"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('accountSettings')}}">Account Settings</a>
+                </div>
+            </li>
+            <div class="col-sm-4 col-xs-4" id="searchCustomers">
                 <form class="form-inline" id="customer_search">
                     <div class="form-group mx-sm-3 mb-2">
                         <label class="sr-only">Find Customer</label>

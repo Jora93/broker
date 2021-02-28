@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/account', 'UserController@index')->name('account');
 Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
+Route::get('/account-settings', 'UserController@settingsShow')->name('accountSettings');
 Route::resource('customers', 'CustomerController');
 Route::get('customers-search', 'CustomerController@search');
 Route::resource('carriers', 'CarrierController');
