@@ -40,3 +40,4 @@ Route::get('/import-carrier', function(){
 Route::get('/import-customer', function(){
     $aaa = \Excel::import(new CustomersImport, public_path('/assets/customer.xlsx'));
 });
+Route::resource('companies', 'CompanyController');

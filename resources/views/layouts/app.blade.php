@@ -112,7 +112,7 @@
                         {{ __('Logout') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('account') }}">My Account</a>
-                    @if(Auth::user()->role === \App\Constanats\UserRoleConstants::Admin)
+                    @if(Auth::user()->role === \App\Constanats\UserRoleConstants::SuperAdmin)
                         <a class="dropdown-item" href="{{ route('userCreate') }}">Create User</a>
                     @endif
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -125,7 +125,8 @@
                     <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " onclick="addEditStop()" aria-hidden="true"></span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{route('accountSettings')}}">Account Settings</a>
+                    <a class="dropdown-item" href="{{url('/companies')}}">Edit Company Profile</a>
+                    <a class="dropdown-item" href="#">General Settings</a>
                 </div>
             </li>
             <div class="col-sm-4 col-xs-4" id="searchCustomers">

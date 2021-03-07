@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'support' => \App\Http\Middleware\Support::class,
         'agent' => \App\Http\Middleware\Agent::class,
         'adminAndSupport' => \App\Http\Middleware\AdminAndSupport::class,
+        'company' => \App\Http\Middleware\Company::class,
     ];
 
     /**
