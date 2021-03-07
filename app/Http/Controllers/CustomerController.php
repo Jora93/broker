@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'adminAndSupport']);
+        $this->middleware(['adminAndSupport']);
     }
 
     /**
@@ -24,7 +24,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::get();
+        $customers = Customer::where('company_id', \App::make('currentCompany')->id)->get();
         return response()->view('customer.index', ['customers' => $customers], 200);
     }
 
@@ -73,9 +73,10 @@ class CustomerController extends Controller
             'billing_zip_code'        => ['required', 'string'],
         ]);
         $data = $request->all();
+        $data['company_id'] = \App::make('currentCompany')->id;
 
         $customer = Customer::create($data);
-        return redirect('customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
+        return redirect($data['company_id'].'/customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
     }
 
     /**
@@ -85,7 +86,7 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($customer_id, Customer $customer)
     {
         return response()->view('customer.show', ['customer' => $customer], 200);
     }
@@ -97,7 +98,7 @@ class CustomerController extends Controller
      *
      * @return void
      */
-    public function edit(Customer $customer)
+    public function edit($customer_id, Customer $customer)
     {
         return response()->view('customer.edit', ['customer' => $customer], 200);
     }

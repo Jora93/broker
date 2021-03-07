@@ -45,7 +45,7 @@ class UserController extends Controller
             'role' => [
                 'required',
                 'integer',
-                Rule::in([UserRoleConstants::Admin, UserRoleConstants::Support, UserRoleConstants::Agent])
+                Rule::in([UserRoleConstants::CompanyAdmin, UserRoleConstants::Support, UserRoleConstants::Agent])
             ],
         ]);
         $data = $request->all();

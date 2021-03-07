@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role === UserRoleConstants::Admin){
+        if ($request->user() && $request->user()->role === UserRoleConstants::CompanyAdmin){
             return $next($request);
         }
     }

@@ -12,7 +12,7 @@
     @endif
 
     <div class="row customer-create col-sm-12">
-        <form method="post" action="{{ url('/customers') }}" class="col-sm-12">
+        <form method="post" action="{{ url('/'.\App::make('currentCompany')->id.'/customers')}}" class="col-sm-12">
         @csrf
 
         <!-- Company Information -->

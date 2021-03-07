@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="col-md-12 customers-show">
-        <a style="padding: 15px" title="edit" href="{{route('customers.edit', $customer->id)}}">
+        <a style="padding: 15px" title="edit" href="{{url(\App::make('currentCompany')->id.'/customers/'.$customer->id.'/edit')}}">
+{{--        <a style="padding: 15px" title="edit" href="{{route('customers.edit', \App::make('currentCompany')->id, $customer->id)}}">--}}
             <button type="button" class="btn btn-primary" aria-label="Left Align">
                 Edit Customer <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>

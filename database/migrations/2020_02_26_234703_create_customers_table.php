@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
 
             $table->string('status');
             $table->string('company')->unique();
@@ -42,6 +43,9 @@ class CreateCustomersTable extends Migration
             $table->string('billing_zip_code');
 
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
         });
     }
 

@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Customers</span>
-                        <a style="float: right;" href="{{route('customers.create')}}" title="create new">
+                        <a style="float: right;" href="{{url(\App::make('currentCompany')->id).'/customers/create'}}" title="create new">
                             <button type="button" class="btn btn-primary" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
@@ -49,7 +49,7 @@
                                     @endphp
                                     <tr>
                                         <td>
-                                            <a title="show" href="{{url('customers/'.$customer->id)}}">
+                                            <a title="show" href="{{url(\App::make('currentCompany')->id.'/customers/'.$customer->id)}}">
                                                 {{$customer->id}}
                                             </a>
                                         </td>
@@ -58,7 +58,7 @@
                                         <td>{{$customer->phone}}</td>
                                         <td>{{$customer->status}}</td>
                                         <td>
-                                            <a title="edit" href="{{route('customers.edit', $customer->id)}}">
+                                            <a title="edit" href="{{url(\App::make('currentCompany')->id.'/customers/'.$customer->id.'/edit')}}">
                                                 <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                     Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>

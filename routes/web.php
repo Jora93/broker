@@ -27,12 +27,10 @@ Route::get('/account', 'UserController@index')->name('account');
 Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::get('/account-settings', 'UserController@settingsShow')->name('accountSettings');
-Route::resource('customers', 'CustomerController');
 Route::get('customers-search', 'CustomerController@search');
 Route::resource('carriers', 'CarrierController');
 Route::resource('load-history', 'LoadHistoryController');
 
-Route::resource('loads', 'LoadController');
 Route::get('loads-search', 'LoadController@search');
 
 Route::resource('dispatchers', 'DispatcherController');
@@ -51,11 +49,9 @@ Route::post('/setAppCompany', 'CompanyController@setAppCompany');
 
 Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function () {
 
-//    Route::get('/', function () {
-//        return redirect(route('home'));
-//    });
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('companies', 'CompanyController');
-
+    Route::resource('loads', 'LoadController');
+    Route::resource('customers', 'CustomerController');
 });
