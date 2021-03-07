@@ -125,7 +125,7 @@
                     <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " onclick="addEditStop()" aria-hidden="true"></span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{url('/companies')}}">Edit Company Profile</a>
+                    <a class="dropdown-item" href="{{url('/profileSettings')}}">Edit Company Profile</a>
                     <a class="dropdown-item" href="#">General Settings</a>
                 </div>
             </li>

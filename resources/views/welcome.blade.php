@@ -4,10 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -88,13 +90,12 @@
                                     <div  class="col-sm item">
                                         <div>
                                             <span>
-                                                <a style="text-decoration: none; color: #636b6f;" href="{{ url($company->id.'/') }}">{{$company->name}}</a>
+                                                <a type="button" class="btn btn-light" href="{{ url('/'.$company->id) }}">{{$company->name}}</a>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 @else

@@ -2,21 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Constanats\UserRoleConstants;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
+
+    public function setAppCompany(Request $request)
+    {
+        $request->validate([
+            "id" => ['required', 'exists:companies,id'],
+        ]);
+
+        if (Auth::user()->role === UserRoleConstants::SuperAdmin) {
+            return redirect('/');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function profileEdit()
+    public function profileSettings()
     {
         return View('company.profile');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +39,6 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return View('company.profile');
-
         $companies = Company::get();
         return View('welcome')->with(['companies' => $companies]);
     }

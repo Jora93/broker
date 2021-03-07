@@ -12,13 +12,17 @@ use App\Imports\CustomersImport;
 |
 */
 
-Route::get('/', function () {
-    return redirect(route('home'));
-});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('companies', 'CompanyController@index');
+
+Route::middleware(['auth', 'company'])->group(function () {
+    Route::get('/', function () {
+        return redirect(route('home'));
+    });
+});
 Route::get('/account', 'UserController@index')->name('account');
 Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
@@ -40,4 +44,18 @@ Route::get('/import-carrier', function(){
 Route::get('/import-customer', function(){
     $aaa = \Excel::import(new CustomersImport, public_path('/assets/customer.xlsx'));
 });
-Route::resource('companies', 'CompanyController');
+Route::get('profileSettings', 'CompanyController@profileSettings');
+
+//superAdminRoutes
+Route::post('/setAppCompany', 'CompanyController@setAppCompany');
+
+Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function () {
+
+//    Route::get('/', function () {
+//        return redirect(route('home'));
+//    });
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('companies', 'CompanyController');
+
+});
