@@ -293,9 +293,9 @@ $(document).ready(function () {
     });
 
     //find customers
-    $( "#customer_search" ).submit(function( event ) {
+    $( "#carrier_search" ).submit(function( event ) {
         event.preventDefault();
-        var $inputs = $('#customer_search :input');
+        var $inputs = $('#carrier_search :input');
 
         var values = {};
         $inputs.each(function () {
@@ -303,13 +303,14 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: `http://broker.me/${window.currentCompanyId}/customers-search`,
+            url: `http://broker.me/${window.currentCompanyId}/carrier-search`,
             data: values,
             success: function (result) {
                 if(result.data && result.data.length) {
+                    $( "#myUL" ).empty();
                     var html = '';
                     result.data.forEach(item => {
-                        var itemHtml = `<li><a href="customers/${item.id}">${item.company}</a></li>`;
+                        var itemHtml = `<li><a href="carriers/${item.id}">${item.company}</a></li>`;
                         html += itemHtml;
                     });
                     $('#myUL').append(html);

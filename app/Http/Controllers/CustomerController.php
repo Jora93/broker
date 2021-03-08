@@ -160,11 +160,4 @@ class CustomerController extends Controller
 //
 //        return back();
     }
-
-    public function search(Request $request)
-    {
-        $keyword = $request->keyword;
-        $data = Customer::where('company', 'LIKE', '%'.$keyword.'%')->get();
-        return response()->json(['data' => $data]);
-    }
 }

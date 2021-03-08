@@ -136,7 +136,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($customer_id, Carrier $carrier)
+    public function show($company_id, Carrier $carrier)
     {
         return response()->view('carrier.show', ['carrier' => $carrier], 200);
 
@@ -149,7 +149,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($customer_id, Carrier $carrier)
+    public function edit($company_id, Carrier $carrier)
     {
         return response()->view('carrier.edit', ['carrier' => $carrier], 200);
     }
@@ -162,7 +162,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($customer_id, Request $request, Carrier $carrier)
+    public function update($company_id, Request $request, Carrier $carrier)
     {
         $request->validate([
             "contracted_on"             => ['string', 'nullable'],
@@ -258,5 +258,12 @@ class CarrierController extends Controller
         $carrier->delete();
 
         return back();
+    }
+
+    public function search($company_id, Request $request)
+    {
+        $keyword = $request->keyword;
+        $data = Carrier::where('company_id', $company_id)->where('company', 'LIKE', '%'.$keyword.'%')->get();
+        return response()->json(['data' => $data]);
     }
 }

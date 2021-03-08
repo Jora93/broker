@@ -122,8 +122,8 @@
                     <a class="dropdown-item" href="#">General Settings</a>
                 </div>
             </li>
-            <div class="col-sm-4 col-xs-4" id="searchCustomers">
-                <form class="form-inline" id="customer_search">
+            <div class="col-sm-4 col-xs-4" id="searchCarriers">
+                <form class="form-inline" id="carrier_search">
                     <div class="form-group mx-sm-3 mb-2">
                         <label class="sr-only">Find Customer</label>
                         <input class="form-control" type="text" id="" name="keyword" placeholder="Search for customers.." title="Type in a name">

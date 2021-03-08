@@ -27,7 +27,6 @@ Route::get('/account', 'UserController@index')->name('account');
 Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::get('/account-settings', 'UserController@settingsShow')->name('accountSettings');
-Route::get('customers-search', 'CustomerController@search');
 
 
 
@@ -42,6 +41,10 @@ Route::get('profileSettings', 'CompanyController@profileSettings');
 //superAdminRoutes
 Route::post('/setAppCompany', 'CompanyController@setAppCompany');
 
+Route::prefix('{company_id}')->middleware(['company'])->group(function () {
+    Route::get('carrier-search', 'CarrierController@search');
+});
+
 Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function () {
 
     Route::get('/', 'HomeController@index')->name('home');
@@ -54,5 +57,6 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('dispatcher-search', 'DispatcherController@search');
     Route::get('loads-search', 'LoadController@search');
     Route::resource('load-history', 'LoadHistoryController');
+//    Route::get('carrier-search', 'CarrierController@search');
 
 });
