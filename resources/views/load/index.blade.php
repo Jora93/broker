@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <span>Load List</span>
                     </div>
-                    <form method="get" action="{{ url('/loads-search') }}">
+                    <form method="get" action="{{ url(\App::make('currentCompany')->id.'/loads-search') }}">
                         <div class="row col-sm-12">
                             @csrf
                             <div class="col-sm">
@@ -111,21 +111,21 @@
                                     @foreach($loads as $load)
                                         <tr>
                                             <th scope="row">
-                                                <a title="show" href="{{url('/loads/'.$load->id)}}">
+                                                <a title="show" href="{{url(\App::make('currentCompany')->id.'/loads/'.$load->id)}}">
                                                     {{$load->id}}
                                                 </a>
                                             </th>
                                             <td>{{$load->shipper_type}}</td>
                                             <td>{{$load->status}}</td>
-                                            <td><a href="{{ url('/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
+                                            <td><a href="{{ url(\App::make('currentCompany')->id.'/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
                                             <td>{{$load->shipper_pickup_date}} {{$load->shipper_pickup_time}}</td>
-                                            <td><a href="{{ url('/carrier/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
+                                            <td><a href="{{ url(\App::make('currentCompany')->id.'/carriers/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
                                             <td>{{$load->shipper_address1}}</td>
                                             <td>{{$load->consignee_address1}}</td>
                                             <td>{{count($load->drops)}}</td>
                                             <td>{{$load->consignee_delivery_date}} {{$load->consignee_delivery_time}}</td>
                                             <td>
-                                                <a title="edit" href="{{url('/loads/'.$load->id.'/edit')}}">
+                                                <a title="edit" href="{{url(\App::make('currentCompany')->id.'/loads/'.$load->id.'/edit')}}">
                                                     <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                     </button>

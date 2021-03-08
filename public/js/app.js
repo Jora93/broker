@@ -68816,11 +68816,11 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "POST",
-      url: "http://broker.me/loads",
+      url: "http://broker.me/".concat(window.currentCompanyId, "/loads"),
       data: values,
       success: function success(result) {
         if (result.success) {
-          location.href = location.origin + '/loads';
+          location.href = "".concat(location.origin, "/").concat(window.currentCompanyId, "/loads");
         }
 
         if (result.error) {
@@ -68927,11 +68927,11 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/loads/".concat(loadId),
+      url: "http://broker.me/".concat(window.currentCompanyId, "/loads/").concat(loadId),
       data: values,
       success: function success(result) {
         if (result.success) {
-          location.href = location.origin + '/loads';
+          location.href = "".concat(location.origin, "/").concat(window.currentCompanyId, "/loads");
         }
 
         if (result.error) {
@@ -68969,7 +68969,7 @@ $(document).ready(function () {
     var reviewer_id = $(this).data('reviewer-id');
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/load-history/".concat(id),
+      url: "http://broker.me/".concat(window.currentCompanyId, "/load-history/").concat(id),
       data: {
         reviewer_id: reviewer_id,
         confirmed: 1
@@ -68996,7 +68996,7 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "GET",
-      url: "http://broker.me/customers-search",
+      url: "http://broker.me/".concat(window.currentCompanyId, "/customers-search"),
       data: values,
       success: function success(result) {
         if (result.data && result.data.length) {

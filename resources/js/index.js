@@ -136,11 +136,11 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "POST",
-            url: "http://broker.me/loads",
+            url: `http://broker.me/${window.currentCompanyId}/loads`,
             data: values,
             success: function (result) {
                 if(result.success) {
-                    location.href = location.origin + '/loads';
+                    location.href = `${location.origin}/${window.currentCompanyId}/loads`;
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();
@@ -242,11 +242,11 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/loads/${loadId}`,
+            url: `http://broker.me/${window.currentCompanyId}/loads/${loadId}`,
             data: values,
             success: function (result) {
                 if(result.success) {
-                    location.href = location.origin + '/loads';
+                    location.href = `${location.origin}/${window.currentCompanyId}/loads`;
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();
@@ -274,7 +274,7 @@ $(document).ready(function () {
         var reviewer_id = $(this).data('reviewer-id');
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/load-history/${id}`,
+            url: `http://broker.me/${window.currentCompanyId}/load-history/${id}`,
             data: {
                 reviewer_id: reviewer_id,
                 confirmed: 1
@@ -303,7 +303,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: "http://broker.me/customers-search",
+            url: `http://broker.me/${window.currentCompanyId}/customers-search`,
             data: values,
             success: function (result) {
                 if(result.data && result.data.length) {

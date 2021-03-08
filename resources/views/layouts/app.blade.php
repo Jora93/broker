@@ -19,6 +19,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    @auth
+        @php
+            $changedLoads = \App\Load::where('changed', true)->get();
+            $companyId = \App::make('currentCompany')->id;
+        @endphp
+        <script>
+            window.currentCompanyId = {!! $companyId !!};
+        </script>
+    @endauth
 </head>
 <body>
 <div id="app">
@@ -36,10 +45,7 @@
                 </li>
             @endif
         @else
-            @php
-                $changedLoads = \App\Load::where('changed', true)->get();
-                $companyId = \App::make('currentCompany')->id;
-            @endphp
+
             <li class="nav-item">
                 <a class="nav-link active" href="{{ url('/'.$companyId.'/home')}}">{{ config('app.name', 'Laravel') }}</a>
             </li>
@@ -151,7 +157,7 @@
                 </div>
 
                 <!-- Modal body -->
-                <form method="GET" action="{{route('loads.create', $companyId)}}">
+                <form method="GET" action="{{url($companyId.'/loads/create')}}">
                     <div class="modal-body">
                             @csrf
                             <div class="form-group">

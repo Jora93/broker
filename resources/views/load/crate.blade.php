@@ -12,7 +12,7 @@
     @endif
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
-        <form method="post" id="loadCreateForm" action="{{ url('/loads') }}" class="col-sm-12">
+        <form method="post" id="loadCreateForm" action="{{ url(\App::make('currentCompany')->id.'/loads') }}" class="col-sm-12">
         @csrf
         <input type="hidden" name="customer_id" value="{{$customer->id}}">
         <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
@@ -737,11 +737,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12"><br>
-                    <button type="submit" class="btn btn-primary">Create Load</button>
-                </div>
-            </div>
-
             <div class="tab-pane fade" id="customers" role="tabpanel" aria-labelledby="customer-tab">
                 <div id="customer" class="tabcontent" style="display: block;">
                     <div class="row">
@@ -948,6 +943,10 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12"><br>
+                <button type="submit" class="btn btn-primary">Create Load</button>
+            </div>
+        </div>
         </form>
     </div>
 @endsection

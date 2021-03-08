@@ -15,7 +15,7 @@
     @endif
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
     <div class="col-sm-12 loads-show">
-        <form method="post" id="loadEditForm" action="{{ url('/loads/'.$load->id) }}" class="col-sm-12">
+        <form method="post" id="loadEditForm" action="{{ url(\App::make('currentCompany')->id.'/loads/'.$load->id) }}" class="col-sm-12">
             @method('PATCH')
             @csrf
             <input type="hidden" id="load_id" name="Load_id" value="{{$load->id}}">
@@ -919,11 +919,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12"><br>
-                        <button type="submit" class="btn btn-primary">Create Load</button>
-                    </div>
                 </div>
-
                 <div class="tab-pane fade" id="customers" role="tabpanel" aria-labelledby="customer-tab">
                     <div id="customer" class="tabcontent" style="display: block;">
                         <div class="row">
@@ -1129,6 +1125,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-sm-12"><br>
+                    <button type="submit" class="btn btn-primary">Update Load</button>
                 </div>
             </div>
         </form>

@@ -15,6 +15,7 @@ class CreateLoadsTable extends Migration
     {
         Schema::create('loads', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('carrier_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('dispatcher_id');
@@ -51,6 +52,7 @@ class CreateLoadsTable extends Migration
             $table->string('driver_email');
             $table->boolean('changed')->default(false);
 
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('carrier_id')->references('id')->on('carriers')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('dispatcher_id')->references('id')->on('dispatchers')->onDelete('cascade');

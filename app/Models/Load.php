@@ -18,6 +18,7 @@ class Load extends Model
      */
     protected $fillable = [
         'id',
+        'company_id',
         'carrier_id',
         'customer_id',
         'dispatcher_id',

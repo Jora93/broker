@@ -18,10 +18,10 @@ class LoadController extends Controller
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($company_id)
     {
-        $loads = Load::with(['customer', 'carrier', 'drops'])->orderBy('created_at', 'desc')->paginate(25);
-        $dispatchers = Dispatcher::select('id', 'full_name')->get();
+        $loads = Load::where('company_id', $company_id)->with(['customer', 'carrier', 'drops'])->orderBy('created_at', 'desc')->paginate(25);
+        $dispatchers = Dispatcher::where('company_id', $company_id)->select('id', 'full_name')->get();
 
         return View('load.index')->with(['loads' => $loads, 'dispatchers' => $dispatchers]);
     }
@@ -35,7 +35,7 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create($company_id, Request $request)
     {
         $request->validate([
             "shipper_value" => ['required', 'integer'],
@@ -43,8 +43,8 @@ class LoadController extends Controller
         ]);
 
         $custumer = Customer::find($request->customerId);
-        $carriers = Carrier::get();
-        $dispatchers = Dispatcher::select('id', 'full_name')->get();
+        $carriers = Carrier::where('company_id', $company_id)->get();
+        $dispatchers = Dispatcher::where('company_id', $company_id)->select('id', 'full_name')->get();
 
         return response()->view('load.crate', [
             'customer' => $custumer,
@@ -61,7 +61,7 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($company_id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             "carrier_id"                             => ['required', 'exists:carriers,id'],
@@ -135,6 +135,8 @@ class LoadController extends Controller
         $dropsData =  $data['consignee'];
         unset($data['consignee']);
         $loadData = $data;
+        $loadData['company_id'] = \App::make('currentCompany')->id;
+
 
         $load = Load::create($loadData);
 
@@ -153,7 +155,7 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Load $load)
+    public function show($company_id, Load $load)
     {
         $load->drops;
         $load->histories;
@@ -170,7 +172,7 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Load $load)
+    public function edit($company_id, Load $load)
     {
         $load->drops;
         return response()->view('load.edit', [
@@ -188,7 +190,7 @@ class LoadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Load $load)
+    public function update($company_id, Request $request, Load $load)
     {
         $validator = Validator::make($request->all(), [
             "carrier_id"                             => ['required', 'exists:carriers,id'],
@@ -299,10 +301,10 @@ class LoadController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function search($company_id, Request $request)
     {
         $data = $request->all();
-        $dispatchers = Dispatcher::get();
+        $dispatchers = Dispatcher::where('company_id', $company_id)->get();
 
         $loads = Load::whereHas('customer', function ($query) use ($data) {
             if (isset($data['customer']) && !is_null($data['customer'])) {
