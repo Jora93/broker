@@ -28,13 +28,10 @@ Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::get('/account-settings', 'UserController@settingsShow')->name('accountSettings');
 Route::get('customers-search', 'CustomerController@search');
-Route::resource('carriers', 'CarrierController');
 Route::resource('load-history', 'LoadHistoryController');
 
 Route::get('loads-search', 'LoadController@search');
 
-Route::resource('dispatchers', 'DispatcherController');
-Route::get('dispatcher-search', 'DispatcherController@search');
 
 Route::get('/import-carrier', function(){
     $aaa = \Excel::import(new CarriersImport, public_path('/assets/carriers.xls'));
@@ -54,4 +51,8 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::resource('companies', 'CompanyController');
     Route::resource('loads', 'LoadController');
     Route::resource('customers', 'CustomerController');
+    Route::resource('carriers', 'CarrierController');
+    Route::resource('dispatchers', 'DispatcherController');
+    Route::get('dispatcher-search', 'DispatcherController@search');
+
 });

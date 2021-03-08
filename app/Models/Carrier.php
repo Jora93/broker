@@ -18,6 +18,7 @@ class Carrier extends Model
      */
     protected $fillable = [
         'id',
+        'company_id',
         "contracted_on",
         "status",
         "company",

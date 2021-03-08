@@ -18,6 +18,7 @@ class Dispatcher extends Model
      */
     protected $fillable = [
         'id',
+        'company_id',
         'full_name',
         'email'
     ];

@@ -19,7 +19,7 @@
             @endif
             <div class="col-md-12">
                 <div class="card-header">Create Carrier</div>
-                <form method="POST" action="{{route('carriers.update', $carrier->id, $carrier->aaaaa)}}" class="col-sm-12">
+                <form method="POST" action="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id)}}" class="col-sm-12">
                     @method('PATCH')
                     @csrf
                     <div class="col-md-6">

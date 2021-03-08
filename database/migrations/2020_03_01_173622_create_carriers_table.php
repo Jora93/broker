@@ -15,6 +15,8 @@ class CreateCarriersTable extends Migration
     {
         Schema::create('carriers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
+
             $table->date('contracted_on')->nullable();
             $table->string('status');
             $table->string('company')->unique();
@@ -84,6 +86,8 @@ class CreateCarriersTable extends Migration
             $table->string('insurance2_email')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

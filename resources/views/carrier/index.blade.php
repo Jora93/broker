@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Carriers</span>
-                        <a style="float: right;" href="{{route('carriers.create')}}" title="create new">
+                        <a style="float: right;" href="{{url(\App::make('currentCompany')->id).'/carriers/create'}}" title="create new">
                             <button type="button" class="btn btn-primary" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
@@ -55,7 +55,7 @@
                                         <td><a href="https://maps.google.com/?q={{$carrier->address1}}" target="_blank">{{$carrier->address1}}</a></td>
                                         <td>{{$carrier->email}}</td>
                                         <td style="display: inline-flex;">
-                                            <a title="edit" href="{{route('carriers.edit', $carrier->id)}}">
+                                            <a title="edit" href="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id.'/edit')}}">
                                                 <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>

@@ -15,9 +15,13 @@ class CreateDispatchersTable extends Migration
     {
         Schema::create('dispatchers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
+
             $table->string('full_name')->unique();;
             $table->string('email')->unique();;
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

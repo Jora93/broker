@@ -111,7 +111,7 @@ class CustomerController extends Controller
      *
      * @return void
      */
-    public function update(Request $request, Customer $customer)
+    public function update($customer_id, Request $request, Customer $customer)
     {
         $request->validate([
             'status'          => ['required', 'string', Rule::in(['Active', 'Inactive'])],
@@ -143,7 +143,7 @@ class CustomerController extends Controller
         $data = $request->all();
         $customer->update($data);
 
-        return redirect('customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
+        return redirect(\App::make('currentCompany')->id.'/customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
     }
 
     /**

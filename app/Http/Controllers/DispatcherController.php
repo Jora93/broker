@@ -23,9 +23,9 @@ class DispatcherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($customer_id)
     {
-        return response()->view('dispatcher.index', ['dispatchers' => Dispatcher::orderBy('created_at', 'desc')->paginate(25)], 200);
+        return response()->view('dispatcher.index', ['dispatchers' => Dispatcher::where('company_id', $customer_id)->orderBy('created_at', 'desc')->paginate(25)], 200);
     }
 
     /**
@@ -44,16 +44,17 @@ class DispatcherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($customer_id, Request $request)
     {
         $request->validate([
             'full_name' => ['required', 'string', 'max:255', 'unique:dispatchers,full_name'],
             'email' => ['required', 'string', 'max:255', 'unique:dispatchers,email'],
         ]);
         $data = $request->all();
+        $data['company_id'] = \App::make('currentCompany')->id;
         Dispatcher::create($data);
 
-        return redirect('dispatchers')->with('success', 'Dispatcher Created successfully');
+        return redirect($data['company_id'].'/dispatchers')->with('success', 'Dispatcher Created successfully');
     }
 
     /**
@@ -74,7 +75,7 @@ class DispatcherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dispatcher $dispatcher)
+    public function edit($customer_id, Dispatcher $dispatcher)
     {
         return response()->view('dispatcher.edit', ['dispatcher' => $dispatcher], 200);
 
@@ -88,7 +89,7 @@ class DispatcherController extends Controller
      *
      * @return void
      */
-    public function update(Request $request, Dispatcher $dispatcher)
+    public function update($customer_id, Request $request, Dispatcher $dispatcher)
     {
         $request->validate([
             'full_name' => ['required', 'string', 'max:255', 'unique:dispatchers,full_name,'.$dispatcher->id],
@@ -97,7 +98,7 @@ class DispatcherController extends Controller
         $data = $request->all();
         $dispatcher->update($data);
 
-        return redirect('dispatchers')->with('success', 'Dispatcher Updated successfully');
+        return redirect($customer_id.'/dispatchers')->with('success', 'Dispatcher Updated successfully');
     }
 
     /**
@@ -111,11 +112,11 @@ class DispatcherController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function search($customer_id, Request $request)
     {
         $data = $request->all();
 
-        $dispatchers = Dispatcher::orderBy('created_at', 'desc');
+        $dispatchers = Dispatcher::where('company_id', $customer_id)->orderBy('created_at', 'desc');
 
         if (isset($data['full_name']) && !is_null($data['full_name'])) {
             $dispatchers->where('full_name', 'LIKE', "%{$data['full_name']}%");

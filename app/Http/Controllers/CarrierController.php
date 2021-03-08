@@ -23,7 +23,7 @@ class CarrierController extends Controller
      */
     public function index()
     {
-        $carriers = Carrier::get();
+        $carriers = Carrier::where('company_id', \App::make('currentCompany')->id)->get();
 
         return response()->view('carrier.index', ['carriers' => $carriers], 200);
     }
@@ -122,10 +122,11 @@ class CarrierController extends Controller
         $data['use_dba_name'] = array_key_exists('use_dba_name', $data) ? true : false;
         $data['require_carrier_agreement'] = array_key_exists('require_carrier_agreement', $data) ? true : false;
         $data['flagged'] = array_key_exists('flagged', $data) ? true : false;
+        $data['company_id'] = \App::make('currentCompany')->id;
 
         $carrier = Carrier::create($data);
 
-        return redirect('carriers/'.$carrier->id)->withInput()->with('success', 'Carrier Created successfully');
+        return redirect($data['company_id'].'/carriers/'.$carrier->id)->withInput()->with('success', 'Carrier Created successfully');
     }
 
     /**
@@ -135,7 +136,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Carrier $carrier)
+    public function show($customer_id, Carrier $carrier)
     {
         return response()->view('carrier.show', ['carrier' => $carrier], 200);
 
@@ -148,7 +149,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Carrier $carrier)
+    public function edit($customer_id, Carrier $carrier)
     {
         return response()->view('carrier.edit', ['carrier' => $carrier], 200);
     }
@@ -161,7 +162,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carrier $carrier)
+    public function update($customer_id, Request $request, Carrier $carrier)
     {
         $request->validate([
             "contracted_on"             => ['string', 'nullable'],
@@ -241,7 +242,7 @@ class CarrierController extends Controller
 
         $carrier->update($data);
 
-        return redirect('carriers/'.$carrier->id)->withInput()->with('success', 'Carrier Edited successfully');
+        return redirect(\App::make('currentCompany')->id.'/carriers/'.$carrier->id)->withInput()->with('success', 'Carrier Edited successfully');
     }
 
     /**

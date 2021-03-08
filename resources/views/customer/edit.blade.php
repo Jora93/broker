@@ -349,7 +349,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Broker</button>
+                    <button type="submit" class="btn btn-primary">Update Customer</button>
                 </div>
             </div>
         </form>

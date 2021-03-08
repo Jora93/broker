@@ -19,7 +19,7 @@
             @endif
             <div class="col-md-12">
                 <div class="card-header">Create Carrier</div>
-                <form method="post" action="{{url('/carriers')}}">
+                <form method="post" action="{{ url('/'.\App::make('currentCompany')->id.'/carriers')}}">
                     @csrf
                     <div class="col-md-6">
                         <div class="entityPanel entityFillPanel carrierPanel" >

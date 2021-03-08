@@ -7,13 +7,13 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Dispatcher List</span>
-                        <a style="float: right;" href="{{route('dispatchers.create')}}" title="create new">
+                        <a style="float: right;" href="{{url(\App::make('currentCompany')->id.'/dispatchers/create')}}" title="create new">
                             <button type="button" class="btn btn-primary" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
-                    <form method="get" action="{{ url('/dispatcher-search') }}">
+                    <form method="get" action="{{ url(\App::make('currentCompany')->id.'/dispatcher-search') }}">
                         <div class="row col-sm-12">
                             @csrf
                             <div class="col-sm">
@@ -80,7 +80,7 @@
                                                 <td>{{$dispatcher->full_name}}</td>
                                                 <td>{{$dispatcher->email}}</td>
                                                 <td>
-                                                    <a title="edit" href="{{url('/dispatchers/'.$dispatcher->id.'/edit')}}">
+                                                    <a title="edit" href="{{url(\App::make('currentCompany')->id.'/dispatchers/'.$dispatcher->id.'/edit')}}">
                                                         <button type="button" class="btn btn-primary" aria-label="Left Align">
                                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                         </button>
