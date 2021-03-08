@@ -28,7 +28,6 @@ Route::get('/user-create', 'UserController@create')->name('userCreate');
 Route::post('/user-store', 'UserController@store')->name('userStore');
 Route::get('/account-settings', 'UserController@settingsShow')->name('accountSettings');
 Route::get('customers-search', 'CustomerController@search');
-Route::resource('load-history', 'LoadHistoryController');
 
 
 
@@ -54,5 +53,6 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::resource('dispatchers', 'DispatcherController');
     Route::get('dispatcher-search', 'DispatcherController@search');
     Route::get('loads-search', 'LoadController@search');
+    Route::resource('load-history', 'LoadHistoryController');
 
 });

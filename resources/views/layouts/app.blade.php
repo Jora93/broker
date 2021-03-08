@@ -87,7 +87,7 @@
                 @if(!$changedLoads->isEmpty())
                     <div class="dropdown-menu">
                         @foreach($changedLoads as $changedLoad)
-                            <a class="dropdown-item" href="{{route('loads.show', $companyId, $changedLoad->id)}}">#{{$changedLoad->id}} changed</a>
+                            <a class="dropdown-item" href="{{url('/'.$companyId.'/loads/'.$changedLoad->id)}}">#{{$changedLoad->id}} changed</a>
                         @endforeach
                     </div>
                 @endif

@@ -85,7 +85,7 @@ class LoadHistoryController
      *
      * @return void
      */
-    public function update(Request $request, LoadHistory $LoadHistory)
+    public function update($company_id, Request $request, LoadHistory $LoadHistory)
     {
         $LoadHistory->update($request->all());
         $unconfirmedHistory = LoadHistory::where('load_id', $LoadHistory->load_id)->where('confirmed', false)->first();
