@@ -46,34 +46,90 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $company_id  = \App::make('currentCompany')->id;
         $request->validate([
             'status'          => ['required', 'string', Rule::in(['Active', 'Inactive'])],
-            'company'         => ['required', 'string', 'max:255', 'unique:customers,company'],
-            'phone'           => ['required', 'string', 'max:255', 'unique:customers,phone'],
-            'address1'        => ['required', 'string', 'max:255', 'unique:customers,address1'],
-            'address2'        => ['string', 'max:255', 'unique:customers,address2'],
+            'company'         => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('company', $request->company)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
+            'phone'           => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('phone', $request->phone)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
+            'address1'        => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('address1', $request->address1)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
+            'address2'        => ['string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('address2', $request->address2)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
             'phone_extension' => ['string', 'max:255'],
-            'fax'             => ['string', 'max:255', 'unique:customers,fax'],
+            'fax'             => ['string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('fax', $request->fax)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
             'city'            => ['required', 'string', 'max:255'],
-            'email'           => ['required', 'email', 'unique:customers,email'],
+            'email'           => ['required', 'email',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                      return $query->where('email', $request->email)
+                                          ->where('company_id', $company_id);
+                                  }),
+            ],
             'state'           => ['required', 'string'],
             'zip_code'        => ['required', 'string'],
             'credit_limit'    => ['required', 'integer'],
             'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
             'note'            => ['string', 'max:1000'],
 
-            'billing_company'         => ['required', 'string', 'max:255', 'unique:customers,company'],
-            'billing_phone'           => ['required', 'string', 'max:255', 'unique:customers,phone'],
-            'billing_address1'        => ['required', 'string', 'max:255', 'unique:customers,address1'],
-            'billing_address2'        => ['string', 'max:255', 'unique:customers,address2'],
+            'billing_company'         => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                              return $query->where('billing_company', $request->billing_company)
+                                                  ->where('company_id', $company_id);
+                                          }),
+            ],
+            'billing_phone'           => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                              return $query->where('billing_phone', $request->billing_phone)
+                                                  ->where('company_id', $company_id);
+                                          }),
+            ],
+            'billing_address1'        => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                              return $query->where('billing_address1', $request->billing_address1)
+                                                  ->where('company_id', $company_id);
+                                          }),
+            ],
+            'billing_address2'        => ['string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                              return $query->where('billing_address2', $request->billing_address2)
+                                                  ->where('company_id', $company_id);
+                                          }),
+            ],
             'billing_phone_extension' => ['string', 'max:255'],
-            'billing_fax'             => ['string', 'max:255', 'unique:customers,fax'],
+            'billing_fax'             => ['string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id) {
+                                              return $query->where('billing_fax', $request->billing_fax)
+                                                  ->where('company_id', $company_id);
+                                          }),
+            ],
             'billing_city'            => ['required', 'string', 'max:255'],
             'billing_state'           => ['required', 'string'],
             'billing_zip_code'        => ['required', 'string'],
         ]);
         $data = $request->all();
-        $data['company_id'] = \App::make('currentCompany')->id;
+        $data['company_id'] = $company_id;
 
         $customer = Customer::create($data);
         return redirect($data['company_id'].'/customers/'.$customer->id)->withInput()->with('success', 'Customer Edited successfully');
@@ -111,30 +167,96 @@ class CustomerController extends Controller
      *
      * @return void
      */
-    public function update($customer_id, Request $request, Customer $customer)
+    public function update($company_id, Request $request, Customer $customer)
     {
         $request->validate([
             'status'          => ['required', 'string', Rule::in(['Active', 'Inactive'])],
-            'company'         => ['required', 'string', 'max:255', 'unique:customers,company,'.$customer->id],
-            'phone'           => ['required', 'string', 'max:255', 'unique:customers,phone,'.$customer->id],
-            'address1'        => ['required', 'string', 'max:255', 'unique:customers,address1,'.$customer->id],
-            'address2'        => ['string', 'max:255', 'unique:customers,address2,'.$customer->id],
+            'company'         => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('company', $request->company)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
+            'phone'           => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('phone', $request->phone)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
+            'address1'        => ['required', 'string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('address1', $request->address1)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
+            'address2'        => ['string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('address2', $request->address2)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
             'phone_extension' => ['string', 'max:255'],
-            'fax'             => ['string', 'max:255', 'unique:customers,fax,'.$customer->id],
+            'fax'             => ['string', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('fax', $request->fax)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
             'city'            => ['required', 'string', 'max:255'],
-            'email'           => ['required', 'email', 'unique:customers,email,'.$customer->id],
+            'email'           => ['required', 'email', 'max:255',
+                                  Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                      return $query->where('email', $request->email)
+                                          ->where('company_id', $company_id)
+                                          ->where('id', $customer->id);
+                                  }),
+            ],
             'state'           => ['required', 'string'],
             'zip_code'        => ['required', 'string'],
             'credit_limit'    => ['required', 'integer'],
             'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
             'note'            => ['string', 'max:1000'],
 
-            'billing_company'         => ['required', 'string', 'max:255', 'unique:customers,company,'.$customer->id],
-            'billing_phone'           => ['required', 'string', 'max:255', 'unique:customers,phone,'.$customer->id],
-            'billing_address1'        => ['required', 'string', 'max:255', 'unique:customers,address1,'.$customer->id],
-            'billing_address2'        => ['string', 'max:255', 'unique:customers,address2,'.$customer->id],
+            'billing_company'         => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                              return $query->where('billing_company', $request->billing_company)
+                                                  ->where('company_id', $company_id)
+                                                  ->where('id', $customer->id);
+                                          }),
+            ],
+            'billing_phone'           => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                              return $query->where('billing_phone', $request->billing_phone)
+                                                  ->where('company_id', $company_id)
+                                                  ->where('id', $customer->id);
+                                          }),
+            ],
+            'billing_address1'        => ['required', 'string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                              return $query->where('billing_address1', $request->billing_address1)
+                                                  ->where('company_id', $company_id)
+                                                  ->where('id', $customer->id);
+                                          }),
+            ],
+            'billing_address2'        => ['string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                              return $query->where('billing_address2', $request->billing_address2)
+                                                  ->where('company_id', $company_id)
+                                                  ->where('id', $customer->id);
+                                          }),
+            ],
             'billing_phone_extension' => ['string', 'max:255'],
-            'billing_fax'             => ['string', 'max:255', 'unique:customers,fax,'.$customer->id],
+            'billing_fax'             => ['string', 'max:255',
+                                          Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
+                                              return $query->where('billing_fax', $request->billing_fax)
+                                                  ->where('company_id', $company_id)
+                                                  ->where('id', $customer->id);
+                                          }),
+            ],
             'billing_city'            => ['required', 'string', 'max:255'],
             'billing_state'           => ['required', 'string'],
             'billing_zip_code'        => ['required', 'string'],

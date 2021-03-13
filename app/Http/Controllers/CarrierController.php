@@ -62,12 +62,6 @@ class CarrierController extends Controller
             "email"                     => ['required', 'email', 'unique:customers,email'],
             "zip_code"                  => ['required', 'string'],
             "carrier_fee"               => ['string', 'nullable'],
-//            "preferred_carrier_status"  => ['integer', 'nullable'],
-//            "smart_way_certified"       => ['integer', 'nullable'],
-//            "carb_compliant"            => ['integer', 'nullable'],
-//            "use_dba_name"              => ['integer', 'nullable'],
-//            "require_carrier_agreement" => ['integer', 'nullable'],
-//            "flagged"                   => ['integer', 'nullable'],
             "flag"                      => ['string', 'nullable', 'max:255'],
             "note"                      => ['string', 'nullable', 'max:255'],
 
@@ -180,12 +174,6 @@ class CarrierController extends Controller
             "email"                     => ['required', 'email', 'unique:customers,email,'.$carrier->id],
             "zip_code"                  => ['required', 'string'],
             "carrier_fee"               => ['string', 'nullable'],
-//            "preferred_carrier_status"  => ['integer', 'nullable'],
-//            "smart_way_certified"       => ['integer', 'nullable'],
-//            "carb_compliant"            => ['integer', 'nullable'],
-//            "use_dba_name"              => ['integer', 'nullable'],
-//            "require_carrier_agreement" => ['integer', 'nullable'],
-//            "flagged"                   => ['integer', 'nullable'],
             "flag"                      => ['string', 'nullable', 'max:255'],
             "note"                      => ['string', 'nullable', 'max:255'],
 
@@ -263,7 +251,7 @@ class CarrierController extends Controller
     public function search($company_id, Request $request)
     {
         $keyword = $request->keyword;
-        $data = Carrier::where('company_id', $company_id)->where('company', 'LIKE', '%'.$keyword.'%')->get();
+        $data = Carrier::where('company', 'LIKE', '%'.$keyword.'%')->get();
         return response()->json(['data' => $data]);
     }
 }
