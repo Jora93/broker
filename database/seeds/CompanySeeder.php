@@ -13,7 +13,10 @@ class CompanySeeder extends Seeder
     public function run()
     {
         DB::table('companies')->insert([
-            'name' => 'American Success Trans'
+            'name' => 'proshyan company',
+            "phone_one" => "(702) 793-2221",
+            "phone_two" => null,
+            'mc_number' => 1111
         ]);
     }
 }

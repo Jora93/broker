@@ -11057,3 +11057,7 @@ a.text-dark:focus {
   background-color: #eee;
 }
 
+.ck-editor__editable_inline {
+  height: 250px;
+}
+

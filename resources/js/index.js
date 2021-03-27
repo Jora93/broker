@@ -320,4 +320,118 @@ $(document).ready(function () {
     });
 
     $(".phoneMask").mask('(000) 000-00000000000000');
+
+    // =============confirmationNoteEditor============
+    let confirmationNoteEditor;
+
+    ClassicEditor
+        .create( document.querySelector( '#confirmationNoteEditor' ) )
+        .then( newEditor => {
+            console.log(newEditor);
+            confirmationNoteEditor = newEditor;
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+    $('#confirmationNoteEditorSubmit').click(function() {
+        const editorData = {'confirmation_note' : confirmationNoteEditor.getData()};
+        $.ajax({
+            type: "PATCH",
+            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            data: editorData,
+            success: function (result) {
+                if(result.success) {
+                }
+                if (result.error) {
+                }
+            }
+        });
+    });
+    // =============confirmationNoteEditor============
+    // =============confirmationNoteEditor============
+    let rateQuoteTCEditor;
+
+    ClassicEditor
+        .create( document.querySelector( '#rateQuoteTCEditor' ) )
+        .then( newEditor => {
+            console.log(newEditor);
+            rateQuoteTCEditor = newEditor;
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+    $('#rateQuoteTCEditorSubmit').click(function() {
+        const editorData = {'rate_quote_terms_conditions' : rateQuoteTCEditor.getData()};
+        $.ajax({
+            type: "PATCH",
+            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            data: editorData,
+            success: function (result) {
+                if(result.success) {
+                }
+                if (result.error) {
+                }
+            }
+        });
+    });
+    // =============confirmationNoteEditor============
+    // =============confirmationNoteEditor============
+    let BOLEditor;
+
+    ClassicEditor
+        .create( document.querySelector( '#BOLEditor' ) )
+        .then( newEditor => {
+            console.log(newEditor);
+            BOLEditor = newEditor;
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+    $('#BOLEditorSubmit').click(function() {
+        const editorData = {'bill_of_lading_terms_conditions' : BOLEditor.getData()};
+        $.ajax({
+            type: "PATCH",
+            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            data: editorData,
+            success: function (result) {
+                if(result.success) {
+                }
+                if (result.error) {
+                }
+            }
+        });
+    });
+    // =============confirmationNoteEditor============
+    // =============confirmationNoteEditor============
+    let invoiceEditor;
+
+    ClassicEditor
+        .create( document.querySelector( '#invoiceEditor' ) )
+        .then( newEditor => {
+            console.log(newEditor);
+            invoiceEditor = newEditor;
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+    $('#invoiceEditorSubmit').click(function() {
+        const editorData = {'invoice_terms_conditions' : invoiceEditor.getData()};
+        $.ajax({
+            type: "PATCH",
+            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            data: editorData,
+            success: function (result) {
+                if(result.success) {
+                }
+                if (result.error) {
+                }
+            }
+        });
+    });
+    // =============confirmationNoteEditor============
+
 });

@@ -36,7 +36,6 @@ Route::get('/import-carrier', function(){
 Route::get('/import-customer', function(){
     $aaa = \Excel::import(new CustomersImport, public_path('/assets/customer.xlsx'));
 });
-Route::get('profileSettings', 'CompanyController@profileSettings');
 
 //superAdminRoutes
 Route::post('/setAppCompany', 'CompanyController@setAppCompany');
@@ -58,5 +57,8 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('loads-search', 'LoadController@search');
     Route::resource('load-history', 'LoadHistoryController');
 //    Route::get('carrier-search', 'CarrierController@search');
-
+    Route::get('profileSettings', 'CompanyController@profileSettings');
+    Route::post('profileSettings', 'CompanyController@UpdateProfileSettings');
+    Route::resource('general-settings', 'GeneralSettingsController');
+    Route::patch('general-settings-edit', 'GeneralSettingsController@update');
 });

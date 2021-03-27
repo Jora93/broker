@@ -28,6 +28,7 @@
             window.currentCompanyId = {!! $companyId !!};
         </script>
     @endauth
+    <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 <div id="app">
@@ -118,8 +119,8 @@
                     <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " onclick="addEditStop()" aria-hidden="true"></span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{url('/',$companyId.'/profileSettings')}}">Edit Company Profile</a>
-                    <a class="dropdown-item" href="#">General Settings</a>
+                    <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">Edit Company Profile</a>
+                    <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">General Settings</a>
                 </div>
             </li>
             <div class="col-sm-4 col-xs-4" id="searchCarriers">
