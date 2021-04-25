@@ -1,6 +1,8 @@
 <?php
 use App\Imports\CarriersImport;
 use App\Imports\CustomersImport;
+use Codedge\Fpdf\Fpdf\Fpdf;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,4 +63,15 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::post('profileSettings', 'CompanyController@UpdateProfileSettings');
     Route::resource('general-settings', 'GeneralSettingsController');
     Route::patch('general-settings-edit', 'GeneralSettingsController@update');
+    Route::get('pdf', 'GeneralSettingsController@pdf');
+    Route::get('invoice', 'GeneralSettingsController@invoice');
+//    Route::get('aaa', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+//        $fpdf->AddPage();
+//        $fpdf->SetFont('Courier', 'B', 18);
+//        $fpdf->Cell(50, 25, 'Hello World!');
+//        $fpdf->Output();
+//    });
+
 });
+
+

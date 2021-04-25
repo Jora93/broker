@@ -28,6 +28,7 @@ class Load extends Model
         "trailer_size",
         "customer_costs_rate_per_unit",
         "carrier_costs_rate_per_unit",
+        "carrier_equipment_id",
         'shipper_company',
         'shipper_phone',
         'shipper_phone_extension',

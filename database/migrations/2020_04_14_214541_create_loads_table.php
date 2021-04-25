@@ -25,6 +25,7 @@ class CreateLoadsTable extends Migration
             $table->string('trailer_size');
             $table->string('customer_costs_rate_per_unit');
             $table->string('carrier_costs_rate_per_unit');
+            $table->string('carrier_equipment_id');
             $table->string('shipper_company');
             $table->string('shipper_phone');
             $table->string('shipper_phone_extension');
