@@ -52,6 +52,7 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('companies', 'CompanyController');
     Route::resource('loads', 'LoadController');
+    Route::get('accounting', 'LoadController@accounting')->name('loads.accounting');
     Route::resource('customers', 'CustomerController');
     Route::resource('carriers', 'CarrierController');
     Route::resource('dispatchers', 'DispatcherController');

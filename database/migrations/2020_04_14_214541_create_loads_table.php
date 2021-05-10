@@ -41,7 +41,7 @@ class CreateLoadsTable extends Migration
             $table->string('shipper_state');
             $table->string('shipper_value');
             $table->string('shipper_zip_code');
-            $table->string('shipper_pickup_date');
+            $table->date('shipper_pickup_date');
             $table->string('shipper_pickup_number');
             $table->string('shipper_pickup_time');
             $table->string('shipper_notes');

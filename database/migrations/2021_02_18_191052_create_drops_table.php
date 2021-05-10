@@ -24,7 +24,7 @@ class CreateDropsTable extends Migration
             $table->string('address1');
             $table->string('delivered_number');
             $table->string('address2');
-            $table->string('delivery_date');
+            $table->date('delivery_date');
             $table->string('city');
             $table->string('delivery_time');
             $table->string('delivery_state');

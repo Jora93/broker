@@ -79,6 +79,12 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounting</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('loads.accounting', $companyId)}}">Load Sales Summary</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     Changed Loads
                     <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " onclick="addEditStop()" aria-hidden="true">

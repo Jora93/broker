@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dispatcher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Carrier;
@@ -361,5 +362,58 @@ class LoadController extends Controller
             'user_id' => Auth::user()->id,
             'info' => $info
         ]);
+    }
+
+    public function accounting($company_id, Request $request)
+    {
+        $data = $request->all();
+        $data['date_type'] = isset($data['date_type']) ? $data['date_type'] : 'shipDate';
+        $data['paginate'] = isset($data['paginate']) ? $data['paginate'] : 25;
+        $dispatchers = Dispatcher::where('company_id', $company_id)->get(['id', 'full_name']);
+        $customers = Customer::where('company_id', $company_id)->get(['id', 'company']);
+        $carriers = Carrier::where('company_id', $company_id)->get(['id', 'company']);
+        $loads = Load::where('company_id', $company_id);
+        if (isset($data['status']) && !is_null($data['status'])) {
+            $loads->where('status', $data['status']);
+        }
+
+        if (isset($data['from']) && !is_null($data['from'])) {
+            $from = Carbon::now()->subDays($data['from']);
+            if ($data['date_type'] === 'shipDate') {
+                $loads->whereDate('shipper_pickup_date', '<=',$from);
+            } else {
+                $loads->drops->whereDate('delivery_date', '<=',$from);
+            }
+        }
+
+        if (isset($data['to']) && !is_null($data['to'])) {
+            $to = Carbon::now()->subDays($data['to']);
+            if ($data['date_type'] === 'shipDate') {
+                $loads->whereDate('shipper_pickup_date', '>=',$to);
+            } else {
+                $loads->drops->whereDate('delivery_date', '>=',$to);
+            }
+
+        }
+
+        if (isset($data['customer_id']) && !is_null($data['customer_id'])) {
+            $loads->where('customer_id', $data['customer_id']);
+        }
+
+        if (isset($data['carrier_id']) && !is_null($data['carrier_id'])) {
+            $loads->where('carrier_id', $data['carrier_id']);
+        }
+
+        if (isset($data['dispatcher_id']) && !is_null($data['dispatcher_id'])) {
+            $loads->where('dispatcher_id', $data['dispatcher_id']);
+        }
+
+        if (isset($data['load_id']) && !is_null($data['load_id'])) {
+            $loads->where('id', $data['load_id']);
+        }
+
+        $loads = $loads->orderBy('created_at', 'desc')->paginate($data['paginate']);
+
+        return view('load.sales-summary', compact( 'dispatchers', 'data', 'customers', 'carriers', 'loads'));
     }
 }
