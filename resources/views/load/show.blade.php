@@ -252,7 +252,7 @@
                                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                                             <label class="control-label">Pickup Date</label>
                                                             <div class="input-group date datePicker defaultDatePicker">
-                                                                <input disabled class="form-control" placeholder="Enter pichup date"  type="date" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
+                                                                <input disabled class="datepicker form-control" placeholder="Enter pichup date"  type="text" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -359,7 +359,7 @@
                                                             <div class="form-group deliveryLocationPickupAtMsg-1613">
                                                                 <label class="control-label">Delivery Date</label>
                                                                 <div class="input-group date datePicker defaultDatePicker">
-                                                                    <input disabled class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="date" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
+                                                                    <input disabled class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="text" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
                                                                 </div>
                                                             </div>
                                                         </div>

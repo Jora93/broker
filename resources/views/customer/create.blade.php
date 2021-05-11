@@ -177,7 +177,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label" for="customer_credit_limit">*Credit Limit</label>
-                                <input class="form-control" required="required" type="number" name="credit_limit" value="{{old('credit_limit')}}" id="credit_limit" tabindex="9">
+                                <input class="form-control" required="required" type="number" name="credit_limit" value="{{old('credit_limit', 10000)}}" id="credit_limit" tabindex="9">
                             </div>
                         </div>
 
@@ -348,7 +348,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Broker</button>
+                <button type="submit" class="btn btn-primary">Add Customer</button>
             </div>
         </div>
         </form>

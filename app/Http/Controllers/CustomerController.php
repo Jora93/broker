@@ -175,28 +175,28 @@ class CustomerController extends Controller
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('company', $request->company)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'phone'           => ['required', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('phone', $request->phone)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'address1'        => ['required', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('address1', $request->address1)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'address2'        => ['string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('address2', $request->address2)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'phone_extension' => ['string', 'max:255'],
@@ -204,7 +204,7 @@ class CustomerController extends Controller
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('fax', $request->fax)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'city'            => ['required', 'string', 'max:255'],
@@ -212,7 +212,7 @@ class CustomerController extends Controller
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('email', $request->email)
                                           ->where('company_id', $company_id)
-                                          ->where('id', $customer->id);
+                                          ->where('id', "!=" , $customer->id);
                                   }),
             ],
             'state'           => ['required', 'string'],
@@ -225,28 +225,28 @@ class CustomerController extends Controller
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_company', $request->billing_company)
                                                   ->where('company_id', $company_id)
-                                                  ->where('id', $customer->id);
+                                                  ->where('id', "!=" , $customer->id);
                                           }),
             ],
             'billing_phone'           => ['required', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_phone', $request->billing_phone)
                                                   ->where('company_id', $company_id)
-                                                  ->where('id', $customer->id);
+                                                  ->where('id', "!=" , $customer->id);
                                           }),
             ],
             'billing_address1'        => ['required', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_address1', $request->billing_address1)
                                                   ->where('company_id', $company_id)
-                                                  ->where('id', $customer->id);
+                                                  ->where('id', "!=" , $customer->id);
                                           }),
             ],
             'billing_address2'        => ['string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_address2', $request->billing_address2)
                                                   ->where('company_id', $company_id)
-                                                  ->where('id', $customer->id);
+                                                  ->where('id', "!=" , $customer->id);
                                           }),
             ],
             'billing_phone_extension' => ['string', 'max:255'],
@@ -254,7 +254,7 @@ class CustomerController extends Controller
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_fax', $request->billing_fax)
                                                   ->where('company_id', $company_id)
-                                                  ->where('id', $customer->id);
+                                                  ->where('id', "!=" , $customer->id);
                                           }),
             ],
             'billing_city'            => ['required', 'string', 'max:255'],

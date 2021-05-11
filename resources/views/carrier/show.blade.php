@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="col-md-12 carriers-show">
+        <div class="col-sm-12">
+            <a title="edit" href="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id.'/edit')}}">
+                <button type="button" class="btn btn-primary" aria-label="Left Align">
+                    Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+            </a>
+        </div>
+        <br>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item col-sm-2 carrier-tab">
                 <a class="nav-link active" id="carrier-tab" data-toggle="tab" href="#carrier" role="tab" aria-controls="carrier" aria-selected="true">Carrier</a>

@@ -10,6 +10,7 @@ require('./index');
 require( 'datatables' );
 require( 'bootstrap-select' );
 require( 'jquery-mask-plugin' );
+require( 'bootstrap-datepicker' );
 
 window.Vue = require('vue');
 

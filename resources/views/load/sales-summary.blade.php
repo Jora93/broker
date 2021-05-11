@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Date From:</label>
                                     <div class="input-group date datePicker defaultDatePicker">
-                                        <input class="form-control" placeholder="Enter pichup date"  type="date" name="from" @if(isset($data['from'])) value="{{$data['from']}}" @endif>
+                                        <input class="datepicker form-control" placeholder="Enter pichup date"  type="text" name="from" @if(isset($data['from'])) value="{{$data['from']}}" @endif>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Date To:</label>
                                     <div class="input-group date datePicker defaultDatePicker">
-                                        <input class="form-control" placeholder="Enter pichup date"  type="date" name="to" @if(isset($data['to'])) value="{{$data['to']}}" @endif>
+                                        <input class="datepicker form-control" placeholder="Enter pichup date"  type="text" name="to" @if(isset($data['to'])) value="{{$data['to']}}" @endif>
                                     </div>
                                 </div>
                             </div>

@@ -34,7 +34,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Contracted</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input id="carrier_contracted_on" name="contracted_on" value="{{old('contracted_on', $carrier->contracted_on)}}" type="date" class="form-control focusOnLoad"  tabindex="3" min={{date('Y-m-d')}}>
+                                                <input id="carrier_contracted_on" name="contracted_on" value="{{old('contracted_on', $carrier->contracted_on)}}" type="text" class="form-control datepicker focusOnLoad"  tabindex="3" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -647,7 +647,7 @@
                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                             <label class="control-label">Effective Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter effective on date"  type="date" name="insurance1_effective_on" value="{{old('insurance1_effective_on', $carrier->insurance1_effective_on)}}" id="carrier_carrier_insurance_policies_attributes_0_effective_on" tabindex="70" min={{date('Y-m-d')}}>
+                                                <input class="datepicker form-control" placeholder="Enter effective on date"  type="text" name="insurance1_effective_on" value="{{old('insurance1_effective_on', $carrier->insurance1_effective_on)}}" id="carrier_carrier_insurance_policies_attributes_0_effective_on" tabindex="70" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -655,7 +655,7 @@
                                         <div class="form-group">
                                             <label class="control-label">*Expiration Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter expires on date" required="required" type="date" name="insurance1_expires_on" value="{{old('insurance1_expires_on', $carrier->insurance1_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_0_expires_on" tabindex="74" min={{date('Y-m-d')}}>
+                                                <input class="insuranceExpirationDate datepicker form-control" placeholder="Enter expires on date" required="required" type="text" name="insurance1_expires_on" value="{{old('insurance1_expires_on', $carrier->insurance1_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_0_expires_on" tabindex="74" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -726,7 +726,7 @@
                                         <div id="insuranceEffectiveDateGroup" class="form-group">
                                             <label class="control-label">Effective Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter effective on date"  type="date" name="insurance2_effective_on" value="{{old('insurance2_effective_on', $carrier->insurance2_effective_on)}}" id="carrier_carrier_insurance_policies_attributes_1_effective_on" tabindex="78" min={{date('Y-m-d')}}>
+                                                <input class="datepicker form-control" placeholder="Enter effective on date"  type="text" name="insurance2_effective_on" value="{{old('insurance2_effective_on', $carrier->insurance2_effective_on)}}" id="carrier_carrier_insurance_policies_attributes_1_effective_on" tabindex="78" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
@@ -734,7 +734,7 @@
                                         <div class="form-group">
                                             <label class="control-label">*Expiration Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="form-control" placeholder="Enter expires on date" required="required"  type="date" name="insurance2_expires_on" value="{{old('insurance2_expires_on', $carrier->insurance2_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
+                                                <input class="datepicker form-control" placeholder="Enter expires on date" required="required"  type="text" name="insurance2_expires_on" value="{{old('insurance2_expires_on', $carrier->insurance2_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>

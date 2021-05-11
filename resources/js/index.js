@@ -161,6 +161,17 @@ $(document).ready(function () {
     });
     //Create Load end ---------------------
 
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+    });
+    $('.insuranceExpirationDate').on('change', function(e){
+        debugger
+        var date1 = new Date();
+        var date2 = new Date(e.target.value);
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+        var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+        if (Difference_In_Days <= 30) alert("Expiration Date less  than " + Difference_In_Days + ' days');
+    });
     //Edit Load start ---------------------
     window.addEditStop = function () {
         window.editStopIndex++;
@@ -323,17 +334,18 @@ $(document).ready(function () {
 
     // =============confirmationNoteEditor============
     let confirmationNoteEditor;
+    if (document.querySelector( '#confirmationNoteEditor' )) {
+        ClassicEditor
+            .create( document.querySelector( '#confirmationNoteEditor' ) )
+            .then( newEditor => {
+                console.log(newEditor);
+                confirmationNoteEditor = newEditor;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
 
-    ClassicEditor
-        .create( document.querySelector( '#confirmationNoteEditor' ) )
-        .then( newEditor => {
-            console.log(newEditor);
-            confirmationNoteEditor = newEditor;
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-
+    }
     $('#confirmationNoteEditorSubmit').click(function() {
         const editorData = {'confirmation_note' : confirmationNoteEditor.getData()};
         $.ajax({
@@ -351,16 +363,17 @@ $(document).ready(function () {
     // =============confirmationNoteEditor============
     // =============confirmationNoteEditor============
     let rateQuoteTCEditor;
-
-    ClassicEditor
-        .create( document.querySelector( '#rateQuoteTCEditor' ) )
-        .then( newEditor => {
-            console.log(newEditor);
-            rateQuoteTCEditor = newEditor;
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+    if (document.querySelector( '#rateQuoteTCEditor' )) {
+        ClassicEditor
+            .create( document.querySelector( '#rateQuoteTCEditor' ) )
+            .then( newEditor => {
+                console.log(newEditor);
+                rateQuoteTCEditor = newEditor;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    }
 
     $('#rateQuoteTCEditorSubmit').click(function() {
         const editorData = {'rate_quote_terms_conditions' : rateQuoteTCEditor.getData()};
@@ -379,16 +392,17 @@ $(document).ready(function () {
     // =============confirmationNoteEditor============
     // =============confirmationNoteEditor============
     let BOLEditor;
-
-    ClassicEditor
-        .create( document.querySelector( '#BOLEditor' ) )
-        .then( newEditor => {
-            console.log(newEditor);
-            BOLEditor = newEditor;
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+    if (document.querySelector( '#BOLEditor' )) {
+        ClassicEditor
+            .create( document.querySelector( '#BOLEditor' ) )
+            .then( newEditor => {
+                console.log(newEditor);
+                BOLEditor = newEditor;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    }
 
     $('#BOLEditorSubmit').click(function() {
         const editorData = {'bill_of_lading_terms_conditions' : BOLEditor.getData()};
@@ -407,16 +421,17 @@ $(document).ready(function () {
     // =============confirmationNoteEditor============
     // =============confirmationNoteEditor============
     let invoiceEditor;
-
-    ClassicEditor
-        .create( document.querySelector( '#invoiceEditor' ) )
-        .then( newEditor => {
-            console.log(newEditor);
-            invoiceEditor = newEditor;
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+    if (document.querySelector( '#invoiceEditor' )) {
+        ClassicEditor
+            .create( document.querySelector( '#invoiceEditor' ) )
+            .then( newEditor => {
+                console.log(newEditor);
+                invoiceEditor = newEditor;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    }
 
     $('#invoiceEditorSubmit').click(function() {
         const editorData = {'invoice_terms_conditions' : invoiceEditor.getData()};
