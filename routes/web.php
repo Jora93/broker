@@ -51,7 +51,7 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('companies', 'CompanyController');
-    Route::resource('loads', 'LoadController')->middleware(['auth', 'company']);
+    Route::resource('loads', 'LoadController')->middleware(['cors']);
     Route::get('accounting', 'LoadController@accounting')->name('loads.accounting');
     Route::resource('customers', 'CustomerController');
     Route::resource('carriers', 'CarrierController');
