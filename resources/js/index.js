@@ -138,7 +138,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "POST",
-            url: `http://broker.me/${window.currentCompanyId}/loads`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/loads`,
             data: values,
             success: function (result) {
                 if(result.success) {
@@ -271,7 +271,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/loads/${loadId}`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/loads/${loadId}`,
             data: values,
             success: function (result) {
                 if(result.success) {
@@ -303,7 +303,7 @@ $(document).ready(function () {
         var reviewer_id = $(this).data('reviewer-id');
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/load-history/${id}`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/load-history/${id}`,
             data: {
                 reviewer_id: reviewer_id,
                 confirmed: 1
@@ -332,7 +332,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: `http://broker.me/${window.currentCompanyId}/carrier-search`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/carrier-search`,
             data: values,
             success: function (result) {
                 if(result.data && result.data.length) {
@@ -368,7 +368,7 @@ $(document).ready(function () {
         const editorData = {'confirmation_note' : confirmationNoteEditor.getData()};
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/general-settings-edit`,
             data: editorData,
             success: function (result) {
                 if(result.success) {
@@ -397,7 +397,7 @@ $(document).ready(function () {
         const editorData = {'rate_quote_terms_conditions' : rateQuoteTCEditor.getData()};
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/general-settings-edit`,
             data: editorData,
             success: function (result) {
                 if(result.success) {
@@ -426,7 +426,7 @@ $(document).ready(function () {
         const editorData = {'bill_of_lading_terms_conditions' : BOLEditor.getData()};
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/general-settings-edit`,
             data: editorData,
             success: function (result) {
                 if(result.success) {
@@ -455,7 +455,7 @@ $(document).ready(function () {
         const editorData = {'invoice_terms_conditions' : invoiceEditor.getData()};
         $.ajax({
             type: "PATCH",
-            url: `http://broker.me/${window.currentCompanyId}/general-settings-edit`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/general-settings-edit`,
             data: editorData,
             success: function (result) {
                 if(result.success) {

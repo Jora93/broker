@@ -70869,7 +70869,7 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "POST",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/loads"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads"),
       data: values,
       success: function success(result) {
         if (result.success) {
@@ -71005,7 +71005,7 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/loads/").concat(loadId),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads/").concat(loadId),
       data: values,
       success: function success(result) {
         if (result.success) {
@@ -71047,7 +71047,7 @@ $(document).ready(function () {
     var reviewer_id = $(this).data('reviewer-id');
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/load-history/").concat(id),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/load-history/").concat(id),
       data: {
         reviewer_id: reviewer_id,
         confirmed: 1
@@ -71074,7 +71074,7 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "GET",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/carrier-search"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/carrier-search"),
       data: values,
       success: function success(result) {
         if (result.data && result.data.length) {
@@ -71108,7 +71108,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/general-settings-edit"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/general-settings-edit"),
       data: editorData,
       success: function success(result) {
         if (result.success) {}
@@ -71136,7 +71136,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/general-settings-edit"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/general-settings-edit"),
       data: editorData,
       success: function success(result) {
         if (result.success) {}
@@ -71164,7 +71164,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/general-settings-edit"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/general-settings-edit"),
       data: editorData,
       success: function success(result) {
         if (result.success) {}
@@ -71192,7 +71192,7 @@ $(document).ready(function () {
     };
     $.ajax({
       type: "PATCH",
-      url: "http://broker.me/".concat(window.currentCompanyId, "/general-settings-edit"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/general-settings-edit"),
       data: editorData,
       success: function success(result) {
         if (result.success) {}

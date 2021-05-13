@@ -26,6 +26,7 @@
         @endphp
         <script>
             window.currentCompanyId = {!! $companyId !!};
+            window.APP_URL = {!! "'".env('APP_URL')."'" !!};
         </script>
     @endauth
     <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
