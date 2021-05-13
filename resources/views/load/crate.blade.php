@@ -353,23 +353,21 @@
                                 <div class="tab-item">
                                     <div class="card">
                                         <div class="card-header">
-                                            <span>Stops //todo add functionality later</span>
+                                            <span>Stops</span>
                                             <button style="float: right" type="button" class="btn btn-primary" aria-label="Left Align">
                                                 <span style="cursor:pointer" class="glyphicon glyphicon-plus pull-right" onclick="addStop()" aria-hidden="true"></span>
                                             </button>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <p class="noEntitiesDefined">No stops have been added.</p>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12" id="consigneeContainer">
-                                <div class="tab-item" id="consigneeItem">
+                                <div class="tab-item consigneeItem" id="consigneeItem">
                                     <div class="card">
-                                        <div class="card-header">Consignee Information</div>
+                                        <div class="card-header">
+                                            <span>Consignee Information</span>
+                                            <span style="cursor:pointer" class="glyphicon glyphicon-trash pull-right removeConsegneeItem" aria-hidden="true"></span>
+                                        </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
