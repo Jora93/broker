@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'agent' => \App\Http\Middleware\Agent::class,
         'adminAndSupport' => \App\Http\Middleware\AdminAndSupport::class,
         'company' => \App\Http\Middleware\Company::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 
     /**
