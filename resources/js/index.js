@@ -165,12 +165,11 @@ $(document).ready(function () {
         format: 'yyyy-mm-dd'
     });
     $('.insuranceExpirationDate').on('change', function(e){
-        debugger
         var date1 = new Date();
         var date2 = new Date(e.target.value);
         var Difference_In_Time = date2.getTime() - date1.getTime();
         var Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
-        if (Difference_In_Days <= 30) alert("Expiration Date less  than " + Difference_In_Days + ' days');
+        if (Difference_In_Days <= 30) alert("Expiration Date must be less  than 30 days");
     });
     //Edit Load start ---------------------
     window.addEditStop = function () {

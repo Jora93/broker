@@ -131,8 +131,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">*Company</label>
-                                                            <input class="form-control" placeholder="Enter company" required="required" type="text" name="shipper_company" value="{{old('shipper_company', $load->shipper_company)}}">
+                                                            <label class="control-label">Company</label>
+                                                            <input class="form-control" placeholder="Enter company"  type="text" name="shipper_company" value="{{old('shipper_company', $load->shipper_company)}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 col-xs-3">
@@ -218,8 +218,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">City</label>
-                                                            <input class="form-control" placeholder="Enter billing city" type="text" name="shipper_city" value="{{old('shipper_city', $load->shipper_city)}}">
+                                                            <label class="control-label">City*</label>
+                                                            <input class="form-control" required="true" placeholder="Enter shipper city" type="text" name="shipper_city" value="{{old('shipper_city', $load->shipper_city)}}">
                                                         </div>
                                                     </div>
 
@@ -235,8 +235,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">State/Province</label><br>
-                                                            <select name="shipper_state" value="{{old('shipper_state', $load->shipper_state)}}" class="selectpicker" required="true" data-live-search="true">
+                                                            <label class="control-label">State/Province*</label><br>
+                                                            <select name="shipper_state" required="true" value="{{old('shipper_state', $load->shipper_state)}}" class="selectpicker"  data-live-search="true">
                                                                 <option disabled selected value>Select State/Province</option>
                                                                 <option @if(old('shipper_state', $load->shipper_state) === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                                 <option @if(old('shipper_state', $load->shipper_state) === 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -296,11 +296,10 @@
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">Value</label>
-
+                                                            <label class="control-label">Value*</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input type="number" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
+                                                                <input type="number" required="true" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -316,9 +315,9 @@
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div id="insuranceEffectiveDateGroup" class="form-group">
-                                                            <label class="control-label">Pickup Date</label>
-                                                            <div class="input-group date datePicker defaultDatePicker">
-                                                                <input class="datepicker form-control" placeholder="Enter pichup date"  type="text" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
+                                                            <label class="control-label">Pickup Date*</label>
+                                                            <div class="input-group date defaultDatePicker">
+                                                                <input class="datepicker form-control" required="required" placeholder="Enter pichup date"  type="text" name="shipper_pickup_date" value="{{old('shipper_pickup_date', $load->shipper_pickup_date)}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -382,7 +381,7 @@
                                                             <div class="form-group">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Company</label>
-                                                                    <input class="form-control consignee_company" placeholder="Enter company" required="required" type="text" name="consignee[{{$key}}][company]" value="{{$drop->company}}">
+                                                                    <input class="form-control consignee_company" placeholder="Enter company"  type="text" name="consignee[{{$key}}][company]" value="{{$drop->company}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -390,7 +389,7 @@
                                                         <div class="col-sm-3 col-xs-3">
                                                             <div class="form-group">
                                                                 <label class="control-label" for="customer_phone">Phone</label>
-                                                                <input class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone" required="required" type="text" name="consignee[{{$key}}][phone]" value="{{$drop->phone}}">
+                                                                <input class="form-control requiredInputCustomer phoneMask consignee_phone" placeholder="Enter phone"  type="text" name="consignee[{{$key}}][phone]" value="{{$drop->phone}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 col-xs-3">
@@ -440,9 +439,9 @@
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group deliveryLocationPickupAtMsg-1613">
-                                                                <label class="control-label">Delivery Date</label>
-                                                                <div class="input-group date datePicker defaultDatePicker">
-                                                                    <input class="datepicker form-control consignee_delivery_date" placeholder="Enter delivery date"  type="text" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
+                                                                <label class="control-label">Delivery Date*</label>
+                                                                <div class="input-group date  defaultDatePicker">
+                                                                    <input required="required" class="datepicker form-control consignee_delivery_date" placeholder="Enter delivery date"  type="text" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -452,7 +451,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div id="delivery_location_cityGroup" class="form-group deliveryLocationCityMsg-1613">
                                                                 <label class="control-label">City</label>
-                                                                <input class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
+                                                                <input class="form-control consignee_city" placeholder="Enter city"  type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
@@ -467,7 +466,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">State/Province</label><br>
-                                                                <select name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
+                                                                <select name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa"  data-live-search="true">
                                                                     <option disabled selected value>Select State/Province</option>
                                                                     <option @if($drop->delivery_state === 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                                     <option @if($drop->delivery_state === 'AK') selected @endif value="AK">AK (Alaska)</option>

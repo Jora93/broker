@@ -177,8 +177,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="customer-load-value" class="col-form-label">*Load Value</label>
-                                <input type="number" name="shipper_value" max="7000" class="form-control" id="customer-load-valuet" required="true">
+                                <label for="customer-load-value" class="col-form-label">Load Value</label>
+                                <input type="number" name="shipper_value" max="7000" class="form-control" id="customer-load-valuet">
                             </div>
                     </div>
 

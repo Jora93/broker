@@ -67,14 +67,14 @@ class CustomerController extends Controller
                                           ->where('company_id', $company_id);
                                   }),
             ],
-            'address2'        => ['string', 'max:255',
+            'address2'        => ['nullable', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id) {
                                       return $query->where('address2', $request->address2)
                                           ->where('company_id', $company_id);
                                   }),
             ],
-            'phone_extension' => ['string', 'max:255'],
-            'fax'             => ['string', 'max:255',
+            'phone_extension' => ['nullable', 'string', 'max:255'],
+            'fax'             => ['nullable', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id) {
                                       return $query->where('fax', $request->fax)
                                           ->where('company_id', $company_id);
@@ -91,7 +91,7 @@ class CustomerController extends Controller
             'zip_code'        => ['required', 'string'],
             'credit_limit'    => ['required', 'integer'],
             'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
-            'note'            => ['string', 'max:1000'],
+            'note'            => ['nullable', 'string', 'max:1000'],
 
             'billing_company'         => ['required', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id) {
@@ -111,14 +111,14 @@ class CustomerController extends Controller
                                                   ->where('company_id', $company_id);
                                           }),
             ],
-            'billing_address2'        => ['string', 'max:255',
+            'billing_address2'        => ['nullable', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id) {
                                               return $query->where('billing_address2', $request->billing_address2)
                                                   ->where('company_id', $company_id);
                                           }),
             ],
-            'billing_phone_extension' => ['string', 'max:255'],
-            'billing_fax'             => ['string', 'max:255',
+            'billing_phone_extension' => ['nullable', 'string', 'max:255'],
+            'billing_fax'             => ['nullable', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id) {
                                               return $query->where('billing_fax', $request->billing_fax)
                                                   ->where('company_id', $company_id);
@@ -192,15 +192,15 @@ class CustomerController extends Controller
                                           ->where('id', "!=" , $customer->id);
                                   }),
             ],
-            'address2'        => ['string', 'max:255',
+            'address2'        => ['nullable', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('address2', $request->address2)
                                           ->where('company_id', $company_id)
                                           ->where('id', "!=" , $customer->id);
                                   }),
             ],
-            'phone_extension' => ['string', 'max:255'],
-            'fax'             => ['string', 'max:255',
+            'phone_extension' => ['nullable', 'string', 'max:255'],
+            'fax'             => ['nullable', 'string', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('fax', $request->fax)
                                           ->where('company_id', $company_id)
@@ -219,7 +219,7 @@ class CustomerController extends Controller
             'zip_code'        => ['required', 'string'],
             'credit_limit'    => ['required', 'integer'],
             'currency'        => ['required', 'string', 'max:20', Rule::in(['USD', 'CAD', 'MXN'])],
-            'note'            => ['string', 'max:1000'],
+            'note'            => ['nullable', 'string', 'max:1000'],
 
             'billing_company'         => ['required', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
@@ -242,15 +242,15 @@ class CustomerController extends Controller
                                                   ->where('id', "!=" , $customer->id);
                                           }),
             ],
-            'billing_address2'        => ['string', 'max:255',
+            'billing_address2'        => ['nullable', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_address2', $request->billing_address2)
                                                   ->where('company_id', $company_id)
                                                   ->where('id', "!=" , $customer->id);
                                           }),
             ],
-            'billing_phone_extension' => ['string', 'max:255'],
-            'billing_fax'             => ['string', 'max:255',
+            'billing_phone_extension' => ['nullable', 'string', 'max:255'],
+            'billing_fax'             => ['nullable', 'string', 'max:255',
                                           Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                               return $query->where('billing_fax', $request->billing_fax)
                                                   ->where('company_id', $company_id)

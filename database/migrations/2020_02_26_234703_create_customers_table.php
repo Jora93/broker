@@ -30,7 +30,7 @@ class CreateCustomersTable extends Migration
             $table->string('zip_code');
             $table->integer('credit_limit');
             $table->string('currency');
-            $table->string('note');
+            $table->string('note')->nullable();
 
             $table->string('billing_company');
             $table->string('billing_phone');

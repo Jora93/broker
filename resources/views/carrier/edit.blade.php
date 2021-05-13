@@ -734,7 +734,7 @@
                                         <div class="form-group">
                                             <label class="control-label">*Expiration Date</label>
                                             <div class="input-group date datePicker defaultDatePicker">
-                                                <input class="datepicker form-control" placeholder="Enter expires on date" required="required"  type="text" name="insurance2_expires_on" value="{{old('insurance2_expires_on', $carrier->insurance2_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
+                                                <input class="insuranceExpirationDate datepicker form-control" placeholder="Enter expires on date" required="required"  type="text" name="insurance2_expires_on" value="{{old('insurance2_expires_on', $carrier->insurance2_expires_on)}}" id="carrier_carrier_insurance_policies_attributes_1_expires_on" tabindex="82" min={{date('Y-m-d')}}>
                                             </div>
                                         </div>
                                     </div>
