@@ -54,7 +54,9 @@ class Load extends Model
         'driver_number',
         'pro_number',
         'driver_email',
-        'changed'
+        'changed',
+        'load_number',
+        'invoice_number'
     ];
 
     /**

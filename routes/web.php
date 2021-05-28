@@ -53,6 +53,7 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::resource('companies', 'CompanyController');
     Route::resource('loads', 'LoadController')->middleware(['cors']);
     Route::get('accounting', 'LoadController@accounting')->name('loads.accounting');
+    Route::get('invoice/{load_id}', 'LoadController@createInvoice');
     Route::resource('customers', 'CustomerController');
     Route::resource('carriers', 'CarrierController');
     Route::resource('dispatchers', 'DispatcherController');
@@ -65,7 +66,7 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::resource('general-settings', 'GeneralSettingsController');
     Route::patch('general-settings-edit', 'GeneralSettingsController@update');
     Route::get('pdf', 'GeneralSettingsController@pdf');
-    Route::get('invoice', 'GeneralSettingsController@invoice');
+//    Route::get('invoice', 'GeneralSettingsController@invoice');
 //    Route::get('aaa', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 //        $fpdf->AddPage();
 //        $fpdf->SetFont('Courier', 'B', 18);

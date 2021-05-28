@@ -26,9 +26,9 @@
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Status</div>
                             <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" onchange="return onStatusChange();" tabindex="1">
+                                <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
                                 <option @if($load->status == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
                                 <option @if($load->status == "Committed") selected @endif value="Committed">Committed</option>
-                                <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
                                 <option @if($load->status == "Dispatched") selected @endif value="Dispatched">Dispatched</option>
                                 <option @if($load->status == "Picked Up") selected @endif value="Picked Up">Picked Up</option>
                                 <option @if($load->status == "Enroute") selected @endif value="Enroute">Enroute</option>
@@ -749,170 +749,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="tab-item">
-                                        <div class="card">
-                                            <div class="card-header">Carrier Costs</div>
-                                            <div class="card-body">
-                                                <table id="carrierCostsTable" class="table table-striped carrierCostsTable costTable">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="unitColumn">Units</th>
-                                                        <th class="qtyColumn">Quantity</th>
-                                                        <th class="amtColumn">Cost/Unit</th>
-                                                        <th class="suggestColumn"></th>
-                                                        <th class="grossColumn">Gross</th>
-                                                        <th class="delColumn"></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr class="carrierCostRow">
-                                                        <td class="unitColumn">
-                                                            <select name="carrier_costs_units_id" class=" form-control editMainField input-sm" tabindex="73">
-                                                                <option value="10613">Blueberries</option>
-                                                                <option value="10612">Boxes</option>
-                                                                <option value="10907">Carrier Fee</option>
-                                                                <option value="10609">Cartons</option>
-                                                                <option value="10606">CWT</option>
-                                                                <option selected="" value="10607">Flat Rate</option>
-                                                                <option value="10605">Miles</option>
-                                                                <option value="10608">Pallets</option>
-                                                                <option value="10611">Pounds</option>
-                                                                <option value="10614">Strawberries</option>
-                                                                <option value="10610">Tons</option>
-                                                                <option value="10615">Truck Ordered/Not Used</option>
-                                                            </select>
-                                                        </td>
-                                                        <td class="qtyColumn">
-                                                            <input name="carrier_costs_quantity" type="text" value="{{old('carrier_costs_quantity', $load->carrier_costs_quantity)}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">
-                                                        </td>
-                                                        <td class="amtColumn">
-                                                            <div class="input-group carrierCostInput">
-                                                                <span class="input-group-addon">$</span>
-                                                                <input name="carrier_costs_rate_per_unit" value="{{old('carrier_costs_rate_per_unit', $load->carrier_costs_rate_per_unit)}}" type="text" class=" form-control editMainField input-sm" tabindex="76">
-                                                            </div>
-                                                        </td>
-                                                        <td class="suggestColumn">
-                                                        </td>
-                                                        <td class="text-right">
-                                                            <span class="grossColumn carrierCostGrossColumn">$0.00</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr class="carrierStopsHeader">
-                                                        <th></th>
-                                                        <th>Stops</th>
-                                                        <th>Cost/Stop</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <tr class="carrierStopsRow">
-                                                        <td></td>
-                                                        <td>
-                                                            <input name="stops" type="number" min="0" value="{{old('stops', $load->stops)}}" class=" form-control editMainField input-sm" tabindex="77">
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">$</span>
-                                                                <input name="cost_per_stop" type="text" class=" form-control input-sm" value="{{old('cost_per_stop', $load->cost_per_stop)}}"  tabindex="78">
-                                                            </div>
-                                                        </td>
-                                                        <td></td>
-                                                        <td class="text-right"> <span class="grossColumn carrierCostsStopGrossColumn">$0.00</span></td>
-                                                        <td></td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <th>Miles</th>
-                                                        <th>Fuel Surcharge</th>
-                                                        <th>FS Rate</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input name="miles" type="number" min="0" value="{{old('miles', $load->miles)}}" class="form-control input-sm">
-                                                        </td>
-                                                        <td>
-                                                            <select name="fuel_surcharge_type" class="form-control input-sm">
-                                                                <option selected="">None</option>
-                                                                <option value="Flat Rate">Flat Rate</option>
-                                                                <option value="Per Mile">Per Mile</option>
-                                                                <option value="Percentage">Percentage</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">$</span>
-                                                                <input name="fuel_surcharge_rate_dollar" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_dollar', $load->fuel_surcharge_rate_dollar)}}" disabled="">
-                                                            </div>
-                                                            <div class="input-group" style="display:none">
-                                                                <input name="fuel_surcharge_rate_percentage" type="text" class="form-control input-sm" value="{{old('fuel_surcharge_rate_percentage', $load->fuel_surcharge_rate_percentage)}}" disabled="">
-                                                                <span class="input-group-addon">%</span>
-                                                            </div>
-                                                        </td>
-                                                        <td><div></div></td>
-                                                        <td class="text-right">
-                                                            <span class="grossColumn carrierCostMilesGrossColumn">$0.00</span>
-                                                        </td>
-                                                        <td class="delColumn"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td style="text-align: right">Total Costs</td>
-                                                        <td class="text-right">  <span class="grossColumn carrierCostTotalCostColumn">$0.00</span></td>
-                                                        <td class="delColumn"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="4" style="text-align: right">Total</td>
-                                                        <td class="text-right">  <span class="grossColumn carrierCostTotalGrossColumn">$0.00</span></td>
-                                                        <td class="delColumn"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>
-                                                            Driver Advance
-                                                        </td>
-
-                                                        <td class="grossColumn">
-                                                            <div class="input-group" style="float: right">
-                                                                <span class="input-group-addon">$</span>
-                                                                <input name="driver_advance_gross" type="number" style="color: red" class="form-control input-sm" value="{{old('driver_advance_gross', $load->driver_advance_gross)}}">
-                                                            </div>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
-
-                                                    <tr class="costBalanceDueRow">
-                                                        <td colspan="4" style="text-align: right">Balance Due</td>
-                                                        <td class="text-right">
-                                                            <span class="grossColumn carrierCostBalanceDueColumn">$0.00</span>
-                                                        </td>
-                                                        <td class="delColumn"></td>
-                                                    </tr>
-
-                                                    </tbody>
-                                                </table>
-
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation One
-                                                </a>
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation Two
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1056,15 +892,6 @@
 
                                                     </tbody>
                                                 </table>
-
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation One
-                                                </a>
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation Two
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -1107,13 +934,9 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <a href="" class="actionLink " target="_blank">
+                                                <a href="{{ url(\App::make('currentCompany')->id.'/invoice/'.$load->id) }}" class="actionLink " target="_blank">
                                                     <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation One
-                                                </a>
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation Two
+                                                    Create Invoice
                                                 </a>
                                             </div>
                                         </div>

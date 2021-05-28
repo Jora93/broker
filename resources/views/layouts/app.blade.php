@@ -23,6 +23,7 @@
         @php
             $changedLoads = \App\Load::where('changed', true)->get();
             $companyId = \App::make('currentCompany')->id;
+            $companies = \App\Company::all();
         @endphp
         <script>
             window.currentCompanyId = {!! $companyId !!};
@@ -88,7 +89,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     Changed Loads
-                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " onclick="addEditStop()" aria-hidden="true">
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " aria-hidden="true">
                         {{count($changedLoads)}}
                     </span>
                 </a>
@@ -103,7 +104,7 @@
             <li class="nav-item dropdown pull-right">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
-                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-user pull-right " onclick="addEditStop()" aria-hidden="true">
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-user pull-right " aria-hidden="true">
                     </span>
                 </a>
                 <div class="dropdown-menu">
@@ -123,11 +124,14 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " onclick="addEditStop()" aria-hidden="true"></span>
+                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " aria-hidden="true"></span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">Edit Company Profile</a>
+                    <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">General Company Profile</a>
                     <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">General Settings</a>
+                    @foreach($companies as $company)
+                        <a class="dropdown-item" href="{{url($companyId.'/companies/'.$company->id.'/edit')}}">{{$company->name}}</a>
+                    @endforeach
                 </div>
             </li>
             <div class="col-sm-4 col-xs-4" id="searchCarriers">
@@ -137,7 +141,7 @@
                         <input class="form-control" type="text" id="" name="keyword" placeholder="Search for customers.." title="Type in a name">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">
-                        <span style="cursor:pointer" class="glyphicon glyphicon-search" onclick="addEditStop()" aria-hidden="true"></span>
+                        <span style="cursor:pointer" class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </form>
                 <ul id="myUL" class="col-sm-6 col-xs-6"></ul>

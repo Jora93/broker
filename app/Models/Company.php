@@ -21,6 +21,10 @@ class Company extends Model
             'name',
             'mc_number',
             'phone_one',
-            'phone_two'
+            'phone_two',
+            'adress',
+            'invoice_last_number',
+            'load_last_number',
+            'logo'
         ];
 }

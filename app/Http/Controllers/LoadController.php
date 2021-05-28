@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Dispatcher;
+use App\GeneralSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Customer;
@@ -138,8 +140,10 @@ class LoadController extends Controller
         $loadData = $data;
         $loadData['company_id'] = \App::make('currentCompany')->id;
 
-
+        $company = Company::find($company_id);
+        $loadData['load_number'] = $company->load_last_number + 1;
         $load = Load::create($loadData);
+        $company->update(['load_last_number' => $loadData['load_number']]);
 
         foreach ($dropsData as $key => $dropData) {
             $dropsData[$key]['load_id'] = $load->id;
@@ -415,5 +419,24 @@ class LoadController extends Controller
         $loads = $loads->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
         return view('load.sales-summary', compact( 'dispatchers', 'data', 'customers', 'carriers', 'loads'));
+    }
+
+    public function createInvoice ($company_id, $load_id) {
+        $mpdf = new \Mpdf\Mpdf();
+        $load  = Load::find($load_id);
+        $load->customer;
+        $img = public_path('assets/images/logo.png');
+        $company = Company::find($company_id);
+        $load->status = 'Invoiced';
+        if (!is_null($load->invoice_number)) {
+            $invoice_last_number = $company->invoice_last_number + 1;
+            $load->invoice_number = $invoice_last_number;
+            $company->update(['invoice_last_number' => $invoice_last_number]);
+        }
+        $load->save();
+        $generalSetting = GeneralSetting::first();
+        $html = view('pdf.invoice', compact(['load', 'generalSetting', 'company']))->render();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
 }

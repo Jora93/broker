@@ -13,6 +13,7 @@ use App\Http\Services\RateConPdf;
 use App\Http\Services\InvoicePdf;
 use PDF;
 use Dompdf\Dompdf;
+use \Mpdf\Mpdf;
 
 class GeneralSettingsController extends Controller
 {
@@ -262,17 +263,26 @@ class GeneralSettingsController extends Controller
 
     public function invoice ($company_id)
     {
-//        $pdf = \App::make('dompdf.wrapper');
-//        $pdf->loadHTML('<h1>Test</h1>');
+        $mpdf = new \Mpdf\Mpdf();
+        $img = public_path('assets/images/logo.png');
         $company = Company::find($company_id);
         $generalSetting = GeneralSetting::first();
         $load  = Load::first(); //TODO dinamoc
-
-        $data = Load::all();
-        view()->share('load',$load);
-        view()->share('generalSetting',$generalSetting);
-        view()->share('company',$company);
-        $pdf = PDF::loadView('pdf.invoice', [$load, $generalSetting, $company]);
-        return $pdf->stream();
+        $html = view('pdf.invoice', compact(['load', 'generalSetting', 'company']))->render();
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+//
+////        $pdf = \App::make('dompdf.wrapper');
+////        $pdf->loadHTML('<h1>Test</h1>');
+//        $company = Company::find($company_id);
+//        $generalSetting = GeneralSetting::first();
+//        $load  = Load::first(); //TODO dinamoc
+//
+//        $data = Load::all();
+//        view()->share('load',$load);
+//        view()->share('generalSetting',$generalSetting);
+//        view()->share('company',$company);
+//        $pdf = PDF::loadView('pdf.invoice', [$load, $generalSetting, $company]);
+//        return $pdf->stream();
     }
 }
