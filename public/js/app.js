@@ -71316,6 +71316,47 @@ $(document).ready(function () {
       }
     });
   });
+  $('.document-delete').click(function () {
+    var id = this.getAttribute('data-id');
+    $.ajax({
+      type: "DELETE",
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/documents/").concat(id),
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(result) {
+        if (result.success) {
+          debugger;
+        }
+
+        if (result.error) {
+          $(".alert-danger").remove();
+
+          for (var _i9 = 0, _Object$entries9 = Object.entries(result.error); _i9 < _Object$entries9.length; _i9++) {
+            var _Object$entries9$_i = _slicedToArray(_Object$entries9[_i9], 2),
+                key = _Object$entries9$_i[0],
+                value = _Object$entries9$_i[1];
+
+            console.log("".concat(key, ": ").concat(value));
+          }
+
+          var list = '';
+
+          for (var _i10 = 0, _Object$entries10 = Object.entries(result.error); _i10 < _Object$entries10.length; _i10++) {
+            var _Object$entries10$_i = _slicedToArray(_Object$entries10[_i10], 2),
+                _key5 = _Object$entries10$_i[0],
+                _value5 = _Object$entries10$_i[1];
+
+            list += "<li>".concat(_value5, "</li>");
+          }
+
+          var html = '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+          $("#ajaxErrorContainer").append(html);
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  });
 });
 
 /***/ }),

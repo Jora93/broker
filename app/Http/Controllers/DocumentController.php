@@ -128,9 +128,10 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($company_id, Request $request, Document $document)
     {
-        //
+        //todo remove from aws
+        return response()->json(['success' => $document->delete()]);
     }
 
     public function download($id)

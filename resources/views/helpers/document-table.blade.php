@@ -33,7 +33,7 @@
                     <td>{{$document->created_at}}</td>
                     <td>{{$document->user->email}}</td>
                     <td>
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-trash document-delete" data-id="{{$document->id}}" aria-hidden="true"></span>
                     </td>
                 </tr>
             @endforeach

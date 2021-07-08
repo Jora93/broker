@@ -558,4 +558,36 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.document-delete').click(function() {
+        let id = this.getAttribute('data-id')
+        $.ajax({
+            type: "DELETE",
+            url: `${window.APP_URL}/${window.currentCompanyId}/documents/${id}`,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if(result.success) {
+                    debugger
+
+                }
+                if (result.error) {
+                    $( ".alert-danger" ).remove();
+                    for (const [key, value] of Object.entries(result.error)) {
+                        console.log(`${key}: ${value}`);
+                    }
+                    var list = '';
+                    for (const [key, value] of Object.entries(result.error)) {
+                        list += `<li>${value}</li>`
+                    }
+                    var html =
+                        '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+                    $("#ajaxErrorContainer").append(html);
+                    window.scrollTo(0, 0);
+                }
+            }
+        });
+    })
+
 });
