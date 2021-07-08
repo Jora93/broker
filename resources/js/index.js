@@ -569,8 +569,7 @@ $(document).ready(function () {
             processData: false,
             success: function (result) {
                 if(result.success) {
-                    debugger
-
+                    $(`.document-row-${id}`).remove();
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();

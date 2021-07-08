@@ -15,12 +15,12 @@
             </thead>
             <tbody>
             @foreach($load->documents as $document)
-                <tr>
+                <tr class="document-row-{{$document->id}}">
                     <td>
                         <a href="{{url('document-download/'.$document->id)}}">
                             <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                         </a>
-                        <span onclick="editDocument({{$document}})" class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        <span onclick="editDocument({{$document}})" class="glyphicon glyphicon-edit document-edit" aria-hidden="true"></span>
                     </td>
                     <th scope="row">
                         <a href="{{url(env('AWS_STORAGE_URL').$document->name)}}" target="_blank">

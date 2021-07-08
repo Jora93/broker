@@ -71326,7 +71326,7 @@ $(document).ready(function () {
       processData: false,
       success: function success(result) {
         if (result.success) {
-          debugger;
+          $(".document-row-".concat(id)).remove();
         }
 
         if (result.error) {
