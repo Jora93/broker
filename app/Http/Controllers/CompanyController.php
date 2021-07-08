@@ -148,14 +148,14 @@ class CompanyController extends Controller
             "phone_one"           => ['required', 'unique:companies,phone_one,'.$company->id],
             "invoice_last_number" => ['required', 'unique:companies,invoice_last_number,'.$company->id],
             "load_last_number"    => ['required', 'unique:companies,load_last_number,'.$company->id],
-            "logo"                => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg|max:2048'],
+            "logo"                => ['required', 'image', 'mimes:pdf|max:2048'],
         ]);
         $data = $request->all();
         $imageName = time().'.'.$request->logo->getClientOriginalExtension();
 
         $image = $data['logo'];
         if (Storage::disk('s3')->exists($company->logo)) {
-            dump('s3://american-success//'.$imageName);
+//            dump('s3://american-success//'.$imageName);
             Storage::disk('s3')->delete($imageName); //todo dont work
         }
         Storage::disk('s3')->put($imageName, file_get_contents($image), 'public');

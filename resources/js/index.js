@@ -467,4 +467,95 @@ $(document).ready(function () {
     });
     // =============confirmationNoteEditor============
 
+    $( "#LoadCreateDocument" ).submit(function( event ) {
+        event.preventDefault();
+        $('#saveDocBtn').hide();
+        $('#saveDocLoadBtn').show();
+        var inputs = $('#LoadCreateDocument :input');
+        var formData = new FormData(this);
+        inputs.each(function () {
+            formData[this.name] = $(this).val();
+        });
+        formData.append('file', $('#docummentFile')[0].files[0]);
+        $.ajax({
+            type: "POST",
+            url: `${window.APP_URL}/${window.currentCompanyId}/documents`,
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if(result.success) {
+                    $('#saveDocBtn').show();
+                    $('#saveDocLoadBtn').hide();
+                    $('#uploadDoumentModal').modal('toggle');
+                    // location.href = `${location.origin}/${window.currentCompanyId}/loads`;
+                }
+                if (result.error) {
+                    $( ".alert-danger" ).remove();
+                    for (const [key, value] of Object.entries(result.error)) {
+                        console.log(`${key}: ${value}`);
+                    }
+                    var list = '';
+                    for (const [key, value] of Object.entries(result.error)) {
+                        list += `<li>${value}</li>`
+                    }
+                    var html =
+                        '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+                    $("#ajaxErrorContainer").append(html);
+                    window.scrollTo(0, 0);
+                }
+            }
+        });
+    });
+
+    window.editDocument = function (document){
+        $('#documentType').val(document.type).change();
+        $('#documentDescription').val(document.description);
+        $('#documentId').val(document.id);
+        $('#documentCarrierId').val(document.carrier_id).change();
+        $('#documentCustomerId').val(document.customer_id).change();
+        $('#updateDoumentModal').modal('show');
+    }
+
+    $( "#LoadUpdateDocument" ).submit(function( event ) {
+        event.preventDefault();
+        $('#updateDocBtn').hide();
+        $('#updateDocLoadBtn').show();
+        var inputs = $('#LoadUpdateDocument :input');
+        var formData = new FormData(this);
+        inputs.each(function () {
+            formData[this.name] = $(this).val();
+        });
+        formData.append('file', $('#docummentFile')[0].files[0]);
+        $.ajax({
+            type: "PATCH",
+            url: `${window.APP_URL}/${window.currentCompanyId}/documents/${formData.id}`,
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if(result.success) {
+                    $('#updateDocBtn').show();
+                    $('#updateDocLoadBtn').hide();
+                    $('#updateDoumentModal').modal('toggle');
+                }
+                if (result.error) {
+                    $( ".alert-danger" ).remove();
+                    for (const [key, value] of Object.entries(result.error)) {
+                        console.log(`${key}: ${value}`);
+                    }
+                    var list = '';
+                    for (const [key, value] of Object.entries(result.error)) {
+                        list += `<li>${value}</li>`
+                    }
+                    var html =
+                        '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+                    $("#ajaxErrorContainer").append(html);
+                    window.scrollTo(0, 0);
+                }
+            }
+        });
+    });
 });

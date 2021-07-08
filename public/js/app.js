@@ -71201,6 +71201,121 @@ $(document).ready(function () {
       }
     });
   }); // =============confirmationNoteEditor============
+
+  $("#LoadCreateDocument").submit(function (event) {
+    event.preventDefault();
+    $('#saveDocBtn').hide();
+    $('#saveDocLoadBtn').show();
+    var inputs = $('#LoadCreateDocument :input');
+    var formData = new FormData(this);
+    inputs.each(function () {
+      formData[this.name] = $(this).val();
+    });
+    formData.append('file', $('#docummentFile')[0].files[0]);
+    $.ajax({
+      type: "POST",
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/documents"),
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(result) {
+        if (result.success) {
+          $('#saveDocBtn').show();
+          $('#saveDocLoadBtn').hide();
+          $('#uploadDoumentModal').modal('toggle'); // location.href = `${location.origin}/${window.currentCompanyId}/loads`;
+        }
+
+        if (result.error) {
+          $(".alert-danger").remove();
+
+          for (var _i5 = 0, _Object$entries5 = Object.entries(result.error); _i5 < _Object$entries5.length; _i5++) {
+            var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
+                key = _Object$entries5$_i[0],
+                value = _Object$entries5$_i[1];
+
+            console.log("".concat(key, ": ").concat(value));
+          }
+
+          var list = '';
+
+          for (var _i6 = 0, _Object$entries6 = Object.entries(result.error); _i6 < _Object$entries6.length; _i6++) {
+            var _Object$entries6$_i = _slicedToArray(_Object$entries6[_i6], 2),
+                _key3 = _Object$entries6$_i[0],
+                _value3 = _Object$entries6$_i[1];
+
+            list += "<li>".concat(_value3, "</li>");
+          }
+
+          var html = '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+          $("#ajaxErrorContainer").append(html);
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  });
+
+  window.editDocument = function (document) {
+    $('#documentType').val(document.type).change();
+    $('#documentDescription').val(document.description);
+    $('#documentId').val(document.id);
+    $('#documentCarrierId').val(document.carrier_id).change();
+    $('#documentCustomerId').val(document.customer_id).change();
+    $('#updateDoumentModal').modal('show');
+  };
+
+  $("#LoadUpdateDocument").submit(function (event) {
+    event.preventDefault();
+    $('#updateDocBtn').hide();
+    $('#updateDocLoadBtn').show();
+    var inputs = $('#LoadUpdateDocument :input');
+    var formData = new FormData(this);
+    inputs.each(function () {
+      formData[this.name] = $(this).val();
+    });
+    formData.append('file', $('#docummentFile')[0].files[0]);
+    $.ajax({
+      type: "PATCH",
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/documents/").concat(formData.id),
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function success(result) {
+        if (result.success) {
+          $('#updateDocBtn').show();
+          $('#updateDocLoadBtn').hide();
+          $('#updateDoumentModal').modal('toggle');
+        }
+
+        if (result.error) {
+          $(".alert-danger").remove();
+
+          for (var _i7 = 0, _Object$entries7 = Object.entries(result.error); _i7 < _Object$entries7.length; _i7++) {
+            var _Object$entries7$_i = _slicedToArray(_Object$entries7[_i7], 2),
+                key = _Object$entries7$_i[0],
+                value = _Object$entries7$_i[1];
+
+            console.log("".concat(key, ": ").concat(value));
+          }
+
+          var list = '';
+
+          for (var _i8 = 0, _Object$entries8 = Object.entries(result.error); _i8 < _Object$entries8.length; _i8++) {
+            var _Object$entries8$_i = _slicedToArray(_Object$entries8[_i8], 2),
+                _key4 = _Object$entries8$_i[0],
+                _value4 = _Object$entries8$_i[1];
+
+            list += "<li>".concat(_value4, "</li>");
+          }
+
+          var html = '<div class="alert alert-danger"><ul>' + list + '</ul></div>';
+          $("#ajaxErrorContainer").append(html);
+          window.scrollTo(0, 0);
+        }
+      }
+    });
+  });
 });
 
 /***/ }),

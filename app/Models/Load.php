@@ -98,4 +98,12 @@ class Load extends Model
     {
         return $this->hasMany('App\LoadHistory');
     }
+
+    /**
+     * Get the documents for the Load.
+     */
+    public function documents()
+    {
+        return $this->hasMany('App\Document');
+    }
 }

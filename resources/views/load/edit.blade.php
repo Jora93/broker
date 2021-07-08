@@ -117,6 +117,9 @@
                 <li class="nav-item col-sm-2 accounting-tab">
                     <a class="nav-link" id="accounting-tab" data-toggle="tab" href="#accounting" role="tab" aria-controls="accounting" aria-selected="false">Accounting</a>
                 </li>
+                <li class="nav-item col-sm-2 documents-tab">
+                    <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="load" role="tabpanel" aria-labelledby="load-tab">
@@ -946,10 +949,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                    <div id="documents" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadDoumentModal">Attach New Document</button>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Documents</div>
+                                            <div class="card-body">
+                                                @include('helpers.document-table')
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-12"><br>
                     <button type="submit" class="btn btn-primary">Update Load</button>
                 </div>
             </div>
         </form>
     </div>
+    @include('helpers.document-create-modal')
+    @include('helpers.document-edit-modal')
 @endsection

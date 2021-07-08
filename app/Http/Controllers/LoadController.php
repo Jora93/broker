@@ -183,7 +183,8 @@ class LoadController extends Controller
         return response()->view('load.edit', [
             'load' => $load,
             'dispatchers' => Dispatcher::select('id', 'full_name')->get(),
-            'carriers' => Carrier::get() //TODO make ajax elastic search
+            'carriers' => Carrier::get(), //TODO make ajax elastic search
+            'customers' => Customer::get() //TODO make ajax elastic search
         ], 200);
     }
 

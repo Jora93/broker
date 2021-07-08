@@ -45,13 +45,15 @@ Route::post('/setAppCompany', 'CompanyController@setAppCompany');
 Route::prefix('{company_id}')->middleware(['company'])->group(function () {
     Route::get('carrier-search', 'CarrierController@search');
 });
-
+Route::get('document-download/{id}', 'DocumentController@download');
 Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function () {
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('companies', 'CompanyController');
     Route::resource('loads', 'LoadController')->middleware(['cors']);
+    Route::resource('documents', 'DocumentController')->middleware(['cors']);
+
     Route::get('accounting', 'LoadController@accounting')->name('loads.accounting');
     Route::get('invoice/{load_id}', 'LoadController@createInvoice');
     Route::resource('customers', 'CustomerController');
