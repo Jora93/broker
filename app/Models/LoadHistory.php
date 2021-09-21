@@ -26,7 +26,7 @@ class LoadHistory extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Load', 'load_id');
+        return $this->belongsTo('App\Models\Load', 'load_id');
     }
 
     public function user()

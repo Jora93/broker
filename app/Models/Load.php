@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -64,7 +64,7 @@ class Load extends Model
      */
     public function customer()
     {
-        return $this->belongsTo('App\Customer');
+        return $this->belongsTo('App\Models\Customer');
     }
 
     /**
@@ -72,7 +72,7 @@ class Load extends Model
      */
     public function carrier()
     {
-        return $this->belongsTo('App\Carrier');
+        return $this->belongsTo('App\Models\Carrier');
     }
 
     /**
@@ -80,7 +80,7 @@ class Load extends Model
      */
     public function dispatcher()
     {
-        return $this->belongsTo('App\Dispatcher');
+        return $this->belongsTo('App\Models\Dispatcher');
     }
 
     /**
@@ -88,7 +88,7 @@ class Load extends Model
      */
     public function drops()
     {
-        return $this->hasMany('App\Drop');
+        return $this->hasMany('App\Models\Drop');
     }
 
     /**
@@ -96,7 +96,7 @@ class Load extends Model
      */
     public function histories()
     {
-        return $this->hasMany('App\LoadHistory');
+        return $this->hasMany('App\Models\LoadHistory');
     }
 
     /**
@@ -104,6 +104,6 @@ class Load extends Model
      */
     public function documents()
     {
-        return $this->hasMany('App\Document');
+        return $this->hasMany('App\Models\Document');
     }
 }

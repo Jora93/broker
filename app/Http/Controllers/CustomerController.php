@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Models\Customer;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -150,7 +150,7 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Customer $customer
+     * @param \App\Models\Customer $customer
      *
      * @return void
      */
@@ -163,7 +163,7 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Customer            $customer
+     * @param \App\Models\Customer            $customer
      *
      * @return void
      */
@@ -271,7 +271,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Customer $customer
+     * @param \App\Models\Customer $customer
      *
      * @return \Illuminate\Http\Response
      * @throws \Exception

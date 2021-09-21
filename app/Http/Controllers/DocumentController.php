@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use App\Document;
+use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response as Download;
 
@@ -87,7 +87,7 @@ class DocumentController extends Controller
      *
      * @param                          $company_id
      * @param \Illuminate\Http\Request $request
-     * @param \App\Document            $document
+     * @param \App\Models\Document            $document
      *
      * @return \Illuminate\Http\Response
      */

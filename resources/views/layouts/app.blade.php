@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     @auth
         @php
-            $changedLoads = \App\Load::where('changed', true)->get();
+            $changedLoads = \App\Models\Load::where('changed', true)->get();
             $companyId = \App::make('currentCompany')->id;
-            $companies = \App\Company::all();
+            $companies = \App\Models\Company::all();
         @endphp
         <script>
             window.currentCompanyId = {!! $companyId !!};
@@ -155,7 +155,7 @@
 </div>
 @auth
 @php
-  $customers = App\Customer::select('company', 'id')->get();
+  $customers = App\Models\Customer::select('company', 'id')->get();
 @endphp
 <!-- The Modal -->
     <div class="modal" id="createLoadModal">

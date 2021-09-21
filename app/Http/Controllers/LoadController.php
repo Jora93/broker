@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
-use App\Dispatcher;
-use App\GeneralSetting;
+use App\Models\Company;
+use App\Models\Dispatcher;
+use App\Models\GeneralSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Customer;
-use App\Carrier;
-use App\Load;
-use App\Drop;
-use App\LoadHistory;
+use App\Models\Customer;
+use App\Models\Carrier;
+use App\Models\Load;
+use App\Models\Drop;
+use App\Models\LoadHistory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -173,7 +173,7 @@ class LoadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Load $load
+     * @param \App\Models\Load $load
      *
      * @return \Illuminate\Http\Response
      */

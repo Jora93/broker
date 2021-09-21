@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Carrier;
+use App\Models\Carrier;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 

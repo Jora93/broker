@@ -18,7 +18,7 @@ class Company
     public function handle($request, Closure $next)
     {
         $company_id = $request->route('company_id');
-        $company = is_null($company_id) ? false : \App\Company::find($company_id);
+        $company = is_null($company_id) ? false : \App\Models\Company::find($company_id);
         if ($company) {
             \App::instance('currentCompany', $company);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,6 +53,6 @@ class Drop extends Model
      */
 //    public function load()
 //    {
-//        return $this->belongsTo('App\Load');
+//        return $this->belongsTo('App\Models\Load');
 //    }
 }

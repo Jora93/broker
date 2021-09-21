@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dispatcher;
+use App\Models\Dispatcher;
 use Illuminate\Validation\Rule;
 
 class DispatcherController extends Controller
@@ -71,7 +71,7 @@ class DispatcherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Dispatcher $dispatcher
+     * @param \App\Models\Dispatcher $dispatcher
      *
      * @return \Illuminate\Http\Response
      */
@@ -85,7 +85,7 @@ class DispatcherController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Dispatcher          $dispatcher
+     * @param \App\Models\Dispatcher          $dispatcher
      *
      * @return void
      */

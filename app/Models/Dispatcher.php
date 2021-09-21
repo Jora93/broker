@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +29,6 @@ class Dispatcher extends Model
      */
     public function loads()
     {
-        return $this->hasMany('App\Load');
+        return $this->hasMany('App\Models\Load');
     }
 }

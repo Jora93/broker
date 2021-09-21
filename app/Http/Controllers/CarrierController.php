@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Carrier;
+use App\Models\Carrier;
 use Illuminate\Validation\Rule;
 
 class CarrierController extends Controller
@@ -139,7 +139,7 @@ class CarrierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Carrier $carrier
+     * @param \App\Models\Carrier $carrier
      *
      * @return \Illuminate\Http\Response
      */
@@ -152,7 +152,7 @@ class CarrierController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Carrier             $carrier
+     * @param \App\Models\Carrier             $carrier
      *
      * @return \Illuminate\Http\Response
      */
@@ -236,7 +236,7 @@ class CarrierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Carrier $carrier
+     * @param \App\Models\Carrier $carrier
      *
      * @return \Illuminate\Http\Response
      * @throws \Exception

@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\GeneralSetting;
+use App\Models\GeneralSetting;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
 class InvoicePdf extends Fpdf

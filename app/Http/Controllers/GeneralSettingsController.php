@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
-use App\Load;
+use App\Models\Company;
+use App\Models\Load;
 use App\Constanats\UserRoles;
-use App\GeneralSetting;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Codedge\Fpdf\Fpdf\Fpdf;
