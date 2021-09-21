@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-//use App\Constanats\UserRoleConstants;
+//use App\Constanats\UserRoles;
 use Closure;
 
 class Agent
@@ -16,7 +16,7 @@ class Agent
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role === \App\Constanats\UserRoleConstants::Agent){
+        if ($request->user() && $request->user()->role === \App\Constanats\UserRoles::Agent){
             return $next($request);
         }
     }

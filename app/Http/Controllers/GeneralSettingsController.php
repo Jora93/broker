@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Load;
-use App\Constanats\UserRoleConstants;
+use App\Constanats\UserRoles;
 use App\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

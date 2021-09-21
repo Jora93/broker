@@ -2,7 +2,7 @@
 
 namespace App\Constanats;
 
-class UserRoleConstants
+class UserRoles
 {
     const SuperAdmin = 1;
     const CompanyAdmin = 2;

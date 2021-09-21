@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-//use App\Constanats\UserRoleConstants;
+//use App\Constanats\UserRoles;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +24,7 @@ class Company
 
             return $next($request);
         } else {
-            if (Auth::user()->role === \App\Constanats\UserRoleConstants::SuperAdmin) {
+            if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
                 return redirect('/companies');
             } else {
                 return redirect('/'.Auth::user()->company_id);

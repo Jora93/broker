@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-//use App\Constanats\UserRoleConstants;
+//use App\Constanats\UserRoles;
 
 class UserController extends Controller
 {
@@ -45,7 +45,7 @@ class UserController extends Controller
             'role' => [
                 'required',
                 'integer',
-                Rule::in([\App\Constanats\UserRoleConstants::CompanyAdmin, UserRoleConstants::Support, UserRoleConstants::Agent])
+                Rule::in([\App\Constanats\UserRoles::CompanyAdmin, UserRoleConstants::Support, UserRoleConstants::Agent])
             ],
         ]);
         $data = $request->all();

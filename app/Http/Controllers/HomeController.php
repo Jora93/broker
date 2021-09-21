@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Constanats\UserRoleConstants;
+use App\Constanats\UserRoles;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

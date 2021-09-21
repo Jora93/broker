@@ -52,7 +52,7 @@
                                         <label>Confirm Password</label>
                                         <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
                                     </div>
-                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoleConstants::Agent}}">
+                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoles::Agent}}">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -78,7 +78,7 @@
                                         <label>Confirm Password</label>
                                         <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
                                     </div>
-                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoleConstants::Support}}">
+                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoles::Support}}">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>

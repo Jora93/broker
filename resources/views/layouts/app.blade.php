@@ -114,7 +114,7 @@
                         {{ __('Logout') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('account') }}">My Account</a>
-                    @if(Auth::user()->role === \App\Constanats\UserRoleConstants::SuperAdmin)
+                    @if(Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin)
                         <a class="dropdown-item" href="{{ route('userCreate') }}">Create User</a>
                     @endif
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
