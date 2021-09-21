@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Constanats\UserRoleConstants;
+//use App\Constanats\UserRoleConstants;
 
 class Admin
 {
@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role === UserRoleConstants::CompanyAdmin){
+        if ($request->user() && $request->user()->role === \App\Constanats\UserRoleConstants::CompanyAdmin){
             return $next($request);
         }
     }
