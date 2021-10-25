@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="entityLabelValue form-group">
-                        <div class="entityLabel">Product</div>
-                        <input id="product" name="product" title="general goods" value="general goods" class="form-control input-sm editMainField">
+                        <div class="entityLabel">Product*</div>
+                        <input id="product" name="product" required title="general goods" value="general goods" class="form-control input-sm editMainField">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
