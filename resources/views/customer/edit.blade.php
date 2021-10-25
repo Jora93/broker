@@ -95,8 +95,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="customer_email">*Email</label>
-                                    <input class="form-control" required="required" placeholder="Enter email" type="email" name="email" value="{{old('email', $customer->email)}}" id="customer_email" tabindex="27">
+                                    <label class="control-label" for="customer_email">Email</label>
+                                    <input class="form-control" placeholder="Enter email" type="email" name="email" value="{{old('email', $customer->email)}}" id="customer_email" tabindex="27">
                                 </div>
                             </div>
 

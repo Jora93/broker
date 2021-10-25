@@ -294,10 +294,10 @@
 
                                                 <div class="col-sm-6 col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label">Value*</label>
+                                                        <label class="control-label">Value</label>
                                                         <div class="input-group">
                                                             <span class="input-group-addon">$</span>
-                                                            <input type="number" name="shipper_value"  required="true" value="{{old('shipper_value', $shipper_value)}}" class="form-control" placeholder="Enter value">
+                                                            <input type="number" name="shipper_value"  value="{{old('shipper_value', $shipper_value)}}" class="form-control" placeholder="Enter value">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -941,7 +941,7 @@
                 </div>
             </div>
             <div class="col-sm-12"><br>
-                <button type="submit" class="btn btn-primary">Create Load</button>
+                <button type="submit" class="btn btn-primary">Save Load</button>
             </div>
         </div>
         </form>

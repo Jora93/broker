@@ -19,6 +19,10 @@ class CreateCompaniesTable extends Migration
             $table->string('mc_number')->unique();
             $table->string('phone_one')->unique();
             $table->string('phone_two')->nullable();
+            $table->string('address')->nullable()->unique();
+            $table->integer('invoice_last_number')->nullable()->unique();
+            $table->integer('load_last_number')->nullable()->unique();
+            $table->string('logo')->nullable()->unique();
             $table->timestamps();
         });
     }

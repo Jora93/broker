@@ -25,7 +25,7 @@ class CreateCustomersTable extends Migration
             $table->string('phone_extension')->nullable();
             $table->string('fax')->nullable();
             $table->string('city');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('state');
             $table->string('zip_code');
             $table->integer('credit_limit');

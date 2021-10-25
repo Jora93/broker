@@ -18,7 +18,9 @@
                 </div>
             @endif
             <div class="col-md-12">
-                <div class="card-header">Create Carrier</div>
+                <div class="card-header">
+                    <h3>Create Carrier</h3>
+                </div>
                 <form method="post" action="{{ url('/'.\App::make('currentCompany')->id.'/carriers')}}">
                     @csrf
                     <div class="col-md-6">

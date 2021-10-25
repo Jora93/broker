@@ -39,7 +39,7 @@ class CreateLoadsTable extends Migration
             $table->string('shipper_city');
             $table->string('shipper_weight')->nullable();
             $table->string('shipper_state');
-            $table->string('shipper_value');
+            $table->string('shipper_value')->nullable();
             $table->string('shipper_zip_code')->nullable();
             $table->date('shipper_pickup_date');
             $table->string('shipper_pickup_number')->nullable();

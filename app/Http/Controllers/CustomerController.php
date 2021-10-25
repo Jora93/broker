@@ -81,7 +81,7 @@ class CustomerController extends Controller
                                   }),
             ],
             'city'            => ['required', 'string', 'max:255'],
-            'email'           => ['required', 'email',
+            'email'           => ['nullable', 'email',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id) {
                                       return $query->where('email', $request->email)
                                           ->where('company_id', $company_id);
@@ -208,7 +208,7 @@ class CustomerController extends Controller
                                   }),
             ],
             'city'            => ['required', 'string', 'max:255'],
-            'email'           => ['required', 'email', 'max:255',
+            'email'           => ['nullable', 'email', 'max:255',
                                   Rule::unique('customers')->where(function ($query) use($request, $company_id, $customer) {
                                       return $query->where('email', $request->email)
                                           ->where('company_id', $company_id)

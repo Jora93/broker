@@ -299,10 +299,10 @@
 
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">Value*</label>
+                                                            <label class="control-label">Value</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-addon">$</span>
-                                                                <input type="number" required="true" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
+                                                                <input type="number" name="shipper_value" value="{{old('shipper_value', $load->shipper_value)}}" class="form-control" placeholder="Enter value">
                                                             </div>
                                                         </div>
                                                     </div>
