@@ -13,7 +13,7 @@
                 <th scope="col"></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="document-list-body">
             @foreach($load->documents as $document)
                 <tr class="document-row-{{$document->id}}">
                     <td>

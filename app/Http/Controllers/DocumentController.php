@@ -53,6 +53,7 @@ class DocumentController extends Controller
         Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
         $data['name'] = $fileName;
         $document = Document::create($data);
+        $document->user_email = Auth::user()->email;
         $document->file_path = env('AWS_STORAGE_URL').$fileName;
 
         return response()->json(['success' => $document]);

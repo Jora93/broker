@@ -5,8 +5,13 @@
 
 @section('content')
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
+    <div class="col-sm-12"><br>
+        <a title="edit" href="{{url(\App::make('currentCompany')->id.'/loads/'.$load->id.'/edit')}}">
+            <button class="btn btn-primary">Update Load</button>
+        </a>
+    </div>
     <div class="col-sm-12 loads-show">
-{{--        <form method="" action="" class="col-sm-12">--}}
+        {{--        <form method="" action="" class="col-sm-12">--}}
             <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
                 <div class="col-md-6" style="padding-right:0px;">
                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -361,7 +366,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group deliveryLocationPickupAtMsg-1613">
                                                                 <label class="control-label">Delivery Date</label>
-                                                                <div class="input-group date datePicker defaultDatePicker">
+                                                                <div class="input-group date ">
                                                                     <input disabled class="form-control consignee_delivery_date" placeholder="Enter delivery date"  type="text" name="consignee[{{$key}}][delivery_date]" value="{{$drop->delivery_date}}" min="{{date('Y-m-d')}}">
                                                                 </div>
                                                             </div>
@@ -930,9 +935,6 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadDoumentModal">Attach New Document</button>
-                                </div>
-                                <div class="col-sm-12">
                                     <div class="tab-item">
                                         <div class="card">
                                             <div class="accounting-card-header card-header">Documents</div>
@@ -945,9 +947,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12"><br>
-                    <button type="submit" class="btn btn-primary">Update Load</button>
                 </div>
             </div>
             </div>

@@ -71077,13 +71077,36 @@ $(document).ready(function () {
       url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/carrier-search"),
       data: values,
       success: function success(result) {
-        if (result.data && result.data.length) {
+        if (result.data) {
           $("#myUL").empty();
           var html = '';
-          result.data.forEach(function (item) {
-            var itemHtml = "<li><a href=\"carriers/".concat(item.id, "\">").concat(item.company, "</a></li>");
-            html += itemHtml;
-          });
+          var itemHtml = '';
+
+          if (result.data.carriers && result.data.carriers.length) {
+            result.data.carriers.forEach(function (carrier) {
+              itemHtml = "<li><a href=\"".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/carriers/").concat(carrier.id, "\">Carrier - ").concat(carrier.company, " (MC ").concat(carrier.mc_number, ")</a></li>");
+            });
+          }
+
+          if (result.data.loads && result.data.loads.length) {
+            result.data.loads.forEach(function (load) {
+              itemHtml += "<li><a href=\"".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads/").concat(load.id, "\">Load - ").concat(load.load_number, "</a></li>");
+            });
+          }
+
+          if (result.data.invoices && result.data.invoices.length) {
+            result.data.invoices.forEach(function (invoice) {
+              itemHtml += "<li><a href=\"".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads/").concat(invoice.id, "\">Invoice - ").concat(invoice.invoice_number, "</a></li>");
+            });
+          }
+
+          if (result.data.customers && result.data.customers.length) {
+            result.data.customers.forEach(function (customer) {
+              itemHtml += "<li><a href=\"".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads/").concat(customer.id, "\">Customer - ").concat(customer.company, "</a></li>");
+            });
+          }
+
+          html += itemHtml;
           $('#myUL').append(html);
         }
       }
@@ -71224,6 +71247,11 @@ $(document).ready(function () {
           $('#saveDocBtn').show();
           $('#saveDocLoadBtn').hide();
           $('#uploadDoumentModal').modal('toggle'); // location.href = `${location.origin}/${window.currentCompanyId}/loads`;
+
+          var data = result.success;
+          data.description = data.description || '';
+          var html = "<tr class=\"document-row-".concat(data.id, "\"\">\n                            <td>\n                                <a href=\"").concat(window.APP_URL, "/document-download/").concat(data.id, "\">\n                                    <span aria-hidden=\"true\" class=\"glyphicon glyphicon-download-alt\"></span>\n                                </a>\n                                <span onclick=\"editDocument(").concat(data, ")\" aria-hidden=\"true\" class=\"glyphicon glyphicon-edit document-edit\"></span>\n                            </td>\n                            <th scope=\"row\">\n                                <a href=\"").concat(data.file_path, "\" target=\"_blank\">\n                                    ").concat(data.name, "\n                                </a>\n                            </th>\n                            <td>\n                                ").concat(data.type, "\n                            </td>\n                            <td>\n                                ").concat(data.load_id, "\n                            </td>\n                            <td>\n                                 ").concat(data.description, "\n                            </td>\n                            <td>\n                                ").concat(data.created_at, "\n                            </td>\n                            <td>\n                                ").concat(data.user_email, "\n                            </td>\n                            <td>\n                                <span data-id=\"2\" aria-hidden=\"true\" class=\"glyphicon glyphicon-trash document-delete\"></span>\n                            </td>\n                        </tr>");
+          $("#document-list-body").append(html);
         }
 
         if (result.error) {

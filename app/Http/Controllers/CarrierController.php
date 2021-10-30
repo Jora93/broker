@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Load;
 use Illuminate\Http\Request;
 use App\Models\Carrier;
 use Illuminate\Validation\Rule;
@@ -251,7 +253,22 @@ class CarrierController extends Controller
     public function search($company_id, Request $request)
     {
         $keyword = $request->keyword;
-        $data = Carrier::where('company', 'LIKE', '%'.$keyword.'%')->get();
+        $data = [];
+        if($keyword) {
+            $carriers = Carrier::where('company', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('mc_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['carriers'] = $carriers;
+
+            $loads = Load::where('load_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['loads'] = $loads;
+
+            $invoices = Load::where('invoice_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['invoices'] = $invoices;
+
+            $customers = Customer::where('company', 'LIKE', '%'.$keyword.'%')->get();
+            $data['customers'] = $customers;
+        }
+
         return response()->json(['data' => $data]);
     }
 }

@@ -335,13 +335,37 @@ $(document).ready(function () {
             url: `${window.APP_URL}/${window.currentCompanyId}/carrier-search`,
             data: values,
             success: function (result) {
-                if(result.data && result.data.length) {
+                if(result.data) {
                     $( "#myUL" ).empty();
                     var html = '';
-                    result.data.forEach(item => {
-                        var itemHtml = `<li><a href="carriers/${item.id}">${item.company}</a></li>`;
-                        html += itemHtml;
-                    });
+                    var itemHtml = '';
+
+                    if (result.data.carriers && result.data.carriers.length) {
+                        result.data.carriers.forEach(carrier => {
+                            itemHtml = `<li><a href="${window.APP_URL}/${window.currentCompanyId}/carriers/${carrier.id}">Carrier - ${carrier.company} (MC ${carrier.mc_number})</a></li>`;
+                        });
+                    }
+
+                    if (result.data.loads && result.data.loads.length) {
+                        result.data.loads.forEach(load => {
+                            itemHtml += `<li><a href="${window.APP_URL}/${window.currentCompanyId}/loads/${load.id}">Load - ${load.load_number}</a></li>`;
+                        });
+                    }
+
+                    if (result.data.invoices && result.data.invoices.length) {
+                        result.data.invoices.forEach(invoice => {
+                            itemHtml += `<li><a href="${window.APP_URL}/${window.currentCompanyId}/loads/${invoice.id}">Invoice - ${invoice.invoice_number}</a></li>`;
+                        });
+                    }
+
+                    if (result.data.customers && result.data.customers.length) {
+                        result.data.customers.forEach(customer => {
+                            itemHtml += `<li><a href="${window.APP_URL}/${window.currentCompanyId}/loads/${customer.id}">Customer - ${customer.company}</a></li>`;
+                        });
+                    }
+
+
+                    html += itemHtml;
                     $('#myUL').append(html);
                 }
             }
@@ -490,6 +514,41 @@ $(document).ready(function () {
                     $('#saveDocLoadBtn').hide();
                     $('#uploadDoumentModal').modal('toggle');
                     // location.href = `${location.origin}/${window.currentCompanyId}/loads`;
+                    var data = result.success;
+                    data.description = data.description || '';
+                    var html =
+                        `<tr class="document-row-${data.id}"">
+                            <td>
+                                <a href="${window.APP_URL}/document-download/${data.id}">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-download-alt"></span>
+                                </a>
+                                <span onclick="editDocument(${data})" aria-hidden="true" class="glyphicon glyphicon-edit document-edit"></span>
+                            </td>
+                            <th scope="row">
+                                <a href="${data.file_path}" target="_blank">
+                                    ${data.name}
+                                </a>
+                            </th>
+                            <td>
+                                ${data.type}
+                            </td>
+                            <td>
+                                ${data.load_id}
+                            </td>
+                            <td>
+                                 ${data.description}
+                            </td>
+                            <td>
+                                ${data.created_at}
+                            </td>
+                            <td>
+                                ${data.user_email}
+                            </td>
+                            <td>
+                                <span data-id="2" aria-hidden="true" class="glyphicon glyphicon-trash document-delete"></span>
+                            </td>
+                        </tr>`;
+                    $("#document-list-body").append(html);
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();
