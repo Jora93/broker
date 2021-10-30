@@ -61,6 +61,9 @@
                 <li class="nav-item col-sm-2 customers-tab">
                     <a class="nav-link" id="customer-tab" data-toggle="tab" href="#customers" role="tab" aria-controls="customers" aria-selected="false">Customers</a>
                 </li>
+                <li class="nav-item col-sm-2 carrier-tab">
+                    <a class="nav-link" id="carrier-tab" data-toggle="tab" href="#carriers" role="tab" aria-controls="carriers" aria-selected="false">Carrier</a>
+                </li>
                 <li class="nav-item col-sm-2 accounting-tab">
                     <a class="nav-link" id="accounting-tab" data-toggle="tab" href="#accounting" role="tab" aria-controls="accounting" aria-selected="false">Accounting</a>
                 </li>
@@ -767,6 +770,194 @@
                                                         <div class="entityValue"><a href="https://maps.google.com/?q={{$load->customer->billing_address1}}" target="_blank">{{$load->customer->billing_address1}}</a></div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="carriers" role="tabpanel" aria-labelledby="carrier-tab">
+                    <div id="carrier" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="col-sm-12">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div>Company Information</div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Company</div>
+                                                            <div class="entityValue">{{$load->carrier->company}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br>
+                                                    <div class="col-md-4">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Status</div>
+                                                            <div class="entityValue">{{$load->carrier->status}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br>
+                                                    <div class="col-md-4">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Phone</div>
+                                                            <div class="entityValue">
+                                                                <a href="tel:{{$load->carrier->phone}}">{{$load->carrier->phone}}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br>
+                                                    <div class="col-md-4">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Address</div>
+                                                            <div class="entityValue">
+                                                                <div class="entityValue">
+                                                                    <a href="https://maps.google.com/?q={{$load->carrier->address1}}" target="_blank">{{$carrier->address1}}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br><br><br>
+                                                    <div class="col-md-12">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Note</div>
+                                                            <br>
+                                                            <div class="entityValue">
+                                                                {{$load->carrier->note}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" tab-item">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div>Insurance Policies</div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Type</th>
+                                                            <th>Amount</th>
+                                                            <th>Eff. Date</th>
+                                                            <th>Exp. Date</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(0)"></span>
+                                                            </td>
+                                                            <td>{{$load->carrier->insurance1_type}}</td>
+                                                            <td>${{$load->carrier->insurance1_amount}}</td>
+                                                            <td>{{$load->carrier->insurance1_effective_on}}</td>
+                                                            <td>{{$load->carrier->insurance1_expires_on}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(1)"></span>
+                                                            </td>
+                                                            <td>{{$load->carrier->insurance2_type}}</td>
+                                                            <td>${{$load->carrier->insurance2_amount}}</td>
+                                                            <td>{{$load->carrier->insurance2_effective_on}}</td>
+                                                            <td>{{$load->carrier->insurance2_expires_on}}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 tab-item">
+
+                                <!-- Payee Information -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div>Payee Information</div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Phone</div>
+                                                            <div class="entityValue">
+                                                                <a href="tel:{{$load->carrier->payee_phone}}">{{$load->carrier->payee_phone}}</a></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">Address</div>
+                                                            <div class="entityValue">
+                                                                <a href="https://maps.google.com/?q={{$load->carrier->payee_address1}}" target="_blank">{{$load->carrier->payee_address1}}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row tab-item">
+                                    <div class="col-md-12">
+                                        <!-- Licenses & Certificates -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div>Licenses &amp; Certificates</div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">MC #</div>
+                                                            <div class="entityValue">{{$load->carrier->mc_number}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="entityLabelValue">
+                                                            <div class="entityLabel">DOT #</div>
+                                                            <div class="entityValue">{{$load->carrier->dot_number}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Carrier Equipment -->
+
+                                        <!-- Reports -->
+                                        <div class="row tab-item">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div>Reports</div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="entityLabelValue">
+                                                                    <a href="#">Load History</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
