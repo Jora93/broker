@@ -103,12 +103,12 @@ class GeneralSettingsController extends Controller
         //
     }
 
-    public function pdf($company_id)
+    public function createCarrierConfirmation($company_id, $load_id)
     {
 
         $company = Company::find($company_id);
         $generalSetting = GeneralSetting::first();
-        $load  = Load::first(); //TODO dinamoc
+        $load  = Load::find($load_id);
         $pdf = new RateConPdf($load->id);
         $pdf->AliasNbPages();
         $pdf->AddPage();

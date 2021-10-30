@@ -941,6 +941,11 @@
                                                     <i class="fa fa-file-pdf-o"></i>
                                                     Create Invoice
                                                 </a>
+                                                |
+                                                <a href="{{ url(\App::make('currentCompany')->id.'/generate-carrier-confirmation/'.$load->id) }}" class="actionLink " target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                    Create Rate Con
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
