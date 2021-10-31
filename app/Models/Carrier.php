@@ -94,4 +94,45 @@ class Carrier extends Model
     {
         return $this->hasMany('App\Models\Load');
     }
+
+
+    public function getContractedOnAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['contracted_on']));
+    }
+
+    public function setContractedOnAttribute($value) {
+        $this->attributes['contracted_on'] = date("Y-m-d", strtotime($value));
+    }
+
+    public function getInsurance1EffectiveOnAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['insurance1_effective_on']));
+    }
+
+    public function setInsurance1EffectiveOnAttribute($value) {
+        $this->attributes['insurance1_effective_on'] = date("Y-m-d", strtotime($value));
+    }
+
+    public function getInsurance1ExpiresOnAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['insurance1_expires_on']));
+    }
+
+    public function setInsurance1ExpiresOnAttribute($value) {
+        $this->attributes['insurance1_expires_on'] = date("Y-m-d", strtotime($value));
+    }
+
+    public function getInsurance2EffectiveOnAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['insurance2_effective_on']));
+    }
+
+    public function setInsurance2EffectiveOnAttribute($value) {
+        $this->attributes['insurance2_effective_on'] = date("Y-m-d", strtotime($value));
+    }
+
+    public function getInsurance2ExpiresOnAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['insurance2_expires_on']));
+    }
+
+    public function setInsurance2ExpiresOnAttribute($value) {
+        $this->attributes['insurance2_expires_on'] = date("Y-m-d", strtotime($value));
+    }
 }

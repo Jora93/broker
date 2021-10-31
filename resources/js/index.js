@@ -164,7 +164,7 @@ $(document).ready(function () {
     //Create Load end ---------------------
 
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'mm-dd-yyyy'
     });
     $('.insuranceExpirationDate').on('change', function(e){
         var date1 = new Date();

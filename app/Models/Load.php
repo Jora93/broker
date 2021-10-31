@@ -59,6 +59,14 @@ class Load extends Model
         'invoice_number'
     ];
 
+    public function getShipperPickupDateAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['shipper_pickup_date']));
+    }
+
+    public function setShipperPickupDateAttribute($value) {
+        $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));
+    }
+
     /**
      * Get the customer for the load.
      */

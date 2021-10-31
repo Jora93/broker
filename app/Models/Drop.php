@@ -48,6 +48,14 @@ class Drop extends Model
         'delivery_location_notes',
     ];
 
+    public function getDeliveryDateAttribute() {
+        return date("m-d-Y", strtotime($this->attributes['delivery_date']));
+    }
+
+    public function setDeliveryDateAttribute($value) {
+        $this->attributes['delivery_date'] = date("Y-m-d", strtotime($value));
+    }
+
     /**
      * Get the load for the drop.
      */
