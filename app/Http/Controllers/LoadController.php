@@ -147,8 +147,9 @@ class LoadController extends Controller
 
         foreach ($dropsData as $key => $dropData) {
             $dropsData[$key]['load_id'] = $load->id;
+            Drop::create($dropsData[$key]);
+
         }
-        Drop::insert($dropsData);
 
         return response()->json(['success' => 'Load Created successfully']);
     }
