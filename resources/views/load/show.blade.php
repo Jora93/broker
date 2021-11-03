@@ -793,14 +793,14 @@
                                                     <div class="col-md-4">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Company</div>
-                                                            <div class="entityValue">{{$load->carrier->company}}</div>
+                                                            <div class="entityValue">@if(isset($load->carrier)){{$load->carrier->company}}@endif</div>
                                                         </div>
                                                     </div>
                                                     <br><br><br>
                                                     <div class="col-md-4">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Status</div>
-                                                            <div class="entityValue">{{$load->carrier->status}}</div>
+                                                            <div class="entityValue">@if(isset($load->carrier)){{$load->carrier->status}}@endif</div>
                                                         </div>
                                                     </div>
                                                     <br><br><br>
@@ -808,7 +808,7 @@
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Phone</div>
                                                             <div class="entityValue">
-                                                                <a href="tel:{{$load->carrier->phone}}">{{$load->carrier->phone}}</a>
+                                                                <a href="tel:@if(isset($load->carrier)){{$load->carrier->phone}}@endif">@if(isset($load->carrier)){{$load->carrier->phone}}@endif</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -818,7 +818,7 @@
                                                             <div class="entityLabel">Address</div>
                                                             <div class="entityValue">
                                                                 <div class="entityValue">
-                                                                    <a href="https://maps.google.com/?q={{$load->carrier->address1}}" target="_blank">{{$carrier->address1}}</a>
+                                                                    <a href="https://maps.google.com/?q=@if(isset($load->carrier)){{$load->carrier->address1}}@endif" target="_blank">{{$carrier->address1}}</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -829,7 +829,7 @@
                                                             <div class="entityLabel">Note</div>
                                                             <br>
                                                             <div class="entityValue">
-                                                                {{$load->carrier->note}}
+                                                                @if(isset($load->carrier)){{$load->carrier->note}}@endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -859,19 +859,19 @@
                                                             <td>
                                                                 <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(0)"></span>
                                                             </td>
-                                                            <td>{{$load->carrier->insurance1_type}}</td>
-                                                            <td>${{$load->carrier->insurance1_amount}}</td>
-                                                            <td>{{$load->carrier->insurance1_effective_on}}</td>
-                                                            <td>{{$load->carrier->insurance1_expires_on}}</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance1_type}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$$load->carrier->insurance1_amount}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance1_effective_on}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance1_expires_on}}@endif</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(1)"></span>
                                                             </td>
-                                                            <td>{{$load->carrier->insurance2_type}}</td>
-                                                            <td>${{$load->carrier->insurance2_amount}}</td>
-                                                            <td>{{$load->carrier->insurance2_effective_on}}</td>
-                                                            <td>{{$load->carrier->insurance2_expires_on}}</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance2_type}}@endif</td>
+                                                            <td>@if(isset($load->carrier))${{$load->carrier->insurance2_amount}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance2_effective_on}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance2_expires_on}}@endif</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -896,14 +896,14 @@
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Phone</div>
                                                             <div class="entityValue">
-                                                                <a href="tel:{{$load->carrier->payee_phone}}">{{$load->carrier->payee_phone}}</a></div>
+                                                                <a href="tel:@if(isset($load->carrier)){{$load->carrier->payee_phone}}@endif">@if(isset($load->carrier)){{$load->carrier->payee_phone}}@endif</a></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Address</div>
                                                             <div class="entityValue">
-                                                                <a href="https://maps.google.com/?q={{$load->carrier->payee_address1}}" target="_blank">{{$load->carrier->payee_address1}}</a>
+                                                                <a href="https://maps.google.com/?q=@if(isset($load->carrier)){{$load->carrier->payee_address1}}@endif" target="_blank">@if(isset($load->carrier)){{$load->carrier->payee_address1}}@endif</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -925,13 +925,13 @@
                                                     <div class="col-md-6">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">MC #</div>
-                                                            <div class="entityValue">{{$load->carrier->mc_number}}</div>
+                                                            <div class="entityValue">@if(isset($load->carrier)){{$load->carrier->mc_number}}@endif</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">DOT #</div>
-                                                            <div class="entityValue">{{$load->carrier->dot_number}}</div>
+                                                            <div class="entityValue">@if(isset($load->carrier)){{$load->carrier->dot_number}}@endif</div>
                                                         </div>
                                                     </div>
                                                 </div>
