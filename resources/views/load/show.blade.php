@@ -860,7 +860,7 @@
                                                                 <span class="tableAction fa fa-list-alt" title="View insurance policy details" onclick="showCarrierInsurancePolicyDetailsDialog(0)"></span>
                                                             </td>
                                                             <td>@if(isset($load->carrier)){{$load->carrier->insurance1_type}}@endif</td>
-                                                            <td>@if(isset($load->carrier)){{$$load->carrier->insurance1_amount}}@endif</td>
+                                                            <td>@if(isset($load->carrier)){{$load->carrier->insurance1_amount}}@endif</td>
                                                             <td>@if(isset($load->carrier)){{$load->carrier->insurance1_effective_on}}@endif</td>
                                                             <td>@if(isset($load->carrier)){{$load->carrier->insurance1_expires_on}}@endif</td>
                                                         </tr>
