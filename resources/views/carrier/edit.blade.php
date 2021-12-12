@@ -372,7 +372,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_state">State/Province</label>
-                                            <select id="carrier_payee_state" name="payee_state" class="selectpicker" required="true" data-live-search="true">
+                                            <select id="carrier_payee_state" name="payee_state" class="selectpicker" data-live-search="true">
                                                 <option disabled selected value>Select State/Province</option>
                                                 <option @if($carrier->payee_state == 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                 <option @if($carrier->payee_state == 'AK') selected @endif value="AK">AK (Alaska)</option>
@@ -506,7 +506,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_state_province">State/Province</label>
-                                                    <select id="carrier_factoring_remit_attributes_factoring_remit_state_province" name="factoring_state" class="selectpicker" required="true" data-live-search="true">
+                                                    <select id="carrier_factoring_remit_attributes_factoring_remit_state_province" name="factoring_state" class="selectpicker" data-live-search="true">
                                                         <option disabled selected value>Select State/Province</option>
                                                         <option @if($carrier->factoring_state == 'AL') selected @endif value="AL">AL (Alabama)</option>
                                                         <option @if($carrier->factoring_state == 'AK') selected @endif value="AK">AK (Alaska)</option>

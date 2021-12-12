@@ -89,11 +89,11 @@ class CarrierController extends Controller
             "factoring_remit_zipcode"  => ['string', 'nullable'],
             "factoring_state"          => ['string', 'nullable'],
 
-            "mc_number"  => ['string'],
-            "dot_number" => ['string'],
+            "mc_number"  => ['string', 'nullable'],
+            "dot_number" => ['string', 'nullable'],
 
             "insurance1_type"          => ['required', 'string'],
-            "insurance1_insurer"       => ['string'], 'nullable',
+            "insurance1_insurer"       => ['string', 'nullable'],
             "insurance1_amount"        => ['required', 'string'],
             "insurance1_policy_number" => ['string', 'nullable'],
             "insurance1_effective_on"  => ['string', 'nullable'],
@@ -201,11 +201,11 @@ class CarrierController extends Controller
             "factoring_remit_zipcode"  => ['string', 'nullable'],
             "factoring_state"          => ['string', 'nullable'],
 
-            "mc_number"  => ['string'],
-            "dot_number" => ['string'],
+            "mc_number"  => ['string', 'nullable'],
+            "dot_number" => ['string', 'nullable'],
 
             "insurance1_type"          => ['required', 'string'],
-            "insurance1_insurer"       => ['string'], 'nullable',
+            "insurance1_insurer"       => ['string', 'nullable'],
             "insurance1_amount"        => ['required', 'string'],
             "insurance1_policy_number" => ['string', 'nullable'],
             "insurance1_effective_on"  => ['string', 'nullable'],
