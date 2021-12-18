@@ -1072,14 +1072,6 @@
                                                     </tbody>
                                                 </table>
 
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation One
-                                                </a>
-                                                <a href="" class="actionLink " target="_blank">
-                                                    <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation Two
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -1122,13 +1114,14 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <a href="" class="actionLink " target="_blank">
+                                                <a href="{{ url(\App::make('currentCompany')->id.'/invoice/'.$load->id) }}" class="actionLink " target="_blank">
                                                     <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation One
+                                                    Create Invoice
                                                 </a>
-                                                <a href="" class="actionLink " target="_blank">
+                                                |
+                                                <a href="{{ url(\App::make('currentCompany')->id.'/generate-carrier-confirmation/'.$load->id) }}" class="actionLink " target="_blank">
                                                     <i class="fa fa-file-pdf-o"></i>
-                                                    Carrier Confirmation Two
+                                                    Create Rate Con
                                                 </a>
                                             </div>
                                         </div>

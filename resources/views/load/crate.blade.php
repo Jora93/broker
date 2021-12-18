@@ -890,15 +890,6 @@
 
                                                 </tbody>
                                             </table>
-
-                                            <a href="" class="actionLink " target="_blank">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                                Carrier Confirmation One
-                                            </a>
-                                            <a href="" class="actionLink " target="_blank">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                                Carrier Confirmation Two
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -941,14 +932,6 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                            <a href="" class="actionLink " target="_blank">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                                Carrier Confirmation One
-                                            </a>
-                                            <a href="" class="actionLink " target="_blank">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                                Carrier Confirmation Two
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
