@@ -16,6 +16,7 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('load_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('carrier_id')->nullable();
@@ -24,6 +25,7 @@ class CreateDocumentsTable extends Migration
             $table->string('description')->nullable();
 
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('carrier_id')->references('id')->on('carriers');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('load_id')->references('id')->on('loads');

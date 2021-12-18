@@ -337,10 +337,27 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 col-xs-6">
+                                                    <div class="col-sm-6 col-xs-6" style="padding: 0">
                                                         <div class="form-group">
                                                             <label class="control-label">Pickup Time</label>
-                                                            <input type="time" name="shipper_pickup_time" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time', $load->shipper_pickup_time)}}">
+                                                        </div>
+                                                        <div class="col-sm-4 col-xs-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">From</label>
+                                                                <input type="time" name="shipper_pickup_time_from" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time_from', $load->shipper_pickup_time_from)}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-xs-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">To</label>
+                                                                <input type="time" name="shipper_pickup_time_to" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time_to', $load->shipper_pickup_time_to)}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-xs-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">APPT</label>
+                                                                <input type="checkbox" @if(old('shipper_pickup_time_appt', $load->shipper_pickup_time_appt)) checked @endif name="shipper_pickup_time_appt" value="{{old('shipper_pickup_time_appt', $load->shipper_pickup_time_appt)}}" >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -17,10 +17,13 @@ class CreateLoadHistoryTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('load_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('reviewer_id')->nullable();
+            $table->boolean('confirmed')->default(0);
             $table->text('info');
 
             $table->foreign('load_id')->references('id')->on('loads')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('reviewer_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

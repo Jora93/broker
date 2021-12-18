@@ -92,7 +92,9 @@ class LoadController extends Controller
             "shipper_value"                          => ['nullable', 'string'],
             "shipper_zip_code"                       => ['nullable', 'string'],
             "shipper_pickup_date"                    => ['required', 'string'],
-            "shipper_pickup_time"                    => ['nullable', 'string'],
+            "shipper_pickup_time_from"               => ['nullable', 'string'],
+            "shipper_pickup_time_to"                 => ['nullable', 'string'],
+            "shipper_pickup_time_appt"               => ['nullable', 'string'],
             "shipper_pickup_number"                  => ['nullable', 'string'],
             "shipper_notes"                          => ['nullable', 'string'],
             "consignee.*.company"                      => ['nullable', 'string'],
@@ -225,7 +227,9 @@ class LoadController extends Controller
             "shipper_value"                          => ['nullable', 'string'],
             "shipper_zip_code"                       => ['nullable', 'string'],
             "shipper_pickup_date"                    => ['required', 'string'],
-            "shipper_pickup_time"                    => ['nullable', 'string'],
+            "shipper_pickup_time_from"               => ['nullable', 'string'],
+            "shipper_pickup_time_to"                 => ['nullable', 'string'],
+            "shipper_pickup_time_appt"               => ['nullable', 'string'],
             "shipper_pickup_number"                  => ['nullable', 'string'],
             "shipper_notes"                          => ['nullable', 'string'],
             "consignee.*.company"                      => ['nullable', 'string'],
@@ -351,8 +355,8 @@ class LoadController extends Controller
             $info = $info.'Customer ID from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
         }
 
-        if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time'] != $load->shipper_pickup_time) {
-            $info = $info.'Pickup Date from '.$load->shipper_pickup_date.' '.$load->shipper_pickup_time.' to '.$data['shipper_pickup_date'].' '.$data['shipper_pickup_time'].', ';
+        if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time_from'] != $load->shipper_pickup_time_from || $data['shipper_pickup_time_to'] != $load->shipper_pickup_time_to) {
+            $info = $info.'Pickup Date from '.$load->shipper_pickup_date.' ('.$load->shipper_pickup_time_from.' - '.$load->shipper_pickup_time_to.') to '.$data['shipper_pickup_date'].' ('.$data['shipper_pickup_time_from'].' - '.$data['shipper_pickup_time_to'].'), ';
         }
 
         if ($data['customer_costs_rate_per_unit'] != $load->customer_costs_rate_per_unit) {

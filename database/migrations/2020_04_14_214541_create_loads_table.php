@@ -19,6 +19,8 @@ class CreateLoadsTable extends Migration
             $table->unsignedBigInteger('carrier_id')->nullable();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('dispatcher_id')->nullable();
+            $table->integer('load_number')->unique();
+            $table->integer('invoice_number')->unique()->nullable();
             $table->string('status')->nullable();
             $table->string('product')->nullable();
             $table->string('purchase_order_number')->nullable();
@@ -43,7 +45,9 @@ class CreateLoadsTable extends Migration
             $table->string('shipper_zip_code')->nullable();
             $table->date('shipper_pickup_date');
             $table->string('shipper_pickup_number')->nullable();
-            $table->string('shipper_pickup_time')->nullable();
+            $table->string('shipper_pickup_time_from')->nullable();
+            $table->string('shipper_pickup_time_to')->nullable();
+            $table->boolean('shipper_pickup_time_appt')->nullable();
             $table->string('shipper_notes')->nullable();
             $table->string('truck_number')->nullable();
             $table->string('trailer_number')->nullable();
