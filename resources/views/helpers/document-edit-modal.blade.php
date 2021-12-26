@@ -5,7 +5,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">New Doument</h4>
+                <h4 class="modal-title">New Document</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -13,7 +13,7 @@
             <form method="POST" id="LoadUpdateDocument"  enctype="multipart/form-data" action="">
                 <div class="modal-body">
                     @csrf
-                    <input type="hidden" name="load_id" value="{{$load->id}}">
+                    <input type="hidden" name="{{$inputName}}" value="{{$model->id}}">
                     <input id="documentId" type="hidden" name="id" value="">
                     <div class="form-group">
                         <div class="form-group">
@@ -57,27 +57,43 @@
                         <input id="documentDescription" type="text" name="description" class="form-control">
                     </div>
                     <hr>
-                    <p>Attach this document to a load, customer, and/or arrier.</p>
-                    <div class="form-group carrierMsg">
-                        <label class="control-label">Carrier</label>
-                        {{-- todo poxel ajax searchov--}}
-                        <select id="documentCarrierId"  name="carrier_id" class="selectpicker form-control editMainField" tabindex="66" data-live-search="true">
-                            <option value="">-- No Carrier Selected --</option>
-                            @foreach($carriers as $carrier)
-                                <option value="{{$carrier->id}}">{{$carrier->company}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group carrierMsg">
-                        <label class="control-label">Carrier</label>
-                        {{-- todo poxel ajax searchov--}}
-                        <select id="documentCustomerId" name="customer_id" class="selectpicker form-control editMainField" tabindex="66" data-live-search="true">
-                            <option value="">-- No Customer Selected --</option>
-                            @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->company}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <p>Attach this document to a load, customer, and/or carrier.</p>
+                    @if($inputName !== 'load_id' && isset($loads))
+                        <div class="form-group carrierMsg">
+                            <label class="control-label">Load</label>
+                            {{-- todo poxel ajax searchov--}}
+                            <select  name="load_id" class="selectpicker form-control editMainField" tabindex="66" data-live-search="true">
+                                <option value="">-- No Load Selected --</option>
+                                @foreach($loads as $load)
+                                    <option value="{{$load->id}}">{{$load->shipper_company}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    @if($inputName !== 'carrier_id' && isset($carriers))
+                        <div class="form-group carrierMsg">
+                            <label class="control-label">Carrier</label>
+                            {{-- todo poxel ajax searchov--}}
+                            <select id="documentCarrierId"  name="carrier_id" class="selectpicker form-control editMainField" tabindex="66" data-live-search="true">
+                                <option value="">-- No Carrier Selected --</option>
+                                @foreach($carriers as $carrier)
+                                    <option value="{{$carrier->id}}">{{$carrier->company}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    @if($inputName !== 'customer_id' && isset($customers))
+                        <div class="form-group carrierMsg">
+                            <label class="control-label">Cusetomer</label>
+                            {{-- todo poxel ajax searchov--}}
+                            <select id="documentCustomerId" name="customer_id" class="selectpicker form-control editMainField" tabindex="66" data-live-search="true">
+                                <option value="">-- No Customer Selected --</option>
+                                @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->company}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Modal footer -->

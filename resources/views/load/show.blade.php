@@ -1140,7 +1140,7 @@
                                         <div class="card">
                                             <div class="accounting-card-header card-header">Documents</div>
                                             <div class="card-body">
-                                                @include('helpers.document-table')
+                                                @include('helpers.document-table', ['model' => $load])
                                             </div>
                                         </div>
                                     </div>

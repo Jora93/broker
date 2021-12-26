@@ -10,11 +10,25 @@
             </ul>
         </div>
     @endif
-
-    <div class="row customer-create col-sm-12">
-        <form method="POST" action="{{url(\App::make('currentCompany')->id.'/customers/'.$customer->id)}}" class="col-sm-12">
-        @method('PATCH')
-        @csrf
+    <div class="row justify-content-center">
+        <div class="customer-create col-sm-12">
+            <div class="card-header">
+                <h3>Edit Customer</h3>
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item col-sm-2 Customer-tab">
+                    <a class="nav-link active" id="customer-tab" data-toggle="tab" href="#customer" role="tab" aria-controls="load" aria-selected="true">Customer</a>
+                </li>
+                <li class="nav-item col-sm-2 documents-tab">
+                    <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="customer" role="tabpanel" aria-labelledby="customer-tab">
+                    <div id="customer" class="tabcontent" style="display: block;">
+                        <form method="POST" action="{{url(\App::make('currentCompany')->id.'/customers/'.$customer->id)}}" class="col-sm-12">
+            @method('PATCH')
+            @csrf
 
         <!-- Company Information -->
             <div class="col-md-6">
@@ -353,5 +367,32 @@
                 </div>
             </div>
         </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                    <div id="documents" class="tabcontent" style="display: block;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadDoumentModal">Attach New Document</button>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="tab-item">
+                                        <div class="card">
+                                            <div class="accounting-card-header card-header">Documents</div>
+                                            <div class="card-body">
+                                                @include('helpers.document-table', ['model' => $customer])
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    @include('helpers.document-create-modal', ['model' => $customer, 'inputName' => 'customer_id', 'loads' => $customer->loads])
+    @include('helpers.document-edit-modal', ['model' => $customer, 'inputName' => 'customer_id', 'loads' => $customer->loads])
 @endsection

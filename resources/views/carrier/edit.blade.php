@@ -21,7 +21,18 @@
                 <div class="card-header">
                     <h3>Edit Carrier</h3>
                 </div>
-                <form method="POST" action="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id)}}" class="col-sm-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item col-sm-2 Carrier-tab">
+                        <a class="nav-link active" id="carrier-tab" data-toggle="tab" href="#carrier" role="tab" aria-controls="load" aria-selected="true">Carrier</a>
+                    </li>
+                    <li class="nav-item col-sm-2 documents-tab">
+                        <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="carrier" role="tabpanel" aria-labelledby="carrier-tab">
+                        <div id="carrier" class="tabcontent" style="display: block;">
+                            <form method="POST" action="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id)}}" class="col-sm-12">
                     @method('PATCH')
                     @csrf
                     <div class="col-md-6">
@@ -762,8 +773,34 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                        <div id="documents" class="tabcontent" style="display: block;">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadDoumentModal">Attach New Document</button>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="tab-item">
+                                            <div class="card">
+                                                <div class="accounting-card-header card-header">Documents</div>
+                                                <div class="card-body">
+                                                    @include('helpers.document-table', ['model' => $carrier])
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    @include('helpers.document-create-modal', ['model' => $carrier, 'inputName' => 'carrier_id', 'loads' => $carrier->loads])
+    @include('helpers.document-edit-modal', ['model' => $carrier, 'inputName' => 'carrier_id', 'loads' => $carrier->loads])
 @endsection
 

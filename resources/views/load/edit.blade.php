@@ -1174,7 +1174,7 @@
                                         <div class="card">
                                             <div class="accounting-card-header card-header">Documents</div>
                                             <div class="card-body">
-                                                @include('helpers.document-table')
+                                                @include('helpers.document-table', ['model' => $load])
                                             </div>
                                         </div>
                                     </div>
@@ -1189,6 +1189,6 @@
             </div>
         </form>
     </div>
-    @include('helpers.document-create-modal')
-    @include('helpers.document-edit-modal')
+    @include('helpers.document-create-modal', ['model' => $load, 'inputName' => 'load_id'])
+    @include('helpers.document-edit-modal', ['model' => $load, 'inputName' => 'load_id'])
 @endsection

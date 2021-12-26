@@ -51,4 +51,12 @@ class Customer extends Model
     {
         return $this->hasMany('App\Models\Load');
     }
+
+    /**
+     * Get the documents for the Customer.
+     */
+    public function documents()
+    {
+        return $this->hasMany('App\Models\Document');
+    }
 }

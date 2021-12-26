@@ -95,7 +95,6 @@ class Carrier extends Model
         return $this->hasMany('App\Models\Load');
     }
 
-
     public function getContractedOnAttribute() {
         return date("m-d-Y", strtotime($this->attributes['contracted_on']));
     }
@@ -134,5 +133,13 @@ class Carrier extends Model
 
     public function setInsurance2ExpiresOnAttribute($value) {
         $this->attributes['insurance2_expires_on'] = date("Y-m-d", strtotime($value));
+    }
+
+    /**
+     * Get the documents for the Carrier.
+     */
+    public function documents()
+    {
+        return $this->hasMany('App\Models\Document');
     }
 }

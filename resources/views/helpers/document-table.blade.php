@@ -1,5 +1,4 @@
 <div class="col-md-12">
-    @if(isset($load) && $load->documents)
         <table class="table">
             <thead>
             <tr>
@@ -14,30 +13,31 @@
             </tr>
             </thead>
             <tbody id="document-list-body">
-            @foreach($load->documents as $document)
-                <tr class="document-row-{{$document->id}}">
-                    <td>
-                        <a href="{{url('document-download/'.$document->id)}}">
-                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                        </a>
-                        <span onclick="editDocument({{$document}})" class="glyphicon glyphicon-edit document-edit" aria-hidden="true"></span>
-                    </td>
-                    <th scope="row">
-                        <a href="{{url(env('AWS_STORAGE_URL').$document->name)}}" target="_blank">
-                            {{$document->name}}
-                        </a>
-                    </th>
-                    <td>{{$document->type}}</td>
-                    <td>{{$document->load_id}}</td>
-                    <td>{{$document->description}}</td>
-                    <td>{{$document->created_at}}</td>
-                    <td>{{$document->user->email}}</td>
-                    <td>
-                        <span class="glyphicon glyphicon-trash document-delete" data-id="{{$document->id}}" aria-hidden="true"></span>
-                    </td>
-                </tr>
-            @endforeach
+            @if(isset($model) && $model->documents)
+                @foreach($model->documents as $document)
+                    <tr class="document-row-{{$document->id}}">
+                        <td>
+                            <a href="{{url('document-download/'.$document->id)}}">
+                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                            </a>
+                            <span onclick="editDocument({{$document}})" class="glyphicon glyphicon-edit document-edit" aria-hidden="true"></span>
+                        </td>
+                        <th scope="row">
+                            <a href="{{url(env('AWS_STORAGE_URL').$document->name)}}" target="_blank">
+                                {{$document->name}}
+                            </a>
+                        </th>
+                        <td>{{$document->type}}</td>
+                        <td>{{$document->load_id}}</td>
+                        <td>{{$document->description}}</td>
+                        <td>{{$document->created_at}}</td>
+                        <td>{{$document->user->email}}</td>
+                        <td>
+                            <span class="glyphicon glyphicon-trash document-delete" data-id="{{$document->id}}" aria-hidden="true"></span>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
-    @endif
 </div>

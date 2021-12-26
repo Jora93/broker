@@ -114,7 +114,7 @@
             <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
                 <div class="tabcontent" style="display: block;">
                     <div class="row">
-                        <div class="col-md-8 tab-item">
+                        <div class="col-md-12 tab-item">
                             <!-- Company Information -->
                             <div class="row">
                                 <div class="col-md-12">
@@ -123,17 +123,7 @@
                                             <div>Documents</div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <a class="actionLink" style="padding-right: 5px" href="/documents/191644/download">
-                                                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                                                    </a>
-                                                    <a class="actionLink" style="padding-right: 5px" href="/documents/191644/print" target="_blank">
-                                                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                                                    </a>
-                                                    <a href="/documents/191644"> Setup (1) (2).pdf</a>
-                                                </div>
-                                            </div>
+                                            @include('helpers.document-table', ['model' => $customer])
                                         </div>
                                     </div>
                                 </div>

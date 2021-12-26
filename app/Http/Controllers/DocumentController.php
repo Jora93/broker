@@ -94,8 +94,6 @@ class DocumentController extends Controller
      */
     public function update($company_id, Request $request, Document $document)
     {
-//        dd($request->all());
-
         $validator = Validator::make($request->all(), [
             "carrier_id"  => ['nullable','exists:carriers,id'],
             "custome_id"  => ['nullable', 'exists:customers,id'],
@@ -104,8 +102,6 @@ class DocumentController extends Controller
             "description" => ['nullable'],
             "file"        => ['nullable', 'file', 'max:2048']
         ]);
-//        $document = Document::find($id);
-//        dd($document);
         $data = $request->all();
         $data['company_id'] = $company_id;
         if (isset($data['file'])) {
@@ -113,7 +109,6 @@ class DocumentController extends Controller
             Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
             $data['name'] = $fileName;
         }
-//        dd($data);
         $document->update($data);
         if (isset($data['file'])) {
             $document->file_path = env('AWS_STORAGE_URL').$fileName;
