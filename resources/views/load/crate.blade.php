@@ -60,6 +60,9 @@
                             <option value="Straight Box Truck">Straight Box Truck</option>
                             <option value="Van">Van</option>
                             <option value="Van or Flatbed">Van or Flatbed</option>
+                            <option value="Van or Reffer">Van or Reffer</option>
+                            <option value="Reefer">Reefer</option>
+                            <option value="Hot Shot">Hot Shot</option>
                         </select>
                     </div>
                 </div>
