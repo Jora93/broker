@@ -467,10 +467,21 @@
                                                         <input class="form-control consignee_city" placeholder="Enter city"  type="text" name="consignee[0][city]" value="{{old('consignee_city')}}">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-6">
+                                                <div class="col-sm-6 col-xs-6" style="padding: 0">
                                                     <div class="form-group">
                                                         <label class="control-label">Delivery Time</label>
-                                                        <input type="time" name="consignee[0][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{old('consignee_delivery_time')}}">
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">From</label>
+                                                            <input type="time" name="consignee[0][delivery_time_from]" class="form-control input-small time-picker-input" value="{{old('consignee_delivery_time_from', "00:00")}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">To</label>
+                                                            <input type="time" name="consignee[0][delivery_time_to]" class="form-control input-small time-picker-input" value="{{old('consignee_delivery_time_to', "23:59")}}">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

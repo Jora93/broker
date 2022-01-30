@@ -400,10 +400,21 @@
                                                                 <input disabled class="form-control consignee_city" placeholder="Enter city" required="required" type="text" name="consignee[{{$key}}][city]" value="{{$drop->city}}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6 col-xs-6">
+                                                        <div class="col-sm-6 col-xs-6" style="padding: 0">
                                                             <div class="form-group">
                                                                 <label class="control-label">Delivery Time</label>
-                                                                <input disabled type="time" name="consignee[{{$key}}][delivery_time]" class="consignee_delivery_time form-control input-small time-picker-input" value="{{$drop->delivery_time}}">
+                                                            </div>
+                                                            <div class="col-sm-4 col-xs-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">From</label>
+                                                                    <input disabled type="time" name="consignee[{{$key}}][delivery_time_from]" class="form-control input-small time-picker-input" value="{{$drop->delivery_time_from ?? "00:00"}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-xs-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">To</label>
+                                                                    <input disabled type="time" name="consignee[{{$key}}][delivery_time_to]" class="form-control input-small time-picker-input" value="{{$drop->delivery_time_to ?? '23:59'}}">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
