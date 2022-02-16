@@ -1,7 +1,7 @@
 <div style="width: 100%">
     <div style="clear: both; width: 100%; ;">
         <div style="float: left;;  width: 40%">
-            <img src="{{public_path('assets/images/logo.png')}}" alt="Logo" ><br>
+            {{-- <img src="{{public_path('assets/images/logo.png')}}" alt="Logo" ><br> --}}
             <b>{{$load->customer->company}}</b>
             <div>
                 <h3><b>{{$load->customer->address1}}</b></h3>
@@ -60,7 +60,6 @@
     </div>
     <div style="color: red">
         <h2><b>Please make check payable to:</b></h2>
-        <h3>{{$generalSetting->address1}}</h3> {{-- proshyan ofice adreess (general settingsi ????) --}}
     </div>
 </div>
 
