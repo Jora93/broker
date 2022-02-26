@@ -14,7 +14,9 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 |
 */
 
-
+Route::get('invite-carrier/{company_alias}', 'InviteCarrierController@index');
+Route::post('invite-carrier-create', 'InviteCarrierController@store')->name('invite-carrier-create');
+Route::get('invite-carrier-success', 'InviteCarrierController@successPage')->name('invite-carrier-success');
 
 Auth::routes();
 

@@ -16,11 +16,49 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Carriers</span>
-                        <a style="float: right;" href="{{url(\App::make('currentCompany')->id).'/carriers/create'}}" title="create new">
-                            <button type="button" class="btn btn-primary" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                        </a>
+                        <form method="get" action="{{ url(\App::make('currentCompany')->id.'/carrier-search') }}">
+                            <div class="row col-sm-12">
+                                @csrf
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label for="customer">Name or MC#:</label>
+                                        <input placeholder="Name or MC#" type="text" class="form-control" name="keyword" value="@if(isset($data['keyword'])){{$data['keyword']}}@endif"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label class="control-label">Status:</label>
+                                        <select class="form-control" name="status" tabindex="1">
+                                            <option value="">Select Status</option>
+                                            <option @if(isset($data['status']) && $data['status'] == "Active") selected @endif value="Active">Active</option>
+                                            <option @if(isset($data['status']) && $data['status'] == "Inactive") selected @endif value="Inactive">Inactive</option>
+                                            <option @if(isset($data['status']) && $data['status'] == "Pending") selected @endif value="Pending">Pending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                        <label class="control-label">Per Page:</label>
+                                        <select class="form-control" name="paginate" tabindex="1">
+                                            <option value="25" selected>25</option>
+                                            <option @if(isset($data['paginate']) && $data['paginate'] == 50) selected @endif value="50">50</option>
+                                            <option @if(isset($data['paginate']) && $data['paginate'] == 100) selected @endif value="100">100</option>
+                                            <option @if(isset($data['paginate']) && $data['paginate'] == 200) selected @endif value="200">200</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <button type="submit" class="btn btn-primary float-right">Search</button>
+                            </div>
+                        </form>
+                        <div class="row col-sm-12">
+                            <a style="float: right;" href="{{url(\App::make('currentCompany')->id).'/carriers/create'}}" title="create new">
+                                <button type="button" class="btn btn-primary" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create Carrier
+                                </button>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="card-body">

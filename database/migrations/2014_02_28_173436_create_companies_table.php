@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('address')->nullable()->unique();
             $table->integer('invoice_last_number')->nullable()->unique();
             $table->integer('load_last_number')->nullable()->unique();
+            $table->integer('invite_alias')->unique()->default(time());
             $table->string('logo')->nullable()->unique();
             $table->timestamps();
         });

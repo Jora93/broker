@@ -31,7 +31,11 @@
                         <td>{{$document->load_id}}</td>
                         <td>{{$document->description}}</td>
                         <td>{{$document->created_at}}</td>
-                        <td>{{$document->user->email}}</td>
+                        @if($document->user)
+                            <td>{{$document->user->email}}</td>
+                        @else
+                            <td></td>
+                        @endif
                         <td>
                             <span class="glyphicon glyphicon-trash document-delete" data-id="{{$document->id}}" aria-hidden="true"></span>
                         </td>

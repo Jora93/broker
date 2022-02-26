@@ -65,6 +65,13 @@
                                     <input type="text" class="form-control focusOnLoad" name="load_last_number" value="{{$company->load_last_number}}">
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="companyInput">Invite Carrier Link</label>
+                                    <input type="text" class="form-control focusOnLoad" disabled name="" value="{{env('APP_URL')}}/'invite-carrier'/{{$company->invite_alias}}">
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="logoInput">Upload Company Logo</label>

@@ -61,7 +61,7 @@ class CarrierController extends Controller
             "fax"                       => ['string', 'nullable', 'max:255', 'unique:carriers,fax'],
             "city"                      => ['required', 'string'],
             "state"                     => ['required', 'string'],
-            "email"                     => ['required', 'email', 'unique:customers,email'],
+            "email"                     => ['required', 'email', 'unique:carriers,email'],
             "zip_code"                  => ['required', 'string'],
             "carrier_fee"               => ['string', 'nullable'],
             "flag"                      => ['string', 'nullable', 'max:255'],
@@ -173,7 +173,7 @@ class CarrierController extends Controller
             "fax"                       => ['string', 'nullable', 'max:255', 'unique:carriers,fax,'.$carrier->id],
             "city"                      => ['required', 'string'],
             "state"                     => ['required', 'string'],
-            "email"                     => ['required', 'email', 'unique:customers,email,'.$carrier->id],
+            "email"                     => ['required', 'email', 'unique:carriers,email,'.$carrier->id],
             "zip_code"                  => ['required', 'string'],
             "carrier_fee"               => ['string', 'nullable'],
             "flag"                      => ['string', 'nullable', 'max:255'],
@@ -252,23 +252,21 @@ class CarrierController extends Controller
 
     public function search($company_id, Request $request)
     {
+        $data = $request->all();
         $keyword = $request->keyword;
-        $data = [];
-        if($keyword) {
-            $carriers = Carrier::where('company', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('mc_number', 'LIKE', '%'.$keyword.'%')->get();
-            $data['carriers'] = $carriers;
+        $carriers = Carrier::query();
 
-            $loads = Load::where('load_number', 'LIKE', '%'.$keyword.'%')->get();
-            $data['loads'] = $loads;
-
-            $invoices = Load::where('invoice_number', 'LIKE', '%'.$keyword.'%')->get();
-            $data['invoices'] = $invoices;
-
-            $customers = Customer::where('company', 'LIKE', '%'.$keyword.'%')->get();
-            $data['customers'] = $customers;
+        if (isset($data['status']) && !is_null($data['status'])) {
+            $carriers = $carriers->where('status', $data['status']);
         }
 
-        return response()->json(['data' => $data]);
+        if (isset($data['keyword']) && !is_null($data['keyword'])) {
+            $carriers = $carriers->where('company', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('mc_number', 'LIKE', '%'.$keyword.'%');
+        }
+
+        $carriers = $carriers->orderBy('created_at', 'desc')->paginate($data['paginate']);
+
+        return response()->view('carrier.index', ['carriers' => $carriers, 'data' => $data], 200);
     }
 }

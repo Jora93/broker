@@ -26,11 +26,12 @@ class CreateDropsTable extends Migration
             $table->string('address2')->nullable();
             $table->date('delivery_date');
             $table->string('city')->nullable();
-            $table->string('delivery_time')->nullable();
             $table->string('delivery_state')->nullable();
             $table->string('BOL_payment_term')->nullable();
             $table->string('delivery_location_bol_number')->nullable();
             $table->string('delivery_location_zip_code')->nullable();
+            $table->string('delivery_time_from')->nullable();
+            $table->string('delivery_time_to')->nullable();
             $table->string('freight_class')->nullable();
             $table->string('national_motor_freight_class')->nullable();
             $table->string('bol_product')->nullable();
