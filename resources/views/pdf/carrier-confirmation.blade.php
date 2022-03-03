@@ -53,7 +53,7 @@
         </tr>
         <tr>
             <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Time: {{$load->shipper_pickup_time}}</td>
+            <td style="border-collapse: collapse;">Time: {{$load->shipper_pickup_time_from}} - {{$load->shipper_pickup_time_to}}</td>
             <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
         </tr>
         <tr>
@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Time: {{$load->drops->first()->delivery_time}}</td>
+            <td style="border-collapse: collapse;">Time: {{$load->drops->first()->delivery_time_from}} - {{$load->drops->first()->delivery_time_to}}</td>
             <td style="border-collapse: collapse;">Weight: {{$load->shipper_weight}} lbs</td>
         </tr>
         <tr>
