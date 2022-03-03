@@ -47,12 +47,12 @@
             <th style="border: 1px solid black; border-collapse: collapse;" colspan="3">Initial Pickup</th>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;"> {{$load->shipper_address1}}</td>
+            <td style="border-collapse: collapse;"> {{$load->shipper_company}}</td>
             <td style="border-collapse: collapse;">Date: {{$load->shipper_pickup_date}}</td>
             <td style="border-collapse: collapse;">Product: {{$load->product}}</td>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;"></td>
+            <td style="border-collapse: collapse;">{{$load->shipper_address1}}</td>
             <td style="border-collapse: collapse;">Time: {{$load->shipper_pickup_time_from}} - {{$load->shipper_pickup_time_to}}</td>
             <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
         </tr>
@@ -68,12 +68,12 @@
             <th style="border: 1px solid black; border-collapse: collapse;" colspan="3">Final Destination</th>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;">{{$load->drops->first()->address1}}</td>
+            <td style="border-collapse: collapse;">{{$load->drops->first()->company}}</td>
             <td style="border-collapse: collapse;"></td>
             <td style="border-collapse: collapse;">Product: {{$load->product}}</td>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;"></td>
+            <td style="border-collapse: collapse;">{{$load->drops->first()->address1}}</td>
             <td style="border-collapse: collapse;">Date: {{$load->drops->first()->delivery_date}}</td>
             <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
         </tr>
