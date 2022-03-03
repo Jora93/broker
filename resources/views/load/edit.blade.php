@@ -901,7 +901,13 @@
                                                     <div class="col-md-4">
                                                         <div class="entityLabelValue">
                                                             <div class="entityLabel">Company</div>
-                                                            <div class="entityValue">@if(isset($load->carrier)){{$load->carrier->company}}@endif</div>
+                                                            <div class="entityValue">
+                                                                @if(isset($load->carrier))
+                                                                    <a title="edit" href="{{url(\App::make('currentCompany')->id.'/carriers/'.$carrier->id)}}">
+                                                                        {{$load->carrier->company}}
+                                                                    </a>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <br><br><br>
