@@ -19,7 +19,6 @@
             @method('PATCH')
             @csrf
             <input type="hidden" id="load_id" name="Load_id" value="{{$load->id}}">
-            <input type="hidden" name="customer_id" value="{{$load->customer->id}}">
             <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
                 <div class="col-md-6" style="padding-right:0px;">
                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -56,7 +55,7 @@
                     </div>
                 </div>
                 <div class="col-md-6" style="padding-left:0px;">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="entityLabelValue form-group carrierEquipmentMsg">
                             <div class="entityLabel">Carrier Equipment</div>
                             <select name="carrier_equipment_id" class="form-control input-sm editMainField checkLaneMaster" tabindex="5">
@@ -69,7 +68,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Trailer Size</div>
                             <select name="trailer_size" class="form-control editMainField" tabindex="7">
@@ -95,7 +94,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Dispatcher</div>
                             <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id')}}" class="form-control editMainField" tabindex="66">
@@ -103,6 +102,19 @@
                                 @if(!$dispatchers->isEmpty())
                                     @foreach($dispatchers as $dispatcher)
                                         <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Customer</div>
+                            <select id="customerSelect" name="customer_id" value="{{old('customer_id')}}" class="form-control editMainField" tabindex="66">
+                                <option value="">-- No Dispatcher Selected --</option>
+                                @if(!$customers->isEmpty())
+                                    @foreach($customers as $customer)
+                                        <option @if($load->customer_id == $customer->id) selected @endif value="{{$customer->id}}">{{$customer->company}}</option>
                                     @endforeach
                                 @endif
                             </select>
