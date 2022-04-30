@@ -142,7 +142,7 @@ $(document).ready(function () {
             data: values,
             success: function (result) {
                 if(result.success) {
-                    location.href = `${location.origin}/${window.currentCompanyId}/loads`;
+                    location.href = `${location.origin}/${window.currentCompanyId}/loads/${result.loadId}`;
                 }
                 if (result.error) {
                     $( ".alert-danger" ).remove();

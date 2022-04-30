@@ -154,7 +154,7 @@ class LoadController extends Controller
 
         }
 
-        return response()->json(['success' => 'Load Created successfully']);
+        return response()->json(['success' => 'Load Created successfully', 'loadId'  => $load->id]);
     }
 
     /**
@@ -327,6 +327,13 @@ class LoadController extends Controller
                 $query->where('mc_number', 'LIKE', "%{$data['mc_number']}%");
             }
         });
+
+        if (isset($data['carrier']) && !is_null($data['carrier'])) {
+            $carrier = Carrier::where('company', 'LIKE', "%{$data['carrier']}%")->first();
+            if (isset($carrier)) {
+                $loads->where('carrier_id', $carrier->id);
+            }
+        }
 
         if (isset($data['dispatcher_id']) && !is_null($data['dispatcher_id'])) {
             $loads->where('dispatcher_id', $data['dispatcher_id']);

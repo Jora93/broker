@@ -46,6 +46,12 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
+                                    <label for="customer">Carrier:</label>
+                                    <input placeholder="Carrier" type="text" class="form-control" name="carrier" value="@if(isset($data['carrier'])){{$data['carrier']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
                                     <label class="control-label">Dispatcher:</label>
                                     <select class="form-control" name="dispatcher_id" tabindex="1">
                                         <option value="">Select Dispatcher</option>
