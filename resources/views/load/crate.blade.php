@@ -63,6 +63,7 @@
                             <option value="Van or Reffer">Van or Reffer</option>
                             <option value="Reefer">Reefer</option>
                             <option value="Hot Shot">Hot Shot</option>
+                            <option value="Stepdeck">Stepdeck</option>
                         </select>
                     </div>
                 </div>

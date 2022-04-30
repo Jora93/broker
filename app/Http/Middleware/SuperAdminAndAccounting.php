@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-//use App\Constanats\UserRoles;
+use App\Constanats\UserRoles;
 use Closure;
 
-class Agent
+class SuperAdminAndAccounting
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,7 @@ class Agent
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role === \App\Constanats\UserRoles::Agent){
+        if ($request->user() && ($request->user()->role === UserRoles::SuperAdmin || $request->user()->role === UserRoles::Accounting)){
             return $next($request);
-        }
-    }
+        }    }
 }

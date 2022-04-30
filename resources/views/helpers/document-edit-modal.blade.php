@@ -26,7 +26,7 @@
                         <select id="documentType" name="type" class="selectpicker col-sm-12" required="true" data-live-search="true">
                             <option disabled selected value>Select Doc Type</option>
                             <option value="VOIDED CHECK">VOIDED CHECK</option>
-                            <option value="Carrier Confirmation">Carrier Confirmation</option>
+                            <option value="Carrier Confirmation">Carrier Agreement</option>
                             <option value="Carrier Freight Bill">Carrier Freight Bill</option>
                             <option value="Claim">Claim</option>
                             <option value="Customer Agreement">Customer Agreement</option>

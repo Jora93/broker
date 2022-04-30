@@ -24,16 +24,16 @@
                         @endif
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="agent-tab" data-toggle="tab" href="#agent" role="tab" aria-controls="agent" aria-selected="true">agent</a>
+                                <a class="nav-link active" id="agent-tab" data-toggle="tab" href="#agent" role="tab" aria-controls="agent" aria-selected="true">Accounting</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false">support</a>
+                                <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="false">Support</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            {{--start create Agent--}}
+                            {{--start create Accounting--}}
                             <div class="tab-pane fade show active" id="agent" role="tabpanel" aria-labelledby="agent-tab">
-                                <form method="POST" action="{{route('userStore')}}">
+                                <form method="POST" action="{{ url(\App::make('currentCompany')->id.'/user-store') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label>Name</label>
@@ -52,14 +52,15 @@
                                         <label>Confirm Password</label>
                                         <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
                                     </div>
-                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoles::Agent}}">
+                                    <input name="role" type="hidden" value="{{\App\Constanats\UserRoles::Accounting}}">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                            {{--end create Agent--}}
+                            {{--end create Accounting--}}
                             {{--start create support  TODO change ids --}}
                             <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab">
-                                <form method="POST" action="{{route('userStore')}}">
+                                <form method="POST" action="{{ url(\App::make('currentCompany')->id.'/user-store') }}">
+
                                     @csrf
                                     <div class="form-group">
                                         <label>Name</label>

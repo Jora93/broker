@@ -86,21 +86,23 @@
                     <a class="dropdown-item" href="{{route('loads.accounting', $companyId)}}">Load Sales Summary</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    Changed Loads
-                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " aria-hidden="true">
-                        {{count($changedLoads)}}
-                    </span>
-                </a>
-                @if(!$changedLoads->isEmpty())
-                    <div class="dropdown-menu">
-                        @foreach($changedLoads as $changedLoad)
-                            <a class="dropdown-item" href="{{url('/'.$companyId.'/loads/'.$changedLoad->id)}}">#{{$changedLoad->id}} changed</a>
-                        @endforeach
-                    </div>
-                @endif
-            </li>
+            @if(Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting)
+                <li class="nav-item dropdown">
+                    <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Changed Loads
+                        <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-bell pull-right " aria-hidden="true">
+                            {{count($changedLoads)}}
+                        </span>
+                    </a>
+                    @if(!$changedLoads->isEmpty())
+                        <div class="dropdown-menu">
+                            @foreach($changedLoads as $changedLoad)
+                                <a class="dropdown-item" href="{{url('/'.$companyId.'/loads/'.$changedLoad->id)}}">#{{$changedLoad->id}} changed</a>
+                            @endforeach
+                        </div>
+                    @endif
+                </li>
+            @endif
             <li class="nav-item dropdown pull-right">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
@@ -113,27 +115,29 @@
                             document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
-                    <a class="dropdown-item" href="{{ route('account') }}">My Account</a>
+                    <a class="dropdown-item" href="{{ url($companyId.'/account') }}">My Account</a>
                     @if(Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin)
-                        <a class="dropdown-item" href="{{ route('userCreate') }}">Create User</a>
+                        <a class="dropdown-item" href="{{url($companyId.'/user-create') }}">Create User</a>
                     @endif
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " aria-hidden="true"></span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">General Company Profile</a>
-                    <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">General Settings</a>
-                    @foreach($companies as $company)
-                        <a class="dropdown-item" href="{{url($companyId.'/companies/'.$company->id.'/edit')}}">{{$company->name}}</a>
-                    @endforeach
-                </div>
-            </li>
+            @if(Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " aria-hidden="true"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">General Company Profile</a>
+                        <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">General Settings</a>
+                        @foreach($companies as $company)
+                            <a class="dropdown-item" href="{{url($companyId.'/companies/'.$company->id.'/edit')}}">{{$company->name}}</a>
+                        @endforeach
+                    </div>
+                </li>
+            @endif
             <div class="col-sm-4 col-xs-4" id="searchCarriers">
                 <form class="form-inline" id="carrier_search">
                     <div class="form-group mx-sm-3 mb-2">

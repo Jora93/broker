@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-//use App\Constanats\UserRoles;
+use App\Constanats\UserRoles;
 
 class UserController extends Controller
 {
@@ -18,7 +18,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin', ['only' => ['store']]);
+        $this->middleware('superAdmin', ['only' => ['store']]);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
         return view('user.create');
     }
 
-    public function store(Request $request)
+    public function store($company_id, Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -45,11 +45,12 @@ class UserController extends Controller
             'role' => [
                 'required',
                 'integer',
-                Rule::in([\App\Constanats\UserRoles::CompanyAdmin, UserRoleConstants::Support, UserRoleConstants::Agent])
+                Rule::in([ UserRoles::Support, UserRoles::Accounting])
             ],
         ]);
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
+        $data['company_id'] = $company_id;
         User::create($data);
     }
 

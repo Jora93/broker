@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-//use App\Constanats\UserRoles;
+use App\Constanats\UserRoles;
 use Closure;
 
-class AdminAndSupport
+class SuperAdminAndSupport
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AdminAndSupport
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && ($request->user()->role === \App\Constanats\UserRoles::SuperAdmin || $request->user()->role === UserRoleConstants::CompanyAdmin || $request->user()->role === UserRoleConstants::Support)){
+        if ($request->user() && ($request->user()->role === UserRoles::SuperAdmin || $request->user()->role === UserRoles::Support)){
             return $next($request);
         }
     }
