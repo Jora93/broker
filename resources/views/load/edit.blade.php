@@ -372,7 +372,11 @@
                                                         <div class="col-sm-4 col-xs-4">
                                                             <div class="form-group">
                                                                 <label class="control-label">APPT</label>
-                                                                <input type="checkbox" @if(old('shipper_pickup_time_appt', $load->shipper_pickup_time_appt)) checked @endif name="shipper_pickup_time_appt" value="{{old('shipper_pickup_time_appt', $load->shipper_pickup_time_appt)}}" >
+                                                                <input type="checkbox" @if(old('shipper_pickup_time_appt', $load->shipper_pickup_time_appt)) checked @endif name="shipper_pickup_time_appt">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">FCFS</label>
+                                                                <input type="checkbox" @if(old('shipper_pickup_time_fcfs', $load->shipper_pickup_time_fcfs)) checked @endif name="shipper_pickup_time_fcfs">
                                                             </div>
                                                         </div>
                                                     </div>

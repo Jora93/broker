@@ -95,6 +95,7 @@ class LoadController extends Controller
             "shipper_pickup_time_from"               => ['nullable', 'string'],
             "shipper_pickup_time_to"                 => ['nullable', 'string'],
             "shipper_pickup_time_appt"               => ['nullable', 'string'],
+            "shipper_pickup_time_fcfs"               => ['nullable', 'string'],
             "shipper_pickup_number"                  => ['nullable', 'string'],
             "shipper_notes"                          => ['nullable', 'string'],
             "consignee.*.company"                      => ['nullable', 'string'],
@@ -138,6 +139,10 @@ class LoadController extends Controller
         }
 
         $data = $request->all();
+
+        $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
+        $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
+
         $dropsData =  $data['consignee'];
         unset($data['consignee']);
         $loadData = $data;
@@ -231,6 +236,7 @@ class LoadController extends Controller
             "shipper_pickup_time_from"               => ['nullable', 'string'],
             "shipper_pickup_time_to"                 => ['nullable', 'string'],
             "shipper_pickup_time_appt"               => ['nullable', 'string'],
+            "shipper_pickup_time_fcfs"               => ['nullable', 'string'],
             "shipper_pickup_number"                  => ['nullable', 'string'],
             "shipper_notes"                          => ['nullable', 'string'],
             "consignee.*.company"                      => ['nullable', 'string'],
@@ -274,6 +280,8 @@ class LoadController extends Controller
         }
 
         $data = $request->all();
+        $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
+        $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
         $dropsData =  $data['consignee'];
         unset($data['consignee']);
         $newDrops = [];

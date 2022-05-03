@@ -71607,7 +71607,11 @@ $(document).ready(function () {
     var $inputs = $('#loadCreateForm :input');
     var values = {};
     $inputs.each(function () {
-      values[this.name] = $(this).val();
+      if (this.name == 'shipper_pickup_time_appt' || this.name == 'shipper_pickup_time_fcfs') {
+        values[this.name] = this.checked;
+      } else {
+        values[this.name] = $(this).val();
+      }
     });
     $.ajax({
       type: "POST",
@@ -71615,7 +71619,7 @@ $(document).ready(function () {
       data: values,
       success: function success(result) {
         if (result.success) {
-          location.href = "".concat(location.origin, "/").concat(window.currentCompanyId, "/loads");
+          location.href = "".concat(location.origin, "/").concat(window.currentCompanyId, "/loads/").concat(result.loadId);
         }
 
         if (result.error) {
@@ -71743,7 +71747,11 @@ $(document).ready(function () {
     var loadId = $("#load_id").val();
     var values = {};
     inputs.each(function () {
-      values[this.name] = $(this).val();
+      if (this.name == 'shipper_pickup_time_appt' || this.name == 'shipper_pickup_time_fcfs') {
+        values[this.name] = this.checked;
+      } else {
+        values[this.name] = $(this).val();
+      }
     });
     $.ajax({
       type: "PATCH",

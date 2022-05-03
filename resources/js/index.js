@@ -134,7 +134,11 @@ $(document).ready(function () {
 
         var values = {};
         $inputs.each(function () {
-            values[this.name] = $(this).val();
+            if (this.name == 'shipper_pickup_time_appt' || this.name == 'shipper_pickup_time_fcfs') {
+                values[this.name] = this.checked;
+            } else {
+                values[this.name] = $(this).val();
+            }
         });
         $.ajax({
             type: "POST",
@@ -267,7 +271,11 @@ $(document).ready(function () {
         var loadId = $("#load_id").val();
         var values = {};
         inputs.each(function () {
-            values[this.name] = $(this).val();
+            if (this.name == 'shipper_pickup_time_appt' || this.name == 'shipper_pickup_time_fcfs') {
+                values[this.name] = this.checked;
+            } else {
+                values[this.name] = $(this).val();
+            }
         });
         $.ajax({
             type: "PATCH",
