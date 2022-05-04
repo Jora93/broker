@@ -269,4 +269,26 @@ class CarrierController extends Controller
 
         return response()->view('carrier.index', ['carriers' => $carriers, 'data' => $data], 200);
     }
+
+    public function globalSearch($company_id, Request $request)
+    {
+        $keyword = $request->keyword;
+        $data = [];
+        if($keyword) {
+            $carriers = Carrier::where('company', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('mc_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['carriers'] = $carriers;
+
+            $loads = Load::where('load_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['loads'] = $loads;
+
+            $invoices = Load::where('invoice_number', 'LIKE', '%'.$keyword.'%')->get();
+            $data['invoices'] = $invoices;
+
+            $customers = Customer::where('company', 'LIKE', '%'.$keyword.'%')->get();
+            $data['customers'] = $customers;
+        }
+
+        return response()->json(['data' => $data]);
+    }
 }

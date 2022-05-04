@@ -42,6 +42,7 @@ Route::post('/setAppCompany', 'CompanyController@setAppCompany');
 
 Route::prefix('{company_id}')->middleware(['company'])->group(function () {
     Route::get('carrier-search', 'CarrierController@search');
+    Route::get('global-search', 'CarrierController@globalSearch');
 });
 Route::get('document-download/{id}', 'DocumentController@download');
 Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function () {

@@ -142,13 +142,13 @@
                 <form class="form-inline" id="carrier_search">
                     <div class="form-group mx-sm-3 mb-2">
                         <label class="sr-only">Find Customer</label>
-                        <input class="form-control" type="text" id="" name="keyword" placeholder="Search for customers.." title="Type in a name">
+                        <input class="form-control" type="text" id="" name="keyword" placeholder="Search" title="Type in a name">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">
                         <span style="cursor:pointer" class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </form>
-                <ul id="myUL" class="col-sm-6 col-xs-6"></ul>
+                <ul id="myUL" class="col-sm-12 col-xs-12"></ul>
             </div>
 
         @endguest

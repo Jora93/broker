@@ -71824,7 +71824,7 @@ $(document).ready(function () {
     });
     $.ajax({
       type: "GET",
-      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/carrier-search"),
+      url: "".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/global-search"),
       data: values,
       success: function success(result) {
         if (result.data) {

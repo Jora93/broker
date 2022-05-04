@@ -340,7 +340,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: `${window.APP_URL}/${window.currentCompanyId}/carrier-search`,
+            url: `${window.APP_URL}/${window.currentCompanyId}/global-search`,
             data: values,
             success: function (result) {
                 if(result.data) {
