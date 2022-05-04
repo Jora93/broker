@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="logoInput">Document*</label>
-                            <input id="docummentFile" type="file" name="file">
+                            <input id="docummentFile" type="file" name="file" accept="image/jpeg,image/gif,image/png,application/pdf">
                         </div>
                     </div>
                     <div class="form-group">
@@ -99,8 +99,8 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button id="saveDocBtn" type="submit" class="btn btn-primary">Save</button>
-                    <button id="saveDocLoadBtn" style="display: none;" class="btn btn-primary" type="button" disabled>
+                    <button id="updateDocBtn" type="submit" class="btn btn-primary">Save</button>
+                    <button id="updateDocLoadBtn" style="display: none;" class="btn btn-primary" type="button" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Loading...
                     </button>

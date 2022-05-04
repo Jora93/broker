@@ -44,7 +44,7 @@ class DocumentController extends Controller
             "load_id"     => ['nullable', 'exists:loads,id'],
             "type"        => ['required'],
             "description" => ['nullable'],
-            "file"        => ['required', 'file', 'max:2048']
+            "file"        => ['required', 'file', 'max:2048', 'mimes:jpeg,png,gif,svg,pdf']
         ]);
         $data = $request->all();
         $data['company_id'] = $company_id;
@@ -100,7 +100,7 @@ class DocumentController extends Controller
             "load_id"     => ['nullable', 'exists:loads,id'],
             "type"        => ['required'],
             "description" => ['nullable'],
-            "file"        => ['nullable', 'file', 'max:2048']
+            "file"        => ['nullable', 'file', 'max:2048', 'mimes:jpeg,png,gif,svg,pdf']
         ]);
         $data = $request->all();
         $data['company_id'] = $company_id;
