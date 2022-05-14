@@ -289,6 +289,9 @@ class LoadController extends Controller
         foreach ($dropsData as $key => $dropData) {
             $dropsData[$key]['haz_mat'] = isset($dropsData[$key]['haz_mat']) ? 1: 0;
             $dropsData[$key]['load_id'] = $load->id;
+            if(isset($dropData['delivery_date'])) {
+                $dropData['delivery_date'] = date("Y-m-d", strtotime($dropData['delivery_date']));
+            }
             if ($dropData['is_new'] === 'false') {
                 unset($dropData['is_new']);
                 Drop::find($dropData['id'])->update($dropData);

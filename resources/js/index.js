@@ -76,6 +76,8 @@ $(document).ready(function () {
             newForm.find('.consignee_delivered_number').attr('name', 'consignee['+ window.createStopIndex+'][delivered_number]');
             newForm.find('.consignee_address2').attr('name', 'consignee['+ window.createStopIndex+'][address2]');
             newForm.find('.consignee_delivery_date').attr('name', 'consignee['+ window.createStopIndex+'][delivery_date]');
+            newForm.find('.consignee_delivery_time_from').attr('name', 'consignee['+ window.createStopIndex+'][delivery_time_from]');
+            newForm.find('.consignee_delivery_time_to').attr('name', 'consignee['+ window.createStopIndex+'][delivery_time_to]');
             newForm.find('.consignee_city').attr('name', 'consignee['+ window.createStopIndex+'][city]');
             newForm.find('.consignee_delivery_time').attr('name', 'consignee['+ window.createStopIndex+'][delivery_time]');
             newForm.find('.consignee_delivery_state').attr('name', 'consignee['+ window.createStopIndex+'][delivery_state]');
@@ -104,6 +106,8 @@ $(document).ready(function () {
             newForm.find('.consignee_delivered_number').val('');
             newForm.find('.consignee_address2').val('');
             newForm.find('.consignee_delivery_date').val('');
+            newForm.find('.consignee_delivery_time_from').val('');
+            newForm.find('.consignee_delivery_time_to').val('');
             newForm.find('.consignee_city').val('');
             newForm.find('.consignee_delivery_time').val('');
             newForm.find('.consignee_delivery_state').val('');
@@ -125,6 +129,9 @@ $(document).ready(function () {
 
             newForm.appendTo( "#consigneeContainer" );
             $('.selectpickeraa').selectpicker('refresh');
+            $('.datepicker').datepicker({
+                format: 'mm-dd-yyyy'
+            });
         }
     };
 
@@ -198,6 +205,8 @@ $(document).ready(function () {
             newForm.find('.consignee_delivered_number').attr('name', 'consignee['+ window.editStopIndex+'][delivered_number]');
             newForm.find('.consignee_address2').attr('name', 'consignee['+ window.editStopIndex+'][address2]');
             newForm.find('.consignee_delivery_date').attr('name', 'consignee['+ window.editStopIndex+'][delivery_date]');
+            newForm.find('.consignee_delivery_time_from').attr('name', 'consignee['+ window.editStopIndex+'][delivery_time_from]');
+            newForm.find('.consignee_delivery_time_to').attr('name', 'consignee['+ window.editStopIndex+'][delivery_time_to]');
             newForm.find('.consignee_city').attr('name', 'consignee['+ window.editStopIndex+'][city]');
             newForm.find('.consignee_delivery_time').attr('name', 'consignee['+ window.editStopIndex+'][delivery_time]');
             newForm.find('.consignee_delivery_state').attr('name', 'consignee['+ window.editStopIndex+'][delivery_state]');
@@ -226,6 +235,8 @@ $(document).ready(function () {
             newForm.find('.consignee_delivered_number').val('');
             newForm.find('.consignee_address2').val('');
             newForm.find('.consignee_delivery_date').val('');
+            newForm.find('.consignee_delivery_time_from').val('');
+            newForm.find('.consignee_delivery_time_to').val('');
             newForm.find('.consignee_city').val('');
             newForm.find('.consignee_delivery_time').val('');
             newForm.find('.consignee_delivery_state').val('');
@@ -247,6 +258,9 @@ $(document).ready(function () {
 
             newForm.appendTo( "#consigneeContainer" );
             $('.selectpickeraa').selectpicker('refresh');
+            $('.datepicker').datepicker({
+                format: 'mm-dd-yyyy'
+            });
         }
     };
 
