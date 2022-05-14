@@ -102,7 +102,7 @@ class GeneralSettingsController extends Controller
 
         $company = Company::find($company_id);
         $generalSetting = GeneralSetting::first();
-        $load  = Load::find($load_id);
+        $load  = Load::with('carrier')->find($load_id);
 
         $html = view('pdf.carrier-confirmation', compact(['load', 'generalSetting', 'company']))->render();
         $mpdf->WriteHTML($html);
