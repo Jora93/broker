@@ -173,7 +173,11 @@
                                             <td>{{$load->status}}</td>
                                             <td><a href="{{ url(\App::make('currentCompany')->id.'/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
                                             <td>{{$load->shipper_pickup_date}} {{$load->shipper_pickup_time}}</td>
-                                            <td><a href="{{ url(\App::make('currentCompany')->id.'/carriers/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
+                                            @if(isset($load->carrier))
+                                                <td><a href="{{ url(\App::make('currentCompany')->id.'/carriers/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
+                                            @else
+                                                <td></td>
+                                            @endif
                                             <td>{{$load->shipper_address1}}</td>
                                             <td>{{$load->consignee_address1}}</td>
                                             <td>{{count($load->drops)}}</td>
