@@ -449,14 +449,14 @@ class LoadController extends Controller
         $costSum = $loads->sum('carrier_costs_rate_per_unit');
         $netSum = $this->calculateNetSum($loads);
 
-////        $totalGrossSum = $loadsTotal->sum('customer_costs_rate_per_unit');
-////        $totalCostSum = $loadsTotal->sum('carrier_costs_rate_per_unit');
-////        $totalNetSum = $this->calculateNetSum($loadsTotal);
+//        $totalGrossSum = $loadsTotal->sum('customer_costs_rate_per_unit');
+//        $totalCostSum = $loadsTotal->sum('carrier_costs_rate_per_unit');
+//        $totalNetSum = $this->calculateNetSum($loadsTotal);
 //        $totalGrossSum = 3333;
 //        $totalCostSum = 22222;
 //        $totalNetSum = 1111;
 
-        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads'/*, 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum'*/));
+        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads', 'grossSum', 'costSum', 'netSum'));
 //        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads'/*, 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum'*/));
     }
 

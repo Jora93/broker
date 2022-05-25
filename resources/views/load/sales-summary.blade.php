@@ -203,14 +203,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
-{{--                                    <tr style="font-weight: bold">--}}
-{{--                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>--}}
-{{--                                        <td>Page Total</td>--}}
-{{--                                        <td>$ {{number_format($grossSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td>$ {{number_format($costSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td>$ {{number_format($netSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td></td>--}}
-{{--                                    </tr>--}}
+                                    <tr style="font-weight: bold">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <td>Page Total</td>
+                                        <td>$ {{number_format($grossSum, 2, '.', ',')}}</td>
+                                        <td>$ {{number_format($costSum, 2, '.', ',')}}</td>
+                                        <td>$ {{number_format($netSum, 2, '.', ',')}}</td>
+                                        <td></td>
+                                    </tr>
 {{--                                    <tr style="font-weight: bold">--}}
 {{--                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>--}}
 {{--                                        <td>Report Total</td>--}}
