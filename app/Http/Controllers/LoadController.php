@@ -54,7 +54,7 @@ class LoadController extends Controller
             'carriers' => $carriers,
             'dispatchers' => $dispatchers,
             'shipper_value' => $request->shipper_value
-            ], 200);
+        ], 200);
     }
 
     /**
@@ -67,71 +67,71 @@ class LoadController extends Controller
     public function store($company_id, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "carrier_id"                             => ['nullable', 'exists:carriers,id'],
-            "customer_id"                            => ['required', 'exists:customers,id'],
-            "dispatcher_id"                          => ['nullable', 'exists:dispatchers,id'],
-            "status"                                 => ['nullable', 'string'],
-            "product"                                => ['required', 'string'],
-            "purchase_order_number"                  => ['nullable', 'string'],
-            "trailer_size"                           => ['nullable', 'string'],
-            "customer_costs_rate_per_unit"           => ['nullable', 'string'],
-            "carrier_costs_rate_per_unit"            => ['nullable', 'string'],
-            "shipper_company"                        => ['nullable', 'string'],
-            "shipper_phone"                          => ['nullable', 'string'],
-            "shipper_phone_extension"                => ['nullable', 'string'],
-            "shipper_location_POS"                   => ['nullable', 'string'],
-            "shipper_customer_POS"                   => ['nullable', 'string'],
-            "shipper_address1"                       => ['nullable', 'string'],
-            "shipper_fax"                            => ['nullable', 'string'],
-            "shipper_address2"                       => ['nullable', 'string'],
-            "shipper_quantity"                       => ['nullable', 'string'],
-            "shipper_type"                           => ['nullable', 'string'],
-            "shipper_city"                           => ['required', 'string'],
-            "shipper_weight"                         => ['nullable', 'string'],
-            "shipper_state"                          => ['required', 'string'],
-            "shipper_value"                          => ['nullable', 'string'],
-            "shipper_zip_code"                       => ['nullable', 'string'],
-            "shipper_pickup_date"                    => ['required', 'string'],
-            "shipper_pickup_time_from"               => ['nullable', 'string'],
-            "shipper_pickup_time_to"                 => ['nullable', 'string'],
-            "shipper_pickup_time_appt"               => ['nullable', 'string'],
-            "shipper_pickup_time_fcfs"               => ['nullable', 'string'],
-            "shipper_pickup_number"                  => ['nullable', 'string'],
-            "shipper_notes"                          => ['nullable', 'string'],
-            "consignee.*.company"                      => ['nullable', 'string'],
-            "consignee.*.phone"                        => ['nullable', 'string'],
-            "consignee.*.phone_extension"              => ['nullable', 'string'],
-            "consignee.*.contact_name"                 => ['nullable', 'string'],
-            "consignee.*.fax"                          => ['nullable', 'string'],
-            "consignee.*.address1"                     => ['nullable', 'string'],
-            "consignee.*.delivered_number"             => ['nullable', 'string'],
-            "consignee.*.address2"                     => ['nullable', 'string'],
-            "consignee.*.delivery_date"                => ['required', 'string'],
-            "consignee.*.delivery_time_from"           => ['nullable', 'string'],
-            "consignee.*.delivery_time_to"             => ['nullable', 'string'],
-            "consignee.*.city"                         => ['nullable', 'string'],
-            "consignee.*.delivery_state"               => ['nullable', 'string'],
-            "consignee.*.BOL_payment_term"             => ['nullable', 'string'],
+            "carrier_id" => ['nullable', 'exists:carriers,id'],
+            "customer_id" => ['required', 'exists:customers,id'],
+            "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
+            "status" => ['nullable', 'string'],
+            "product" => ['required', 'string'],
+            "purchase_order_number" => ['nullable', 'string'],
+            "trailer_size" => ['nullable', 'string'],
+            "customer_costs_rate_per_unit" => ['nullable', 'string'],
+            "carrier_costs_rate_per_unit" => ['nullable', 'string'],
+            "shipper_company" => ['nullable', 'string'],
+            "shipper_phone" => ['nullable', 'string'],
+            "shipper_phone_extension" => ['nullable', 'string'],
+            "shipper_location_POS" => ['nullable', 'string'],
+            "shipper_customer_POS" => ['nullable', 'string'],
+            "shipper_address1" => ['nullable', 'string'],
+            "shipper_fax" => ['nullable', 'string'],
+            "shipper_address2" => ['nullable', 'string'],
+            "shipper_quantity" => ['nullable', 'string'],
+            "shipper_type" => ['nullable', 'string'],
+            "shipper_city" => ['required', 'string'],
+            "shipper_weight" => ['nullable', 'string'],
+            "shipper_state" => ['required', 'string'],
+            "shipper_value" => ['nullable', 'string'],
+            "shipper_zip_code" => ['nullable', 'string'],
+            "shipper_pickup_date" => ['required', 'string'],
+            "shipper_pickup_time_from" => ['nullable', 'string'],
+            "shipper_pickup_time_to" => ['nullable', 'string'],
+            "shipper_pickup_time_appt" => ['nullable', 'string'],
+            "shipper_pickup_time_fcfs" => ['nullable', 'string'],
+            "shipper_pickup_number" => ['nullable', 'string'],
+            "shipper_notes" => ['nullable', 'string'],
+            "consignee.*.company" => ['nullable', 'string'],
+            "consignee.*.phone" => ['nullable', 'string'],
+            "consignee.*.phone_extension" => ['nullable', 'string'],
+            "consignee.*.contact_name" => ['nullable', 'string'],
+            "consignee.*.fax" => ['nullable', 'string'],
+            "consignee.*.address1" => ['nullable', 'string'],
+            "consignee.*.delivered_number" => ['nullable', 'string'],
+            "consignee.*.address2" => ['nullable', 'string'],
+            "consignee.*.delivery_date" => ['required', 'string'],
+            "consignee.*.delivery_time_from" => ['nullable', 'string'],
+            "consignee.*.delivery_time_to" => ['nullable', 'string'],
+            "consignee.*.city" => ['nullable', 'string'],
+            "consignee.*.delivery_state" => ['nullable', 'string'],
+            "consignee.*.BOL_payment_term" => ['nullable', 'string'],
             "consignee.*.delivery_location_bol_number" => ['nullable', 'string'],
-            "consignee.*.delivery_location_zip_code"   => ['nullable', 'string'],
-            "consignee.*.freight_class"                => ['nullable', 'string'],
+            "consignee.*.delivery_location_zip_code" => ['nullable', 'string'],
+            "consignee.*.freight_class" => ['nullable', 'string'],
             "consignee.*.national_motor_freight_class" => ['nullable', 'string'],
-            "consignee.*.bol_product"                  => ['nullable', 'string'],
-            "consignee.*.delivery_location_quantity"   => ['nullable', 'string'],
-            "consignee.*.item_type"                    => ['nullable', 'string'],
-            "consignee.*.length"                       => ['nullable', 'string'],
-            "consignee.*.width"                        => ['nullable', 'string'],
-            "consignee.*.height"                       => ['nullable', 'string'],
-            "consignee.*.delivery_location_weight"     => ['nullable', 'string'],
-            "consignee.*.haz_mat"                      => ['nullable', 'string'],
-            "consignee.*.bol_notes"                    => ['nullable', 'string'],
-            "consignee.*.delivery_location_notes"      => ['nullable', 'string'],
-            "truck_number"                           => ['nullable', 'string'],
-            "trailer_number"                         => ['nullable', 'string'],
-            "driver"                                 => ['nullable', 'string'],
-            "driver_number"                          => ['nullable', 'string'],
-            "pro_number"                             => ['nullable', 'string'],
-            "driver_email"                           => ['nullable', 'email'],
+            "consignee.*.bol_product" => ['nullable', 'string'],
+            "consignee.*.delivery_location_quantity" => ['nullable', 'string'],
+            "consignee.*.item_type" => ['nullable', 'string'],
+            "consignee.*.length" => ['nullable', 'string'],
+            "consignee.*.width" => ['nullable', 'string'],
+            "consignee.*.height" => ['nullable', 'string'],
+            "consignee.*.delivery_location_weight" => ['nullable', 'string'],
+            "consignee.*.haz_mat" => ['nullable', 'string'],
+            "consignee.*.bol_notes" => ['nullable', 'string'],
+            "consignee.*.delivery_location_notes" => ['nullable', 'string'],
+            "truck_number" => ['nullable', 'string'],
+            "trailer_number" => ['nullable', 'string'],
+            "driver" => ['nullable', 'string'],
+            "driver_number" => ['nullable', 'string'],
+            "pro_number" => ['nullable', 'string'],
+            "driver_email" => ['nullable', 'email'],
         ]);
 
         if ($validator->fails()) {
@@ -143,7 +143,7 @@ class LoadController extends Controller
         $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
         $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
 
-        $dropsData =  $data['consignee'];
+        $dropsData = $data['consignee'];
         unset($data['consignee']);
         $loadData = $data;
         $loadData['company_id'] = \App::make('currentCompany')->id;
@@ -159,7 +159,7 @@ class LoadController extends Controller
 
         }
 
-        return response()->json(['success' => 'Load Created successfully', 'loadId'  => $load->id]);
+        return response()->json(['success' => 'Load Created successfully', 'loadId' => $load->id]);
     }
 
     /**
@@ -201,78 +201,78 @@ class LoadController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update($company_id, Request $request, Load $load)
     {
         $validator = Validator::make($request->all(), [
-            "carrier_id"                             => ['nullable', 'exists:carriers,id'],
-            "customer_id"                            => ['required', 'exists:customers,id'],
-            "dispatcher_id"                          => ['nullable', 'exists:dispatchers,id'],
-            "status"                                 => ['nullable', 'string'],
-            "product"                                => ['required', 'string'],
-            "purchase_order_number"                  => ['nullable', 'string'],
-            "trailer_size"                           => ['nullable', 'string'],
-            "customer_costs_rate_per_unit"           => ['nullable', 'string'],
-            "carrier_costs_rate_per_unit"            => ['nullable', 'string'],
-            "shipper_company"                        => ['nullable', 'string'],
-            "shipper_phone"                          => ['nullable', 'string'],
-            "shipper_phone_extension"                => ['nullable', 'string'],
-            "shipper_location_POS"                   => ['nullable', 'string'],
-            "shipper_customer_POS"                   => ['nullable', 'string'],
-            "shipper_address1"                       => ['nullable', 'string'],
-            "shipper_fax"                            => ['nullable', 'string'],
-            "shipper_address2"                       => ['nullable', 'string'],
-            "shipper_quantity"                       => ['nullable', 'string'],
-            "shipper_type"                           => ['nullable', 'string'],
-            "shipper_city"                           => ['required', 'string'],
-            "shipper_weight"                         => ['nullable', 'string'],
-            "shipper_state"                          => ['required', 'string'],
-            "shipper_value"                          => ['nullable', 'string'],
-            "shipper_zip_code"                       => ['nullable', 'string'],
-            "shipper_pickup_date"                    => ['required', 'string'],
-            "shipper_pickup_time_from"               => ['nullable', 'string'],
-            "shipper_pickup_time_to"                 => ['nullable', 'string'],
-            "shipper_pickup_time_appt"               => ['nullable', 'string'],
-            "shipper_pickup_time_fcfs"               => ['nullable', 'string'],
-            "shipper_pickup_number"                  => ['nullable', 'string'],
-            "shipper_notes"                          => ['nullable', 'string'],
-            "consignee.*.company"                      => ['nullable', 'string'],
-            "consignee.*.phone"                        => ['nullable', 'string'],
-            "consignee.*.phone_extension"              => ['nullable', 'string'],
-            "consignee.*.contact_name"                 => ['nullable', 'string'],
-            "consignee.*.fax"                          => ['nullable', 'string'],
-            "consignee.*.address1"                     => ['nullable', 'string'],
-            "consignee.*.delivered_number"             => ['nullable', 'string'],
-            "consignee.*.address2"                     => ['nullable', 'string'],
-            "consignee.*.delivery_date"                => ['required', 'string'],
-            "consignee.*.delivery_time_from"           => ['nullable', 'string'],
-            "consignee.*.delivery_time_to"             => ['nullable', 'string'],
-            "consignee.*.city"                         => ['nullable', 'string'],
-            "consignee.*.delivery_state"               => ['nullable', 'string'],
-            "consignee.*.BOL_payment_term"             => ['nullable', 'string'],
+            "carrier_id" => ['nullable', 'exists:carriers,id'],
+            "customer_id" => ['required', 'exists:customers,id'],
+            "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
+            "status" => ['nullable', 'string'],
+            "product" => ['required', 'string'],
+            "purchase_order_number" => ['nullable', 'string'],
+            "trailer_size" => ['nullable', 'string'],
+            "customer_costs_rate_per_unit" => ['nullable', 'string'],
+            "carrier_costs_rate_per_unit" => ['nullable', 'string'],
+            "shipper_company" => ['nullable', 'string'],
+            "shipper_phone" => ['nullable', 'string'],
+            "shipper_phone_extension" => ['nullable', 'string'],
+            "shipper_location_POS" => ['nullable', 'string'],
+            "shipper_customer_POS" => ['nullable', 'string'],
+            "shipper_address1" => ['nullable', 'string'],
+            "shipper_fax" => ['nullable', 'string'],
+            "shipper_address2" => ['nullable', 'string'],
+            "shipper_quantity" => ['nullable', 'string'],
+            "shipper_type" => ['nullable', 'string'],
+            "shipper_city" => ['required', 'string'],
+            "shipper_weight" => ['nullable', 'string'],
+            "shipper_state" => ['required', 'string'],
+            "shipper_value" => ['nullable', 'string'],
+            "shipper_zip_code" => ['nullable', 'string'],
+            "shipper_pickup_date" => ['required', 'string'],
+            "shipper_pickup_time_from" => ['nullable', 'string'],
+            "shipper_pickup_time_to" => ['nullable', 'string'],
+            "shipper_pickup_time_appt" => ['nullable', 'string'],
+            "shipper_pickup_time_fcfs" => ['nullable', 'string'],
+            "shipper_pickup_number" => ['nullable', 'string'],
+            "shipper_notes" => ['nullable', 'string'],
+            "consignee.*.company" => ['nullable', 'string'],
+            "consignee.*.phone" => ['nullable', 'string'],
+            "consignee.*.phone_extension" => ['nullable', 'string'],
+            "consignee.*.contact_name" => ['nullable', 'string'],
+            "consignee.*.fax" => ['nullable', 'string'],
+            "consignee.*.address1" => ['nullable', 'string'],
+            "consignee.*.delivered_number" => ['nullable', 'string'],
+            "consignee.*.address2" => ['nullable', 'string'],
+            "consignee.*.delivery_date" => ['required', 'string'],
+            "consignee.*.delivery_time_from" => ['nullable', 'string'],
+            "consignee.*.delivery_time_to" => ['nullable', 'string'],
+            "consignee.*.city" => ['nullable', 'string'],
+            "consignee.*.delivery_state" => ['nullable', 'string'],
+            "consignee.*.BOL_payment_term" => ['nullable', 'string'],
             "consignee.*.delivery_location_bol_number" => ['nullable', 'string'],
-            "consignee.*.delivery_location_zip_code"   => ['nullable', 'string'],
-            "consignee.*.freight_class"                => ['nullable', 'string'],
+            "consignee.*.delivery_location_zip_code" => ['nullable', 'string'],
+            "consignee.*.freight_class" => ['nullable', 'string'],
             "consignee.*.national_motor_freight_class" => ['nullable', 'string'],
-            "consignee.*.bol_product"                  => ['nullable', 'string'],
-            "consignee.*.delivery_location_quantity"   => ['nullable', 'string'],
-            "consignee.*.item_type"                    => ['nullable', 'string'],
-            "consignee.*.length"                       => ['nullable', 'string'],
-            "consignee.*.width"                        => ['nullable', 'string'],
-            "consignee.*.height"                       => ['nullable', 'string'],
-            "consignee.*.delivery_location_weight"     => ['nullable', 'string'],
-            "consignee.*.haz_mat"                      => ['nullable', 'string'],
-            "consignee.*.bol_notes"                    => ['nullable', 'string'],
-            "consignee.*.delivery_location_notes"      => ['nullable', 'string'],
-            "truck_number"                           => ['nullable', 'string'],
-            "trailer_number"                         => ['nullable', 'string'],
-            "driver"                                 => ['nullable', 'string'],
-            "driver_number"                          => ['nullable', 'string'],
-            "pro_number"                             => ['nullable', 'string'],
-            "driver_email"                           => ['nullable', 'email'],
+            "consignee.*.bol_product" => ['nullable', 'string'],
+            "consignee.*.delivery_location_quantity" => ['nullable', 'string'],
+            "consignee.*.item_type" => ['nullable', 'string'],
+            "consignee.*.length" => ['nullable', 'string'],
+            "consignee.*.width" => ['nullable', 'string'],
+            "consignee.*.height" => ['nullable', 'string'],
+            "consignee.*.delivery_location_weight" => ['nullable', 'string'],
+            "consignee.*.haz_mat" => ['nullable', 'string'],
+            "consignee.*.bol_notes" => ['nullable', 'string'],
+            "consignee.*.delivery_location_notes" => ['nullable', 'string'],
+            "truck_number" => ['nullable', 'string'],
+            "trailer_number" => ['nullable', 'string'],
+            "driver" => ['nullable', 'string'],
+            "driver_number" => ['nullable', 'string'],
+            "pro_number" => ['nullable', 'string'],
+            "driver_email" => ['nullable', 'email'],
         ]);
 
         if ($validator->fails()) {
@@ -282,14 +282,14 @@ class LoadController extends Controller
         $data = $request->all();
         $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
         $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
-        $dropsData =  $data['consignee'];
+        $dropsData = $data['consignee'];
         unset($data['consignee']);
         $newDrops = [];
 
         foreach ($dropsData as $key => $dropData) {
-            $dropsData[$key]['haz_mat'] = isset($dropsData[$key]['haz_mat']) ? 1: 0;
+            $dropsData[$key]['haz_mat'] = isset($dropsData[$key]['haz_mat']) ? 1 : 0;
             $dropsData[$key]['load_id'] = $load->id;
-            if(isset($dropData['delivery_date'])) {
+            if (isset($dropData['delivery_date'])) {
                 $dropData['delivery_date'] = date("Y-m-d", strtotime($dropData['delivery_date']));
             }
             if ($dropData['is_new'] === 'false') {
@@ -358,33 +358,33 @@ class LoadController extends Controller
             $loads->where('status', $data['status']);
         }
 
-        $loads = $loads->with(['customer','carrier'])->orderBy('created_at', 'desc')->paginate($data['paginate']);
+        $loads = $loads->with(['customer', 'carrier'])->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
         return view('load.index', compact('loads', 'data', 'dispatchers'));
     }
 
     private function createHistory($data, $load)
     {
-        $info = Auth::user()->email.' changed ';
+        $info = Auth::user()->email . ' changed ';
 
         if ($data['carrier_id'] != $load->carrier_id) {
-            $info = $info.'Carrier Id from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
+            $info = $info . 'Carrier Id from ' . $load->carrier_id . ' to ' . $data['carrier_id'] . ', ';
         }
 
         if ($data['carrier_id'] != $load->customer_id) {
-            $info = $info.'Customer ID from '.$load->carrier_id.' to '.$data['carrier_id'].', ';
+            $info = $info . 'Customer ID from ' . $load->carrier_id . ' to ' . $data['carrier_id'] . ', ';
         }
 
         if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time_from'] != $load->shipper_pickup_time_from || $data['shipper_pickup_time_to'] != $load->shipper_pickup_time_to) {
-            $info = $info.'Pickup Date from '.$load->shipper_pickup_date.' ('.$load->shipper_pickup_time_from.' - '.$load->shipper_pickup_time_to.') to '.$data['shipper_pickup_date'].' ('.$data['shipper_pickup_time_from'].' - '.$data['shipper_pickup_time_to'].'), ';
+            $info = $info . 'Pickup Date from ' . $load->shipper_pickup_date . ' (' . $load->shipper_pickup_time_from . ' - ' . $load->shipper_pickup_time_to . ') to ' . $data['shipper_pickup_date'] . ' (' . $data['shipper_pickup_time_from'] . ' - ' . $data['shipper_pickup_time_to'] . '), ';
         }
 
         if ($data['customer_costs_rate_per_unit'] != $load->customer_costs_rate_per_unit) {
-            $info = $info.'Customer Rate from $'.$load->customer_costs_rate_per_unit.' to $'.$data['customer_costs_rate_per_unit'].', ';
+            $info = $info . 'Customer Rate from $' . $load->customer_costs_rate_per_unit . ' to $' . $data['customer_costs_rate_per_unit'] . ', ';
         }
 
         if ($data['carrier_costs_rate_per_unit'] != $load->carrier_costs_rate_per_unit) {
-            $info = $info.'Carrier Rate from $'.$load->carrier_costs_rate_per_unit.' to $'.$data['carrier_costs_rate_per_unit'].', ';
+            $info = $info . 'Carrier Rate from $' . $load->carrier_costs_rate_per_unit . ' to $' . $data['carrier_costs_rate_per_unit'] . ', ';
         }
 
         LoadHistory::create([
@@ -410,18 +410,18 @@ class LoadController extends Controller
         if (isset($data['from']) && !is_null($data['from'])) {
             $from = Carbon::now()->subDays($data['from']);
             if ($data['date_type'] === 'shipDate') {
-                $loads->whereDate('shipper_pickup_date', '<=',$from);
+                $loads->whereDate('shipper_pickup_date', '<=', $from);
             } else {
-                $loads->drops->whereDate('delivery_date', '<=',$from);
+                $loads->drops->whereDate('delivery_date', '<=', $from);
             }
         }
 
         if (isset($data['to']) && !is_null($data['to'])) {
             $to = Carbon::now()->subDays($data['to']);
             if ($data['date_type'] === 'shipDate') {
-                $loads->whereDate('shipper_pickup_date', '>=',$to);
+                $loads->whereDate('shipper_pickup_date', '>=', $to);
             } else {
-                $loads->drops->whereDate('delivery_date', '>=',$to);
+                $loads->drops->whereDate('delivery_date', '>=', $to);
             }
 
         }
@@ -442,14 +442,37 @@ class LoadController extends Controller
             $loads->where('id', $data['load_id']);
         }
 
+//        $loadsTotal = $loads->select('customer_costs_rate_per_unit', 'carrier_costs_rate_per_unit')->get();
         $loads = $loads->orderBy('created_at', 'desc')->paginate($data['paginate']);
 
-        return view('load.sales-summary', compact( 'dispatchers', 'data', 'customers', 'carriers', 'loads'));
+        $grossSum = $loads->sum('customer_costs_rate_per_unit');
+        $costSum = $loads->sum('carrier_costs_rate_per_unit');
+        $netSum = $this->calculateNetSum($loads);
+
+////        $totalGrossSum = $loadsTotal->sum('customer_costs_rate_per_unit');
+////        $totalCostSum = $loadsTotal->sum('carrier_costs_rate_per_unit');
+////        $totalNetSum = $this->calculateNetSum($loadsTotal);
+//        $totalGrossSum = 3333;
+//        $totalCostSum = 22222;
+//        $totalNetSum = 1111;
+
+        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads'/*, 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum'*/));
+//        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads'/*, 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum'*/));
     }
 
-    public function createInvoice ($company_id, $load_id) {
+    private function calculateNetSum($loads)
+    {
+        $netSum = 0;
+        foreach ($loads as $load) {
+            $netSum += ($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit);
+        }
+        return $netSum;
+    }
+
+    public function createInvoice($company_id, $load_id)
+    {
         $mpdf = new \Mpdf\Mpdf();
-        $load  = Load::find($load_id);
+        $load = Load::find($load_id);
         $load->customer;
         $img = public_path('assets/images/logo.png');
         $company = Company::find($company_id);

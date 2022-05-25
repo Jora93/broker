@@ -63,11 +63,16 @@ class Load extends Model
     ];
 
     public function getShipperPickupDateAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['shipper_pickup_date']));
+        if (isset($this->attributes['shipper_pickup_date'])) {
+            return date("m-d-Y", strtotime($this->attributes['shipper_pickup_date']));
+        }
+        return null;
     }
 
     public function setShipperPickupDateAttribute($value) {
-        $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));
+        if (isset($this->attributes['shipper_pickup_date'])) {
+            $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));
+        }
     }
 
     /**

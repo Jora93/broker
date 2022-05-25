@@ -155,10 +155,14 @@
                                         <th scope="col">Customer</th>
                                         <th scope="col">Ship Date</th>
                                         <th scope="col">Carrier</th>
-                                        <th scope="col">Shipper Address</th>
-                                        <th scope="col">Deliv. Address</th>
+{{--                                        <th scope="col">Shipper Address</th>--}}
+{{--                                        <th scope="col">Deliv. Address</th>--}}
                                         <th scope="col">Stops</th>
                                         <th scope="col">Delivery Date</th>
+                                        <th scope="col">P/L</th>
+                                        <th scope="col">Gross</th>
+                                        <th scope="col">Cost</th>
+                                        <th scope="col">Net</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -171,17 +175,25 @@
                                             </th>
                                             <td>{{$load->shipper_type}}</td>
                                             <td>{{$load->status}}</td>
-                                            <td><a href="{{ url(\App::make('currentCompany')->id.'/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
+                                            @if(!empty($load->customer))
+                                                <td><a href="{{ url(\App::make('currentCompany')->id.'/customers/'.$load->customer->id) }}">{{$load->customer->company}}</a></td>
+                                            @else
+                                                <td></td>
+                                            @endif
                                             <td>{{$load->shipper_pickup_date}} {{$load->shipper_pickup_time}}</td>
-                                            @if(isset($load->carrier))
+                                            @if(!empty($load->carrier))
                                                 <td><a href="{{ url(\App::make('currentCompany')->id.'/carriers/'.$load->carrier->id) }}">{{$load->carrier->company}}</a></td>
                                             @else
                                                 <td></td>
                                             @endif
                                             <td>{{$load->shipper_address1}}</td>
-                                            <td>{{$load->consignee_address1}}</td>
+{{--                                            <td>{{$load->consignee_address1}}</td>--}}
                                             <td>{{count($load->drops)}}</td>
                                             <td>{{$load->consignee_delivery_date}} {{$load->consignee_delivery_time}}</td>
+                                            <td>{{number_format(($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit) / $load->customer_costs_rate_per_unit * 100, 2, '.', ',')}}%</td>
+                                            <td>$ {{number_format($load->customer_costs_rate_per_unit, 2, '.', ',')}}</td>
+                                            <td>$ {{number_format($load->carrier_costs_rate_per_unit, 2, '.', ',')}}</td>
+                                            <td>$ {{number_format($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit, 2, '.', ',')}}</td>
                                             <td>
                                                 <a title="edit" href="{{url(\App::make('currentCompany')->id.'/loads/'.$load->id.'/edit')}}">
                                                     <button type="button" class="btn btn-primary" aria-label="Left Align">
@@ -191,6 +203,22 @@
                                             </td>
                                         </tr>
                                     @endforeach
+{{--                                    <tr style="font-weight: bold">--}}
+{{--                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>--}}
+{{--                                        <td>Page Total</td>--}}
+{{--                                        <td>$ {{number_format($grossSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td>$ {{number_format($costSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td>$ {{number_format($netSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td></td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr style="font-weight: bold">--}}
+{{--                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>--}}
+{{--                                        <td>Report Total</td>--}}
+{{--                                        <td>$ {{number_format($totalGrossSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td>$ {{number_format($totalCostSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td>$ {{number_format($totalNetSum, 2, '.', ',')}}</td>--}}
+{{--                                        <td></td>--}}
+{{--                                    </tr>--}}
                                     </tbody>
                                 </table>
                                 @if(isset($data))
