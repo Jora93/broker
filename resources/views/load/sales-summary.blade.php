@@ -203,6 +203,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                     <tr style="font-weight: bold">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                         <td>Page Total</td>
