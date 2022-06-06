@@ -83,7 +83,10 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
 //        $fpdf->Cell(50, 25, 'Hello World!');
 //        $fpdf->Output();
 //    });
-    Route::get('/migrate-carriers', 'MigrationController@migrateCarriers');
+
+
+//    Route::get('/migrate-carriers', 'MigrationController@migrateCarriers');
+    Route::get('/migrate-customers', 'MigrationController@migrateCustomers');
 });
 
 
