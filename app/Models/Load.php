@@ -50,6 +50,7 @@ class Load extends Model
         'shipper_pickup_time_to',
         'shipper_pickup_time_appt',
         'shipper_pickup_time_fcfs',
+        'shipper_payment_method',
         'shipper_notes',
         'truck_number',
         'trailer_number',

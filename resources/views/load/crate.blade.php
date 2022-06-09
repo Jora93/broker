@@ -365,6 +365,15 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
+                                                        <label class="control-label">Payment Method</label>
+                                                        <select name="shipper_payment_method" value="{{old('shipper_payment_method')}}" class="consignee_item_type form-control">
+                                                            <option value="">Select Type</option>
+                                                            <option @if(old('shipper_payment_method')) selected @endif value="NET 30 FACTORING">NET 30 FACTORING</option>
+                                                            <option @if(old('shipper_payment_method')) selected @endif value="STANDART">STANDART</option>
+                                                            <option @if(old('shipper_payment_method')) selected @endif value="QUICK PAY 3%">QUICK PAY 3%</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label class="control-label">Pickup Note</label>
                                                         <textarea class="form-control editMainField" name="shipper_notes" placeholder="Enter pickup notes">{{old('shipper_notes')}}</textarea>
                                                     </div>
