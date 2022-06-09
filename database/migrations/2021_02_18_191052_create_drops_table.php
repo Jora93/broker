@@ -24,7 +24,7 @@ class CreateDropsTable extends Migration
             $table->string('address1')->nullable();
             $table->string('delivered_number')->nullable();
             $table->string('address2')->nullable();
-            $table->date('delivery_date');
+            $table->date('delivery_date')->nullable();;
             $table->string('city')->nullable();
             $table->string('delivery_state')->nullable();
             $table->string('BOL_payment_term')->nullable();

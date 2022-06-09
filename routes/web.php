@@ -86,7 +86,8 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
 
 
 //    Route::get('/migrate-carriers', 'MigrationController@migrateCarriers');
-    Route::get('/migrate-customers', 'MigrationController@migrateCustomers');
+//    Route::get('/migrate-customers', 'MigrationController@migrateCustomers');
+//    Route::get('/migrate-loads', 'MigrationController@migrateLoads');
 });
 
 

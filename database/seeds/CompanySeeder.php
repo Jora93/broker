@@ -13,7 +13,7 @@ class CompanySeeder extends Seeder
     public function run()
     {
         DB::table('companies')->insert([
-            'name' => 'proshyan company',
+            'name' => 'Bagramyan company',
             "phone_one" => "(702) 793-2221",
             "phone_two" => null,
             'mc_number' => 1111
