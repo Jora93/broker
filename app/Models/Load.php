@@ -70,11 +70,12 @@ class Load extends Model
         return null;
     }
 
-    public function setShipperPickupDateAttribute($value) {
-        if (isset($this->attributes['shipper_pickup_date'])) {
-            $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));
-        }
-    }
+//    public function setShipperPickupDateAttribute($value) {
+//        if (isset($this->attributes['shipper_pickup_date'])) {
+////            $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));
+//            $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime(str_replace('-', '/', $value)));
+//        }
+//    }
 
     /**
      * Get the customer for the load.

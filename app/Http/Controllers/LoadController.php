@@ -150,6 +150,10 @@ class LoadController extends Controller
 
         $company = Company::find($company_id);
         $loadData['load_number'] = $company->load_last_number + 1;
+        if (isset($loadData['shipper_pickup_date'])) {
+            $loadData['shipper_pickup_date'] = date("Y-m-d", strtotime(str_replace('-', '/', $loadData['shipper_pickup_date'])));
+        }
+
         $load = Load::create($loadData);
         $company->update(['load_last_number' => $loadData['load_number']]);
 
@@ -307,6 +311,9 @@ class LoadController extends Controller
         if ($data['shipper_value'] != $load->shipper_value || $data['carrier_id'] != $load->carrier_id || $data['carrier_id'] != $load->customer_id) {
             $this->createHistory($data, $load);
             $data['changed'] = 1;
+        }
+        if (isset($data['shipper_pickup_date'])) {
+            $data['shipper_pickup_date'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['shipper_pickup_date'])));
         }
         $load->update($data);
 
