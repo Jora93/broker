@@ -67,7 +67,7 @@ class LoadController extends Controller
     public function store($company_id, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "carrier_id" => ['nullable', 'exists:carriers,id'],
+            "carrier_id" => ['required', 'exists:carriers,id'],
             "customer_id" => ['required', 'exists:customers,id'],
             "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
             "status" => ['nullable', 'string'],

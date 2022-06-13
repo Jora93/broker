@@ -713,9 +713,9 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <div class="form-group">
-                                                        <label class="control-laCbel">Carrier</label><br>
-                                                        <select name="customerId" class="selectpicker col-sm-12" required="true" data-live-search="true">
+                                                    <div class="form-group carrierMsg">
+                                                        <label class="control-label">Carrier *</label><br>
+                                                        <select required name="carrier_id" class="selectpicker col-sm-12" required="true" data-live-search="true">
                                                             <option @if(is_null(old('carrier_id'))) selected @endif disabled>-- No Carrier Selected --</option>
                                                             {{-- todo poxel ajax searchov--}}
                                                             @foreach($carriers as $carrier)
