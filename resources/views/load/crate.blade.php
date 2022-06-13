@@ -369,7 +369,7 @@
                                                         <select name="shipper_payment_method" value="{{old('shipper_payment_method')}}" class="consignee_item_type form-control">
                                                             <option value="">Select Type</option>
                                                             <option @if(old('shipper_payment_method')) selected @endif value="NET 30 FACTORING">NET 30 FACTORING</option>
-                                                            <option @if(old('shipper_payment_method')) selected @endif value="STANDART">STANDART</option>
+                                                            <option @if(old('shipper_payment_method')) selected @endif value="STANDARD">STANDARD</option>
                                                             <option @if(old('shipper_payment_method')) selected @endif value="QUICK PAY 3%">QUICK PAY 3%</option>
                                                         </select>
                                                     </div>
