@@ -46,7 +46,7 @@ class LoadController extends Controller
         ]);
 
         $custumer = Customer::find($request->customerId);
-        $carriers = Carrier::where('company_id', $company_id)->get();
+        $carriers = Carrier::where('company_id', $company_id)->orderBy('company')->select('id', 'company')->get();
         $dispatchers = Dispatcher::where('company_id', $company_id)->select('id', 'full_name')->get();
 
         return response()->view('load.crate', [
@@ -196,7 +196,7 @@ class LoadController extends Controller
         return response()->view('load.edit', [
             'load' => $load,
             'dispatchers' => Dispatcher::select('id', 'full_name')->get(),
-            'carriers' => Carrier::get(), //TODO make ajax elastic search
+            'carriers' => Carrier::orderBy('company')->select('id', 'company')->get(), //TODO make ajax elastic search
             'customers' => Customer::get() //TODO make ajax elastic search
         ], 200);
     }
