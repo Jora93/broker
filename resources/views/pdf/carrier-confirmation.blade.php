@@ -28,14 +28,14 @@
     </div>
     <table style="width: 100%; margin-top: 40px; table-layout: fixed; border-collapse: collapse; font-size:10px">
         <tr>
-            <th style="border-bottom: 1px solid black;text-align: left">Carrier: {{$load->carrier->company}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">Phone: {{$load->carrier->phone}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">MC# {{$load->carrier->mc_number}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Carrier: {{isset($load->carrier) ?? $load->carrier->company}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Phone: {{isset($load->carrier) ?? $load->carrier->phone}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">MC# {{isset($load->carrier) ?? $load->carrier->mc_number}}</th>
         </tr>
         <tr>
-            <th style="border-bottom: 1px solid black;text-align: left">Contact: {{$load->carrier->email}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">Fax: {{$load->carrier->fax}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">DOT# {{$load->carrier->dot_number}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Contact: {{isset($load->carrier) ?? $load->carrier->email}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Fax: {{isset($load->carrier) ?? $load->carrier->fax}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">DOT# {{isset($load->carrier) ?? $load->carrier->dot_number}}</th>
         </tr>
     </table>
     <table style="width:100%; border: 1px solid black; border-collapse: collapse; margin-top: 40px;">
