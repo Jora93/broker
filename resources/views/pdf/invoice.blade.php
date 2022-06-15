@@ -1,7 +1,7 @@
 <div style="width: 100%">
     <div style="clear: both; width: 100%; ;">
         <div style="float: left;;  width: 40%">
-            {{-- <img src="{{public_path('assets/images/logo.png')}}" alt="Logo" ><br> --}}
+            {{-- <img src="{{public_path('assets/images/logo.jpeg')}}" alt="Logo" ><br> --}}
             <b>{{$load->customer->company}}</b>
             <div>
                 <h3><b>{{$load->customer->address1}}</b></h3>

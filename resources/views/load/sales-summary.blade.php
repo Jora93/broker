@@ -186,11 +186,17 @@
                                             @else
                                                 <td></td>
                                             @endif
-                                            <td>{{$load->shipper_address1}}</td>
+{{--                                            <td>{{$load->shipper_address1}}</td>--}}
 {{--                                            <td>{{$load->consignee_address1}}</td>--}}
                                             <td>{{count($load->drops)}}</td>
                                             <td>{{$load->consignee_delivery_date}} {{$load->consignee_delivery_time}}</td>
-                                            <td>{{number_format(($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit) / $load->customer_costs_rate_per_unit * 100, 2, '.', ',')}}%</td>
+                                            <td>
+                                                @if($load->customer_costs_rate_per_unit != 0)
+                                                    {{number_format(($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit) / $load->customer_costs_rate_per_unit * 100, 2, '.', ',')}}%
+                                                @else
+                                                    0
+                                                @endif
+                                            </td>
                                             <td>$ {{number_format($load->customer_costs_rate_per_unit, 2, '.', ',')}}</td>
                                             <td>$ {{number_format($load->carrier_costs_rate_per_unit, 2, '.', ',')}}</td>
                                             <td>$ {{number_format($load->customer_costs_rate_per_unit - $load->carrier_costs_rate_per_unit, 2, '.', ',')}}</td>
@@ -205,7 +211,7 @@
                                     @endforeach
 
                                     <tr style="font-weight: bold">
-                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                         <td>Page Total</td>
                                         <td>$ {{number_format($grossSum, 2, '.', ',')}}</td>
                                         <td>$ {{number_format($costSum, 2, '.', ',')}}</td>

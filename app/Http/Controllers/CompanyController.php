@@ -21,7 +21,7 @@ class CompanyController extends Controller
             "id" => ['required', 'exists:companies,id'],
         ]);
 
-        if (Auth::user()->role === UserRoleConstants::SuperAdmin) {
+        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
             return redirect('/');
         }
     }
@@ -67,7 +67,7 @@ class CompanyController extends Controller
         $company = Company::find($company_id);
         $company->update($data['company']);
 
-        if (Auth::user()->role === UserRoleConstants::SuperAdmin) {
+        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
             $generalSetting = GeneralSetting::first();
             $generalSetting->update($data['generalSettings']);
         }

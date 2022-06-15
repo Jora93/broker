@@ -70,6 +70,22 @@ class Load extends Model
         return null;
     }
 
+    public function getCustomerCostsRatePerUnitAttribute(): int
+    {
+        if (isset($this->attributes['customer_costs_rate_per_unit'])) {
+            return intval(str_replace(',', '', $this->attributes['customer_costs_rate_per_unit']));
+        }
+        return 0;
+    }
+
+    public function getCarrierCostsRatePerUnitAttribute(): int
+    {
+        if (isset($this->attributes['carrier_costs_rate_per_unit'])) {
+            return intval(str_replace(',', '', $this->attributes['carrier_costs_rate_per_unit']));
+        }
+        return 0;
+    }
+
 //    public function setShipperPickupDateAttribute($value) {
 //        if (isset($this->attributes['shipper_pickup_date'])) {
 ////            $this->attributes['shipper_pickup_date'] = date("Y-m-d", strtotime($value));

@@ -142,6 +142,8 @@ class LoadController extends Controller
 
         $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
         $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
+        $data['customer_costs_rate_per_unit'] = $data['customer_costs_rate_per_unit'] ?? 0;
+        $data['carrier_costs_rate_per_unit'] = $data['carrier_costs_rate_per_unit'] ?? 0;
 
         $dropsData = $data['consignee'];
         unset($data['consignee']);
@@ -286,6 +288,8 @@ class LoadController extends Controller
         $data = $request->all();
         $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
         $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
+        $data['customer_costs_rate_per_unit'] = $data['customer_costs_rate_per_unit'] ?? 0;
+        $data['carrier_costs_rate_per_unit'] = $data['carrier_costs_rate_per_unit'] ?? 0;
         $dropsData = $data['consignee'];
         unset($data['consignee']);
         $newDrops = [];
@@ -308,7 +312,8 @@ class LoadController extends Controller
         if (!empty($newDrops)) {
             Drop::insert($newDrops);
         }
-        if ($data['shipper_value'] != $load->shipper_value || $data['carrier_id'] != $load->carrier_id || $data['carrier_id'] != $load->customer_id) {
+//        dd($data['carrier_id'], $load->carrier_id);
+        if ($data['shipper_value'] != $load->shipper_value || $data['carrier_id'] != $load->carrier_id || $data['customer_id'] != $load->customer_id) {
             $this->createHistory($data, $load);
             $data['changed'] = 1;
         }
@@ -378,8 +383,8 @@ class LoadController extends Controller
             $info = $info . 'Carrier Id from ' . $load->carrier_id . ' to ' . $data['carrier_id'] . ', ';
         }
 
-        if ($data['carrier_id'] != $load->customer_id) {
-            $info = $info . 'Customer ID from ' . $load->carrier_id . ' to ' . $data['carrier_id'] . ', ';
+        if ($data['customer_id'] != $load->customer_id) {
+            $info = $info . 'Customer ID from ' . $load->customer_id . ' to ' . $data['customer_id'] . ', ';
         }
 
         if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time_from'] != $load->shipper_pickup_time_from || $data['shipper_pickup_time_to'] != $load->shipper_pickup_time_to) {
@@ -392,6 +397,10 @@ class LoadController extends Controller
 
         if ($data['carrier_costs_rate_per_unit'] != $load->carrier_costs_rate_per_unit) {
             $info = $info . 'Carrier Rate from $' . $load->carrier_costs_rate_per_unit . ' to $' . $data['carrier_costs_rate_per_unit'] . ', ';
+        }
+
+        if ($data['shipper_value'] != $load->shipper_value) {
+            $info = $info . 'Shipper Value from $' . $load->shipper_value . ' to $' . $data['shipper_value'] . ', ';
         }
 
         LoadHistory::create([
@@ -481,7 +490,7 @@ class LoadController extends Controller
         $mpdf = new \Mpdf\Mpdf();
         $load = Load::find($load_id);
         $load->customer;
-        $img = public_path('assets/images/logo.png');
+        $img = public_path('assets/images/logo.jpeg');
         $company = Company::find($company_id);
         $load->status = 'Invoiced';
         if (!is_null($load->invoice_number)) {

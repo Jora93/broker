@@ -179,8 +179,8 @@ class MigrationController extends Controller
 //            $array['AMOUNT DUE PLUS THIRTY'] = !empty($data[87]) ? $data[87]: null;
 //            $array['AMOUNT DUE PLUS SIXTY'] = !empty($data[88]) ? $data[88]: null;
 //            $array['AMOUNT DUE PLUS NINETY'] = !empty($data[89]) ? $data[89]: null;
-            $array['carrier_costs_rate_per_unit'] = !empty($data[90]) ? $data[90]: null;
-            $array['customer_costs_rate_per_unit'] = !empty($data[91]) ? $data[91]: null;
+            $array['customer_costs_rate_per_unit'] = !empty($data[90]) ? $data[90]: null;
+            $array['carrier_costs_rate_per_unit'] = !empty($data[91]) ? $data[91]: null;
 //            $array['AMOUNT NET'] = !empty($data[92]) ? $data[92]: null;
 //            $array['AMOUNT NET PERCENT'] = !empty($data[93]) ? $data[93]: null;
 

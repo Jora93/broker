@@ -12,7 +12,7 @@
     </table>
     <table style="width: 100%; margin-top: 40px; table-layout: fixed; border-collapse: collapse;">
         <tr>
-            <th><img src="{{public_path('assets/images/logo.png')}}" width="200px" alt="Logo" ></th>
+            <th><img src="{{public_path('assets/images/logo.jpeg')}}" width="200px" alt="Logo" ></th>
             <th style="border: 1px solid black;text-align: center">
                 Please have driver call for dispatch. <br>
                 Phone: {{$company->phone_one}} <br>

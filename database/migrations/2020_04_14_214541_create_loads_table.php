@@ -25,8 +25,8 @@ class CreateLoadsTable extends Migration
             $table->string('product')->nullable();
             $table->string('purchase_order_number')->nullable();
             $table->string('trailer_size')->nullable();
-            $table->string('customer_costs_rate_per_unit')->nullable();
-            $table->string('carrier_costs_rate_per_unit')->nullable();
+            $table->string('customer_costs_rate_per_unit')->default(0);
+            $table->string('carrier_costs_rate_per_unit')->default(0);
             $table->string('carrier_equipment_id')->nullable();
             $table->string('shipper_company')->nullable();
             $table->string('shipper_phone')->nullable();

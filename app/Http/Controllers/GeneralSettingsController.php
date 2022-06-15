@@ -76,7 +76,7 @@ class GeneralSettingsController extends Controller
     public function update($company_id, Request $request)
     {
         $data = $request->all();
-        if (Auth::user()->role === UserRoleConstants::SuperAdmin) {
+        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
             $generalSetting = GeneralSetting::first();
             $generalSetting->update($data);
         }
@@ -112,7 +112,7 @@ class GeneralSettingsController extends Controller
     public function invoice ($company_id)
     {
         $mpdf = new \Mpdf\Mpdf();
-        $img = public_path('assets/images/logo.png');
+        $img = public_path('assets/images/logo.jpeg');
         $company = Company::find($company_id);
         $generalSetting = GeneralSetting::first();
         $load  = Load::first(); //TODO dinamoc
