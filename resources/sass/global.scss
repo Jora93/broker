@@ -11,6 +11,9 @@
 }
 
 .carriers-show, .customers-show, .loads-show {
+    .entityLabel {
+        font-weight: bold;
+    }
     .nav-tabs {
         #load-tab {
             background: #c4e3f3;

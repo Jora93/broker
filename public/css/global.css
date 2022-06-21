@@ -8,6 +8,12 @@
   opacity: 1;
 }
 
+.carriers-show .entityLabel,
+.customers-show .entityLabel,
+.loads-show .entityLabel {
+  font-weight: bold;
+}
+
 .carriers-show .nav-tabs #load-tab,
 .customers-show .nav-tabs #load-tab,
 .loads-show .nav-tabs #load-tab {

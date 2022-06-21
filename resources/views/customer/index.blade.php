@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
+                                    <th>MC#</th>
                                     <th>CreditLimit</th>
                                     <th>Phone</th>
                                     <th>Status</th>
@@ -54,6 +55,7 @@
                                             </a>
                                         </td>
                                         <td>{{$customer->company}}</td>
+                                        <td>{{$customer->mc_number}}</td>
                                         <td>{{$currency}}@php echo number_format( $customer->credit_limit, 2 )@endphp</td>
                                         <td>{{$customer->phone}}</td>
                                         <td>{{$customer->status}}</td>

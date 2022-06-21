@@ -32,6 +32,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">MC #</label>
+                                <input class="form-control" placeholder="Enter MC Number" type="text" name="mc_number" value="{{old('mc_number')}}" tabindex="64">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">

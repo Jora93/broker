@@ -37,6 +37,13 @@
                                             <br><br><br>
                                             <div class="col-md-4">
                                                 <div class="entityLabelValue">
+                                                    <div class="entityLabel">MC #</div>
+                                                    <div class="entityValue">{{$customer->mc_number}}</div>
+                                                </div>
+                                            </div>
+                                            <br><br><br>
+                                            <div class="col-md-4">
+                                                <div class="entityLabelValue">
                                                     <div class="entityLabel">Status</div>
                                                     <div class="entityValue">{{$customer->status}}</div>
                                                 </div>
