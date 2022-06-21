@@ -56,6 +56,7 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('accounting', 'LoadController@accounting')->name('loads.accounting');
     Route::get('invoice/{load_id}', 'LoadController@createInvoice');
     Route::resource('customers', 'CustomerController');
+    Route::get('customer-search', 'CustomerController@search');
     Route::resource('carriers', 'CarrierController');
     Route::resource('dispatchers', 'DispatcherController');
     Route::get('dispatcher-search', 'DispatcherController@search');

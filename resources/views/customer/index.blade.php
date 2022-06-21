@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <div class="container">
+    <div class="container"  style="max-width: 100%">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -23,13 +23,73 @@
                         </a>
                     </div>
 
+                    <form method="get" action="{{ url(\App::make('currentCompany')->id.'/customer-search') }}">
+                        <div class="row col-sm-12">
+                            @csrf
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label>ID#:</label>
+                                    <input placeholder="Customer ID" type="text" class="form-control" name="id" value="@if(isset($data['id'])){{$data['id']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="control-label">Status:</label>
+                                    <select class="form-control" name="status" tabindex="1">
+                                        <option value="">Select Status</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Invoiced") selected @endif value="Active">Active</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Committed") selected @endif value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label>Company:</label>
+                                    <input placeholder="Company name" type="text" class="form-control" name="company" value="@if(isset($data['company'])){{$data['company']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label>MC#:</label>
+                                    <input placeholder="MC#" type="text" class="form-control" name="mc_number" value="@if(isset($data['mc_number'])){{$data['mc_number']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label>Address:</label>
+                                    <input placeholder="Address" type="text" class="form-control" name="address1" value="@if(isset($data['address1'])){{$data['address1']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label for="customer">Phone:</label>
+                                    <input placeholder="Phone" type="text" class="form-control" name="phone" value="@if(isset($data['phone'])){{$data['phone']}}@endif"/>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="control-label">Per Page:</label>
+                                    <select class="form-control" name="paginate" tabindex="1">
+                                        <option value="25" selected>25</option>
+                                        <option @if(isset($data['paginate']) && $data['paginate'] == 50) selected @endif value="50">50</option>
+                                        <option @if(isset($data['paginate']) && $data['paginate'] == 100) selected @endif value="100">100</option>
+                                        <option @if(isset($data['paginate']) && $data['paginate'] == 200) selected @endif value="200">200</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary float-right">Search</button>
+                        </div>
+                    </form>
+
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <table class="table table-striped table-bordered data-table" style="width:100%">
+                        <table class="table" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -65,14 +125,6 @@
                                                     Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>
                                             </a>
-{{--                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="post">--}}
-{{--                                                <input type="hidden" name="_method" value="delete">--}}
-{{--                                                @csrf--}}
-{{--                                                <input type="hidden" name="id" value="{{ $customer->id }}">--}}
-{{--                                                <button  title="delete" type="submit" onclick="return confirm('Are you sure to delete this customer?')" class="btn btn-danger" name="destroy_device">--}}
-{{--                                                    <span class="glyphicon glyphicon-trash"></span>--}}
-{{--                                                </button>--}}
-{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -81,13 +133,19 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Company</th>
+                                    <th>MC#</th>
                                     <th>CreditLimit</th>
-                                    <th>Product</th>
+                                    <th>Phone</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
                         </table>
+                        @if(isset($data))
+                            {{ $customers->appends($data)->links() }}
+                        @else
+                            {{ $customers->links() }}
+                        @endif
                     </div>
                 </div>
             </div>

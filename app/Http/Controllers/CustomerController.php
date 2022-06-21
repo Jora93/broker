@@ -24,7 +24,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::where('company_id', \App::make('currentCompany')->id)->get();
+        $customers = Customer::where('company_id', \App::make('currentCompany')->id)->orderBy('created_at', 'desc')->paginate(25);
         return response()->view('customer.index', ['customers' => $customers], 200);
     }
 
@@ -281,5 +281,40 @@ class CustomerController extends Controller
 //        $customer->delete();
 //
 //        return back();
+    }
+
+    public function search($company_id, Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+//        dd($data);
+        $customers = Customer::where('company_id', \App::make('currentCompany')->id)->orderBy('created_at', 'desc');
+
+        if (isset($data['id']) && !is_null($data['id'])) {
+            $customers->where('id', $data['id']);
+        }
+
+        if (isset($data['status']) && !is_null($data['status'])) {
+            $customers->where('status', $data['status']);
+        }
+
+        if (isset($data['company']) && !is_null($data['company'])) {
+            $customers->where('company', 'LIKE', '%'.$data['company'].'%');
+        }
+
+        if (isset($data['mc_number']) && !is_null($data['mc_number'])) {
+            $customers->where('mc_number', $data['mc_number']);
+        }
+
+        if (isset($data['address1']) && !is_null($data['address1'])) {
+            $customers->where('address1', 'LIKE', '%'.$data['address1'].'%');
+        }
+
+        if (isset($data['phone']) && !is_null($data['phone'])) {
+            $customers->phone('status', $data['phone']);
+        }
+
+        $customers = $customers->paginate($data['paginate']);
+        return response()->view('customer.index', ['customers' => $customers, 'data' => $data], 200);
     }
 }
