@@ -50,7 +50,10 @@ class Drop extends Model
     ];
 
     public function getDeliveryDateAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['delivery_date']));
+        if (isset($this->attributes['delivery_date'])) {
+            return date("m-d-Y", strtotime($this->attributes['delivery_date']));
+        }
+        return null;
     }
 
     public function setDeliveryDateAttribute($value) {

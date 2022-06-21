@@ -286,6 +286,7 @@ class LoadController extends Controller
         }
 
         $data = $request->all();
+//        dd($data);
         $data['shipper_pickup_time_appt'] = $data['shipper_pickup_time_appt'] == 'true' ? 1 : 0;
         $data['shipper_pickup_time_fcfs'] = $data['shipper_pickup_time_fcfs'] == 'true' ? 1 : 0;
         $data['customer_costs_rate_per_unit'] = $data['customer_costs_rate_per_unit'] ?? 0;
@@ -298,7 +299,9 @@ class LoadController extends Controller
             $dropsData[$key]['haz_mat'] = isset($dropsData[$key]['haz_mat']) ? 1 : 0;
             $dropsData[$key]['load_id'] = $load->id;
             if (isset($dropData['delivery_date'])) {
-                $dropData['delivery_date'] = date("Y-m-d", strtotime($dropData['delivery_date']));
+//                $dropData['delivery_date'] = date("Y-m-d", strtotime($dropData['delivery_date']));
+                $dropData['delivery_date'] = date("Y-m-d", strtotime(str_replace('-', '/', $dropData['delivery_date'])));
+
             }
             if ($dropData['is_new'] === 'false') {
                 unset($dropData['is_new']);

@@ -28,14 +28,14 @@
     </div>
     <table style="width: 100%; margin-top: 40px; table-layout: fixed; border-collapse: collapse; font-size:10px">
         <tr>
-            <th style="border-bottom: 1px solid black;text-align: left">Carrier: {{isset($load->carrier) ?? $load->carrier->company}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">Phone: {{isset($load->carrier) ?? $load->carrier->phone}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">MC# {{isset($load->carrier) ?? $load->carrier->mc_number}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Carrier: @if(isset($load->carrier)){{$load->carrier->company}}@endif</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Phone: @if(isset($load->carrier)){{$load->carrier->phone}}@endif</th>
+            <th style="border-bottom: 1px solid black;text-align: left">MC# @if(isset($load->carrier)){{$load->carrier->mc_number}}@endif</th>
         </tr>
         <tr>
-            <th style="border-bottom: 1px solid black;text-align: left">Contact: {{isset($load->carrier) ?? $load->carrier->email}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">Fax: {{isset($load->carrier) ?? $load->carrier->fax}}</th>
-            <th style="border-bottom: 1px solid black;text-align: left">DOT# {{isset($load->carrier) ?? $load->carrier->dot_number}}</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Contact: @if(isset($load->carrier)){{$load->carrier->email}}@endif</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Fax: @if(isset($load->carrier)){{$load->carrier->fax}}@endif</th>
+            <th style="border-bottom: 1px solid black;text-align: left">DOT# @if(isset($load->carrier)){{$load->carrier->dot_number}}@endif</th>
         </tr>
     </table>
     <table style="width:100%; border: 1px solid black; border-collapse: collapse; margin-top: 40px;">
@@ -76,42 +76,49 @@
         <tr>
             <td style="border-collapse: collapse;" colspan="3">Pickup Note: {{$load->shipper_notes}}</td>
         </tr>
-        <tr>
-            <th style="border: 1px solid black; border-collapse: collapse;" colspan="3">Final Destination</th>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;">{{$load->drops->first()->company}}</td>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Product: {{$load->product}}</td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;">{{$load->drops->first()->address1}}</td>
-            <td style="border-collapse: collapse;">Date: {{$load->drops->first()->delivery_date}}</td>
-            <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Time: {{$load->drops->first()->delivery_time_from}} - {{$load->drops->first()->delivery_time_to}}</td>
-            <td style="border-collapse: collapse;">Weight: {{$load->shipper_weight}} lbs</td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Delivery #:{{$load->drops->first()->delivered_number}}</td>
-            <td style="border-collapse: collapse;"></td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">Type:{{$load->drops->first()->item_type}}</td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;"></td>
-            <td style="border-collapse: collapse;">BOL #:{{$load->drops->first()->delivery_location_bol_number}}</td>
-        </tr>
-        <tr>
-            <td style="border-collapse: collapse;" colspan="3">Delivery Note:{{$load->drops->first()->delivery_location_notes}}</td>
-        </tr>
+        @foreach($load->drops as $key => $drop)
+            <tr>
+                <th style="border: 1px solid black; border-collapse: collapse;" colspan="3">
+                    @if($key == (count($load->drops) - 1 ))
+                        Final Destination
+                    @else
+                        Stop #{{$key + 1}}
+                    @endif
+                </th>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;">{{$drop->company}}</td>
+                <td style="border-collapse: collapse;" colspan="2">Product: {{$load->product}}</td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;">{{$drop->address1}}</td>
+                <td style="border-collapse: collapse;">Date: {{$drop->delivery_date}}</td>
+                <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;">Time: {{$drop->delivery_time_from}} - {{$drop->delivery_time_to}}</td>
+                <td style="border-collapse: collapse;">Weight: {{$drop->delivery_location_weight}} lbs</td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;">Delivery #:{{$drop->delivered_number}}</td>
+                <td style="border-collapse: collapse;"></td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;">Type:{{$drop->item_type}}</td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;"></td>
+                <td style="border-collapse: collapse;">BOL #:{{$drop->delivery_location_bol_number}}</td>
+            </tr>
+            <tr>
+                <td style="border-collapse: collapse;" colspan="3">Delivery Note:{{$drop->delivery_location_notes}}</td>
+            </tr>
+        @endforeach
     </table>
     <div style="clear: both; width: 100%; margin-top: 50px;">
         <p style="font-weight: bold">NOTE:</p>
