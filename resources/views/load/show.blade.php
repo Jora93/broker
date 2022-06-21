@@ -10,6 +10,19 @@
             <button class="btn btn-primary">Update Load</button>
         </a>
     </div>
+    <br>
+    <div class="col-sm-12 load-short-info"><br>
+        <div class="col-sm-2">
+            <span># {{$load->id}}</span>
+        </div>
+        <div class="col-sm-5">
+            <span>Carrier: @if(isset($load->carrier)){{$load->carrier->company}}@endif</span>
+        </div>
+        <div class="col-sm-5">
+            <span>Customer: {{$load->customer->company}}</span>
+        </div>
+        <br>
+    </div>
     <div class="col-sm-12 loads-show">
         {{--        <form method="" action="" class="col-sm-12">--}}
             <div class="row" style="background-color:#ddd;width:100%;padding:5px;border:1px solid #999;border-radius:3px;margin:auto auto 10px auto;">
