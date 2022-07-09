@@ -60,12 +60,28 @@ class Load extends Model
         'driver_email',
         'changed',
         'load_number',
-        'invoice_number'
+        'invoice_number',
+        'invoice_date',
+        'invoice_past_due_date'
     ];
 
     public function getShipperPickupDateAttribute() {
         if (isset($this->attributes['shipper_pickup_date'])) {
             return date("m-d-Y", strtotime($this->attributes['shipper_pickup_date']));
+        }
+        return null;
+    }
+
+    public function getInvoiceDateAttribute() {
+        if (isset($this->attributes['invoice_date'])) {
+            return date("m-d-Y", strtotime($this->attributes['invoice_date']));
+        }
+        return null;
+    }
+
+    public function getInvoicePastDueDateAttribute() {
+        if (isset($this->attributes['invoice_past_due_date'])) {
+            return date("m-d-Y", strtotime($this->attributes['invoice_past_due_date']));
         }
         return null;
     }

@@ -199,7 +199,7 @@ class LoadController extends Controller
             'load' => $load,
             'dispatchers' => Dispatcher::select('id', 'full_name')->get(),
             'carriers' => Carrier::orderBy('company')->select('id', 'company')->get(), //TODO make ajax elastic search
-            'customers' => Customer::get() //TODO make ajax elastic search
+            'customers' => Customer::orderBy('company')->get() //TODO make ajax elastic search
         ], 200);
     }
 
@@ -493,13 +493,19 @@ class LoadController extends Controller
         $mpdf = new \Mpdf\Mpdf();
         $load = Load::find($load_id);
         $load->customer;
+        $load->drops;
         $img = public_path('assets/images/logo.jpeg');
         $company = Company::find($company_id);
         $load->status = 'Invoiced';
-        if (!is_null($load->invoice_number)) {
+        if (is_null($load->invoice_number)) {
             $invoice_last_number = $company->invoice_last_number + 1;
             $load->invoice_number = $invoice_last_number;
             $company->update(['invoice_last_number' => $invoice_last_number]);
+        }
+        if (is_null($load->invoice_date)) {
+            $load->invoice_date = Carbon::now()->format('Y-m-d');
+        } else {
+            $load->invoice_past_due_date = Carbon::now()->format('Y-m-d');
         }
         $load->save();
         $generalSetting = GeneralSetting::first();
