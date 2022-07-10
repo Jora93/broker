@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'superAdminAndAccounting' => \App\Http\Middleware\SuperAdminAndAccounting::class,
         'company' => \App\Http\Middleware\Company::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'corsNoAuth' => \App\Http\Middleware\CorsNoAuth::class,
     ];
 
     /**

@@ -21,14 +21,13 @@ Route::get('invite-carrier-success', 'InviteCarrierController@successPage')->nam
 Auth::routes();
 
 Route::get('companies', 'CompanyController@index');
+Route::get('get-black-list/{company_id}', 'BlacklistController@getList')->middleware(['corsNoAuth']);
 
 Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/', function () {
         return redirect(route('home'));
     });
 });
-
-
 
 Route::get('/import-carrier', function(){
     $aaa = \Excel::import(new CarriersImport, public_path('/assets/carriers.xls'));
@@ -89,6 +88,9 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('/migrate-carriers', 'MigrationController@migrateCarriers');
     Route::get('/migrate-customers', 'MigrationController@migrateCustomers');
     Route::get('/migrate-loads', 'MigrationController@migrateLoads');
+
+    Route::resource('black-list', 'BlacklistController');
+    Route::get('black-list-search', 'BlacklistController@search');
 });
 
 
