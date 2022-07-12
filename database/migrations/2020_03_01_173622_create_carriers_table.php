@@ -28,9 +28,9 @@ class CreateCarriersTable extends Migration
             $table->string('cell_phone')->nullable();
             $table->string('fax')->unique()->nullable();
             $table->string('city');
-            $table->string('email')->unique();
-            $table->string('state');
-            $table->string('zip_code');
+            $table->string('email')->unique()->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip_code')->nullable();
             $table->integer('carrier_fee')->nullable();
             $table->integer('preferred_carrier_status')->nullable();
             $table->integer('smart_way_certified')->nullable();
@@ -66,22 +66,22 @@ class CreateCarriersTable extends Migration
             $table->string('dot_number')->nullable();
 
 
-            $table->string('insurance1_type');
+            $table->string('insurance1_type')->nullable();
             $table->string('insurance1_insurer')->nullable();
-            $table->string('insurance1_amount');
+            $table->string('insurance1_amount')->nullable();
             $table->string('insurance1_policy_number')->nullable();
             $table->date('insurance1_effective_on')->nullable();
-            $table->date('insurance1_expires_on');
+            $table->date('insurance1_expires_on')->nullable();
             $table->string('insurance1_phone')->nullable();
             $table->string('insurance1_email')->nullable();
 
 
-            $table->string('insurance2_type');
+            $table->string('insurance2_type')->nullable();
             $table->string('insurance2_insurer')->nullable();
-            $table->string('insurance2_amount');
+            $table->string('insurance2_amount')->nullable();
             $table->string('insurance2_policy_number')->nullable();
             $table->date('insurance2_effective_on')->nullable();
-            $table->date('insurance2_expires_on');
+            $table->date('insurance2_expires_on')->nullable();
             $table->string('insurance2_phone')->nullable();
             $table->string('insurance2_email')->nullable();
 

@@ -38,6 +38,9 @@ class GeneralSetting extends Model
         "confirmation_note",
         "rate_quote_terms_conditions",
         "bill_of_lading_terms_conditions",
-        "invoice_terms_conditions"
+        "invoice_terms_conditions",
+        'mc_number',
+        'logo',
+        'phone'
     ];
 }

@@ -111,8 +111,9 @@ class GeneralSettingsController extends Controller
 
     public function invoice ($company_id)
     {
+        dd(11111);
         $mpdf = new \Mpdf\Mpdf();
-        $img = public_path('assets/images/logo.jpeg');
+        $img = public_path('assets/data/'.$company_id.'/broker-logo.jpeg');
         $company = Company::find($company_id);
         $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
         $load  = Load::first(); //TODO dinamoc

@@ -215,7 +215,7 @@
                             <div id="phone1InputGroup" class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone1Input">*Primary Phone</label>
-                                    <input type="text" class="form-control phoneMask" id="phone1Input" name="company[phone_one]" placeholder="Enter the company's primary phone number" value="{{$company->phone_one}}">
+                                    <input type="text" class="form-control phoneMask" id="phone1Input" name="generalSettings[phone]" placeholder="Enter the company's primary phone number" value="{{$generalSettings->phone}}">
                                 </div>
                             </div>
 
@@ -223,12 +223,6 @@
                                 <div class="form-group">
                                     <label for="address2Input">Address 2</label>
                                     <input type="text" class="form-control" id="address2Input" name="generalSettings[address2]" placeholder="Enter the company's address" value="{{$generalSettings->address2}}">
-                                </div>
-                            </div>
-                            <div id="phone1InputGroup" class="col-md-6">
-                                <div class="form-group">
-                                    <label for="phone2Input">Secondary Phone</label>
-                                    <input type="text" class="form-control phoneMask" id="phone2Input" name="company[phone_two]" placeholder="Enter the company's secondary phone number" value="{{$company->company}}">
                                 </div>
                             </div>
 
@@ -363,14 +357,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mcNumberInput">MC Number*</label>
-                                    <input required type="text" class="form-control" id="mcNumberInput" name="company[mc_number]" placeholder="Enter the company's mc number" value="{{$company->mc_number}}">
-                                </div>
-                            </div>
-                            <div id="emailInputGroup" class="col-md-12">
-                                <div class="form-group">
-                                    <label for="logoInput">Upload Company Logo</label>
-                                    <input type="file" id="logoInput" name="logo">
-                                    <div style="color: #469C46; font-size: 12px; margin-top: 5px;"> Recommended logo size 250x75 </div>
+                                    <input required type="text" class="form-control" id="mcNumberInput" name="generalSettings[mc_number]" placeholder="Enter the company's mc number" value="{{$generalSettings->mc_number}}">
                                 </div>
                             </div>
                             <hr style="clear: both;">

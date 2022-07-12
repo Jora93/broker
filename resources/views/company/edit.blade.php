@@ -72,12 +72,6 @@
                                     <input type="text" class="form-control focusOnLoad" disabled name="" value="{{env('APP_URL')}}/invite-carrier/{{$company->invite_alias}}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="logoInput">Upload Company Logo</label>
-                                    <input type="file" id="logoInput" name="logo">
-                                </div>
-                            </div>
                             <hr style="clear: both;">
                             <button class="btn btn-success" type="submit">
                                 <i class="glyphicon glyphicon-floppy-saved"></i> &nbsp;Save Changes

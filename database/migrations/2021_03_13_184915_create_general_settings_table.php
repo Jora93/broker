@@ -15,8 +15,11 @@ class CreateGeneralSettingsTable extends Migration
     {
         Schema::create('general_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
 
             $table->string('name');
+            $table->string('phone');
+            $table->string('mc_number')->unique();
             $table->string('time_zone');
             $table->string('first_name');
             $table->string('last_name');
@@ -32,12 +35,12 @@ class CreateGeneralSettingsTable extends Migration
             $table->string('default_currency');
             $table->string('fed_id')->nullable();
             $table->string('scac')->nullable();
-            //
             $table->longText('confirmation_note')->nullable();
             $table->longText('rate_quote_terms_conditions')->nullable();
             $table->longText('bill_of_lading_terms_conditions')->nullable();
             $table->longText('invoice_terms_conditions')->nullable();
 
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }

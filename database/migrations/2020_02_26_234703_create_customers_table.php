@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
 
+            $table->string('mc_number')->nullable();
             $table->string('status');
             $table->string('company');
             $table->string('phone');
@@ -26,10 +27,10 @@ class CreateCustomersTable extends Migration
             $table->string('fax')->nullable();
             $table->string('city');
             $table->string('email')->nullable();
-            $table->string('state');
-            $table->string('zip_code');
+            $table->string('state')->nullable();
+            $table->string('zip_code')->nullable();
             $table->integer('credit_limit');
-            $table->string('currency');
+            $table->string('currency')->nullable();
             $table->string('note')->nullable();
 
             $table->string('billing_company');
@@ -38,9 +39,9 @@ class CreateCustomersTable extends Migration
             $table->string('billing_address2')->nullable();
             $table->string('billing_phone_extension')->nullable();
             $table->string('billing_fax')->nullable();
-            $table->string('billing_city');
-            $table->string('billing_state');
-            $table->string('billing_zip_code');
+            $table->string('billing_city')->nullable();
+            $table->string('billing_state')->nullable();
+            $table->string('billing_zip_code')->nullable();
 
             $table->timestamps();
 

@@ -41,11 +41,9 @@ class CompanyController extends Controller
     public function UpdateProfileSettings($company_id, Request $request)
     {
         $request->validate([
-            "company.phone_one" => ['required', 'string', 'max:255', 'unique:companies,phone_one,'.$company_id],
-            "company.phone_two" => ['nullable', 'string', 'max:255', 'unique:companies,phone_two,'.$company_id],
-            "company.mc_number" => ['required', 'string', 'max:255'],
-
             "generalSettings.name"             => ['required', 'string'],
+            "generalSettings.phone"            => ['required', 'string'],
+            "generalSettings.mc_number"        => ['required', 'string'],
             "generalSettings.time_zone"        => ['required', 'string'],
             "generalSettings.first_name"       => ['required', 'string'],
             "generalSettings.last_name"        => ['required', 'string'],
@@ -61,15 +59,12 @@ class CompanyController extends Controller
             "generalSettings.default_currency" => ['required', 'string'],
             "generalSettings.fed_id"           => ['nullable', 'string'],
             "generalSettings.scac"             => ['nullable', 'string']
-
         ]);
 
         $data = $request->all();
-        $company = Company::find($company_id);
-        $company->update($data['company']);
+        $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
 
         if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
-            $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
             $generalSetting->update($data['generalSettings']);
         }
 
@@ -149,19 +144,8 @@ class CompanyController extends Controller
             "phone_one"           => ['required', 'unique:companies,phone_one,'.$company->id],
             "invoice_last_number" => ['required', 'unique:companies,invoice_last_number,'.$company->id],
             "load_last_number"    => ['required', 'unique:companies,load_last_number,'.$company->id],
-            "logo"                => ['required', 'image', 'mimes:pdf|max:2048'],
         ]);
         $data = $request->all();
-        $imageName = $company_id.'/'.time().'.'.$request->logo->getClientOriginalExtension();
-
-        $image = $data['logo'];
-        if (Storage::disk('s3')->exists($company->logo)) {
-//            dump('s3://american-success//'.$imageName);
-            Storage::disk('s3')->delete($imageName); //todo dont work
-        }
-        Storage::disk('s3')->put($imageName, file_get_contents($image), 'public');
-
-        $data['logo'] = $imageName;
         $company->update($data);
 
         return redirect()->back();

@@ -494,7 +494,6 @@ class LoadController extends Controller
         $load = Load::find($load_id);
         $load->customer;
         $load->drops;
-        $img = public_path('assets/images/logo.jpeg');
         $company = Company::find($company_id);
         $load->status = 'Invoiced';
         if (is_null($load->invoice_number)) {
