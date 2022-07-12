@@ -47,8 +47,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="companyInput">Adress *</label>
-                                    <input type="text" class="form-control focusOnLoad" name="adress" placeholder="Enter the adress of the company" value="{{$company->adress}}">
+                                    <label for="companyInput">address *</label>
+                                    <input type="text" class="form-control focusOnLoad" name="address" placeholder="Enter the address of the company" value="{{$company->address}}">
                                 </div>
                             </div>
 
@@ -69,7 +69,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="companyInput">Invite Carrier Link</label>
-                                    <input type="text" class="form-control focusOnLoad" disabled name="" value="{{env('APP_URL')}}invite-carrier/{{$company->invite_alias}}">
+                                    <input type="text" class="form-control focusOnLoad" disabled name="" value="{{env('APP_URL')}}/invite-carrier/{{$company->invite_alias}}">
                                 </div>
                             </div>
                             <div class="col-md-6">

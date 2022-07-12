@@ -22,7 +22,7 @@ class Company extends Model
             'mc_number',
             'phone_one',
             'phone_two',
-            'adress',
+            'address',
             'invoice_last_number',
             'load_last_number',
             'logo'

@@ -15,7 +15,7 @@ class Document
         $data['description'] = $description;
         $data['type'] = $type;
         $data['user_id'] = !is_null($user) ? $user->id : null;
-        $fileName = time().str_replace(' ', '_', $file->getClientOriginalName());
+        $fileName = $company_id.'/'.time().str_replace(' ', '_', $file->getClientOriginalName());
         Storage::disk('s3')->put($fileName, file_get_contents($file), 'public');
         $data['name'] = $fileName;
         $document = \App\Models\Document::create($data);

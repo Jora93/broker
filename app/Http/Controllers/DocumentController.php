@@ -49,7 +49,7 @@ class DocumentController extends Controller
         $data = $request->all();
         $data['company_id'] = $company_id;
         $data['user_id'] = Auth::user()->id;
-        $fileName = time().str_replace(' ', '_', $request->file->getClientOriginalName());
+        $fileName = $company_id.'/'.time().str_replace(' ', '_', $request->file->getClientOriginalName());
         Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
         $data['name'] = $fileName;
         $document = Document::create($data);
@@ -105,7 +105,7 @@ class DocumentController extends Controller
         $data = $request->all();
         $data['company_id'] = $company_id;
         if (isset($data['file'])) {
-            $fileName = time().str_replace(' ', '_', $request->file->getClientOriginalName());
+            $fileName =  $company_id.'/'.time().str_replace(' ', '_', $request->file->getClientOriginalName());
             Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
             $data['name'] = $fileName;
         }
