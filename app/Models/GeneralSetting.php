@@ -18,6 +18,7 @@ class GeneralSetting extends Model
      */
     protected $fillable = [
         'id',
+        'company_id',
         "name",
         "time_zone",
         "first_name",

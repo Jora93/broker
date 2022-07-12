@@ -508,7 +508,7 @@ class LoadController extends Controller
             $load->invoice_past_due_date = Carbon::now()->format('Y-m-d');
         }
         $load->save();
-        $generalSetting = GeneralSetting::first();
+        $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
         $html = view('pdf.invoice', compact(['load', 'generalSetting', 'company']))->render();
         $mpdf->WriteHTML($html);
         $mpdf->Output();

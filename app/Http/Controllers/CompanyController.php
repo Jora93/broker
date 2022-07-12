@@ -14,26 +14,26 @@ use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
-
-    public function setAppCompany(Request $request)
-    {
-        $request->validate([
-            "id" => ['required', 'exists:companies,id'],
-        ]);
-
-        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
-            return redirect('/');
-        }
-    }
+//
+//    public function setAppCompany(Request $request)
+//    {
+//        $request->validate([
+//            "id" => ['required', 'exists:companies,id'],
+//        ]);
+//
+//        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
+//            return redirect('/');
+//        }
+//    }
 
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
-    public function profileSettings()
+    public function profileSettings($company_id)
     {
         $company = \App::make('currentCompany');
-        $generalSettings = GeneralSetting::first();
+        $generalSettings = GeneralSetting::where('company_id', $company_id)->first();
 
         return View('company.profile')->with(['company' => $company, "generalSettings" => $generalSettings]);
     }
@@ -63,12 +63,13 @@ class CompanyController extends Controller
             "generalSettings.scac"             => ['nullable', 'string']
 
         ]);
+
         $data = $request->all();
         $company = Company::find($company_id);
         $company->update($data['company']);
 
         if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
-            $generalSetting = GeneralSetting::first();
+            $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
             $generalSetting->update($data['generalSettings']);
         }
 

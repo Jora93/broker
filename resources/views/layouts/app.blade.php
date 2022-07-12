@@ -22,8 +22,9 @@
     @auth
         @php
             $changedLoads = \App\Models\Load::where('changed', true)->get();
-            $companyId = \App::make('currentCompany')->id;
-            $companies = \App\Models\Company::all();
+            $company = \App::make('currentCompany');
+            $companyId = $company->id;
+            $brokerCompany = \App\Models\GeneralSetting::where('company_id', $companyId)->first();
         @endphp
         <script>
             window.currentCompanyId = {!! $companyId !!};
@@ -130,11 +131,9 @@
                         <span style="cursor:pointer" class="glyphicon glyphicon glyphicon-cog pull-right " aria-hidden="true"></span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">General Company Profile</a>
-                        <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">General Settings</a>
-                        @foreach($companies as $company)
-                            <a class="dropdown-item" href="{{url($companyId.'/companies/'.$company->id.'/edit')}}">{{$company->name}}</a>
-                        @endforeach
+                        <a class="dropdown-item" href="{{url($companyId.'/profileSettings')}}">{{$brokerCompany->name}} Profile</a>
+                        <a class="dropdown-item" href="{{url($companyId.'/general-settings/1/edit')}}">{{$brokerCompany->name}} Settings</a>
+                        <a class="dropdown-item" href="{{url($companyId.'/companies/'.$company->id.'/edit')}}">{{$company->name}} Profile</a>
                     </div>
                 </li>
             @endif
