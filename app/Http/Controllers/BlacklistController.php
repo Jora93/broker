@@ -126,6 +126,6 @@ class BlacklistController extends Controller
     {
         $list = Blacklist::where('company_id', $company_id)->orderBy('created_at', 'desc')->get();
 
-        return response()->json(['list' => $list]);
+        return response()->json($list);
     }
 }
