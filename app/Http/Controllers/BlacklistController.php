@@ -39,15 +39,11 @@ class BlacklistController extends Controller
      */
     public function store($company_id, Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             "name" => ['required'],
             "mc_number" => ['required'],
             "note" => ['required']
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()]);
-        }
 
         $data = $request->all();
         $data['company_id'] = $company_id;

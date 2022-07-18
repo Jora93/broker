@@ -87,6 +87,9 @@
                     <a class="dropdown-item" href="{{route('loads.accounting', $companyId)}}">Load Sales Summary</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a  href="{{url('/'.$companyId.'/black-list')}}">Black List</a>
+            </li>
             @if(Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting)
                 <li class="nav-item dropdown">
                     <a class="nav-link header-notifications-item dropdown-toggle @if(!$changedLoads->isEmpty()) has-notification @endif" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
