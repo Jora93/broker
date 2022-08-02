@@ -354,19 +354,10 @@
                                                     </div>
 
                                                     <div class="col-sm-6 col-xs-6" style="padding: 0">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Pickup Time</label>
-                                                        </div>
-                                                        <div class="col-sm-4 col-xs-4">
+                                                        <div class="col-sm-8 col-xs-8">
                                                             <div class="form-group">
-                                                                <label class="control-label">From</label>
-                                                                <input type="time" name="shipper_pickup_time_from" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time_from', $load->shipper_pickup_time_from)}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 col-xs-4">
-                                                            <div class="form-group">
-                                                                <label class="control-label">To</label>
-                                                                <input type="time" name="shipper_pickup_time_to" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time_to', $load->shipper_pickup_time_to)}}">
+                                                                <label class="control-label">Pickup Time</label>
+                                                                <input type="text" name="shipper_pickup_time_from" class="form-control input-small time-picker-input" value="{{old('shipper_pickup_time_from', $load->shipper_pickup_time_from)}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-xs-4">
@@ -505,19 +496,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6" style="padding: 0">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Delivery Time</label>
-                                                            </div>
-                                                            <div class="col-sm-4 col-xs-4">
+                                                            <div class="col-sm-8 col-xs-8">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">From</label>
-                                                                    <input type="time" name="consignee[{{$key}}][delivery_time_from]" class="form-control input-small time-picker-input" value="{{$drop->delivery_time_from ?? "00:00"}}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4 col-xs-4">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">To</label>
-                                                                    <input type="time" name="consignee[{{$key}}][delivery_time_to]" class="form-control input-small time-picker-input" value="{{$drop->delivery_time_to ?? '23:59'}}">
+                                                                    <label class="control-label">Delivery Time</label>
+                                                                    <input type="text" name="consignee[{{$key}}][delivery_time_from]" class="form-control input-small time-picker-input" value="{{$drop->delivery_time_from}}">
                                                                 </div>
                                                             </div>
                                                         </div>
