@@ -64,7 +64,7 @@
             <td style="border-collapse: collapse;">Product: {{$load->product}}</td>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;">{{$load->shipper_address1}}</td>
+            <td style="border-collapse: collapse;">{{$load->shipper_address1}} {{$load->shipper_zip_code}} {{$load->shipper_city}} {{$load->shipper_state}}</td>
             <td style="border-collapse: collapse;">Time: {{$load->shipper_pickup_time_from}}</td>
             <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
         </tr>
@@ -91,7 +91,7 @@
                 <td style="border-collapse: collapse;" colspan="2">Product: {{$load->product}}</td>
             </tr>
             <tr>
-                <td style="border-collapse: collapse;">{{$drop->address1}}</td>
+                <td style="border-collapse: collapse;">{{$drop->address1}} {{$drop->delivery_location_zip_code}} {{$drop->city}} {{$drop->delivery_state}}</td>
                 <td style="border-collapse: collapse;">Date: {{$drop->delivery_date}}</td>
                 <td style="border-collapse: collapse;">PO #: {{$load->purchase_order_number}}</td>
             </tr>
