@@ -93,4 +93,10 @@ Route::prefix('{company_id}')->middleware(['auth', 'company'])->group(function (
     Route::get('black-list-search', 'BlacklistController@search');
 });
 
+Route::prefix('api')->middleware(['auth', 'company'])->group(function () {
+    Route::prefix('{company_id}')->group(function () {
+        Route::get('loads', 'Api\LoadController@getLoads');
+    });
+});
+
 

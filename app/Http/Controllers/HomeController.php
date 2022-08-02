@@ -24,6 +24,6 @@ class HomeController extends Controller
      */
     public function index($company_id)
     {
-        return redirect('/'.$company_id.'/loads');
+        return view('home');
     }
 }
