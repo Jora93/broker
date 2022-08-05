@@ -374,16 +374,63 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-4">
                                                         <div class="form-group">
                                                             <label class="control-label">Payment Method</label>
-                                                            <select name="shipper_payment_method" value="{{$load->shipper_payment_method}}" class="consignee_item_type form-control">
+                                                            <select name="shipper_payment_method" value="{{$load->shipper_payment_method}}" class="shipper-payment-method form-control">
                                                                 <option value="">Select Type</option>
                                                                 <option @if($load->shipper_payment_method === 'NET 30 FACTORING') selected @endif value="NET 30 FACTORING">NET 30 FACTORING</option>
-                                                                <option @if($load->shipper_payment_method === 'STANDARD') selected @endif value="STANDARD">STANDARD</option>
-                                                                <option @if($load->shipper_payment_method === 'QUICK PAY 3%') selected @endif value="QUICK PAY 3%">QUICK PAY 3%</option>
+                                                                <option @if($load->shipper_payment_method === 'STANDARD ACH') selected @endif value="STANDARD ACH">STANDARD ACH</option>
+                                                                <option @if($load->shipper_payment_method === 'STANDARD ZELLE PERSONAL') selected @endif value="STANDARD ZELLE PERSONAL">STANDARD ZELLE PERSONAL</option>
+                                                                <option @if($load->shipper_payment_method === 'STANDARD ZELLE BUSINESS') selected @endif value="STANDARD ZELLE BUSINESS">STANDARD ZELLE BUSINESS</option>
+                                                                <option @if($load->shipper_payment_method === 'QUICK PAY') selected @endif value="QUICK PAY">QUICK PAY</option>
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-sm-4 shipper-quick-pay-percent" @if($load->shipper_payment_method != 'QUICK PAY') style="display: none" @endif>
+                                                        <div class="form-group">
+                                                            <label class="control-label">%</label>
+                                                            <input value="{{old('shipper_quick_pay_percent', $load->shipper_quick_pay_percent)}}"  class="form-control shipper-quick-pay-percent-value" name="shipper_quick_pay_percent" type="number" min="0" max="100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8 shipper-factoring" @if($load->shipper_payment_method != 'NET 30 FACTORING') style="display: none" @endif>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Factoring Name</label>
+                                                            <input value="{{old('shipper_factoring', $load->shipper_factoring)}}" class="form-control shipper-factoring-value" name="shipper_factoring" type="text">
+                                                        </div>
+                                                        <p style="color: darkred">NOTE: Notice of Assignment (NOA) document required after 7 days from load creation.</p>
+                                                    </div>
+                                                    <div class="col-sm-8 shipper-factoring-ach-info" @if($load->shipper_payment_method != 'STANDARD ACH') style="display: none" @endif>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Account Number</label>
+                                                                <input value="{{old('shipper_factoring_ach_account_number', $load->shipper_factoring_ach_account_number)}}"  class="form-control" name="shipper_factoring_ach_account_number" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Routing Number</label>
+                                                                <input value="{{old('shipper_factoring_ach_routing_number', $load->shipper_factoring_ach_routing_number)}}"  class="form-control" name="shipper_factoring_ach_routing_number" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8 shipper-factoring-zelle-info" @if(!in_array($load->shipper_payment_method, ['STANDARD ZELLE PERSONAL','STANDARD ZELLE BUSINESS'])) style="display: none" @endif>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Zelle Phone Number</label>
+                                                                <input value="{{old('shipper_factoring_zelle_phone', $load->shipper_factoring_zelle_phone)}}" class="form-control" name="shipper_factoring_zelle_phone" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Zelle Email</label>
+                                                                <input value="{{old('shipper_factoring_zelle_email', $load->shipper_factoring_zelle_email)}}" class="form-control" name="shipper_factoring_zelle_email" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Pickup Note</label>
                                                             <textarea class="form-control editMainField" name="shipper_notes" placeholder="Enter pickup notes">{{old('shipper_notes', $load->shipper_notes)}}</textarea>

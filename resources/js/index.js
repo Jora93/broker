@@ -669,5 +669,59 @@ $(document).ready(function () {
             }
         });
     })
+    $('.shipper-payment-method').on('change', function() {
+        if (this.value === 'QUICK PAY') {
+            $('.shipper-quick-pay-percent').show();
+            $('.shipper-factoring').hide();
+            $('.shipper-factoring-ach-info').hide();
+            $('.shipper-factoring-zelle-info').hide();
+        } else if (this.value === 'NET 30 FACTORING') {
+            $('.shipper-quick-pay-percent').hide();
+            $('.shipper-factoring').show();
+            $('.shipper-factoring-ach-info').hide();
+            $('.shipper-factoring-zelle-info').hide();
+        } else if (this.value === 'STANDARD ACH') {
+            $('.shipper-quick-pay-percent').hide();
+            $('.shipper-factoring').hide();
+            $('.shipper-factoring-ach-info').show();
+            $('.shipper-factoring-zelle-info').hide();
+        } else if (this.value === 'STANDARD ZELLE PERSONAL' || this.value === 'STANDARD ZELLE BUSINESS') {
+            $('.shipper-quick-pay-percent').hide();
+            $('.shipper-factoring').hide();
+            $('.shipper-factoring-ach-info').hide();
+            $('.shipper-factoring-zelle-info').show();
+        } else {
+            $('.shipper-quick-pay-percent').hide();
+            $('.shipper-factoring').hide();
+            $('.shipper-factoring-ach-info').hide();
+            $('.shipper-factoring-zelle-info').hide();
+        }
+    });
 
+    //check NOA LOADS
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    let NOALoads = getCookie('NOA');
+    if (NOALoads && JSON.parse(NOALoads).length) {
+        NOALoads = JSON.parse(NOALoads);
+        let html = '';
+        NOALoads.forEach(item => {
+            html += `LOAD#:  <a href="${window.APP_URL}/${window.currentCompanyId}/loads/${item.id}/edit">${item.id}</a><br>`;
+        })
+        $('#noaReminderModal').modal()
+        $('.noaReminderModal-body').html(html);
+    }
 });

@@ -71785,6 +71785,66 @@ $(document).ready(function () {
       }
     });
   });
+  $('.shipper-payment-method').on('change', function () {
+    if (this.value === 'QUICK PAY') {
+      $('.shipper-quick-pay-percent').show();
+      $('.shipper-factoring').hide();
+      $('.shipper-factoring-ach-info').hide();
+      $('.shipper-factoring-zelle-info').hide();
+    } else if (this.value === 'NET 30 FACTORING') {
+      $('.shipper-quick-pay-percent').hide();
+      $('.shipper-factoring').show();
+      $('.shipper-factoring-ach-info').hide();
+      $('.shipper-factoring-zelle-info').hide();
+    } else if (this.value === 'STANDARD ACH') {
+      $('.shipper-quick-pay-percent').hide();
+      $('.shipper-factoring').hide();
+      $('.shipper-factoring-ach-info').show();
+      $('.shipper-factoring-zelle-info').hide();
+    } else if (this.value === 'STANDARD ZELLE PERSONAL' || this.value === 'STANDARD ZELLE BUSINESS') {
+      $('.shipper-quick-pay-percent').hide();
+      $('.shipper-factoring').hide();
+      $('.shipper-factoring-ach-info').hide();
+      $('.shipper-factoring-zelle-info').show();
+    } else {
+      $('.shipper-quick-pay-percent').hide();
+      $('.shipper-factoring').hide();
+      $('.shipper-factoring-ach-info').hide();
+      $('.shipper-factoring-zelle-info').hide();
+    }
+  }); //check NOA LOADS
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+
+    return "";
+  }
+
+  var NOALoads = getCookie('NOA');
+
+  if (NOALoads && JSON.parse(NOALoads).length) {
+    NOALoads = JSON.parse(NOALoads);
+    var html = '';
+    NOALoads.forEach(function (item) {
+      html += "LOAD#:  <a href=\"".concat(window.APP_URL, "/").concat(window.currentCompanyId, "/loads/").concat(item.id, "/edit\">").concat(item.id, "</a><br>");
+    });
+    $('#noaReminderModal').modal();
+    $('.noaReminderModal-body').html(html);
+  }
 });
 
 /***/ }),

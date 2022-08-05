@@ -90,7 +90,7 @@
                                     <div  class="col-sm item">
                                         <div>
                                             <span>
-                                                <a type="button" class="btn btn-light" href="{{ url('/'.$company->id) }}">{{$company->name}}</a>
+                                                <a style="font-size: 24px; font-weight: bold" type="button" class="btn btn-light" href="{{ url('/'.$company->id) }}">{{$company->name}}</a>
                                             </span>
                                         </div>
                                     </div>

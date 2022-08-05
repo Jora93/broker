@@ -62,7 +62,14 @@ class Load extends Model
         'load_number',
         'invoice_number',
         'invoice_date',
-        'invoice_past_due_date'
+        'invoice_past_due_date',
+        'shipper_quick_pay_percent',
+        'shipper_factoring',
+        'has_noa',
+        'shipper_factoring_ach_account_number',
+        'shipper_factoring_ach_routing_number',
+        'shipper_factoring_zelle_phone',
+        'shipper_factoring_zelle_email',
     ];
 
     public function getShipperPickupDateAttribute() {

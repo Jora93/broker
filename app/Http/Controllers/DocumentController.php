@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Load;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +54,9 @@ class DocumentController extends Controller
         Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
         $data['name'] = $fileName;
         $document = Document::create($data);
+        if (isset($data['load_id']) && $data['type'] == 'Notice of Assignment') {
+            Load::find($data['load_id'])->update(['has_noa' => true]);
+        }
         $document->user_email = Auth::user()->email;
         $document->file_path = env('AWS_STORAGE_URL').$fileName;
 
@@ -109,7 +113,15 @@ class DocumentController extends Controller
             Storage::disk('s3')->put($fileName, file_get_contents($data['file']), 'public');
             $data['name'] = $fileName;
         }
+        $oldType = $document->type;
         $document->update($data);
+        if (isset($data['load_id'])) {
+            if ($data['type'] == 'Notice of Assignment') {
+                Load::find($data['load_id'])->update(['has_noa' => true]);
+            } elseif ($oldType == 'Notice of Assignment' && $oldType != $data['type']) {
+                Load::find($data['load_id'])->update(['has_noa' => false]);
+            }
+        }
         if (isset($data['file'])) {
             $document->file_path = env('AWS_STORAGE_URL').$fileName;
         }
@@ -126,6 +138,9 @@ class DocumentController extends Controller
      */
     public function destroy($company_id, Request $request, Document $document)
     {
+        if (!is_null($document->load_id) && $document->type == 'Notice of Assignment') {
+            Load::find($document->load_id)->update(['has_noa' => false]);
+        }
         //todo remove from aws
         return response()->json(['success' => $document->delete()]);
     }

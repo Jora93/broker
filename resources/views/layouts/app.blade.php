@@ -199,7 +199,25 @@
                         <button type="submit" class="btn btn-primary">Create Load</button>
                     </div>
                 </form>
-
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="noaReminderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="position: initial">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">NOA reminder</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please attach NOA document for this loads</p><br>
+                    <div class="noaReminderModal-body"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
