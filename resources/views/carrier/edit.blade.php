@@ -143,61 +143,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">*State/Province</label>
-                                            <select name="state" class="selectpicker" required="true" data-live-search="true">
-                                                <option disabled selected value>Select State/Province</option>
-                                                <option @if($carrier->state == 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                <option @if($carrier->state == 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                <option @if($carrier->state == 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                <option @if($carrier->state == 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                <option @if($carrier->state == 'CA') selected @endif value="CA">CA (California)</option>
-                                                <option @if($carrier->state == 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                <option @if($carrier->state == 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                <option @if($carrier->state == 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                <option @if($carrier->state == 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                <option @if($carrier->state == 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                <option @if($carrier->state == 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                <option @if($carrier->state == 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                <option @if($carrier->state == 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                <option @if($carrier->state == 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                <option @if($carrier->state == 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                <option @if($carrier->state == 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                <option @if($carrier->state == 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                <option @if($carrier->state == 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                <option @if($carrier->state == 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                <option @if($carrier->state == 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                <option @if($carrier->state == 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                <option @if($carrier->state == 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                <option @if($carrier->state == 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                <option @if($carrier->state == 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                <option @if($carrier->state == 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                <option @if($carrier->state == 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                <option @if($carrier->state == 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                <option @if($carrier->state == 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                <option @if($carrier->state == 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                <option @if($carrier->state == 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                <option @if($carrier->state == 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                <option @if($carrier->state == 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                <option @if($carrier->state == 'NY') selected @endif value="NY">NY (New York)</option>
-                                                <option @if($carrier->state == 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                <option @if($carrier->state == 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                <option @if($carrier->state == 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                <option @if($carrier->state == 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                <option @if($carrier->state == 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                <option @if($carrier->state == 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                <option @if($carrier->state == 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                <option @if($carrier->state == 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                <option @if($carrier->state == 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                <option @if($carrier->state == 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                <option @if($carrier->state == 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                <option @if($carrier->state == 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                <option @if($carrier->state == 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                <option @if($carrier->state == 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                <option @if($carrier->state == 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                <option @if($carrier->state == 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                <option @if($carrier->state == 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                <option @if($carrier->state == 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                <option @if($carrier->state == 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                            </select>
+                                            <input class="form-control" placeholder="Please Enter State/Province" required="required" type="text" name="state" value="{{old('state', $carrier->state)}}" id="carrier_state" tabindex="8">
                                         </div>
                                     </div>
 
@@ -383,61 +329,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="carrier_payee_state">State/Province</label>
-                                            <select id="carrier_payee_state" name="payee_state" class="selectpicker" data-live-search="true">
-                                                <option disabled selected value>Select State/Province</option>
-                                                <option @if($carrier->payee_state == 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                <option @if($carrier->payee_state == 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                <option @if($carrier->payee_state == 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                <option @if($carrier->payee_state == 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                <option @if($carrier->payee_state == 'CA') selected @endif value="CA">CA (California)</option>
-                                                <option @if($carrier->payee_state == 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                <option @if($carrier->payee_state == 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                <option @if($carrier->payee_state == 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                <option @if($carrier->payee_state == 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                <option @if($carrier->payee_state == 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                <option @if($carrier->payee_state == 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                <option @if($carrier->payee_state == 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                <option @if($carrier->payee_state == 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                <option @if($carrier->payee_state == 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                <option @if($carrier->payee_state == 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                <option @if($carrier->payee_state == 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                <option @if($carrier->payee_state == 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                <option @if($carrier->payee_state == 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                <option @if($carrier->payee_state == 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                <option @if($carrier->payee_state == 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                <option @if($carrier->payee_state == 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                <option @if($carrier->payee_state == 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                <option @if($carrier->payee_state == 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                <option @if($carrier->payee_state == 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                <option @if($carrier->payee_state == 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                <option @if($carrier->payee_state == 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                <option @if($carrier->payee_state == 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                <option @if($carrier->payee_state == 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                <option @if($carrier->payee_state == 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                <option @if($carrier->payee_state == 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                <option @if($carrier->payee_state == 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                <option @if($carrier->payee_state == 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                <option @if($carrier->payee_state == 'NY') selected @endif value="NY">NY (New York)</option>
-                                                <option @if($carrier->payee_state == 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                <option @if($carrier->payee_state == 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                <option @if($carrier->payee_state == 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                <option @if($carrier->payee_state == 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                <option @if($carrier->payee_state == 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                <option @if($carrier->payee_state == 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                <option @if($carrier->payee_state == 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                <option @if($carrier->payee_state == 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                <option @if($carrier->payee_state == 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                <option @if($carrier->payee_state == 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                <option @if($carrier->payee_state == 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                <option @if($carrier->payee_state == 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                <option @if($carrier->payee_state == 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                <option @if($carrier->payee_state == 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                <option @if($carrier->payee_state == 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                <option @if($carrier->payee_state == 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                <option @if($carrier->payee_state == 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                <option @if($carrier->payee_state == 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                <option @if($carrier->payee_state == 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                            </select>
+                                            <input class="form-control" placeholder="Please Enter State/Province" type="text" name="payee_state" value="{{old('payee_state', $carrier->payee_state)}}" id="carrier_payee_state" tabindex="8">
                                         </div>
                                     </div>
                                 </div>
@@ -516,62 +408,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="carrier_factoring_remit_attributes_factoring_remit_state_province">State/Province</label>
-                                                    <select id="carrier_factoring_remit_attributes_factoring_remit_state_province" name="factoring_state" class="selectpicker" data-live-search="true">
-                                                        <option disabled selected value>Select State/Province</option>
-                                                        <option @if($carrier->factoring_state == 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                        <option @if($carrier->factoring_state == 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                        <option @if($carrier->factoring_state == 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                        <option @if($carrier->factoring_state == 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                        <option @if($carrier->factoring_state == 'CA') selected @endif value="CA">CA (California)</option>
-                                                        <option @if($carrier->factoring_state == 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                        <option @if($carrier->factoring_state == 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                        <option @if($carrier->factoring_state == 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                        <option @if($carrier->factoring_state == 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                        <option @if($carrier->factoring_state == 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                        <option @if($carrier->factoring_state == 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                        <option @if($carrier->factoring_state == 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                        <option @if($carrier->factoring_state == 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                        <option @if($carrier->factoring_state == 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                        <option @if($carrier->factoring_state == 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                        <option @if($carrier->factoring_state == 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                        <option @if($carrier->factoring_state == 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                        <option @if($carrier->factoring_state == 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                        <option @if($carrier->factoring_state == 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                        <option @if($carrier->factoring_state == 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                        <option @if($carrier->factoring_state == 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                        <option @if($carrier->factoring_state == 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                        <option @if($carrier->factoring_state == 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                        <option @if($carrier->factoring_state == 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                        <option @if($carrier->factoring_state == 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                        <option @if($carrier->factoring_state == 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                        <option @if($carrier->factoring_state == 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                        <option @if($carrier->factoring_state == 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                        <option @if($carrier->factoring_state == 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                        <option @if($carrier->factoring_state == 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                        <option @if($carrier->factoring_state == 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                        <option @if($carrier->factoring_state == 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                        <option @if($carrier->factoring_state == 'NY') selected @endif value="NY">NY (New York)</option>
-                                                        <option @if($carrier->factoring_state == 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                        <option @if($carrier->factoring_state == 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                        <option @if($carrier->factoring_state == 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                        <option @if($carrier->factoring_state == 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                        <option @if($carrier->factoring_state == 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                        <option @if($carrier->factoring_state == 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                        <option @if($carrier->factoring_state == 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                        <option @if($carrier->factoring_state == 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                        <option @if($carrier->factoring_state == 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                        <option @if($carrier->factoring_state == 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                        <option @if($carrier->factoring_state == 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                        <option @if($carrier->factoring_state == 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                        <option @if($carrier->factoring_state == 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                        <option @if($carrier->factoring_state == 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                        <option @if($carrier->factoring_state == 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                        <option @if($carrier->factoring_state == 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                        <option @if($carrier->factoring_state == 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                        <option @if($carrier->factoring_state == 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                        <option @if($carrier->factoring_state == 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                                    </select>
+                                                    <label class="control-label">State/Province</label>
+                                                    <input class="form-control" placeholder="Please Enter State/Province" type="text" name="factoring_state" value="{{old('factoring_state', $carrier->factoring_state)}}" tabindex="8">
                                                 </div>
                                             </div>
 
