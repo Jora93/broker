@@ -47,8 +47,8 @@ class DispatcherController extends Controller
     public function store($customer_id, Request $request)
     {
         $request->validate([
-            'full_name' => ['required', 'string', 'max:255', 'unique:dispatchers,full_name'],
-            'email' => ['required', 'string', 'max:255', 'unique:dispatchers,email'],
+            'full_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
         ]);
         $data = $request->all();
         $data['company_id'] = \App::make('currentCompany')->id;
@@ -92,8 +92,8 @@ class DispatcherController extends Controller
     public function update($customer_id, Request $request, Dispatcher $dispatcher)
     {
         $request->validate([
-            'full_name' => ['required', 'string', 'max:255', 'unique:dispatchers,full_name,'.$dispatcher->id],
-            'email' => ['required', 'string', 'max:255', 'unique:dispatchers,email,'.$dispatcher->id],
+            'full_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
         ]);
         $data = $request->all();
         $dispatcher->update($data);
