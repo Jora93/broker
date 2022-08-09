@@ -193,62 +193,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">State/Province</label><br>
-                                                            <select disabled name="shipper_state" value="{{old('shipper_state', $load->shipper_state)}}" class="selectpicker" required="true" data-live-search="true">
-                                                                <option disabled selected value>Select State/Province</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'CA') selected @endif value="CA">CA (California)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NY') selected @endif value="NY">NY (New York)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                                <option @if(old('shipper_state', $load->shipper_state) === 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                                            </select>
+                                                            <label class="control-label">State/Province*</label><br>
+                                                            <input required type="text" name="shipper_state" value="{{old('shipper_state', $load->shipper_state)}}" class="form-control" placeholder="Please Enter State/Province">
                                                         </div>
                                                     </div>
 
@@ -485,61 +431,7 @@
                                                         <div class="col-sm-6 col-xs-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">State/Province</label><br>
-                                                                <select disabled name="consignee[{{$key}}][delivery_state]" value="{{$drop->delivery_state}}" class="consignee_delivery_state selectpickeraa" required="true" data-live-search="true">
-                                                                    <option disabled selected value>Select State/Province</option>
-                                                                    <option @if($drop->delivery_state === 'AL') selected @endif value="AL">AL (Alabama)</option>
-                                                                    <option @if($drop->delivery_state === 'AK') selected @endif value="AK">AK (Alaska)</option>
-                                                                    <option @if($drop->delivery_state === 'AZ') selected @endif value="AZ">AZ (Arizona)</option>
-                                                                    <option @if($drop->delivery_state === 'AR') selected @endif value="AR">AR (Arkansas)</option>
-                                                                    <option @if($drop->delivery_state === 'CA') selected @endif value="CA">CA (California)</option>
-                                                                    <option @if($drop->delivery_state === 'CO') selected @endif value="CO">CO (Colorado)</option>
-                                                                    <option @if($drop->delivery_state === 'CT') selected @endif value="CT">CT (Connecticut)</option>
-                                                                    <option @if($drop->delivery_state === 'DE') selected @endif value="DE">DE (Delaware)</option>
-                                                                    <option @if($drop->delivery_state === 'DC') selected @endif value="DC">DC (District of Columbia)</option>
-                                                                    <option @if($drop->delivery_state === 'FL') selected @endif value="FL">FL (Florida)</option>
-                                                                    <option @if($drop->delivery_state === 'GA') selected @endif value="GA">GA (Georgia)</option>
-                                                                    <option @if($drop->delivery_state === 'HI') selected @endif value="HI">HI (Hawaii)</option>
-                                                                    <option @if($drop->delivery_state === 'ID') selected @endif value="ID">ID (Idaho)</option>
-                                                                    <option @if($drop->delivery_state === 'IL') selected @endif value="IL">IL (Illinois)</option>
-                                                                    <option @if($drop->delivery_state === 'IN') selected @endif value="IN">IN (Indiana)</option>
-                                                                    <option @if($drop->delivery_state === 'IA') selected @endif value="IA">IA (Iowa)</option>
-                                                                    <option @if($drop->delivery_state === 'KS') selected @endif value="KS">KS (Kansas)</option>
-                                                                    <option @if($drop->delivery_state === 'KY') selected @endif value="KY">KY (Kentucky)</option>
-                                                                    <option @if($drop->delivery_state === 'LA') selected @endif value="LA">LA (Louisiana)</option>
-                                                                    <option @if($drop->delivery_state === 'ME') selected @endif value="ME">ME (Maine)</option>
-                                                                    <option @if($drop->delivery_state === 'MD') selected @endif value="MD">MD (Maryland)</option>
-                                                                    <option @if($drop->delivery_state === 'MA') selected @endif value="MA">MA (Massachusetts)</option>
-                                                                    <option @if($drop->delivery_state === 'MI') selected @endif value="MI">MI (Michigan)</option>
-                                                                    <option @if($drop->delivery_state === 'MN') selected @endif value="MN">MN (Minnesota)</option>
-                                                                    <option @if($drop->delivery_state === 'MS') selected @endif value="MS">MS (Mississippi)</option>
-                                                                    <option @if($drop->delivery_state === 'MO') selected @endif value="MO">MO (Missouri)</option>
-                                                                    <option @if($drop->delivery_state === 'MT') selected @endif value="MT">MT (Montana)</option>
-                                                                    <option @if($drop->delivery_state === 'NE') selected @endif value="NE">NE (Nebraska)</option>
-                                                                    <option @if($drop->delivery_state === 'NV') selected @endif value="NV">NV (Nevada)</option>
-                                                                    <option @if($drop->delivery_state === 'NH') selected @endif value="NH">NH (New Hampshire)</option>
-                                                                    <option @if($drop->delivery_state === 'NJ') selected @endif value="NJ">NJ (New Jersey)</option>
-                                                                    <option @if($drop->delivery_state === 'NM') selected @endif value="NM">NM (New Mexico)</option>
-                                                                    <option @if($drop->delivery_state === 'NY') selected @endif value="NY">NY (New York)</option>
-                                                                    <option @if($drop->delivery_state === 'NC') selected @endif value="NC">NC (North Carolina)</option>
-                                                                    <option @if($drop->delivery_state === 'ND') selected @endif value="ND">ND (North Dakota)</option>
-                                                                    <option @if($drop->delivery_state === 'OH') selected @endif value="OH">OH (Ohio)</option>
-                                                                    <option @if($drop->delivery_state === 'OK') selected @endif value="OK">OK (Oklahoma)</option>
-                                                                    <option @if($drop->delivery_state === 'OR') selected @endif value="OR">OR (Oregon)</option>
-                                                                    <option @if($drop->delivery_state === 'PA') selected @endif value="PA">PA (Pennsylvania)</option>
-                                                                    <option @if($drop->delivery_state === 'PR') selected @endif value="PR">PR (Puerto Rico)</option>
-                                                                    <option @if($drop->delivery_state === 'RI') selected @endif value="RI">RI (Rhode Island)</option>
-                                                                    <option @if($drop->delivery_state === 'SC') selected @endif value="SC">SC (South Carolina)</option>
-                                                                    <option @if($drop->delivery_state === 'SD') selected @endif value="SD">SD (South Dakota)</option>
-                                                                    <option @if($drop->delivery_state === 'TN') selected @endif value="TN">TN (Tennessee)</option>
-                                                                    <option @if($drop->delivery_state === 'TX') selected @endif value="TX">TX (Texas)</option>
-                                                                    <option @if($drop->delivery_state === 'UT') selected @endif value="UT">UT (Utah)</option>
-                                                                    <option @if($drop->delivery_state === 'VT') selected @endif value="VT">VT (Vermont)</option>
-                                                                    <option @if($drop->delivery_state === 'VA') selected @endif value="VA">VA (Virginia)</option>
-                                                                    <option @if($drop->delivery_state === 'WA') selected @endif value="WA">WA (Washington)</option>
-                                                                    <option @if($drop->delivery_state === 'WV') selected @endif value="WV">WV (West Virginia)</option>
-                                                                    <option @if($drop->delivery_state === 'WI') selected @endif value="WI">WI (Wisconsin)</option>
-                                                                    <option @if($drop->delivery_state === 'WY') selected @endif value="WY">WY (Wyoming)</option>
-                                                                </select>
+                                                                <input type="text" name="consignee[{{$key}}][delivery_time_from]" value="{{old('delivery_state', $drop->delivery_state)}}" class="form-control" placeholder="Please Enter State/Province">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6">
