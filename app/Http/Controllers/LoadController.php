@@ -358,8 +358,9 @@ class LoadController extends Controller
     {
         $data = $request->all();
         $dispatchers = Dispatcher::where('company_id', $company_id)->get();
+        $loads = Load::where('company_id', $company_id);
 
-        $loads = Load::whereHas('customer', function ($query) use ($data) {
+        $loads = $loads->whereHas('customer', function ($query) use ($data) {
             if (isset($data['customer']) && !is_null($data['customer'])) {
                 $query->where('company', 'LIKE', "%{$data['customer']}%");
             }
@@ -379,8 +380,8 @@ class LoadController extends Controller
             $loads->where('dispatcher_id', $data['dispatcher_id']);
         }
 
-        if (isset($data['id']) && !is_null($data['id'])) {
-            $loads->where('id', $data['id']);
+        if (isset($data['load_number']) && !is_null($data['load_number'])) {
+            $loads->where('load_number', 'LIKE', "%{$data['load_number']}%");
         }
 
         if (isset($data['status']) && !is_null($data['status'])) {
@@ -471,8 +472,8 @@ class LoadController extends Controller
             $loads->where('dispatcher_id', $data['dispatcher_id']);
         }
 
-        if (isset($data['load_id']) && !is_null($data['load_id'])) {
-            $loads->where('id', $data['load_id']);
+        if (isset($data['load_number']) && !is_null($data['load_number'])) {
+            $loads->where('load_number', 'LIKE', "%{$data['load_number']}%");
         }
 
 //        $loadsTotal = $loads->select('customer_costs_rate_per_unit', 'carrier_costs_rate_per_unit')->get();

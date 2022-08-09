@@ -14,7 +14,7 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="load_number">Load#:</label>
-                                    <input placeholder="Load Number" type="text" class="form-control" name="id" value="@if(isset($data['id'])){{$data['id']}}@endif"/>
+                                    <input placeholder="Load Number" type="text" class="form-control" name="load_number" value="@if(isset($data['load_number'])){{$data['load_number']}}@endif"/>
                                 </div>
                             </div>
                             <div class="col-sm">
@@ -118,7 +118,7 @@
                                         <tr>
                                             <th scope="row">
                                                 <a title="show" href="{{url(\App::make('currentCompany')->id.'/loads/'.$load->id)}}">
-                                                    {{$load->id}}
+                                                    # {{$load->load_number}}
                                                 </a>
                                             </th>
                                             <td>{{$load->shipper_type}}</td>

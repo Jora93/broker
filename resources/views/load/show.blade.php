@@ -13,7 +13,7 @@
     <br>
     <div class="col-sm-12 load-short-info"><br>
         <div class="col-sm-2">
-            <span># {{$load->id}}</span>
+            <span># {{$load->load_number}}</span>
         </div>
         <div class="col-sm-5">
             <span>Carrier: @if(isset($load->carrier)){{$load->carrier->company}}@endif</span>

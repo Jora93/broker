@@ -14,6 +14,11 @@
         </div>
     @endif
     <div id="ajaxErrorContainer" class="col-sm-12"></div>
+    <div class="col-sm-12 load-short-info"><br>
+        <div class="col-sm-2">
+            <span># {{$load->load_number}}</span>
+        </div>
+    </div>
     <div class="col-sm-12 loads-show">
         <form method="post" id="loadEditForm" action="{{ url(\App::make('currentCompany')->id.'/loads/'.$load->id) }}" class="col-sm-12">
             @method('PATCH')
