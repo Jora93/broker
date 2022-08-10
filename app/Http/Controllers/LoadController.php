@@ -433,65 +433,69 @@ class LoadController extends Controller
         $data = $request->all();
         $data['date_type'] = isset($data['date_type']) ? $data['date_type'] : 'shipDate';
         $data['paginate'] = isset($data['paginate']) ? $data['paginate'] : 25;
+        $company_id = ((Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting) && isset($data['company_id'])) ? $data['company_id'] : $company_id;
         $dispatchers = Dispatcher::where('company_id', $company_id)->get(['id', 'full_name']);
         $customers = Customer::where('company_id', $company_id)->get(['id', 'company']);
         $carriers = Carrier::where('company_id', $company_id)->get(['id', 'company']);
-        $loads = Load::where('company_id', $company_id);
+        $result = Load::where('company_id', $company_id);
         if (isset($data['status']) && !is_null($data['status'])) {
-            $loads->where('status', $data['status']);
+            $result->where('status', $data['status']);
         }
 
         if (isset($data['from']) && !is_null($data['from'])) {
             $from = Carbon::now()->subDays($data['from']);
             if ($data['date_type'] === 'shipDate') {
-                $loads->whereDate('shipper_pickup_date', '<=', $from);
+                $result->whereDate('shipper_pickup_date', '<=', $from);
             } else {
-                $loads->drops->whereDate('delivery_date', '<=', $from);
+                $result->drops->whereDate('delivery_date', '<=', $from);
             }
         }
 
         if (isset($data['to']) && !is_null($data['to'])) {
             $to = Carbon::now()->subDays($data['to']);
             if ($data['date_type'] === 'shipDate') {
-                $loads->whereDate('shipper_pickup_date', '>=', $to);
+                $result->whereDate('shipper_pickup_date', '>=', $to);
             } else {
-                $loads->drops->whereDate('delivery_date', '>=', $to);
+                $result->drops->whereDate('delivery_date', '>=', $to);
             }
 
         }
 
         if (isset($data['customer_id']) && !is_null($data['customer_id'])) {
-            $loads->where('customer_id', $data['customer_id']);
+            $result->where('customer_id', $data['customer_id']);
         }
 
         if (isset($data['carrier_id']) && !is_null($data['carrier_id'])) {
-            $loads->where('carrier_id', $data['carrier_id']);
+            $result->where('carrier_id', $data['carrier_id']);
         }
 
         if (isset($data['dispatcher_id']) && !is_null($data['dispatcher_id'])) {
-            $loads->where('dispatcher_id', $data['dispatcher_id']);
+            $result->where('dispatcher_id', $data['dispatcher_id']);
         }
 
         if (isset($data['load_number']) && !is_null($data['load_number'])) {
-            $loads->where('load_number', 'LIKE', "%{$data['load_number']}%");
+            $result->where('load_number', 'LIKE', "%{$data['load_number']}%");
         }
 
-//        $loadsTotal = $loads->select('customer_costs_rate_per_unit', 'carrier_costs_rate_per_unit')->get();
-        $loads = $loads->orderBy('created_at', 'desc')->paginate($data['paginate']);
+        $loadsTotal = clone($result);
+        $loads = clone($result);
 
+        $loads = $loads->orderBy('created_at', 'desc')->paginate($data['paginate']);
         $grossSum = $loads->sum('customer_costs_rate_per_unit');
         $costSum = $loads->sum('carrier_costs_rate_per_unit');
         $netSum = $this->calculateNetSum($loads);
 
-//        $totalGrossSum = $loadsTotal->sum('customer_costs_rate_per_unit');
-//        $totalCostSum = $loadsTotal->sum('carrier_costs_rate_per_unit');
-//        $totalNetSum = $this->calculateNetSum($loadsTotal);
-//        $totalGrossSum = 3333;
-//        $totalCostSum = 22222;
-//        $totalNetSum = 1111;
+        $loadsTotal = $loadsTotal->select('customer_costs_rate_per_unit', 'carrier_costs_rate_per_unit')->get();
+        $totalGrossSum = $loadsTotal->sum('customer_costs_rate_per_unit');
+        $totalCostSum = $loadsTotal->sum('carrier_costs_rate_per_unit');
+        $totalNetSum = $this->calculateNetSum($loadsTotal);
 
-        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads', 'grossSum', 'costSum', 'netSum'));
-//        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads'/*, 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum'*/));
+        $companies = null;
+        if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting) {
+            $companies = Company::select(['id', 'name'])->get();
+        }
+
+        return view('load.sales-summary', compact('dispatchers', 'data', 'customers', 'carriers', 'loads', 'grossSum', 'costSum', 'netSum', 'totalGrossSum', 'totalCostSum', 'totalNetSum', 'companies'));
     }
 
     private function calculateNetSum($loads)

@@ -12,6 +12,23 @@
                         <div class="row col-sm-12">
                             @csrf
                             <div class="col-sm-6">
+                                @if (!is_null($companies) && (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting))
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label class="control-label">Company:</label>
+                                            <select class="form-control" name="company_id" tabindex="1">
+                                                <option selected disabled value="">{{\App::make('currentCompany')->name}}</option>
+                                                @foreach($companies as $company)
+                                                    <option @if(isset($data['company_id']) && $data['company_id'] == $company->id) selected @endif value={{$company->id}}>
+                                                        {{$company->name}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label">Status:</label>
                                     <select class="form-control" name="status" tabindex="1">
@@ -211,21 +228,31 @@
                                     @endforeach
 
                                     <tr style="font-weight: bold">
-                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                         <td>Page Total</td>
+                                        @if($netSum != 0)
+                                            <td>{{number_format($netSum / $grossSum * 100, 2, '.', ',')}}%</td>
+                                        @else
+                                            <td>0</td>
+                                        @endif
                                         <td>$ {{number_format($grossSum, 2, '.', ',')}}</td>
                                         <td>$ {{number_format($costSum, 2, '.', ',')}}</td>
                                         <td>$ {{number_format($netSum, 2, '.', ',')}}</td>
                                         <td></td>
                                     </tr>
-{{--                                    <tr style="font-weight: bold">--}}
-{{--                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>--}}
-{{--                                        <td>Report Total</td>--}}
-{{--                                        <td>$ {{number_format($totalGrossSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td>$ {{number_format($totalCostSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td>$ {{number_format($totalNetSum, 2, '.', ',')}}</td>--}}
-{{--                                        <td></td>--}}
-{{--                                    </tr>--}}
+                                    <tr style="font-weight: bold">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <td>Report Total</td>
+                                        @if($totalNetSum != 0)
+                                            <td>{{number_format($totalNetSum / $totalGrossSum * 100, 2, '.', ',')}}%</td>
+                                        @else
+                                            <td>0</td>
+                                        @endif
+                                        <td>$ {{number_format($totalGrossSum, 2, '.', ',')}}</td>
+                                        <td>$ {{number_format($totalCostSum, 2, '.', ',')}}</td>
+                                        <td>$ {{number_format($totalNetSum, 2, '.', ',')}}</td>
+                                        <td></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 @if(isset($data))
