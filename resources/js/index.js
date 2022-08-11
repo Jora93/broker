@@ -522,7 +522,7 @@ $(document).ready(function () {
         inputs.each(function () {
             formData[this.name] = $(this).val();
         });
-        formData.append('file', $('#documentFile')[0].files[0]);
+        formData.append('file', $('#docummentFile')[0].files[0]);
         $.ajax({
             type: "POST",
             url: `${window.APP_URL}/${window.currentCompanyId}/documents`,
@@ -609,7 +609,7 @@ $(document).ready(function () {
         inputs.each(function () {
             formData[this.name] = $(this).val();
         });
-        formData.append('file', $('#documentFile')[0].files[0]);
+        formData.append('file', $('#docummentFile')[0].files[0]);
         $.ajax({
             type: "PATCH",
             url: `${window.APP_URL}/${window.currentCompanyId}/documents/${formData.id}`,
@@ -637,7 +637,7 @@ $(document).ready(function () {
                     $("#ajaxErrorContainer").append(html);
                     window.scrollTo(0, 0);
                 }
-                $('#documentFile').val('');
+                $('#docummentFile').val('');
             }
         });
     });
