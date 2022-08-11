@@ -18,6 +18,13 @@
         <div class="col-sm-2">
             <span># {{$load->load_number}}</span>
         </div>
+        <div class="col-sm-5">
+            <span>Carrier: @if(isset($load->carrier)){{$load->carrier->company}}@endif</span>
+        </div>
+        <div class="col-sm-5">
+            <span>Customer: {{$load->customer->company}}</span>
+        </div>
+        <br>
     </div>
     <div class="col-sm-12 loads-show">
         <form method="post" id="loadEditForm" action="{{ url(\App::make('currentCompany')->id.'/loads/'.$load->id) }}" class="col-sm-12">

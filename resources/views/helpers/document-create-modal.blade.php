@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="logoInput">Document*</label>
-                            <input required type="file" name="file" accept="image/jpeg,image/gif,image/png,application/pdf">
+                            <input required id="documentUploadInput" type="file" name="file" accept="image/jpeg,image/gif,image/png,application/pdf">
                         </div>
                     </div>
                     <div class="form-group">
