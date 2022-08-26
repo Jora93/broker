@@ -66,6 +66,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6" id="voided-reason-container" @if($load->status !== 'Voided') style="display: none" @endif>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Voided Reason</div>
+                            <input disabled id="po_number" name="voided_reason" title="" value="{{$load->voided_reason}}" class="form-control input-sm editMainField">
+                        </div>
+                    </div>
+                </div>
             </div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item col-sm-2 load-tab">

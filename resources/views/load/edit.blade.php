@@ -36,7 +36,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Status</div>
-                            <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" onchange="return onStatusChange();" tabindex="1">
+                            <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" tabindex="1">
                                 <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
                                 <option @if($load->status == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
                                 <option @if($load->status == "Committed") selected @endif value="Committed">Committed</option>
@@ -131,6 +131,14 @@
                                     @endforeach
                                 @endif
                             </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" id="voided-reason-container" @if($load->status !== 'Voided') style="display: none" @endif>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Voided Reason</div>
+                            <input id="po_number" name="voided_reason" title="" value="{{$load->voided_reason}}" class="form-control input-sm editMainField">
                         </div>
                     </div>
                 </div>

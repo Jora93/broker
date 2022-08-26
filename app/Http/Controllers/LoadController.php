@@ -46,7 +46,7 @@ class LoadController extends Controller
         ]);
 
         $custumer = Customer::find($request->customerId);
-        $carriers = Carrier::where('company_id', $company_id)->orderBy('company')->select('id', 'company')->get();
+        $carriers = Carrier::orderBy('company')->select('id', 'company')->get();
         $dispatchers = Dispatcher::where('company_id', $company_id)->select('id', 'full_name')->get();
 
         return response()->view('load.crate', [
@@ -71,6 +71,7 @@ class LoadController extends Controller
             "customer_id" => ['required', 'exists:customers,id'],
             "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
             "status" => ['nullable', 'string'],
+            "voided_reason" => ['nullable', 'string'],
             "product" => ['required', 'string'],
             "purchase_order_number" => ['nullable', 'string'],
             "trailer_size" => ['nullable', 'string'],
@@ -225,6 +226,7 @@ class LoadController extends Controller
             "customer_id" => ['required', 'exists:customers,id'],
             "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
             "status" => ['nullable', 'string'],
+            "voided_reason" => ['nullable', 'string'],
             "product" => ['required', 'string'],
             "purchase_order_number" => ['nullable', 'string'],
             "trailer_size" => ['nullable', 'string'],
@@ -436,7 +438,7 @@ class LoadController extends Controller
         $company_id = ((Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin || Auth::user()->role === \App\Constanats\UserRoles::Accounting) && isset($data['company_id'])) ? $data['company_id'] : $company_id;
         $dispatchers = Dispatcher::where('company_id', $company_id)->get(['id', 'full_name']);
         $customers = Customer::where('company_id', $company_id)->get(['id', 'company']);
-        $carriers = Carrier::where('company_id', $company_id)->get(['id', 'company']);
+        $carriers = Carrier::get(['id', 'company']);
         $result = Load::where('company_id', $company_id);
         if (isset($data['status']) && !is_null($data['status'])) {
             $result->where('status', $data['status']);

@@ -700,6 +700,14 @@ $(document).ready(function () {
         }
     });
 
+    $('#loadStatusSelect').on('change', function() {
+        if (this.value === 'Voided') {
+            $('#voided-reason-container').show();
+        } else {
+            $('#voided-reason-container').hide();
+        }
+    });
+
     //check NOA LOADS
     function getCookie(cname) {
         let name = cname + "=";

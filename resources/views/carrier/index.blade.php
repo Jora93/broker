@@ -67,7 +67,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <table class="table table-striped table-bordered data-table" colspan="0" rospwan="0" style="width:100%">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -124,6 +124,11 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        @if(isset($data))
+                            {{ $carriers->appends($data)->links() }}
+                        @else
+                            {{ $carriers->links() }}
+                        @endif
                     </div>
                 </div>
             </div>

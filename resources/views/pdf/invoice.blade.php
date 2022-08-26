@@ -1,7 +1,7 @@
 <div style="width: 100%">
     <div style="clear: both; width: 100%; ;">
         <div style="float: left;;  width: 40%">
-            <img src="{{public_path('assets/data/'.$company->id.'/broker-logo.jpeg')}}" alt="Logo" ><br>
+            <img src="{{public_path('assets/data/'.$company->id.'/carrier-logo.jpeg')}}" alt="Logo" ><br>
             <b>{{$generalSetting->address1}} {{$generalSetting->zip_code}} {{$generalSetting->city}} {{$generalSetting->state}}</b>
             <br>
             <br>

@@ -23,6 +23,7 @@ class Load extends Model
         'customer_id',
         'dispatcher_id',
         "status",
+        "voided_reason",
         "product",
         "purchase_order_number",
         "trailer_size",

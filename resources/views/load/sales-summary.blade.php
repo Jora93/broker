@@ -80,7 +80,7 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="customer">Customer:</label>
-                                    <select class="form-control" name="customer_id" tabindex="1">
+                                    <select class="selectpicker form-control" data-live-search="true" name="customer_id" tabindex="1">
                                         <option value="">Select Customer</option>
                                         @if(!$customers->isEmpty())
                                             @foreach($customers as $customer)
@@ -93,7 +93,7 @@
                             <div class="col-sm">
                                 <div class="form-group">
                                     <label for="carrier">Carrier:</label>
-                                    <select class="form-control" name="carrier_id" tabindex="1">
+                                    <select class="selectpicker form-control" data-live-search="true" name="carrier_id" tabindex="1">
                                         <option value="">Select Carrier</option>
                                         @if(!$carriers->isEmpty())
                                             @foreach($carriers as $carrier)

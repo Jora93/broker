@@ -20,7 +20,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="entityLabelValue form-group">
                         <div class="entityLabel">Status</div>
-                        <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" onchange="return onStatusChange();" tabindex="1">
+                        <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" tabindex="1">
                             <option selected value="Available">Available</option>
                             <option value="Invoiced">Invoiced</option>
                             <option value="Committed">Committed</option>
@@ -105,6 +105,14 @@
                                 @endforeach
                             @endif
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" id="voided-reason-container" style="display: none">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="entityLabelValue form-group">
+                        <div class="entityLabel">Voided Reason</div>
+                        <input id="po_number" name="voided_reason" title="" class="form-control input-sm editMainField">
                     </div>
                 </div>
             </div>

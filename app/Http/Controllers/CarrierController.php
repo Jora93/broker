@@ -25,7 +25,7 @@ class CarrierController extends Controller
      */
     public function index()
     {
-        $carriers = Carrier::where('company_id', \App::make('currentCompany')->id)->get();
+        $carriers = Carrier::orderBy('created_at', 'desc')->paginate(25);
 
         return response()->view('carrier.index', ['carriers' => $carriers], 200);
     }
