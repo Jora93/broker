@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @php
+        $brokerCompany = \App\Models\GeneralSetting::first();
+    @endphp
     @auth
         @php
             $changedLoads = \App\Models\Load::where('changed', true)->get();
             $company = \App::make('currentCompany');
             $companyId = $company->id;
-            $brokerCompany = \App\Models\GeneralSetting::first();
         @endphp
         <script>
             window.currentCompanyId = {!! $companyId !!};
