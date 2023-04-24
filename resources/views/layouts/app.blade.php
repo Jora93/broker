@@ -19,7 +19,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $company->name }}</title>
+        @guest
+            <title>{{ env('APP_NAME') }}</title>
+        @else
+            <title>{{ $company->name }}</title>
+        @endguest
+
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
