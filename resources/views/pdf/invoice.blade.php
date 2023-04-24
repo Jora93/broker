@@ -1,8 +1,8 @@
 <div style="width: 100%">
     <div style="clear: both; width: 100%; ;">
         <div style="float: left;;  width: 40%">
-            <img src="{{public_path('assets/data/'.$company->id.'/carrier-logo.jpeg')}}" alt="Logo" ><br>
-            <b>{{$generalSetting->address1}} {{$generalSetting->zip_code}} {{$generalSetting->city}} {{$generalSetting->state}}</b>
+            <img src="{{public_path($company->logo)}}" alt="Logo" ><br>
+            <b>{{$company->address}} {{$company->zip_code}} {{$company->city}} {{$company->state}}</b>
             <br>
             <br>
             <br>
@@ -70,7 +70,7 @@
     </div>
     <div style="color: red">
         <h2><b>Please make check payable to:</b></h2>
-        <b>{{$generalSetting->address1}} {{$generalSetting->zip_code}} {{$generalSetting->city}} {{$generalSetting->state}}</b>
+        <b>{{$company->address}} {{$company->zip_code}} {{$company->city}} {{$company->state}}</b>
     </div>
 </div>
 

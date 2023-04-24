@@ -360,6 +360,12 @@
                                     <input required type="text" class="form-control" id="mcNumberInput" name="generalSettings[mc_number]" placeholder="Enter the company's mc number" value="{{$generalSettings->mc_number}}">
                                 </div>
                             </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Brokerage Logo</label>
+                                <input name="generalSettings[logo]" class="form-control" style="padding: 3px" type="file" accept="image/*">
+                            </div>
+
                             <hr style="clear: both;">
                             <button class="btn btn-success" type="submit">
                                 <i class="glyphicon glyphicon-floppy-saved"></i> &nbsp;Save Changes

@@ -12,13 +12,13 @@
     </table>
     <table style="width: 100%; margin-top: 40px; table-layout: fixed; border-collapse: collapse;">
         <tr>
-            <th><img src="{{public_path('assets/data/'.$company->id.'/broker-logo.jpeg')}}" width="200px" alt="Logo" ></th>
+            <th><img src="{{public_path('assets/data/general-settings/'.$generalSetting->logo_path)}}" width="200px" alt="Logo" ></th>
             <th style="border: 1px solid black;text-align: center">
                 Please have driver call for dispatch. <br>
-                Phone: {{$company->phone_one}} <br>
+                Phone: {{$generalSetting->phone}} <br>
                 Confirmation must be signed and <br>
                 returned before driver can be dispatched. <br>
-                MC: {{$company->mc_number}}
+                MC: {{$generalSetting->mc_number}}
             </th>
         </tr>
     </table>

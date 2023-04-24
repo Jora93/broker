@@ -25,6 +25,9 @@ class Company extends Model
             'address',
             'invoice_last_number',
             'load_last_number',
-            'logo'
+            'logo',
+            'city',
+            'zip_code',
+            'state'
         ];
 }

@@ -33,7 +33,7 @@ class CompanyController extends Controller
     public function profileSettings($company_id)
     {
         $company = \App::make('currentCompany');
-        $generalSettings = GeneralSetting::where('company_id', $company_id)->first();
+        $generalSettings = GeneralSetting::first();
 
         return View('company.profile')->with(['company' => $company, "generalSettings" => $generalSettings]);
     }
@@ -58,11 +58,21 @@ class CompanyController extends Controller
             "generalSettings.website"          => ['nullable', 'string'],
             "generalSettings.default_currency" => ['required', 'string'],
             "generalSettings.fed_id"           => ['nullable', 'string'],
-            "generalSettings.scac"             => ['nullable', 'string']
+            "generalSettings.scac"             => ['nullable', 'string'],
+            "generalSettings.logo"             => ['nullable', 'file', 'max:5048', 'mimes:jpeg,bmp,png']
         ]);
 
         $data = $request->all();
-        $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
+        if (isset($data['generalSettings']['logo'])) {
+            $path = public_path('assets/data/general-settings');
+            !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+            $imageName = 'logo.' . $data['generalSettings']['logo']->getClientOriginalExtension();
+            $data['generalSettings']['logo']->move($path, $imageName);
+            $data['generalSettings']['logo_path'] = 'logo.' . $data['generalSettings']['logo']->getClientOriginalExtension();
+        }
+        $generalSetting = GeneralSetting::first();
 
         if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
             $generalSetting->update($data['generalSettings']);
@@ -138,14 +148,27 @@ class CompanyController extends Controller
     public function update($company_id, Request $request, Company $company)
     {
         $validator = Validator::make($request->all(), [
-            "name"                => ['required', 'unique:companies,name,'.$company->id],
-            "address"              => ['required', 'unique:companies,address,'.$company->id],
-            "mc_number"           => ['required', 'unique:companies,mc_number,'.$company->id],
-            "phone_one"           => ['required', 'unique:companies,phone_one,'.$company->id],
-            "invoice_last_number" => ['required', 'unique:companies,invoice_last_number,'.$company->id],
-            "load_last_number"    => ['required', 'unique:companies,load_last_number,'.$company->id],
+            "name"                  => ['required', 'unique:companies,name,'.$company->id],
+            "address"               => ['required', 'unique:companies,address,'.$company->id],
+            "mc_number"             => ['required', 'unique:companies,mc_number,'.$company->id],
+            "phone_one"             => ['required', 'unique:companies,phone_one,'.$company->id],
+            "invoice_last_number"   => ['required', 'unique:companies,invoice_last_number,'.$company->id],
+            "load_last_number"      => ['required', 'unique:companies,load_last_number,'.$company->id],
+            "city"                  => ['required', 'string'],
+            "zip_code"              => ['required', 'string'],
+            "state"                 => ['required', 'string'],
+            "logo"                  => ['nullable', 'file', 'max:5048', 'mimes:jpeg,bmp,png']
         ]);
         $data = $request->all();
+        if (isset($data['logo'])) {
+            $path = public_path('assets/data/'.$company->id);
+            !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+            $imageName = 'logo.' . $data['logo']->getClientOriginalExtension();
+            $data['logo']->move($path, $imageName);
+            $data['logo'] = 'assets/data/'.$company->id.'/logo.' . $data['logo']->getClientOriginalExtension();
+        }
         $company->update($data);
 
         return redirect()->back();

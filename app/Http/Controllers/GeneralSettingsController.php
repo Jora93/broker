@@ -61,7 +61,7 @@ class GeneralSettingsController extends Controller
      */
     public function edit($company_id, $id)
     {
-        return View('generalSettings.edit')->with(['generalSetting' => GeneralSetting::where('company_id', $company_id)->first()]);
+        return View('generalSettings.edit')->with(['generalSetting' => GeneralSetting::first()]);
 
     }
 
@@ -77,7 +77,7 @@ class GeneralSettingsController extends Controller
     {
         $data = $request->all();
         if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
-            $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
+            $generalSetting = GeneralSetting::first();
             $generalSetting->update($data);
         }
 
@@ -101,7 +101,7 @@ class GeneralSettingsController extends Controller
         $mpdf = new \Mpdf\Mpdf();
 
         $company = Company::find($company_id);
-        $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
+        $generalSetting = GeneralSetting::first();
         $load  = Load::with('carrier')->find($load_id);
 
         $html = view('pdf.carrier-confirmation', compact(['load', 'generalSetting', 'company']))->render();
@@ -115,7 +115,7 @@ class GeneralSettingsController extends Controller
         $mpdf = new \Mpdf\Mpdf();
         $img = public_path('assets/data/'.$company_id.'/broker-logo.jpeg');
         $company = Company::find($company_id);
-        $generalSetting = GeneralSetting::where('company_id', $company_id)->first();
+        $generalSetting = GeneralSetting::first();
         $load  = Load::first(); //TODO dinamoc
         $html = view('pdf.invoice', compact(['load', 'generalSetting', 'company']))->render();
         $mpdf->WriteHTML($html);

@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @auth
+        @php
+            $changedLoads = \App\Models\Load::where('changed', true)->get();
+            $company = \App::make('currentCompany');
+            $companyId = $company->id;
+            $brokerCompany = \App\Models\GeneralSetting::first();
+        @endphp
+        <script>
+            window.currentCompanyId = {!! $companyId !!};
+            window.APP_URL = {!! "'".env('APP_URL')."'" !!};
+        </script>
+    @endauth
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $company->name }}</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -19,18 +31,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    @auth
-        @php
-            $changedLoads = \App\Models\Load::where('changed', true)->get();
-            $company = \App::make('currentCompany');
-            $companyId = $company->id;
-            $brokerCompany = \App\Models\GeneralSetting::where('company_id', $companyId)->first();
-        @endphp
-        <script>
-            window.currentCompanyId = {!! $companyId !!};
-            window.APP_URL = {!! "'".env('APP_URL')."'" !!};
-        </script>
-    @endauth
     <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
@@ -38,7 +38,7 @@
     <ul class="nav nav-tabs">
         @guest
             <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <a class="nav-link active" href="{{ url('/') }}">{{ $brokerCompany->name }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -51,7 +51,7 @@
         @else
 
             <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/'.$companyId.'/home')}}">{{ config('app.name', 'Laravel') }}</a>
+                <a class="nav-link active" href="{{ url('/'.$companyId.'/home')}}">{{$brokerCompany->name}} / {{$company->name}}</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Loads</a>

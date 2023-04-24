@@ -18,7 +18,6 @@ class GeneralSetting extends Model
      */
     protected $fillable = [
         'id',
-        'company_id',
         "name",
         "time_zone",
         "first_name",
@@ -35,12 +34,12 @@ class GeneralSetting extends Model
         "default_currency",
         "fed_id",
         "scac",
+        "logo_path",
         "confirmation_note",
         "rate_quote_terms_conditions",
         "bill_of_lading_terms_conditions",
         "invoice_terms_conditions",
         'mc_number',
-        'logo',
         'phone'
     ];
 }
