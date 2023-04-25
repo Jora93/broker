@@ -77,7 +77,7 @@
                             <option value="20' H.C.">20' H.C.</option>
                             <option value="22'">22'</option>
                             <option value="24'">24'</option>
-                            <option value="26'" selected="">26'</option>
+                            <option value="26'">26'</option>
                             <option value="28'">28'</option>
                             <option value="32'">32'</option>
                             <option value="40'">40'</option>
