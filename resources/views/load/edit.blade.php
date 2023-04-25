@@ -78,6 +78,7 @@
                                 <option @if($load->carrier_equipment_id == "Reefer") selected @endif value="Reefer">Reefer</option>
                                 <option @if($load->carrier_equipment_id == "Hot Shot") selected @endif value="Hot Shot">Hot Shot</option>
                                 <option @if($load->carrier_equipment_id == "Stepdeck") selected @endif value="Stepdeck">Stepdeck</option>
+                                <option @if($load->carrier_equipment_id == "Flatbed") selected @endif value="Flatbed">Flatbed</option>
                             </select>
                         </div>
                     </div>

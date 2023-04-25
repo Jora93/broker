@@ -59,11 +59,12 @@
                             <option selected="" value="">Select Equipment</option>
                             <option value="Straight Box Truck">Straight Box Truck</option>
                             <option value="Van">Van</option>
-                            <option value="Van or Flatbed">Van or Flatbed</option>
+                            <option value="Van or lFlatbed">Van or Flatbed</option>
                             <option value="Van or Reffer">Van or Reffer</option>
                             <option value="Reefer">Reefer</option>
                             <option value="Hot Shot">Hot Shot</option>
                             <option value="Stepdeck">Stepdeck</option>
+                            <option value="Flatbed">Flatbed</option>
                         </select>
                     </div>
                 </div>
