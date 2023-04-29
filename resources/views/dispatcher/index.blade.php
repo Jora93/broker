@@ -30,6 +30,15 @@
                             </div>
                             <div class="col-sm">
                                 <div class="form-group">
+                                    <label class="control-label">Status:</label>
+                                    <select class="form-control" name="status" tabindex="1">
+                                        <option value="Active" selected>Active</option>
+                                        <option @if(isset($data['status']) && $data['status'] == 'Inactive') selected @endif value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="form-group">
                                     <label class="control-label">Per Page:</label>
                                     <select class="form-control" name="paginate" tabindex="1">
                                         <option value="25" selected>25</option>
@@ -68,6 +77,7 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,6 +89,7 @@
                                                 </th>
                                                 <td>{{$dispatcher->full_name}}</td>
                                                 <td>{{$dispatcher->email}}</td>
+                                                <td>{{$dispatcher->status}}</td>
                                                 <td>
                                                     <a title="edit" href="{{url(\App::make('currentCompany')->id.'/dispatchers/'.$dispatcher->id.'/edit')}}">
                                                         <button type="button" class="btn btn-primary" aria-label="Left Align">

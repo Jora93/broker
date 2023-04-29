@@ -29,6 +29,15 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
+                    <label class="control-label" for="email">*status</label>
+                    <select name="status" class="form-control editMainField input-sm" tabindex="1">
+                        <option @if($dispatcher->status == "Active") selected @endif value="Active">Active</option>
+                        <option @if($dispatcher->status == "Inactive") selected @endif value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update Dispatcher</button>
                 </div>
             </div>

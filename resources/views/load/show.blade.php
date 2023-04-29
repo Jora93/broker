@@ -606,16 +606,16 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Dispatcher</label>
-                                                            {{-- todo avelacnel dispatcherner --}}
-                                                            <select disabled id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">
-                                                                <option value="">-- No Dispatcher Selected --</option>
-                                                                <option selected value="1">@if($load->dispatcher){{$load->dispatcher->full_name}}@endif</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+{{--                                                    <div class="col-sm-6 col-xs-6">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="control-label">Dispatcher</label>--}}
+{{--                                                            --}}{{-- todo avelacnel dispatcherner --}}
+{{--                                                            <select disabled id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">--}}
+{{--                                                                <option value="">-- No Dispatcher Selected --</option>--}}
+{{--                                                                <option selected value="1">@if($load->dispatcher){{$load->dispatcher->full_name}}@endif</option>--}}
+{{--                                                            </select>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-6">
@@ -1024,7 +1024,7 @@
                                                     <tbody>
                                                     <tr class="carrierCostRow">
                                                         <td class="unitColumn">
-                                                            <input disabled name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                            <input disabled name="customer_units_id" type="text" value="{{$load->customer_units_id}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
                                                         </td>
                                                         <td class="qtyColumn">
                                                             <input disabled name="customer_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
@@ -1068,7 +1068,7 @@
                                                     <tbody>
                                                     <tr class="carrierCostRow">
                                                         <td class="unitColumn">
-                                                            <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                            <input disabled name="carrier_units_id" type="text" value="{{$load->carrier_units_id}}" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
                                                         </td>
                                                         <td class="qtyColumn">
                                                             <input name="carrier_costs_quantity" type="text" value="'1.0'" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">

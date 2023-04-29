@@ -49,6 +49,7 @@ class DispatcherController extends Controller
         $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
+            'status' => ['nullable', 'string', 'max:255'],
         ]);
         $data = $request->all();
         $data['company_id'] = \App::make('currentCompany')->id;
@@ -94,6 +95,7 @@ class DispatcherController extends Controller
         $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
+            'status' => ['nullable', 'string', 'max:255'],
         ]);
         $data = $request->all();
         $dispatcher->update($data);
@@ -123,6 +125,9 @@ class DispatcherController extends Controller
         }
         if (isset($data['email']) && !is_null($data['email'])) {
             $dispatchers->where('email', 'LIKE', "%{$data['email']}%");
+        }
+        if (isset($data['status']) && !is_null($data['status'])) {
+            $dispatchers->where('status', 'LIKE', "%{$data['status']}%");
         }
 
         $dispatchers = $dispatchers->paginate($data['paginate']);

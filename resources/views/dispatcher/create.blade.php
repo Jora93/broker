@@ -28,6 +28,15 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
+                <label class="control-label" for="email">*Status</label>
+                <select name="status" class="form-control editMainField input-sm" tabindex="1">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary">Add Dispatcher</button>
             </div>
         </div>

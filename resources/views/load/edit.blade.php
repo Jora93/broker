@@ -37,9 +37,10 @@
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Status</div>
                             <select id="loadStatusSelect" name="status" class="form-control editMainField input-sm" tabindex="1">
-                                <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
+                                <option @if($load->status == "Available") selected @endif value="Available">Available</option>
                                 <option @if($load->status == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
                                 <option @if($load->status == "Committed") selected @endif value="Committed">Committed</option>
+                                <option @if($load->status == "Assigned") selected @endif value="Assigned">Assigned</option>
                                 <option @if($load->status == "Dispatched") selected @endif value="Dispatched">Dispatched</option>
                                 <option @if($load->status == "Picked Up") selected @endif value="Picked Up">Picked Up</option>
                                 <option @if($load->status == "Enroute") selected @endif value="Enroute">Enroute</option>
@@ -55,8 +56,8 @@
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="entityLabelValue form-group">
-                            <div class="entityLabel">Product*</div>
-                            <input id="product" name="product" required title="general goods" value="{{$load->product}}" class="form-control input-sm editMainField">
+                            <div class="entityLabel">Product</div>
+                            <input id="product" name="product" title="" value="{{$load->product}}" class="form-control input-sm editMainField">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -112,8 +113,13 @@
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Dispatcher</div>
                             <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id')}}" class="form-control editMainField" tabindex="66">
-                                <option value="">-- No Dispatcher Selected --</option>
-                                @if(!$dispatchers->isEmpty())
+                                @if($load->dispatcher_id)
+                                    <option selected value="{{$load->dispatcher->id}}">{{$load->dispatcher->full_name}}</option>
+                                @else
+                                    <option value="">-- No Dispatcher Selected --</option>
+                                @endif
+
+                            @if(!$dispatchers->isEmpty())
                                     @foreach($dispatchers as $dispatcher)
                                         <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
                                     @endforeach
@@ -686,24 +692,24 @@
                                                                 <option @if(is_null(old('carrier_id', $load->carrier_id))) selected @endif disabled>-- No Carrier Selected --</option>
                                                                 {{-- todo poxel ajax searchov--}}
                                                                 @foreach($carriers as $carrier)
-                                                                    <option @if(old('carrier_id', $load->carrier_id) == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}}</option>
+                                                                    <option @if(old('carrier_id', $load->carrier_id) == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}} - ({{$carrier->mc_number}})</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Dispatcher</label>
-                                                            {{-- todo avelacnel dispatcherner --}}
-                                                            <select id="dispatcherUserSelect" name="dispatcher_id" value="{{old('dispatcher_id', 1)}}" class="form-control editMainField" tabindex="66">
-                                                                <option value="">-- No Dispatcher Selected --</option>
+{{--                                                    <div class="col-sm-6 col-xs-6">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="control-label">Dispatcher</label>--}}
+{{--                                                            --}}{{-- todo avelacnel dispatcherner --}}
+{{--                                                            <select id="dispatcherUserSelect" name="dispatcher_id" class="form-control editMainField" tabindex="66">--}}
+{{--                                                                <option value="">-- No Dispatcher Selected --</option>--}}
 {{--                                                                <option @if(old('dispatcher_id', $load->dispatcher_id) == 1) selected @endif value="1">Fake dispatcher</option>--}}
-                                                                @foreach($dispatchers as $dispatcher)
-                                                                    <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+{{--                                                                @foreach($dispatchers as $dispatcher)--}}
+{{--                                                                    <option @if($load->dispatcher_id == $dispatcher->id) selected @endif value="{{$dispatcher->id}}">{{$dispatcher->full_name}}</option>--}}
+{{--                                                                @endforeach--}}
+{{--                                                            </select>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-6">
@@ -1072,7 +1078,11 @@
                                                     <tbody>
                                                     <tr class="carrierCostRow">
                                                         <td class="unitColumn">
-                                                            <input disabled name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                            <select name="customer_units_id" class="form-control editMainField input-sm" tabindex="1">
+                                                                <option @if($load->customer_units_id == "Flat Rate") selected @endif value="Flat Rate">Flat Rate</option>
+                                                                <option @if($load->customer_units_id == "Truck Order/ Not Used") selected @endif value="Truck Order/ Not Used">Truck Order/ Not Used</option>
+                                                            </select>
+{{--                                                            <input name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">--}}
                                                         </td>
                                                         <td class="qtyColumn">
                                                             <input disabled name="customer_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
@@ -1115,7 +1125,11 @@
                                                     <tbody>
                                                     <tr class="carrierCostRow">
                                                         <td class="unitColumn">
-                                                            <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                            <select name="carrier_units_id" class="form-control editMainField input-sm" tabindex="1">
+                                                                <option @if($load->carrier_units_id == "Flat Rate") selected @endif value="Flat Rate">Flat Rate</option>
+                                                                <option @if($load->carrier_units_id == "Truck Order/ Not Used") selected @endif value="Truck Order/ Not Used">Truck Order/ Not Used</option>
+                                                            </select>
+{{--                                                            <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">--}}
                                                         </td>
                                                         <td class="qtyColumn">
                                                             <input name="carrier_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">

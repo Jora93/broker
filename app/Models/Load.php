@@ -71,6 +71,8 @@ class Load extends Model
         'shipper_factoring_ach_routing_number',
         'shipper_factoring_zelle_phone',
         'shipper_factoring_zelle_email',
+        'customer_units_id',
+        'carrier_units_id'
     ];
 
     public function getShipperPickupDateAttribute() {

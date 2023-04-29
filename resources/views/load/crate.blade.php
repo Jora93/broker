@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="entityLabelValue form-group">
-                        <div class="entityLabel">Product*</div>
-                        <input id="product" name="product" required title="general goods" value="general goods" class="form-control input-sm editMainField">
+                        <div class="entityLabel">Product</div>
+                        <input id="product" name="product" title="" value="" class="form-control input-sm editMainField">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
@@ -648,7 +648,7 @@
                                                             <option @if(is_null(old('carrier_id'))) selected @endif disabled>-- No Carrier Selected --</option>
                                                             {{-- todo poxel ajax searchov--}}
                                                             @foreach($carriers as $carrier)
-                                                                <option @if(old('carrier_id') == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}}</option>
+                                                                <option @if(old('carrier_id') == $carrier->id) selected @endif value="{{$carrier->id}}">{{$carrier->company}} - ({{$carrier->mc_number}})</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -837,7 +837,11 @@
                                                 <tbody>
                                                 <tr class="carrierCostRow">
                                                     <td class="unitColumn">
-                                                        <input disabled name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        <select name="customer_units_id" class="form-control editMainField input-sm" tabindex="1">
+                                                            <option value="Flat Rate">Flat Rate</option>
+                                                            <option value="Truck Order/ Not Used">Truck Order/ Not Used</option>
+                                                        </select>
+{{--                                                        <input name="customer_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">--}}
                                                     </td>
                                                     <td class="qtyColumn">
                                                         <input disabled name="customer_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
@@ -880,7 +884,11 @@
                                                 <tbody>
                                                 <tr class="carrierCostRow">
                                                     <td class="unitColumn">
-                                                        <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">
+                                                        <select name="carrier_units_id" class="form-control editMainField input-sm" tabindex="1">
+                                                            <option value="Flat Rate">Flat Rate</option>
+                                                            <option value="Truck Order/ Not Used">Truck Order/ Not Used</option>
+                                                        </select>
+{{--                                                        <input disabled name="carrier_units_id" type="text" value="Flat Rate" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" tabindex="75">--}}
                                                     </td>
                                                     <td class="qtyColumn">
                                                         <input name="carrier_costs_quantity" type="text" value="1.0" class=" form-control editMainField input-sm carrierCostInput carrierCostQuantityInput" disabled="" tabindex="75">

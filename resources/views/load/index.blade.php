@@ -22,6 +22,7 @@
                                     <label class="control-label">Status:</label>
                                     <select class="form-control" name="status" tabindex="1">
                                         <option value="">Select Status</option>
+                                        <option @if(isset($data['status']) && $data['status'] == "Available") selected @endif value="Available">Available</option>
                                         <option @if(isset($data['status']) && $data['status'] == "Invoiced") selected @endif value="Invoiced">Invoiced</option>
                                         <option @if(isset($data['status']) && $data['status'] == "Committed") selected @endif value="Committed">Committed</option>
                                         <option @if(isset($data['status']) && $data['status'] == "Assigned") selected @endif value="Assigned">Assigned</option>

@@ -46,8 +46,8 @@ class LoadController extends Controller
         ]);
 
         $custumer = Customer::find($request->customerId);
-        $carriers = Carrier::orderBy('company')->select('id', 'company')->get();
-        $dispatchers = Dispatcher::where('company_id', $company_id)->select('id', 'full_name')->get();
+        $carriers = Carrier::orderBy('company')->select('id', 'company', 'mc_number')->get();
+        $dispatchers = Dispatcher::where('company_id', $company_id)->where('status', 'Active')->select('id', 'full_name')->get();
 
         return response()->view('load.crate', [
             'customer' => $custumer,
@@ -72,7 +72,7 @@ class LoadController extends Controller
             "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
             "status" => ['nullable', 'string'],
             "voided_reason" => ['nullable', 'string'],
-            "product" => ['required', 'string'],
+            "product" => ['nullable', 'string'],
             "purchase_order_number" => ['nullable', 'string'],
             "trailer_size" => ['nullable', 'string'],
             "customer_costs_rate_per_unit" => ['nullable', 'string'],
@@ -140,6 +140,8 @@ class LoadController extends Controller
             "driver_number" => ['nullable', 'string'],
             "pro_number" => ['nullable', 'string'],
             "driver_email" => ['nullable', 'email'],
+            "customer_units_id" => ['nullable', 'string'],
+            "carrier_units_id" => ['nullable', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -187,6 +189,7 @@ class LoadController extends Controller
     {
         $load->drops;
         $load->histories;
+        $load->dispatcher;
         return response()->view('load.show', [
             'load' => $load,
             'carriers' => Carrier::get() //TODO make ajax elastic search
@@ -205,8 +208,8 @@ class LoadController extends Controller
         $load->drops;
         return response()->view('load.edit', [
             'load' => $load,
-            'dispatchers' => Dispatcher::select('id', 'full_name')->get(),
-            'carriers' => Carrier::orderBy('company')->select('id', 'company')->get(), //TODO make ajax elastic search
+            'dispatchers' => Dispatcher::select('id', 'full_name')->where('status', 'Active')->get(),
+            'carriers' => Carrier::orderBy('company')->select('id', 'company', 'mc_number')->get(), //TODO make ajax elastic search
             'customers' => Customer::orderBy('company')->get() //TODO make ajax elastic search
         ], 200);
     }
@@ -227,7 +230,7 @@ class LoadController extends Controller
             "dispatcher_id" => ['nullable', 'exists:dispatchers,id'],
             "status" => ['nullable', 'string'],
             "voided_reason" => ['nullable', 'string'],
-            "product" => ['required', 'string'],
+            "product" => ['nullable', 'string'],
             "purchase_order_number" => ['nullable', 'string'],
             "trailer_size" => ['nullable', 'string'],
             "customer_costs_rate_per_unit" => ['nullable', 'string'],
@@ -295,6 +298,8 @@ class LoadController extends Controller
             "driver_number" => ['nullable', 'string'],
             "pro_number" => ['nullable', 'string'],
             "driver_email" => ['nullable', 'email'],
+            "customer_units_id" => ['nullable', 'string'],
+            "carrier_units_id" => ['nullable', 'string'],
         ]);
 
         if ($validator->fails()) {

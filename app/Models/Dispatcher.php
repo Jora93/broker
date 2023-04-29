@@ -20,7 +20,8 @@ class Dispatcher extends Model
         'id',
         'company_id',
         'full_name',
-        'email'
+        'email',
+        'status'
     ];
 
 
