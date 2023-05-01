@@ -33,7 +33,7 @@
             <th style="border-bottom: 1px solid black;text-align: left">MC# @if(isset($load->carrier)){{$load->carrier->mc_number}}@endif</th>
         </tr>
         <tr>
-            <th style="border-bottom: 1px solid black;text-align: left">Contact: @if(isset($load->carrier)){{$load->carrier->email}}@endif</th>
+            <th style="border-bottom: 1px solid black;text-align: left">Contact: {{--@if(isset($load->carrier)){{$load->carrier->email}}@endif--}}</th>
             <th style="border-bottom: 1px solid black;text-align: left">Fax: @if(isset($load->carrier)){{$load->carrier->fax}}@endif</th>
             <th style="border-bottom: 1px solid black;text-align: left">DOT# @if(isset($load->carrier)){{$load->carrier->dot_number}}@endif</th>
         </tr>
@@ -45,10 +45,10 @@
         <tr>
             <td style="border-collapse: collapse;">MILES:</td>
             <td style="border-collapse: collapse;">SIZE: {{$load->trailer_size}}</td>
-            <td style="border-collapse: collapse;">Flat Rate: $ {{$load->carrier_costs_rate_per_unit}}</td>
+            <td style="border-collapse: collapse;">{{$load->carrier_units_id}}: $ {{$load->carrier_costs_rate_per_unit}}</td>
         </tr>
         <tr>
-            <td style="border-collapse: collapse;">'WEIGHT: {{$load->shipper_weight}} lbs</td>
+            <td style="border-collapse: collapse;">WEIGHT: {{$load->shipper_weight}} lbs</td>
             <td style="border-collapse: collapse;">TRAILER #:{{$load->trailer_number}}</td>
             <td style="border-collapse: collapse;">Total: ${{$load->carrier_costs_rate_per_unit}}</td>
         </tr>

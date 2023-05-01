@@ -520,63 +520,64 @@
                                             <div class="row class-dimensions-row">
                                                 <div class="col-sm-12">
                                                     <table class="table table-class-dimensions">
-                                                        <tbody><tr>
-                                                            <th>Freight Class</th>
-                                                            <th>NMFC</th>
-                                                            <th>Product</th>
-                                                            <th>Qty</th>
-                                                            <th>Type</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="freight-class-td-width">
-                                                                <select name="consignee[0][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">
-                                                                    <option value="">Select Freight Class</option>
-                                                                    <option @if(old('consignee_freight_class') === 'FAK') selected @endif value="FAK">FAK</option>
-                                                                    <option @if(old('consignee_freight_class') === '50') selected @endif value="50">50</option>
-                                                                    <option @if(old('consignee_freight_class') === '55') selected @endif value="55">55</option>
-                                                                    <option @if(old('consignee_freight_class') === '60') selected @endif value="60">60</option>
-                                                                    <option @if(old('consignee_freight_class') === '65') selected @endif value="65">65</option>
-                                                                    <option @if(old('consignee_freight_class') === '70' ) selected @endif value="70">70</option>
-                                                                    <option @if(old('consignee_freight_class') === '77.5') selected @endif value="77.5">77.5</option>
-                                                                    <option @if(old('consignee_freight_class') === '85') selected @endif value="85">85</option>
-                                                                    <option @if(old('consignee_freight_class') === '92.5') selected @endif value="92.5">92.5</option>
-                                                                    <option @if(old('consignee_freight_class') === '100') selected @endif value="100">100</option>
-                                                                    <option @if(old('consignee_freight_class') === '110') selected @endif value="110">110</option>
-                                                                    <option @if(old('consignee_freight_class') === '125') selected @endif value="125">125</option>
-                                                                    <option @if(old('consignee_freight_class') === '150') selected @endif value="150">150</option>
-                                                                    <option @if(old('consignee_freight_class') === '175') selected @endif value="175">175</option>
-                                                                    <option @if(old('consignee_freight_class') === '200') selected @endif value="200">200</option>
-                                                                    <option @if(old('consignee_freight_class') === '250') selected @endif value="250">250</option>
-                                                                    <option @if(old('consignee_freight_class') === '300') selected @endif value="300">300</option>
-                                                                    <option @if(old('consignee_freight_class') === '400') selected @endif value="400">400</option>
-                                                                    <option @if(old('consignee_freight_class') === '500') selected @endif value="500">500</option></select>
-                                                            </td>
-                                                            <td class="nmfc-td-width">
-                                                                <input type="text" name="consignee[0][national_motor_freight_class]" value="{{old('consignee_national_motor_freight_class')}}" class="consignee_national_motor_freight_class form-control">
-                                                            </td>
-                                                            <td class="prod-td-width">
-                                                                <input type="text" name="consignee[0][bol_product]" value="{{old('consignee_bol_product')}}" class="consignee_bol_product form-control">
-                                                            </td>
-                                                            <td class="qty-td-width">
-                                                                <input type="text" name="consignee[0][delivery_location_quantity]" value="{{old('consignee_delivery_location_quantity')}}" class="consignee_delivery_location_quantity form-control">
-                                                            </td>
-                                                            <td class="type-td-width">
-                                                                <select name="consignee[0][item_type]" value="{{old('consignee_item_type')}}" class="consignee_item_type form-control">
-                                                                    <option value="">Select Type</option>
-                                                                    <option @if(old('consignee_item_type') === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>
-                                                                    <option @if(old('consignee_item_type') === 'Boxes') selected @endif  value="Boxes">Boxes</option>
-                                                                    <option @if(old('consignee_item_type') === 'Carrier Fee') selected @endif  value="Carrier Fee">Carrier Fee</option>
-                                                                    <option @if(old('consignee_item_type') === 'Cartons') selected @endif  value="Cartons">Cartons</option>
-                                                                    <option @if(old('consignee_item_type') === 'CWT') selected @endif  value="CWT">CWT</option>
-                                                                    <option @if(old('consignee_item_type') === 'Flat Rate') selected @endif  value="Flat Rate">Flat Rate</option>
-                                                                    <option @if(old('consignee_item_type') === 'Miles') selected @endif  value="Miles">Miles</option>
-                                                                    <option @if(old('consignee_item_type') === 'Pallets') selected @endif  value="Pallets">Pallets</option>
-                                                                    <option @if(old('consignee_item_type') === 'Pounds') selected @endif  value="Pounds">Pounds</option>
-                                                                    <option @if(old('consignee_item_type') === 'Strawberries') selected @endif  value="Strawberries">Strawberries</option>
-                                                                    <option @if(old('consignee_item_type') === 'Tons') selected @endif  value="Tons">Tons</option>
-                                                                    <option @if(old('consignee_item_type') === 'ruck Ordered/Not Used') selected @endif  value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>
-                                                            </td>
-                                                        </tr>
+                                                        <tbody>
+{{--                                                        <tr>--}}
+{{--                                                            <th>Freight Class</th>--}}
+{{--                                                            <th>NMFC</th>--}}
+{{--                                                            <th>Product</th>--}}
+{{--                                                            <th>Qty</th>--}}
+{{--                                                            <th>Type</th>--}}
+{{--                                                        </tr>--}}
+{{--                                                        <tr>--}}
+{{--                                                            <td class="freight-class-td-width">--}}
+{{--                                                                <select name="consignee[0][freight_class]" id="freight-classes" class="consignee_freight_class form-control" tabindex="242">--}}
+{{--                                                                    <option value="">Select Freight Class</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === 'FAK') selected @endif value="FAK">FAK</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '50') selected @endif value="50">50</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '55') selected @endif value="55">55</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '60') selected @endif value="60">60</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '65') selected @endif value="65">65</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '70' ) selected @endif value="70">70</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '77.5') selected @endif value="77.5">77.5</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '85') selected @endif value="85">85</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '92.5') selected @endif value="92.5">92.5</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '100') selected @endif value="100">100</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '110') selected @endif value="110">110</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '125') selected @endif value="125">125</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '150') selected @endif value="150">150</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '175') selected @endif value="175">175</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '200') selected @endif value="200">200</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '250') selected @endif value="250">250</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '300') selected @endif value="300">300</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '400') selected @endif value="400">400</option>--}}
+{{--                                                                    <option @if(old('consignee_freight_class') === '500') selected @endif value="500">500</option></select>--}}
+{{--                                                            </td>--}}
+{{--                                                            <td class="nmfc-td-width">--}}
+{{--                                                                <input type="text" name="consignee[0][national_motor_freight_class]" value="{{old('consignee_national_motor_freight_class')}}" class="consignee_national_motor_freight_class form-control">--}}
+{{--                                                            </td>--}}
+{{--                                                            <td class="prod-td-width">--}}
+{{--                                                                <input type="text" name="consignee[0][bol_product]" value="{{old('consignee_bol_product')}}" class="consignee_bol_product form-control">--}}
+{{--                                                            </td>--}}
+{{--                                                            <td class="qty-td-width">--}}
+{{--                                                                <input type="text" name="consignee[0][delivery_location_quantity]" value="{{old('consignee_delivery_location_quantity')}}" class="consignee_delivery_location_quantity form-control">--}}
+{{--                                                            </td>--}}
+{{--                                                            <td class="type-td-width">--}}
+{{--                                                                <select name="consignee[0][item_type]" value="{{old('consignee_item_type')}}" class="consignee_item_type form-control">--}}
+{{--                                                                    <option value="">Select Type</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Blueberries') selected @endif value="Blueberries">Blueberries</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Boxes') selected @endif  value="Boxes">Boxes</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Carrier Fee') selected @endif  value="Carrier Fee">Carrier Fee</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Cartons') selected @endif  value="Cartons">Cartons</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'CWT') selected @endif  value="CWT">CWT</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Flat Rate') selected @endif  value="Flat Rate">Flat Rate</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Miles') selected @endif  value="Miles">Miles</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Pallets') selected @endif  value="Pallets">Pallets</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Pounds') selected @endif  value="Pounds">Pounds</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Strawberries') selected @endif  value="Strawberries">Strawberries</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'Tons') selected @endif  value="Tons">Tons</option>--}}
+{{--                                                                    <option @if(old('consignee_item_type') === 'ruck Ordered/Not Used') selected @endif  value="Truck Ordered/Not Used">Truck Ordered/Not Used</option></select>--}}
+{{--                                                            </td>--}}
+{{--                                                        </tr>--}}
                                                         <tr>
                                                             <th>Length</th>
                                                             <th>Width</th>
