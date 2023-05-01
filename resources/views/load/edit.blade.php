@@ -72,6 +72,7 @@
                         <div class="entityLabelValue form-group carrierEquipmentMsg">
                             <div class="entityLabel">Carrier Equipment</div>
                             <select name="carrier_equipment_id" class="form-control input-sm editMainField checkLaneMaster" tabindex="5">
+                                <option selected="" value="">Select Equipment</option>
                                 <option @if($load->carrier_equipment_id == "Straight Box Truck") selected @endif value="Straight Box Truck">Straight Box Truck</option>
                                 <option @if($load->carrier_equipment_id == "Van") selected @endif value="Van">Van</option>
                                 <option @if($load->carrier_equipment_id == "Van or Flatbed") selected @endif value="Van or Flatbed">Van or Flatbed</option>
@@ -87,11 +88,12 @@
                         <div class="entityLabelValue form-group">
                             <div class="entityLabel">Trailer Size</div>
                             <select name="trailer_size" class="form-control editMainField" tabindex="7">
+                                <option value="">Select Size</option>
                                 <option @if($load->trailer_size == "20' Std.") selected @endif value="20' Std.">20' Std.</option>
                                 <option @if($load->trailer_size == "20' H.C.") selected @endif value="20' H.C.">20' H.C.</option>
                                 <option @if($load->trailer_size == "22'") selected @endif value="22'">22'</option>
                                 <option @if($load->trailer_size == "24'") selected @endif value="24'">24'</option>
-                                <option @if($load->trailer_size == "26'") selected @endif value="26'" selected="">26'</option>
+                                <option @if($load->trailer_size == "26'") selected @endif value="26'">26'</option>
                                 <option @if($load->trailer_size == "28'") selected @endif value="28'">28'</option>
                                 <option @if($load->trailer_size == "32'") selected @endif value="32'">32'</option>
                                 <option @if($load->trailer_size == "40'") selected @endif value="40'">40'</option>
