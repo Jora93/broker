@@ -18,10 +18,13 @@
         <div class="col-sm-2">
             <span># {{$load->load_number}}</span>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-2">
+            <span>Invoice#: @if(isset($load->invoice_number)){{$load->invoice_number}}@endif</span>
+        </div>
+        <div class="col-sm-4">
             <span>Carrier: @if(isset($load->carrier)){{$load->carrier->company}}@endif</span>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <span>Customer: {{$load->customer->company}}</span>
         </div>
         <br>

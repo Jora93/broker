@@ -23,32 +23,19 @@
                         <label class="control-laCbel">Doument Type</label><br>
                         <select name="type" class="selectpicker col-sm-12" required="true" data-live-search="true">
                             <option disabled selected value>Select Doc Type</option>
-                            <option value="VOIDED CHECK">VOIDED CHECK</option>
-                            <option value="Carrier Confirmation">Carrier Agreement</option>
-                            <option value="Carrier Freight Bill">Carrier Freight Bill</option>
-                            <option value="Claim">Claim</option>
-                            <option value="Customer Agreement">Customer Agreement</option>
+                            <option value="Carrier Agreement">Carrier Agreement</option>
+                            <option value="Carrier Confirmation">Carrier Confirmation</option>
                             <option value="Customer Confirmation">Customer Confirmation</option>
-                            <option value="Customer Invoice">Customer Invoice</option>
-                            <option value="Customer Packet">Customer Packet</option>
-                            <option value="Bill of Lading">Bill of Lading</option>
-                            <option value="Customs Paperwork">Customs Paperwork</option>
                             <option value="Insurance">Insurance</option>
-                            <option value="Load Sheet">Load Sheet</option>
                             <option value="MC Authority">MC Authority</option>
                             <option value="Notice of Assignment">Notice of Assignment</option>
+                            <option value="Void Check">Void Check</option>
+                            <option value="ACH info">ACH info</option>
                             <option value="Payment Documents">Payment Documents</option>
-                            <option value="Picture">Picture</option>
-                            <option value="Proof of Delivery">Proof of Delivery</option>
-                            <option value="Purchase Order">Purchase Order</option>
-                            <option value="Rate Quote">Rate Quote</option>
-                            <option value="Receipt">Receipt</option>
-                            <option value="References">References</option>
-                            <option value="Release">Release</option>
                             <option value="W9 Form">W9 Form</option>
-                            <option value="Weight Ticket">Weight Ticket</option>
+                            <option value="Carrier Invoice">Carrier Invoice</option>
                             <option value="Other">Other</option>
-                            <option value="Unknown">Unknown</option></select>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="customer-load-value" class="col-form-label">Description</label>
