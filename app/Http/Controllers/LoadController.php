@@ -412,7 +412,11 @@ class LoadController extends Controller
             $info = $info . 'Customer ID from ' . $load->customer_id . ' to ' . $data['customer_id'] . ', ';
         }
 
-        if ($data['shipper_pickup_date'] != $load->shipper_pickup_date || $data['shipper_pickup_time_from'] != $load->shipper_pickup_time_from || $data['shipper_pickup_time_to'] != $load->shipper_pickup_time_to) {
+        if (
+            (isset($data['shipper_pickup_date']) && $data['shipper_pickup_date'] != $load->shipper_pickup_date) ||
+            (isset($data['shipper_pickup_time_from']) && $data['shipper_pickup_time_from'] != $load->shipper_pickup_time_from) ||
+            (isset($data['shipper_pickup_time_to']) && $data['shipper_pickup_time_to'] != $load->shipper_pickup_time_to)
+        ) {
             $info = $info . 'Pickup Date from ' . $load->shipper_pickup_date . ' (' . $load->shipper_pickup_time_from . ' - ' . $load->shipper_pickup_time_to . ') to ' . $data['shipper_pickup_date'] . ' (' . $data['shipper_pickup_time_from'] . ' - ' . $data['shipper_pickup_time_to'] . '), ';
         }
 
