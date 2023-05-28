@@ -120,6 +120,22 @@ class CarrierController extends Controller
         $data['flagged'] = array_key_exists('flagged', $data) ? true : false;
         $data['company_id'] = \App::make('currentCompany')->id;
 
+        if (isset($data['contracted_on'])) {
+            $data['contracted_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['contracted_on'])));
+        }
+        if (isset($data['insurance1_effective_on'])) {
+            $data['insurance1_effective_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance1_effective_on'])));
+        }
+        if (isset($data['insurance1_expires_on'])) {
+            $data['insurance1_expires_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance1_expires_on'])));
+        }
+        if (isset($data['insurance2_effective_on'])) {
+            $data['insurance2_effective_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance2_effective_on'])));
+        }
+        if (isset($data['insurance2_expires_on'])) {
+            $data['insurance2_expires_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance2_expires_on'])));
+        }
+
         $carrier = Carrier::create($data);
 
         return redirect($data['company_id'].'/carriers/'.$carrier->id)->withInput()->with('success', 'Carrier Created successfully');
@@ -223,6 +239,24 @@ class CarrierController extends Controller
             "insurance2_email"         => ['email', 'nullable']
         ]);
         $data = $request->all();
+        if (isset($data['contracted_on'])) {
+            $data['contracted_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['contracted_on'])));
+        }
+        if (isset($data['insurance1_effective_on'])) {
+            $data['insurance1_effective_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance1_effective_on'])));
+        }
+        if (isset($data['insurance1_expires_on'])) {
+            $data['insurance1_expires_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance1_expires_on'])));
+        }
+        if (isset($data['insurance2_effective_on'])) {
+            $data['insurance2_effective_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance2_effective_on'])));
+        }
+        if (isset($data['insurance2_expires_on'])) {
+            $data['insurance2_expires_on'] = date("Y-m-d", strtotime(str_replace('-', '/', $data['insurance2_expires_on'])));
+        }
+//        dd($data);
+
+
         $data['preferred_carrier_status'] = array_key_exists('preferred_carrier_status', $data) ? true : false;
         $data['smart_way_certified'] = array_key_exists('smart_way_certified', $data) ? true : false;
         $data['carb_compliant'] = array_key_exists('carb_compliant', $data) ? true : false;

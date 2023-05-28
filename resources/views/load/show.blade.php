@@ -69,6 +69,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="entityLabelValue form-group">
+                            <div class="entityLabel">Load Notes</div>
+                            <textarea disabled class="form-control" name="note" placeholder="Enter a note" rows="2" tabindex="15">{{$load->note}}</textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-6" id="voided-reason-container" @if($load->status !== 'Voided') style="display: none" @endif>
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="entityLabelValue form-group">
@@ -104,8 +112,8 @@
                 <div class="tab-pane fade show active" id="load" role="tabpanel" aria-labelledby="load-tab">
                     <div id="load" class="tabcontent" style="display: block;">
                         <div class="row">
-                            <div class="col-sm-6 shipper-cards">
-                                <div class="col-sm-12 shipper-info">
+                            <div class="col-sm-12 shipper-cards">
+                                <div class="col-sm-6 shipper-info">
                                     <div class="tab-item">
                                         <div class="card">
                                             <div class="card-header">Shipper Information</div>
@@ -342,7 +350,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12" id="consigneeContainer">
+                                <div class="col-sm-6" id="consigneeContainer">
                                     @foreach($load->drops as $key => $drop)
                                         <div class="tab-item" id="consigneeItem">
                                             <input disabled type="hidden" name='consignee[{{$key}}][is_new]' class="is_new" value="false">

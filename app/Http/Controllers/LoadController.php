@@ -142,6 +142,7 @@ class LoadController extends Controller
             "driver_email" => ['nullable', 'email'],
             "customer_units_id" => ['nullable', 'string'],
             "carrier_units_id" => ['nullable', 'string'],
+            "note" => ['nullable', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -165,6 +166,9 @@ class LoadController extends Controller
         if (isset($loadData['shipper_pickup_date'])) {
             $loadData['shipper_pickup_date'] = date("Y-m-d", strtotime(str_replace('-', '/', $loadData['shipper_pickup_date'])));
         }
+        $invoice_last_number = $company->invoice_last_number + 1;
+        $loadData['invoice_number'] = $invoice_last_number;
+        $company->update(['invoice_last_number' => $invoice_last_number]);
 
         $load = Load::create($loadData);
         $company->update(['load_last_number' => $loadData['load_number']]);
@@ -300,6 +304,7 @@ class LoadController extends Controller
             "driver_email" => ['nullable', 'email'],
             "customer_units_id" => ['nullable', 'string'],
             "carrier_units_id" => ['nullable', 'string'],
+            "note" => ['nullable', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -526,11 +531,6 @@ class LoadController extends Controller
         $load->drops;
         $company = Company::find($company_id);
         $load->status = 'Invoiced';
-        if (is_null($load->invoice_number)) {
-            $invoice_last_number = $company->invoice_last_number + 1;
-            $load->invoice_number = $invoice_last_number;
-            $company->update(['invoice_last_number' => $invoice_last_number]);
-        }
         if (is_null($load->invoice_date)) {
             $load->invoice_date = Carbon::now()->format('Y-m-d');
         } else {

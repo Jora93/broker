@@ -96,43 +96,58 @@ class Carrier extends Model
     }
 
     public function getContractedOnAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['contracted_on']));
+        if (isset($this->attributes['contracted_on'])) {
+            return date("m-d-Y", strtotime($this->attributes['contracted_on']));
+        }
+        return null;
     }
 
     public function setContractedOnAttribute($value) {
-        $this->attributes['contracted_on'] = date("Y-m-d", strtotime($value));
+        $this->attributes['contracted_on'] = is_null($value) ? null : date("Y-m-d", strtotime($value));
     }
 
     public function getInsurance1EffectiveOnAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['insurance1_effective_on']));
+        if (isset($this->attributes['insurance1_effective_on'])) {
+            return date("m-d-Y", strtotime($this->attributes['insurance1_effective_on']));
+        }
+        return null;
     }
 
     public function setInsurance1EffectiveOnAttribute($value) {
-        $this->attributes['insurance1_effective_on'] = date("Y-m-d", strtotime($value));
+        $this->attributes['insurance1_effective_on'] = is_null($value) ? null : date("Y-m-d", strtotime($value));
     }
 
     public function getInsurance1ExpiresOnAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['insurance1_expires_on']));
+        if (isset($this->attributes['insurance1_expires_on'])) {
+            return date("m-d-Y", strtotime($this->attributes['insurance1_expires_on']));
+        }
+        return null;
     }
 
     public function setInsurance1ExpiresOnAttribute($value) {
-        $this->attributes['insurance1_expires_on'] = date("Y-m-d", strtotime($value));
+        $this->attributes['insurance1_expires_on'] = is_null($value) ? null : date("Y-m-d", strtotime($value));
     }
 
     public function getInsurance2EffectiveOnAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['insurance2_effective_on']));
+        if (isset($this->attributes['insurance2_effective_on'])) {
+            return date("m-d-Y", strtotime($this->attributes['insurance2_effective_on']));
+        }
+        return null;
     }
 
     public function setInsurance2EffectiveOnAttribute($value) {
-        $this->attributes['insurance2_effective_on'] = date("Y-m-d", strtotime($value));
+        $this->attributes['insurance2_effective_on'] = is_null($value) ? null : date("Y-m-d", strtotime($value));
     }
 
     public function getInsurance2ExpiresOnAttribute() {
-        return date("m-d-Y", strtotime($this->attributes['insurance2_expires_on']));
+        if (isset($this->attributes['insurance2_expires_on'])) {
+            return date("m-d-Y", strtotime($this->attributes['insurance2_expires_on']));
+        }
+        return null;
     }
 
     public function setInsurance2ExpiresOnAttribute($value) {
-        $this->attributes['insurance2_expires_on'] = date("Y-m-d", strtotime($value));
+        $this->attributes['insurance2_expires_on'] = is_null($value) ? null : date("Y-m-d", strtotime($value));
     }
 
     /**

@@ -17,7 +17,7 @@
         </div>
         <div style="float: right; text-align: right; ;  width: 59%">
             <h2><b>FREIGHT INVOICE</b></h2>
-            <h3><b>LOAD # {{$load->id}}</b></h3> {{-- avelacnel loadi mej 'invoice load# field'--}}
+            <h3><b>LOAD # {{$load->load_number}}</b></h3> {{-- avelacnel loadi mej 'invoice load# field'--}}
             <h3><b>INVOICE # {{$load->invoice_number}}</b></h3> {{-- invoice id avelanuma create aneluc heto--}}
             <p>(Please reference Invoice Number when paying invoice)</p>
             <h3>INVOICE DATE: {{str_replace('-', '/', $load->invoice_date)}} </h3>
