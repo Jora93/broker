@@ -37,6 +37,7 @@ class Company
     public function checkNOA ($company){
         $loadsWithoutNOA = Load::where('shipper_payment_method', 'NET 30 FACTORING')
             ->where('company_id', $company->id)
+            ->where('status', "!=" , "Voided")
             ->where('created_at', '<=', Carbon::now()->subDays(7))
             ->where('has_noa', false)
             ->get('id');
