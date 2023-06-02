@@ -724,7 +724,8 @@ $(document).ready(function () {
         }
         return "";
     }
-    let NOALoads = getCookie('NOA');
+    // let NOALoads = getCookie('NOA');
+    let NOALoads = null;
     if (NOALoads && JSON.parse(NOALoads).length) {
         NOALoads = JSON.parse(NOALoads);
         let html = '';

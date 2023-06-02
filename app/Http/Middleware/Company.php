@@ -23,7 +23,7 @@ class Company
         $company = is_null($company_id) ? false : \App\Models\Company::find($company_id);
         if ($company) {
             \App::instance('currentCompany', $company);
-            $this->checkNOA($company);
+//            $this->checkNOA($company);
             return $next($request);
         } else {
             if (Auth::user()->role === \App\Constanats\UserRoles::SuperAdmin) {
